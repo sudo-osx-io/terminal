@@ -1,0 +1,608 @@
+To Do List
+----------
+Bugs 
+----
+**3/3/04 added by wrand
+there appears to be a bug where if it can't correctly create a lot in
+a subdivision it doesn't create any lots make sure we look through it
+and have it create one big lot if nothing else, or crash if
+divideIntoLots doesn't create any lots
+
+Features
+--------
+**4/30/04 added by mzellner
+test that measure of sub type per township is correct (Moira already did).
+
+**4/16/04 added by mzellner
+add new roads
+
+**4/12/04 added by wrand
+move clearForest from Subdivision to Cell
+
+**4/09/04 added by mzellner and wrand
+sweep thresholds of decision rules to see effects.
+
+**3/3/04 added by wrand
+test the water condition, that the amount of a lot made up of water is
+not used in the size of the lot
+
+**2/25/04 added by mzellner (rlriolo)
+make all constants into variables defined at the top of class (especially
+in Subdivision). (Worked on thresholds in Sub, and maps in Model). Any others?
+
+**2/24/04 added by mzellner (rlriolo)
+Observe how time to run scales with world size
+
+**2/23/04 added by mzellner
+PRIORITY: check that conditions for development (water+forest, and forest acreage) are
+right (Bill). Moira changed older conditions and changed back to original (03/02/04).
+
+**2/23/04 added by mzellner
+make roadspace always binary
+
+**2/19/04 added by wrand
+add checks to make sure QualitySpaces match up in size with the world
+
+**2/18/04 added by wrand
+exclude lots that residents can't afford from their selection criteria
+
+**2/17/04 added by wrand
+add printhelp to ARMS-R
+
+**2/17/04 added by mzellner
+include adjacency by checking number of subs of each type surrounding current
+sub (represents NIMBYism).
+
+**2/17/04 added by mzellner
+change probability of sale of farm with time.
+
+**2/10/04 added by wrand
+deal with splitting subdivision types
+
+**2/10/04 added by wrand
+change residents color so that they are simply a darker color of
+their subdivision
+
+**2/03/04 added by mzellner
+need to make code more generic to accept any number of townships and
+zoning restrictions.
+
+**1/29/04 added by wrand
+set default parameters to realistic ones as specified by Monday meeting
+
+**1/12/04 added by wrand
+modify create farms to respect township boundaries
+
+**1/8/04 added by wrand
+add rural lots
+
+**12/09/03 added by wrand
+modify sellLots so that it doesn't have to just keep generating random
+lots and seeing if the resident can move into them
+
+Cleanup
+-------
+**2/19/04 added by wrand
+
+change developFarms, etc. so they are not called if there is no
+appropriate land type
+
+**12/05/03 added by wrand
+
+reset all private static ints, when the world resets like subID right
+now they keep accumulating
+
+**2/17/04 added by wrand
+move all qualityspace references to cell level, this is the
+clearforest in subdivision as well as the subdivision level envtl calculations
+
+**2/17/04 added by wrand
+modify parameter file tests to run with the dronified version.
+
+**12/09/03 added by wrand
+
+have moira look over evaluatelots routine with you
+
+**12/18/03 added by wrand
+
+clean up divideIntoLots routine right now its kludgy
+
+Finished
+--------
+**3/15/04 added by mzellner (rlriolo)
+add output measure to indicate how many subs of each type exist at each
+time step.
+
+done, 4/30/04 by mzellner
+
+**4/09/04 added by mzellner and wrand
+change threshold of forest to 10% of sub size until 80 acres
+sub size, and 10 acres if sub is bigger.
+
+done, 4/16/04 by mzellner
+
+**4/16/04 added by wrand and mzellner
+add check to panoramic view
+
+done, 4/16/04 by mzellner
+
+**4/09/04 added by mzellner and wrand
+isRolling will say (max - min) > rollingThreshold.
+
+done, 4/16/04 by mzellner
+
+**4/09/04 added by mzellner and wrand
+Eliminate scaling of quality spaces because forest and water will
+be double between 0 and 1. Elevation will be double with no maximum
+value specified.
+
+done, 4/16/04 by mzellner
+
+**4/09/04 added by mzellner and wrand
+Change panoramic view method to check cells in a lot, and determine if
+it has panoramic view when any cell has over 50% of its neighboring cells
+at least 62 ft. lower (20 m).
+
+done, 4/16/04 by mzellner and wrand
+
+**3/1/04 added by wrand
+PRIORITY: change restriction on building so that it simply adds whatever is not
+covered by water to the size of the lot. Same as: **2/23/04 added by mzellner
+PRIORITY: check that water restriction on building is right (Bill)
+
+done, 3/3/04 by wrand
+
+**3/1/04 added by wrand
+PRIORITY: modify water check to 1% for water presence
+
+done, 3/2/04 by mzellner
+
+**3/1/04 added by wrand
+PRIORITY: comment out the condition
+in developer and go back to the original decision process, (presence /
+absence of water, and 50% or more wooded or rolling), in determineSubType
+
+done, 3/2/04 by mzellner
+
+**2/24/04 added by mzellner (rlriolo)
+make size of water for determineSubType a static final public class variable
+in Model.java  so that we can easily change it to be a parameter.
+(ie, don't stick the 0.5 constant down in the methods.)
+
+done, 2/25/04 by mzellner
+
+**2/17/04 added by mzellner
+PRIORITY: test script files to read from experiment data
+
+done, 2/25 by mzellner and rlriolo
+
+**2/24/04 added by mzellner
+make demographic distributions parameters, so that they can be swept;
+test that it works.
+
+done, 2/24/04 by mzellner
+
+**2/17/04 added by mzellner
+PRIORITY: for decision about hort or remnant development, consider >10 acres
+forest, or >10% area of sub is forest or water (cumulative).
+
+done, 2/23/04 by mzellner
+
+**2/17/04 added by mzellner
+PRIORITY: add restriction in divideIntoLots that cells with >=50% water does not
+count towards lot size (cannot build on water).
+
+done, 2/23/04 by mzellner
+
+**2/17/04 added by mzellner
+PRIORITY: take out soil productivity from developers' decision
+
+done, 2/23/04 by mzellner
+
+**2/19/04 added by wrand
+write a test to make sure township zoning is not violated by
+subdivision minlotsize
+
+done, 2/23/04 by mzellner
+
+**2/19/04 added by wrand
+check and write a test to make sure qualityspaces are initialized correctly
+
+done, 2/23/04 by mzellner
+
+**2/18/04 added by wrand
+look over preference setting (how pref are set given demographics) (Moira) 
+and write a test to make sure it is done correctly -
+
+done, 2/23/04 by mzellner
+
+**2/18/04 added by wrand
+write a test to make sure the average forest is calculated correctly
+
+done, 2/20/04 by mzellner
+
+**2/17/04 added by wrand
+write a test to make sure that forests are removed when COUNTRY or
+HORT subs are built
+
+done, 2/17/04 by wrand
+
+**2/18/04 added by wrand
+write tests to make sure components of utility function
+(calculateAvgWater, Forest, Development, PanoramicView, and relief)
+work correctly, and that lot is selected due to highest utility.
+
+done, 2/20/04 by mzellner
+
+**2/17/04 added by mzellner
+PRIORITY: increase variance in distribution of elevation, so that we have rolling
+landscape. we probably want some smoothing (autocorrelation), as well.
+
+done, wrand, 2/19/04 this will be solved by reading in from files
+
+**2/17/04 added by mzellner
+PRIORITY: make country subs be smaller in lot size; i.e. townships may exclude
+the development of country subs if their min lot size is larger.
+
+done, wrand, 2/19/04
+
+**2/17/04 added by mzellner
+PRIORITY: have code be able to read maps of environmental features (and farms?)
+
+done, wrand, 2/19/04
+
+**2/17/04 added by wrand
+write a test to make sure ARMS-R works with drone - 
+
+done, 2/19/04 by mzellner
+
+**2/17/04 added by wrand
+PRIORITY: test to make sure report files are generated appropriately
+
+done, 2/19/04 by mzellner
+
+**2/18/04 added by wrand
+
+when out of farms we run into a problem:
+
+     [java] java.lang.IndexOutOfBoundsException: Index: 0, Size: 0
+     [java]     at java.util.ArrayList.RangeCheck(ArrayList.java:507)
+     [java]     at java.util.ArrayList.get(ArrayList.java:324)
+     [java]     at ARMSR.Model.developFarms(Unknown Source)
+     [java]     at ARMSR.Model.step(Unknown Source)
+     [java]     at ARMSR.GUIModel.step(Unknown Source)
+     [java]     at BAB_SYNTH_2.execute(Unknown Source)
+     [java]     at uchicago.src.sim.engine.ScheduleGroup.execute(ScheduleGroup.java:49)
+     [java]     at uchicago.src.sim.engine.RandomScheduleGroup.execute(RandomScheduleGroup.java:21)
+     [java]     at uchicago.src.sim.engine.ScheduleGroup.execute(ScheduleGroup.java:49)
+     [java]     at uchicago.src.sim.engine.Schedule.execute(Schedule.java:366)
+     [java]     at uchicago.src.sim.engine.BaseController$1.run(BaseController.java:404)
+     [java]     at java.lang.Thread.run(Thread.java:534)
+
+done, wrand, 2/18/04 one of Moira's check forgot to check indices
+
+**1/22/04 added by mzellner
+PRIORITY: assign panoramic view score according to elevation.
+let residents use this score for location decision.
+
+done, wrand, 2/18/04
+
+**2/17/04 added by mzellner
+PRIORITY: have all the betas have the same value for every resident, alphas are
+preferences (from Joan and Bobbi's table)
+
+done, wrand, 2/18/04 There are no betas in current model
+
+**2/17/04 added by mzellner
+PRIORITY: implement additive model for residential preference
+
+done, wrand, 2/18/04
+
+**2/17/04 added by mzellner
+PRIORITY: add measure for forest cover, should be printed out per township in report.
+
+done, wrand, 2/18/04
+
+**2/10/04 added by wrand
+PRIORITY: remove forest cover appropriately during development
+
+done, 2/18/04, wrand
+
+**2/5/04 added by wrand
+test to make sure developments are not looked at in a biased fashion (get farm
+before and after shuffling; but do not exit program if pointers are the same)
+
+done, 2/17/04 by mzellner
+
+**2/10/04 added by wrand
+check get min/max/avg level
+
+done, 2/17/04 by mzellner
+
+**2/10/04 added by wrand
+check isRolling()
+
+done, 2/17/04 by mzellner
+
+**1/27/04 added by wrand
+test to make sure that subdivisions are appropriate for land
+
+done, 2/16/04 by mzellner
+
+**1/29/04 added by wrand
+test developer creation, and addition of subs to developers
+
+done, 2/10/04 by mzellner
+
+**1/29/04 added by wrand
+test canDevelop routine
+
+done, 2/10/04 by mzellner
+
+**1/27/04 addded by wrand
+test to make sure that subdivision development happens due to demand
+
+done, 2/10/04 by mzellner
+
+**1/19/04 added by wrand
+test to make sure envt'l features are created correctly
+
+done, 2/10/04 by mzellner
+
+**11/11/03 added by wrand
+Figure out this error message
+Nov 11, 2003 2:52:25 PM java.util.prefs.FileSystemPreferences$3 run
+WARNING: Could not create system preferences directory. System preferences are unusable.
+
+done, wrand, 2/10/04 upgraded to new repast
+
+**2/10/04 added by wrand
+have developers respond to environment
+
+done, wrand, 2/10/04 for developments < 80 acres need to fix for rest
+
+**1/22/04 added by mzellner
+assign the top 1/4 of whatever range as good soil quality and the bottom 
+3/4 of that range as poor soil quality.
+
+done, wrand, 2/10/04
+
+**1/22/04 added by mzellner
+when a farm is for sale, compute relief by subtracting from the highest 
+elevation the lowest elevation within the farm parcel. Then, identify 
+a breakpoint for rolling (20').
+Need to add this in development decision-making, as condition if
+subdivision is 50% forested OR rolling.
+
+done, 2/10/04 by wrand
+
+**2/9/04 added by wrand
+fix bug in QualitySpace where its not getting the values its putting
+
+done, 2/9/04 by wrand, changed to RasterSpace
+
+**1/29/04 added by wrand
+fix developFarms so it looks at farms randomly not in any order
+
+done, 2/5/04, by wrand it was actually developfarms
+
+**1/12/04 added by wrand
+add tests of recorder and income output
+
+done, 2/05/04 by mzellner
+
+**1/12/04 added by wrand
+write tests for township creation, adding cells to townships, and
+adding/deleting residents from townships
+
+done, 2/05/04 by mzellner
+
+**2/03/04 added by mzellner
+test that the zoned min lot sizes are appropriately assigned.
+
+done, 2/05/04 by mzellner
+
+**2/03/04 added by mzellner
+add zoning lot size per township, and make subdivisions use this to
+divide lots.
+
+done, 2/03/04 by mzellner
+
+**12/18/03 added by wrand
+write tests for the divideIntoLots routine, you want to make sure and
+test all sorts of irregular shapes and test different values for 
+minLotSize and the Farm x, y's
+
+done, 2/03/04 by mzellner
+
+**1/30/04 added by mzellner
+It freezes with some world sizes. Need to fix how farms are formed. 
+After division of world into farms of equal size, any remaining 
+cells should be added to last farm.
+
+done, 2/02/04 by mzellner and wrand
+
+**12/05/03 added by wrand
+test the coloring of subdivision types
+
+done, 1/30/04 by mzellner
+
+**1/30/04 added by mzellner
+add quality space for elevation.
+
+done, 1/30/04 by mzellner
+
+**12/09/03 added by wrand
+test for resident attributes
+
+done, 1/30/03 by mzellner
+
+**1/8/04 added by wrand
+have demand drive development
+
+done, wrand, 1/29/04
+
+**1/16/04 added by mzellner
+test why it crashes when a lot type is all sold.
+
+		**1/5/04 added by wrand
+
+		generated this error after a long run with default parameters:
+
+		Tried to sell a lot that doesn't exist!
+
+fixed, same bug, no lots a resident could afford, 1/29/04
+
+**1/8/04 added by wrand
+add environmental features roads, soil, forest, water
+
+done, 1/19/04 by wrand
+
+**12/09/03 added by wrand
+test for resident valuation
+
+done, 1/18/04 by mzellner
+
+**1/16/04 added by mzellner
+test to make sure residents can't buy lots they can't afford (test 7).
+done, 1/16/04
+
+**1/13/04 added by mzellner
+tested that subdivisions aren't resold (test 4).
+tested that residents are moving in and owning corresponding lot (test5).
+tested residents moving out and lots are owned by subdivision (test 6).
+(this is also test for synch lot and cell ownership transfer)
+
+done, 1/13/04
+
+**1/12/04 added by wrand
+add a measure of income based on townships, and output it somehow
+
+done, 1/12/04
+
+**1/8/04 added by wrand
+add townships
+
+done, 1/12/04
+
+**12/05/03 added by wrand
+have different types of  subdivisions colored different colors
+
+done, 12/18/03
+
+**12/05/03 added by wrand
+have residents not consider lots they can't afford
+
+done, wrand, 12/09/03
+
+**12/05/03 added by wrand
+have resident attributes used to determine value of lot
+
+done, wrand 12/09/03
+
+**12/05/03 added by wrand
+add multiple subdivision types
+
+done, wrand, 12/09/03
+
+**12/05/03 added by wrand
+add kids, income, envGroup attributes to residents
+
+done, 12/09/03 by wrand
+
+**23/09/02 added by wrand
+-Allow residents to move out
+
+done, 12/05/03 by wrand
+
+**12/02/03 added by wrand
+finish coding sellLots method
+
+done, 12/04/03 by wrand and mzellner
+
+
+**11/18/03 added by wrand
+look over farm creation and rename listOfFarms to listOfFarmCells
+
+done, 12/02/03 (mzellner)
+
+**11/21/03 added by wrand and mzellner
+change farmX and farmY in assignCells to be more representative of
+what they are which is the actual farm width and height, make indFarmX
+and indFarmY
+
+done, 12/02/03 (mzellner)
+
+**23/09/03 added by wrand
+-Create Resident class
+
+done, 12/02/03
+
+**11/24/30 added by wrand et al
+bug in code seems to allow subdivisions to be resold, should look into that
+
+done, 12/02/03
+
+**11/18/03 added by wrand
+make subdivision and farm a subclass of owner
+
+done, 11/20/03
+
+**11/11/03 added by wrand
+collapse Cell, FarmCell, and SubCell into just cell
+
+
+done, 11/20/03, wrand
+
+**11/10/03 added by mzellner and wrand
+6. subDivision then divides into lots
+Involves adding Lot class
+ -- in a primitive fashion every cell is its own lot
+
+done, 11/20/03, wrand
+
+**11/11/03, wrand and mzellner
+Add subdivision class
+
+done, 11/18/03, wrand
+
+**11/11/03, wrand and mzellner
+5. subDivision buys it
+
+done,11/18/03, wrand
+
+**11/11/03 added by wrand
+4. Add parameter p(farmUpForSale)
+
+done, 11/11/03
+
+**11/11/03 added by wrand
+-Change code so farms show up some shade of yellow
+
+done, 11/11/03, wrand
+
+**23/09/03 added by wrand
+-Create SubCell class
+
+done, wrand, 11/11/03
+
+**11/10/03 added by mzellner and wrand
+3. Create a subDivision class
+
+done, wrand, 11/11/03
+
+**11/10/03 added by mzellner and wrand
+2. Change to 4x4 farms
+
+done, it was a parameter setting, wrand, 11/11/03
+
+**11/10/03 added by mzellner and wrand
+1. Eliminate farmers, but make sure that all is in farms
+
+done, 11/11/03
+
+**23/09/03 added by wrand
+Write the whole model
+
+somewhat done 23/09/03 - though this will never be completely done
+I've got it started

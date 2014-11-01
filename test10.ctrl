@@ -1,0 +1,167 @@
+# These parameters MUST be set up by the user
+param rootDir = /users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR
+param programDir = /users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/bin
+param programName = batchrun.sh
+param seriesLogFile = ARMSR.log
+param emailAddr = mzellner@umich.edu
+param mailUser = 1
+
+# how many replications with different RNG seeds?
+param numRuns = 30
+
+############################################################
+# Program Input File
+# The text between the lines "begin input file" and
+# "end input file" is written directly out to the input 
+# file for the program to be run for this experiment.
+# You should include all parameters here, both those
+# to be constant for the experiment and the ones to be
+# varied (i.e., those also in the sweep section, below).
+
+begin input file
+<Experiment name="Fixed 1,1"
+    desc = "Fixed zoning Z=(1,1), variable demographics">
+<parameters>
+	<rDebug>0</rDebug>
+	<seed>1234567</seed>
+	<stopT>300</stopT>
+	<worldXSize>80</worldXSize>
+	<worldYSize>80</worldYSize>
+	<mapDir>/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/</mapDir>
+	<initialParametersFileName></initialParametersFileName>
+	<outputDirName>./</outputDirName>
+	<pFarmSale>0.1</pFarmSale>
+	<reportFrequency>999999</reportFrequency>
+	<reportFileName>report</reportFileName>
+	<runNumber>0</runNumber>
+	<resPerTurn>10</resPerTurn>
+	<saveRunEndState>0</saveRunEndState>
+	<zonedMinLotSize0>1</zonedMinLotSize0>
+	<zonedMinLotSize1>1</zonedMinLotSize1>
+	<demogrKids>0.5</demogrKids>
+	<demogrIncome>0.5</demogrIncome>
+	<demogrEnv>0.05</demogrEnv>
+</parameters>
+</Experiment>
+end input file
+
+#############################################################
+# Program Sweep Parameters
+# Parameters to have values varied for the different 
+# "cases" of this experiment.
+# These lines can be of the format:
+#   sweep N 11 51 111 511
+#   sweep m 1 2 3 4
+# or to select cells from the parameter space:
+#   sweep (N m) (11 1) (11 2) (51 2) (51 3)
+# or it can be combinations of those approaches.
+
+sweep demogrIncome 0.2 0.5
+
+#############################################################
+# Comments -- these get written to the log file
+
+comment A simple test to be sure the heatBugs2 repast
+comment is working ok with this control file setup.
+
+#############################################################
+# Abbreviations -- only change if you change 
+#        parameters and/or abbreviations
+# These are used to contruct names of output case diretories.
+
+abbrev rDebug = D
+abbrev seed = S
+abbrev initialParametersFileName = iPFN
+abbrev initialAgentsFileName = iAFN
+abbrev reportFileName = rFN
+abbrev stopT = T
+abbrev saveRunEndState = sRES
+abbrev outputDirName = oDN
+abbrev reportFrequency = rF
+abbrev runNumber = rN
+
+abbrev worldXSize = X
+abbrev worldYSize = Y
+abbrev mapDir = mD
+abbrev pFarmSale = pFS
+abbrev resPerTurn = rPT
+abbrev zonedMinLotSize0 = zMLS0
+abbrev zonedMinLotSize1 = zMLS1
+abbrev demogrKids = dKids 
+abbrev demogrIncome = dInc
+abbrev demogrEnv = dEnv
+
+################################################################
+# some other sometimes-set parameters
+#
+param useLocalHost = 1
+param hostFile = hosts
+param experimentSeed =
+param useTmp = 0
+param tmpPath = /tmp
+
+# Parameters that depend on particular run-time interface 
+# of program being run by drone.
+# These are suitable for Swarm-based programs that use
+# the UM-ExpTools-4 RParameters object/methods to 
+# handle run-time parameters and output.
+param programVersion =
+param getProgramVersion = 0
+param versionOptions = 
+param makeInputFile = 1
+param inputFileOption = iPFN=
+param runSeedOption = S=
+param runNumOption = rN=
+param runNumPrefix = 
+param setParamOption = 
+param miscOptions = 
+
+# new stuff
+param useWrapper = 0
+param wrapper = babysit -s /bin/sh -v
+param createHostFile = 0
+param hostFileCmd = gethosts Ultra
+param maxErrors = 500
+param runNumFormat = "%02d"
+param errorLogDir = $rootDir/errorlogs
+param errorLogFile =
+param logEvents = 0
+param eventLogDir = $rootDir/errorlogs
+param eventLogFile = eventlog
+
+
+# Pathnames
+param seriesLogDir = $rootDir/logs
+param outputControlDir = $rootDir/logs
+param outputControlFile = 
+param outputLogDir = $rootDir/debuglogs
+param outputLogFile = 
+param hostDir = $rootDir/hostfiles
+param experimentDir = $rootDir/expdata
+param experimentName = 
+
+# Debugging options
+param outputLog = 0
+param debugInternal = 0
+param stackTrace = 1
+
+# Infrequently set parameters
+param compressPattern = 
+param compressFiles = 0
+param runSeedGenerator = Ran3
+param useExperimentNumber = 1
+param useNice = 1
+param niceness = 5
+param sleepInterval = 5
+param background = 1
+param compressProgram = gzip
+param compressFlags = -f
+param removeExperiment = 0
+param compressExperiment = 0
+param defaultTimeout = 60
+param ftpTimeout = 300
+param compressTimeout = 300
+param cacheIPAddresses = 0
+param ipLookupMethod = nslookup
+param saveStdout = 0
+param terminalType = vt100

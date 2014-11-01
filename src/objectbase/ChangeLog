@@ -1,0 +1,2134 @@
+2009-09-24  Scott Christley  <schristley@mac.com>
+
+	* ProbeLibrary.m, ActivityControl.m, ProbeMap.m, MessageProbe.m,
+	VarProbe.m: Adjust casts to eliminate compiler warnings.
+
+2009-04-02  Scott Christley  <schristley@mac.com>
+
+	* CompleteProbeMap.m, probing.m, ProbeMap.m, DefaultProbeMap.m,
+	MessageProbe.m, swarm_rts_routines.h, CompleteVarMap.m,
+	VarProbe.m: ObjC runtime abstraction.
+
+2008-07-06  Scott Christley  <schristley@mac.com>
+
+	* DefaultProbeMap.m: Include COM.h to eliminate compile errors.
+
+2008-06-25  Scott Christley  <schristley@mac.com>
+
+	* ActivityControl.h, CompleteProbeMap.h, CompleteVarMap.h,
+	CustomProbeMap.h, DefaultProbeMap.h, EmptyProbeMap.h,
+	MessageProbe.h, Probe.h, ProbeLibrary.h, ProbeMap.h, Swarm.h,
+	SwarmObject.h, VarProbe.h, objectbase.h, probing.h, Makefile.am:
+	Standardize include directory structure to support libraries and
+	OpenStep frameworks.
+
+2007-08-30  Gennady Telegin  <gepo@lvk.cs.msu.su>
+
+	* CustomProbeMap.m: If user add probe for unexisting method, then raise
+	warning instead of segfault.
+
+2007-03-04  Marcus G. Daniels  <marcus@snoutfarm.com>
+
+	* ProbeMap.h, objectbase.h: Change class to class_ for Objective C++.
+
+2005-04-14  Paul Johnson  <pauljohn@pols111.pols.ku.edu>
+
+	* Swarm.m ([Swarm -activateIn:]): Consistent casts:
+	- (id <Activity>)activateIn:  swarmContext
+
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Use libobjc definition.  Add GNUstep
+	includes.
+
+	* swarm_rts_routines.m: Include internal.h.
+
+2003-09-14    <mgd@DRONE>
+
+	* swarm_rts_routines.m (skip_typespec): Don't require a type
+	for _C_PTR.
+
+2003-06-18    <pauljohn@localhost.localdomain>
+
+	* VarProbe.m ([VarProbe -drop]): realized ZFREEBLOCK(globalZone,
+	basetype) is not the same as [globalZone free: basetype].
+	
+2003-06-17  Paul E. Johnson  <pauljohn@pjdell.pols.ukans.edu>
+
+	* VarProbe.m ([VarProbe -drop]): free baseType and floatFormat
+
+2003-06-11  Paul E. Johnson  <pauljohn@pjdell.pols.ukans.edu>
+
+	* MessageProbe.m ([MessageProbe -dynamicCallOn:]): silence gcc
+	warnings, cast "call" fc = (FCall_c *)call;
+
+2002-09-13    <pjohnson@localhost.localdomain>
+
+	* VarProbe.m ([VarProbe -_setupObjcVarProbe_]): Change i from unsigned
+	to int to allow comparison without compiler warning.
+	* ProbeMap.m ([ProbeMap -addObjcFields:]): ditto.
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* CompleteProbeMap.h, CompleteProbeMap.m, CompleteVarMap.h,
+	CompleteVarMap.m, CustomProbeMap.h, CustomProbeMap.m,
+	DefaultProbeMap.h, DefaultProbeMap.m, EmptyProbeMap.h,
+	EmptyProbeMap.m, MessageProbe.h, MessageProbe.m, Probe.h, Probe.m,
+	ProbeLibrary.h, ProbeLibrary.m, ProbeMap.h, ProbeMap.m, Swarm.h,
+	Swarm.m, SwarmObject.h, SwarmObject.m, VarProbe.h, VarProbe.m,
+	local.h, objectbase.h, probing.h, probing.m, swarm_rts_routines.h,
+	swarm_rts_routines.m: Change copyright statement to canonical
+	version as suggested by GNU GPL.
+
+2001-12-17  Marcus G. Daniels  <mgd@dhcp144.santafe.edu>
+
+	* VarProbe.h: Make getter and setterMethod ivars and setter
+	arguments of type COMCOMmethod.
+
+2001-11-27  Alex Lancaster  <alex@swarm.org>
+
+	* objectbase.h (setNonInteractive): Fix doc string to not use an
+	ampersand between `drag' and `drop', can confuse some XML
+	processors.
+	
+2001-11-07  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* probing.m (string_convert): Add a break after fcall_type_jstring
+	code.
+
+	* CompleteVarMap.m: Use SD_JAVA_FIND_CLASS_JAVA instead of 
+	SD_JAVA_FIND_OBJECT_JAVA.
+
+2001-11-04    <mgd@HELEN>
+
+	* Makefile.am: Don't use multi-line values in variable assignments.
+	It confuses Cygwin automake.
+
+2001-10-24  Marcus G. Daniels  <mgd@condor.santafe.edu>
+
+	* probing.m: Include misc.h.
+
+2001-09-23  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.m ([VarProbe -_setupObjcVarProbe_]): Copy probedType
+	into globalZone.
+	([VarProbe -drop]): Don't drop classObject.
+
+	* Probe.m ([Probe -drop]): Drop probedType.
+
+	* MessageProbe.m ([MessageProbe -createEnd]): Copy
+	probedType into globalZone.
+
+	* VarProbe.m ([VarProbe -drop]): Don't free the class here as we
+	didn't allocate it.
+
+2001-09-17  Marcus G. Daniels  <mgd@condor>
+
+	* ProbeMap.m ([ProbeMap -addProbe:], [ProbeMap -_fastAddProbe_:],
+	[ProbeMap -dropProbeMap:]): Remove redundant STRDUP.
+
+	* ProbeMap.m ([ProbeMap -dropProbeFor:]): Add.  Use below.
+	Drop key string.
+
+	* ProbeMap.[hm], objectbase.h: Return void on
+	dropProbeFor{Variable,Message}:.
+
+2001-09-05  Marcus G. Daniels  <mgd@condor>
+
+	* ProbeMap.m ([ProbeMap -drop]): Drop probes Map.
+
+2001-08-03  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.m ([VarProbe -_setupJavaVarProbe_]): Use
+	SD_JAVA_FIND_CLASS_JAVA instead of SD_FIND_OBJECT_JAVA.
+
+2001-08-01  Marcus G. Daniels  <mgd@condor.santafe.edu>
+
+	* MessageProbe.h: Don't include FCall.h (avoid its dependencies).
+	Make call be an object implementing the FCall protocol.
+
+2001-07-29  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* VarProbe.m ([VarProbe -setData:ToString:]): Protect
+	Java things with HAVE_JDK.
+
+2001-07-11  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* ProbeMap.m: Include VarProbe.h.
+
+	* ProbeMap.h: Don't include collections/Map.h,
+	objectbase/{Probe,VarProbe,MessageProbe}.h.  Include SwarmObject.h.
+
+	* Probe.m ([Probe -setProbedClass:]): Remove SAFEPROBES check.
+
+	* MessageProbe.m: Include FCall.h and FArguments.h.
+	([MessageProbe -createEnd]): Initialize call to nil.
+	([MessageProbe -dynamicCallOn:]): Split out FCall creation into
+	_createFCall_:.  Modify to cache call if there are no arguments.
+	Only drop fc and fa when there is no cached call.  Call
+	setProbedObject: during setup to ensure argument call is set
+	(in COM case).  Use FArguments setSelector first to set Language
+	and then only if there is a proxy.
+
+	* MessageProbe.h (MessageProbe): Add `call'.
+
+	* Makefile.am (INCLUDES): Add FFIINCLUDES.
+
+2001-06-27  Marcus G. Daniels  <mgd@dhcp144.santafe.edu>
+
+	* VarProbe.h (VarProbe): javaInfo replaces fieldObject, fieldType,
+	and classObject.
+
+	* VarProbe.m ([VarProbe -_setupJavaVarProbe_]): Setup
+	(JAVAINFO_SIZE, java_{fieldType,fieldObject,classObject): New
+	macros.  Replace all non-"java_" variables with these macros.
+	([VarProbe -drop]): Drop javaInfo.
+	([VarProbe -_setupJavaVarProbe_]): Allocate javaInfo from
+	_obj_GCFixedRootZone.
+
+2001-06-05  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* VarProbe.m ([VarProbe -notifyFor:with:]): New method for
+	notification code (factored out from first two methods blow).
+	([VarProbe -setData:To:], [VarProbe -setData:ToString:], [VarProbe
+	-setData:ToDouble:]): Use it.
+
+	* objectbase.h, VarProbe.[hm] ([VarProbe -setData:ToDouble:]):
+	New method.
+
+2001-05-30  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* VarProbe.m (java_probe_as_string): Handle NULL strings.
+
+2001-05-08    <mgd@coyote.santafe.edu>
+
+	* CustomProbeMap.m (addProbesWithIdentifers): Don't requires a
+	variable.
+
+2001-03-20  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* objectbase.h, ActivityControl.[hm]: Change run to runActivity
+	and stop to stopActivity.  Change [self class] to getClass (self),
+	and [self getZone] to getZone (self).
+
+2001-03-14  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ActivityControl.m ([ActivityControl -_setup_ProbeMap]): Here too.
+
+2001-03-12  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ActivityControl.[hm], objectbase.h: Switch from next/step to
+	nextAction/stepAction.  Allows other uses of these names with
+	void return type.
+
+2001-02-23  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Probe.h (CONVERT): Add case for fcall_type_jselector.
+
+	* VarProbe.m ([VarProbe -_typeSetup_]): Likewise.
+	(convert_from_string): Likewise.
+
+	* probing.m (string_convert): Likewise.
+
+2001-02-14  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* MessageProbe.m ([MessageProbe -drop]): Don't free arguments
+	unless set.
+
+2001-02-10  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.m ([VarProbe -_typeSetup_]): Structs are
+	non-interactive.
+	([VarProbe -probeAsString:Buffer:withFullPrecision:]): Print
+	structs as "{..}".
+
+2001-02-09  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ProbeMap.m ([ProbeMap -addProbe:]): Warn about attempts
+	to add null probes.
+
+2001-02-07  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* DefaultProbeMap.m ([DefaultProbeMap -createEnd]): Handle JavaScript.
+
+2001-02-05  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* probing.m (string_convert): Handle NULL selectors.
+
+2001-02-05  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* probing.m (string_convert): Handle Java objects and strings.
+
+	* VarProbe.m, probing.[hm]: Move string_convert into probing
+	as a global.
+
+	* SwarmObject.m, Swarm.m: Use getProbeMapForObject: instead of
+	getProbeMap:.
+
+	* ProbeLibrary.[hm], objectbase.h:  Add ForObject counterparts.
+	Change display precision routines and ivars to unsigned.
+
+	* ProbeLibrary.m: Include defalloc.h and directory.h.
+	([ProbeLibrary -setProbeMap:ForObject:]): Use getZone (self) as
+	appropriate.
+	([ProbeLibrary -_probeMapForObject_:]): New method. Used in new
+	-getProbeMapForObject: and -isProbeMapDefinedForObject:.
+
+	* ActivityControl.m ([ActivityControl -_setup_ProbeMap]): Use
+	setProbeMap:ForObject: instead of setProbeMapFor: (class).
+
+	* ProbeMap.m ([ProbeMap -_addMessageProbe_:methodName:]): New method.
+	([ProbeMap -addJSMethods:]): Call it.
+
+	* MessageProbe.m ([MessageProbe -getArgCount]): Handle JavaScript.
+	([MessageProbe -setArg:ToString:]): Use fcall_type_t for switch, not
+	ObjC typecodes.
+	([MessageProbe -dynamicCallOn:]): Rework to pull typecode from 
+	FCall.
+
+2001-02-04  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* MessageProbe.m ([MessageProbe -createEnd]): Check for dynamic
+	targets like JS objects.  Don't require selector or type in that case.
+	(dynamicCall): Eliminate.  Move into -dynamicCallOn:
+
+	* MessageProbe.[hm], objectbase.h (MessageProbe): Add
+	probedMethodName and setter.  
+
+	* MessageProbe.[hm]: Add drop method.
+
+2001-02-02  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.m ([VarProbe -probeAsString:Buffer:withFullPrecision:]): 
+	Handle pointers.
+
+2001-01-31  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.m ([VarProbe -probeAsPointer:]): Use void * instead of
+	char *.
+	([VarProbe -probeAs{Int,Double}:]): Need extra parens before
+	casting to types_t.
+
+2001-01-30  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.m (COM_probe_as_{int,double,object,string}): Use
+	simplified val_t interface for setting args and return value.
+	([VarProbe -setData:ToString:]): Add support for JavaScript,
+	using -guessValue: to get typing info.
+
+	* Probe.[hm] ([Probe -guessValue:]): New method.
+
+	* Probe.m: Include misc.h.
+
+2001-01-29  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ProbeMap.m ([ProbeMap -addJavaFields:]): Reverse order.
+	([ProbeMap -addJavaMethods:]): Likewise.
+
+	* VarProbe.m (convert_from_string): Handle true/false and
+	failing that, try casting the numeric value.  (Backward compatibility.)
+	([VarProbe -probeAsString:Buffer:withFullPrecision:]): In the 
+	case of apparent boolean probes on an Objective C object, switch
+	back to uchar, since they are conflated.  Add special handling
+	for array ivars, printing as "[...]".
+
+2001-01-29  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* VarProbe.m ([VarProbe -_typeSetup_]): Handle ObjC array type.
+
+	* Probe.h (CONVERT): Moved from VarProbe.m.
+
+	* MessageProbe.m ([MessageProbe -doubleDynamicCallOn:]) 
+	([MessageProbe -longDynamicCallOn:]): Use it.
+
+2001-01-28  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* objectbase.h (val_t): Remove.  (Moved to defobj.h.)
+	(ProbeMap): Add setProbedObject:.
+
+	* VarProbe.m ([VarProbe -_setupJSVarProbe_]): New method.
+	([VarProbe -createEnd]): Use it.
+	([VarProbe -probeAsPointer:], [VarProbe -probeAsInt:],
+	[VarProbe -probeAsDouble:],
+	[VarProbe -probeAsString:Buffer:withFullPrecision:],
+	[VarProbe -probeObject:]): Handle JavaScript.
+	(JS_probe_as_{int,double,object,string}): New functions.
+
+	* Probe.[hm] (Probe): Add probedObject and setter.
+
+	* VarProbe.m ([VarProbe -_typeSetup_]): Handle fcall_type_iid.
+	(CONVERT): Likewise.
+
+	* ProbeMap.h: Include COM.h when BUILDING_SWARM is set.
+
+	* ProbeMap.m ([ProbeMap -_addVarProbe_:getter:setter:]): Change
+	class argument type to COMclass.
+	([ProbeMap -createEnd]): Handle JavaScript.
+	(CONVERT): Add pointer argument.
+	({COM,OBJC}_CONVERT): Accomodate.
+	(JS_CONVERT): New macro.
+	([ProbeMap -_finishVarProbe_:]): New method.
+
+	* ProbeMap.[hm]: Change argument type of addCOM{Fields,Methods}:
+	to COMclass.  Change internal indirections as needed.
+	(ProbeMap): Add probedObject and setter.
+	([-_addVarProbeFor{Class,Object}_:variableName:],
+	[ProbeMap -addJSFields:], [ProbeMap -addJSMethods:]): New methods,
+	first is a rename.  Use _finishVarProbe_: to simplify add methods.
+
+2001-01-27  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ProbeMap.m ([ProbeMap -addCOMMethods:]): Create Selector
+	and add Objective C counterpart.
+
+	* MessageProbe.m: Include defobj/internal.h
+	([MessageProbe -setArg:ToUnsigned:],
+	[MessageProbe -setArg:ToString:], dynamicCallOn
+	[MessageProbe -doubleDynamicCallOn:],
+	[MessageProbe -longDynamicCallOn:],
+	[MessageProbe -stringDynamicCallOn:],
+	[MessageProbe -objectDynamicCallOn:]): Use fcall_types instead 
+	of Objective C type.
+
+	* objectbase.h (val_t): Change type to fcall_type_t.
+	
+2001-01-24  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.h (VarProbe): Use const void * for {getter,setter}Method
+	instead of COMmethod.  (Don't want to include COM.h here.)
+
+	* VarProbe.m ([VarProbe -setProbedVariable:]): Include COM.h.
+
+2001-01-21  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.m ([VarProbe -_typeSetup_]): New method.
+	([VarProbe -_setupJavaVarProbe_])
+	([VarProbe -_setupObjcVarProbe_], [VarProbe -_setupCOMVarProbe_]):
+	Use it.
+	([VarProbe -createEnd], [VarProbe -probeAs{Int,Double,String}:]):
+	Handle COM.
+	([VarProbe -probeRaw:], [VarProbe -probeAsPointer:]): Reject COM
+	case.
+	(CONVERT, OBJC_CONVERT, COM_CONVERT): New macros.
+	(objc_probe_as_{int,double,string}): Replaces
+	probe_as_{int,double,string}.  Use OBJC_CONVERT.
+	(COM_probe_as_{int,double,string}): New function.
+	(GETSTRFULLPREC): New macro.
+	(java_probe_as_string): Use it; handle full precision case.
+	(string_convert): New function.
+	(COM_probe_as_string,
+	[VarProbe -probeAsString:Buffer:withFullPrecision:]): Use it.
+	(convert_from_string): New function.
+	([VarProbe -setData:ToString:]): Use it.
+
+	* VarProbe.[hm], objectbase.h ([VarProbe
+	-probeAsString:Buffer:withFullPrecision:]): Make last argument
+	boolean.
+
+	* VarProbe.h (VarProbe): Add getterMethod and setterMethod
+	and setter.
+
+	* ProbeMap.m ([ProbeMap -_addVarProbe_:getter:setter:]): New method.
+	([ProbeMap -addCOMFields: collect_variable]): Use it.
+
+2001-01-20  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ProbeMap.m ([ProbeMap -addCOMMethods:]): Change collect_method
+	for new COMmethod argument usage.
+	([ProbeMap -addCOMFields:]): Likewise for collect_variable.
+
+2001-01-19  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.m: Use "language == LanguageJava" instead if
+	isJavaProxy throughout.
+	([VarProbe -_setupJavaVarProbe_],
+	[VarProbe -_setupObjcVarProbe_], [VarProbe -createEnd]): Split out
+	language-specific probe setup into separate internal methods.
+
+	* Probe.h (Probe): Replace `isJavaProxy' with `language'.
+
+	* Probe.m ([Probe +createBegin:]): Initialize language to 
+	LanguageObjc.  ([Probe -setProbedClass:]): Set language instead of 
+	isJavaProxy.
+	
+2001-01-17  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* CompleteVarMap.m ([CompleteVarMap -createEnd]): Remove paranoid 
+	classList check.
+
+	* VarProbe.[hm], objectbase.h ([VarProbe
+	-probeAsString:Buffer:withFullPrecision:]): Cast precision values
+	to int.  Make precision argument unsigned.  Likewise for getter
+	and setter.
+
+	* VarProbe.m ([VarProbe -createEnd]): Improve error messages.
+
+	* MessageProbe.[hm] (-getArgCount, -setArg:ToString:, -getArg:,
+	-getArgName:, -isArgumentId): Don't use int for count or
+	positional values.  Add -setArg:ToUnsigned:.
+
+	* ProbeMap.h (ProbeMap): Remove classObject.
+
+	* ProbeMap.[hm]: Add -_addVarProbe_:variableName: and
+	-_addMessageProbe_:selector:. 
+
+	* ProbeMap.m ([ProbeMap
+	-addObjc{Fields,Methods}:,addCOMFields:,-addJava{Fields,Methods}:]):
+	Use them.
+
+	* CompleteProbeMap.m, CompleteVarMap.m, DefaultProbeMap.m: Don't
+	use classObject.
+
+2001-01-11  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ProbeMap.[hm] ([ProbeMap -addObjc{Fields,Methods}:]): New methods.
+
+	* ProbeMap.h (ProbeMap): Remove isJavaProxy.  
+
+	* CompleteProbeMap.m ([CompleteProbeMap -createEnd]): Use new
+	-addObjc{Fields,Methods} instead of inline code.  Do isJavaProxy
+	test using a respondsTo.
+
+	* ProbeMap.m ([ProbeMap -createEnd]): Likewise.
+
+	* CompleteVarMap.m ([CompleteVarMap -createEnd]): Likewise.
+
+	* DefaultProbeMap.m ([DefaultProbeMap -createEnd]): Likewise.
+
+2000-10-14  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* objectbase.h (ProbeMap): Make argument to addProbe: id <Probe>.
+	(ProbeLibrary): Make first argument to setProbeMap:For: id <ProbeMap>.
+
+	* ProbeMap.m ([ProbeMap -addProbeMap:],
+	[ProbeMap -_fastAddProbe_:],
+	[ProbeMap -dropProbeMap:]):  Make argument id <Probe>.
+	([ProbeMap -getProbeForVariable:]): Make return id <VarProbe>.
+	([ProbeMap -getProbeForMessage:]): Make return id <MessageProbe>.
+
+	* ProbeLibrary.h: Add return types to -getProbeMapFor:,
+	-getCompleteProbeMapFor:, -getCompleteVarMapFor:,
+	-getProbeForVariable:inClass:,
+	-getProbeForMessage:inClass:,-setProbeMap:For:.
+
+2000-09-18  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ProbeMap.m ([ProbeMap -createEnd]): Remove inversionList code.
+
+	* CompleteVarMap.m, CompleteProbeMap.m, CustomProbeMap.m,
+	DefaultProbeMap.m, ProbeMap.m: Include defalloc.h and use getZone
+	throughout.  Use `count' instead of `numEntries' throughout.
+
+	* ProbeMap.[hm], objectbase.h: Rename numEntries to count
+	throughout and getter.
+
+	* ProbeMap.m ([ProbeMap -addJavaFields]): Rename count to fieldCount.
+	([ProbeMap -addJavaFields]): Rename count to methodCount.
+
+2000-09-13  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* MessageProbe.m (dynamicCallOn): Use getLanguage, setLanguage:
+	instead of getJavaFlag, setJavaFlag:.
+
+2000-08-11  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.m (GETSTR): New macro.
+	({_}GETSTROBJECT): Disable.
+	(java_probe_as_string): Rework to use GETSTR, i.e. direct
+	JNI field access.
+
+2000-07-26    <mgd@DRONE>
+
+	* ProbeMap.m: Change SD_JAVA_FINDJAVACLASS to
+	SD_JAVA_FIND_CLASS_JAVA and SD_JAVA_ENSUREOBJCMETHOD
+	to SD_JAVA_ENSURE_SELECTOR_OBJC.
+
+	* MessageProbe.m, VarProbe.m: Change SD_JAVA_FINDOBJC to
+	SD_JAVA_FIND_OBJECT_OBJC.
+
+	* CompleteProbeMap.m: Change SD_JAVA_FINDJAVACLASS to
+	SD_JAVA_FIND_CLASS_JAVA.
+
+2000-07-03  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* ProbeMap.m ([ProbeMap -getProbeForMessage:],
+	[ProbeMap -getProbeForVariable:]): Remove warnings if 
+	probes don't exist.
+
+2000-07-02  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* VarProbe.[hm], MessageProbe.[hm] ([... -describe:]):
+	New method.
+
+	* VarProbe.[hm], objectbase.h
+	([VarProbe -probeAsString:]): New method.
+
+	* objectbase.h (ProbeMap): Change return type on begin:
+	to Index.
+
+	* CompleteProbeMap.m ([CompleteProbeMap -createEnd]): Check
+	for javaProxy, not swarmDirectory before doing
+	java class lookup.  Use SD_JAVA_FINDJAVACLASS, not
+	SD_JAVA_FIND_OBJECT_JAVA.
+
+	* ProbeLibrary.m: Formatting tweaks.
+
+	* ProbeMap.[hm] ([ProbeMap -describeForEach:]): New method.
+	
+2000-06-27  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* CompleteProbeMap.m ([CompleteProbeMap -createEnd]): 
+	Don't do classObject lookup unless swarmDirectory exists.
+
+	* MessageProbe.m (dynamicCallOn): Put FArguments and FCall
+	in component zone.
+
+2000-06-19  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* ProbeMap.m ([ProbeMap -addJavaMethods:]): Handle failed
+	selector creation (as occurs with polymorphic methods).
+	([ProbeMap -createEnd]): Use SD_JAVA_FINDJAVACLASS instead
+	of SD_JAVA_FIND_OBJECT_JAVA.
+
+2000-06-18    <mgd@DRONE>
+
+	* CompleteProbeMap.m ([CompleteProbeMap -createEnd]): Use
+	classObject instead of isJavaProxy.
+
+	* ProbeMap.m ([ProbeMap -addJavaFields:]): Use
+	m_ClassGetDeclaredFields with java_field_usable_p to get the
+	public fields, but not the inherited -- still need to add proper
+	super class support.
+	([ProbeMap -addProbeMap:], [ProbeMap -addProbe:]): 
+	Use SD_SUPERCLASS instead of class_get_super_class.
+
+2000-05-18  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* objectbase.h ([Swarm -activateIn:]): Hide in a #ifndef IDL.
+
+2000-05-10  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Probe.m ([Probe -setObjectToNotify:]): Disable test to
+	check for method below.  (Doesn't work for Java.)
+
+	* SwarmObject.[hm] ([SwarmObject
+	-eventOccurredOn:via:withProbeType:on:ofType:withData:]): Return void.
+
+	* CompleteProbeMap.m, CompleteVarMap.m, DefaultProbeMap.m,
+	ProbeMap.m, VarProbe.m: Update macros throughout per changes in
+	defobj.
+
+2000-05-03  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbe.m: Include java.h instead of directory.h.
+	([VarProbe -createEnd]): Drop jniEnv argument to SD_JAVA_FINDJAVA
+	and to fcall_type_for_java_class.
+	([VarProbe -probeAsInt:]): Drop jniEnv argument to
+	SD_JAVA_FINDJAVA.
+	([VarProbe -probeAsString:Buffer:withFullPrecision:]): Likewise.
+	([VarProbe -probeObject:]): Likewise.
+	(setFieldFromString): Likewise.
+	(java_probe_as_object): Drop jniEnv argument to
+	fcall_type_for_java_class and SD_JAVA_FINDOBJC.
+
+	* ProbeMap.m ([ProbeMap -addJavaMethods:]): Drop jniEnv
+	arguments to SD_JAVA_ENSUREOBJCMETHOD.
+	([ProbeMap -createEnd]): Drop jniEnv arguments to SD_JAVA_FINDJAVA.
+
+	* ProbeMap.[hm]: Include java.h instead of directory.h.
+
+	* MessageProbe.m: Include jva.h instead of directory.h and javavars.h
+	(dynamicCallOn): Use JAVA_COPY_STRING instead of
+	SD_JAVA_COPYSTRING.  Drop jniEnv arguments to SD_JAVA_FINDOBJC.
+
+	* CompleteProbeMap.m: Include java.h instead of directory.h.
+	([CompleteProbeMap -createEnd]): Drop jniEnv argument to
+	SD_JAVA_FINDJAVA.
+
+	* CompleteVarMap.m: Likewise.
+
+2000-05-01  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ProbeMap.m ([ProbeMap -addJavaMethods:]): Use 
+	SD_JAVA_ENSUREOBJCMETHOD instead of function. 
+
+	* MessageProbe.m (dynamicCallOn): Use java copy string macro
+	instead of function.
+
+2000-04-28    <mgd@nest.swarm.org>
+
+	* CompleteProbeMap.m, CompleteVarMap.m, DefaultProbeMap.m,
+	MessageProbe.m, ProbeMap.m, VarProbe.m: Accomodate SD_* renames.
+	Ensure that swarmconfig.h is included before HAVE_JDK checks.
+
+2000-04-27    <mgd@nest.swarm.org>
+
+	* objectbase.h ([VarProbe -createEnd]): Remove.
+	([ProbeMap -getProbeForVariable:, -getProbeForMessage:]): Remove.
+
+2000-04-20    <mgd@nest.swarm.org>
+
+	* VarProbe.m (java_probe_as_string): Handle strings.
+
+2000-04-15    <mgd@nest.swarm.org>
+
+	* ProbeMap.m ([ProbeMap -addJavaFields:]): Use m_ClassGetFields
+	instead of m_ClassGetDeclaredFields.  (Want the publics, and inherited
+	variables.)
+
+2000-04-13    <mgd@nest.swarm.org>
+
+	* VarProbe.m ([VarProbe -createEnd]): Use m_ClassGetField instead
+	of m_ClassGetDeclaredField.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Makefile.am (CURRENT): Bump:  Swarm 2.1.1 frozen.
+
+	* ActivityControl.[hm]: Remove +createBegin:/-createEnd.
+	Add (id <Symbol>) return to run, stop, next, step, stepUntil.
+	Make void return for attachToActivity, updateStateVar, and
+	_setup_ProbeMap.  Use <ScheduleActivity> for argument
+	to attachToActvity. 
+	([ActivityControl -getActivity]): New method.
+
+	* objectbase.h: Declare terminate and getActivity.  Accomodate
+	changes above.
+
+2000-03-27    <mgd@nest.swarm.org>
+
+	* Swarm.m ([Swarm -getProbeMap], [Swarm -getCompleteProbeMap],
+	[Swarm -getProbeForVariable:]): Use SD_GETCLASS instead of
+	[self class].
+
+	* SwarmObject.m: Likewise.
+	([SwarmObject -getProbeForMessage:]): Likewise.
+
+	* ProbeMap.m ([ProbeMap -addJavaMethods:]): Only add public,
+	non-static methods.
+
+2000-02-22    <mgd@nest.swarm.org>
+
+	* Makefile.am (REVISION): Bump.  Version 2.1.
+
+	* VarProbe.m (java_probe_as_string): Print the class name instead
+	of the string expansion.
+
+2000-02-17    <mgd@nest.swarm.org>
+
+	* ActivityControl.h, CompleteProbeMap.h, CompleteVarMap.h,
+	DefaultProbeMap.h, Probe.h, ProbeLibrary.h, ProbeMap.h,
+	SwarmObject.h: Conform to respective protocol.
+
+	* ActivityControl.m, CompleteProbeMap.m, CompleteVarMap.m,
+	DefaultProbeMap.m, Probe.m, ProbeLibrary.m, ProbeMap.m,
+	SwarmObject.m: Add phase tags.
+
+	* objectbase.h (ActivityControl): Remove terminateActivity.
+
+2000-02-16    <mgd@nest.swarm.org>
+
+	* VarProbe.m ([VarProbe -createEnd]): Print a warning if
+	probe attempted on array of structs or unions.
+
+2000-01-23    <mgd@nest.swarm.org>
+
+	* VarProbe.m ([VarProbe -createEnd], java_probe_as_object):
+	Accomodate swarm_directory_fcall_type_for_java_class ->
+	fcall_type_for_java_class rename.
+
+2000-01-20    <mgd@nest.swarm.org>
+
+	* VarProbe.m ([VarProbe -createEnd], java_probe_as_object): Use
+	swarm_directory_fcall_type_for_java_class.
+
+2000-01-11    <mgd@nest.swarm.org>
+
+	* VarProbe.m ([VarProbe -createEnd], [VarProbe
+	-iterateAsDouble:using:], [VarProbe iterateAsInteger:using:]): Use
+	objc_process_array instead of process_array.
+
+2000-01-04    <mgd@DRONE>
+
+	* MessageProbe.m (dynamicCallOn): Use FCall
+	+create:target:selector:arguments: instead of similiar local code.
+
+1999-12-22    <mgd@nest.swarm.org>
+
+	* MessageProbe.m (dynamicCallOn): Use setJavaFlag: followed
+	by setSelector: instead of previous combination method.
+
+1999-12-21    <mgd@nest.swarm.org>
+
+	* MessageProbe.m (dynamicCallOn): Use setSelector:setJavaFlag:
+	instead of inline code.  Remove call to setObjCReturnType:.
+
+1999-10-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Don't attempt Java lookup
+	unless swarmDirectory exists.
+
+1999-09-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* swarm_rts_routines.m (skip_typespec): Handle bitfields.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-09-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbe.m ([VarProbe -createEnd]): Drop localref to temp
+	probedVariable java string.
+
+1999-09-15  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* CompleteProbeMap.m: Convert [self getZone] to getZone (self).
+	([CompleteProbeMap -createEnd]): Drop localrefs
+	each iteration up class hierarchy.
+
+	* CompleteVarMap.m ([CompleteVarMap -createEnd]): Likewise.
+
+	* ProbeMap.m: Convert [self getZone] to getZone (self).
+	([ProbeMap -addJava{Fields,Methods}:]): Make localref usage
+	and drop as narrow as possible.
+
+	* VarProbe.m (java_probe_as_object): Handle localref cleanup
+	for GETVALUE.
+	(java_probe_as_string): Drop localref to temp Java string.
+
+1999-09-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ProbeMap.m ([ProbeMap -addJavaFields:]): Handle localref cleanup.
+	([ProbeMap -addJavaMethods:]): 
+
+	* VarProbe.m ([VarProbe -createEnd], setFieldFromString): Likewise.
+
+1999-09-09  Alex Lancaster  <alex@santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Adjust HAVE_JDK #ifdef to
+	include the Java declaration.
+
+1999-09-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m: Include defalloc.h.
+	([MessageProbe -createEnd], copy_to_nth_colon): Use alloc: instead
+	of xmalloc.
+
+1999-09-03  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Pass results of
+	swarm_directory_ensure_selector_type_signature as argument
+	to (fa's) setJavaSignature.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ProbeMap.m ([ProbeMap -addJavaFields:], [ProbeMap
+	-addJavaMethods:]): Don't define without HAVE_JDK.
+
+1999-08-25  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* swarm_rts_routines.m (skip_typespec, skip_offset): Avoid using
+	ctype isdigit.
+
+	* SwarmObject.[mh] ([SwarmObject -getIdName]): Remove.
+
+	* objectbase.h (VarProbe): Declare DefaultString, CharString,
+	IntString.
+
+	* local.h: Remove declarations above.
+
+1999-08-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* objectbase.h: Add VarProbe, MessageProbe, and ProbeMap typing.
+
+1999-08-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* objectbase.h: Add Zone typing to +create:* methods.
+	(Swarm): Return Activity with activateIn:
+
+1999-08-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbe.m (java_probe_as_object): New function.
+
+	* VarProbe.[hm], objectbase.h ([VarProbe -probeObject:]): New method.
+	Use function above.
+
+	* Probe.[mh], objectbase.h ([Probe -setStringReturnType:,
+	-setFloatFormat:, -probeRaw:, -probeAsPointer:, -probeAsInt:,
+	-probeAsDouble, -probeAsString:Buffer,
+	-probeAsString:Buffer:withFullPrecision:]): Remove placeholders.
+
+	* VarProbe.m ([VarProbe -createEnd]): Use
+	swarm_directory_objc_type_for_java_class instead of duplicate code.
+
+	* ProbeMap.m ([ProbeMap -addJavaFields:], [ProbeMap
+	-addJavaMethods:]): New methods.
+	([ProbeMap -createEnd]): Rewrite to use them.
+
+	* ProbeMap.h: When BUILDING_SWARM and HAVE_JDK, include
+	defobj/directory.h and declare -addJava{Fields,Methods}:,
+
+	* CompleteVarMap.m ([CompleteVarMap -createEnd]): Rewrite to use
+	addJavaFields.
+
+	* DefaultProbeMap.m ([DefaultProbeMap -createEnd]): Likewise.
+
+	* CompleteProbeMap.m, CompleteVarMap.m, DefaultProbeMap.m,
+	ProbeMap.m: Include javavars.h instead of using local
+	declarations.  Include <defobj/directory.h> instead of
+	"../defobj/directory.h".
+	([CompleteProbeMap -createEnd]): Rewrite to use
+	addJava{Fields,Methods}:.
+
+1999-08-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Probe.h: Don't include local.h.
+
+1999-08-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* probing.m: Use externvardef to declare symbols below.
+
+	* local.h: Use externvar for declaration of symbols below.
+
+	* Probe.h: Include local.h.  Don't declare DefaultString, CharString,
+	and IntString.h.
+
+1999-08-11  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbe.m ([VarProbe
+	-probeAsString:Buffer:withFullPrecision:]): Use a display name if
+	available.  Don't use getInstanceName.
+
+	* SwarmObject.[hm], objectbase.h ([SwarmObject -getInstanceName]): 
+	Remove.
+
+	* ActivityControl.[hm], objectbase.h ([ActivityControl
+	-getInstanceName]): Remove.
+
+	* VarProbe.m ([VarProbe -setProbedVariable:]): Include javavars.h.
+	(java_probe_as_string): 
+	(_TYPEP, TYPEP, _GETSTROBJECT, GETSTROBJECT, _GETVALUE, GETVALUE): 
+	New macros.
+	(java_probe_as_{int,double,string}): Use them.
+
+1999-08-09  Alex Lancaster  <alex@santafe.edu>
+
+	* objectbase.h (EmptyProbeMap): Add +create:forClass: convenience
+	create message to protocol.
+
+	* EmptyProbeMap.[hm] ([EmptyProbeMap +create:forClass:]): New
+	convenience factory method for creating an EmptyProbeMap, but with
+	the appropriate class set.  Make class conform to EmptyProbeMap
+	protocol.  Add all appropriate phase tags.
+
+1999-08-09  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbe.m: Accomodate c_* renames in defobj/directory.m throughout.
+
+1999-08-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbe.m ([VarProbe -probeAsString:Buffer:withFullPrecision:],
+	[VarProbe -setData:ToString:]): If long and long long are the
+	same size, don't use LLFMT.
+
+	* swarm_rts_routines.m (skip_typespec): Add case for long double.
+
+	* MessageProbe.m ([MessageProbe -setArg:ToString:], [MessageProbe
+	-doubleDynamicCallOn:], [MessageProbe -longDynamicCallOn:]): Add
+	support for [unsigned] long long and long double.
+
+	* VarProbe.m ([VarProbe -createEnd], probe_as_int,
+	probe_as_double, [VarProbe
+	-probeAsString:Buffer:withFullPrecision:], [VarProbe
+	-setData:To:], [VarProbe -setData:ToString:]): Add support
+	for [unsigned] long long and long double.
+
+1999-08-08  Alex Lancaster  <alex@santafe.edu>
+
+	* objectbase.h (ActivityControl): Move -attachToActivity: to USING
+	phase, doesn't need to be a CREATING phase method.
+
+1999-08-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* swarm_rts_routines.m (skip_typespec): Handle [unsigned] long longs.
+
+	* ProbeMap.m ([ProbeMap -addProbe:], [ProbeMap -_fastAddProbe_:]): 
+	([ProbeMap -dropProbeMap:aProbeMap]): Use STRDUP instead of strdup.
+
+	* VarProbe.m ([VarProbe -setProbedVariable:], [VarProbe
+	-setFloatFormat:], [VarProbe -setData:ToString:]): Likewise.
+
+	* MessageProbe.m ([MessageProbe -createEnd], [MessageProbe
+	-setArg:ToString:]): Use STRDUP instead of strdup.
+	(dynamicCallOn): Use ZSTRDUP instead of strdup.
+
+1999-08-04  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbe.m ([VarProbe -probeAsString:Buffer:withFullPrecision:]): 
+	Use raiseEvent instead of printf for error.
+
+1999-07-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* CompleteProbeMap.m, CompleteVarMap.m, DefaultProbeMap.m, 
+	MessageProbe.m, ProbeMap.m, VarProbe.m: Accomodate J* to SD_*
+	and swarm directory function renames.
+
+1999-07-21  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* VarProbe.m ([VarProbe -createEnd]): Setup probedType
+	for a variable in a Java obejct.
+
+	* ProbeMap.m: Reformating.
+
+1999-07-15  Alex Lancaster  <alex@santafe.edu>
+
+	* CustomProbeMap.h (@interface): Make class conform to
+	CustomProbeMap protocol.
+
+	* CustomProbeMap.[hm] (addProbesWithIdentifers): New static function
+	which parses the input list.
+	([CustomProbeMap +create:forClass:withIdentifiers:): Use it.
+	([CustomProbeMap -addProbesForClass:withIdentifiers:]): New
+	method, likewise use addProbesWithIdentifiers function.
+	
+	* objectbase.h (CustomProbeMap): Document existing methods.  
+	Add new SETTING method (addProbesForClass:withIdentifiers:) which
+	allows post-create time addition of variables and method names via
+	the list-delimiter form.
+
+1999-07-09  Alex Lancaster  <alex@santafe.edu>
+
+	* VarProbe.m (setFieldFromString): Protect Java-only static
+	function with #ifdef HAVE_JDK.
+
+	* CompleteProbeMap.m ([CompleteProbeMap -createEnd]): Move
+	declaration of index and inversionList inside the #ifdef HAVE_JDK
+	block, since they are only used in the Java case.
+
+1999-07-09  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* CompleteProbeMap.m: Import directory.h and declare as extern global
+	variables that are needed.
+	([CompleteProbeMap -createEnd]): If probed class is Java class, then
+	use JNI calls to initialize fields andd methods list of the class 
+	and all of its the superclasses and corresponding probes.
+
+	* CompleteVarMap.m: Import directory.h and declare as extern global
+	variables that are needed.
+	([CompleteVarMap -createEnd]): If probed class is Java class, then
+	use JNI calls to initialize fields list of the class and all the 
+	superclasses and corresponding probes.
+
+	* DefaultProbeMap.m: Import directory.h and declare as extern global
+	variables that are needed.
+	([DefaultProbeMap -createEnd]): If probed class is Java class, then
+	use JNI calls to initialize fields list and corresponding probes.
+
+	* Probe.h: Add new field isJavaProxy.
+
+	* Probe.m ([Probe -setProbedClass:]):  Check to see if the probed 
+	class is a JavaProxy instance.
+
+	* ProbeMap.h (SwarmObject): Add new field isJavaProxy.
+
+	* ProbeMap.m: Import directory.h and declare as extern needed 
+	global variables.
+	([ProbeMap -setProbedClass:]): Check to see if the probed class is
+	a JavaProxy instance.
+	([ProbeMap -createEnd]): If probed class is Java class, then use
+	JNI to initialize list of fields and methods and corresponding 
+	probes.
+
+	* VarProbe.h (VarProbe>): Add new fields fieldObject, fieldType,
+	classObject.
+
+	* VarProbe.m: Import directory.h and declare as extern global
+	variables with c_ m_ and f_ prefixes that are used.
+	([VarProbe -createEnd]): If probed class is a new class on
+	Java side, get all field information through JNI.
+	([VarProbe -probeRaw:]): Prohibit raw probing of Java objects.
+	([VarProbe -probeAsPointer:]): Prohibit probing as pointer of
+	Java objects.
+	(java_probe_as_int): Add new function that extracts integer
+	from a field.
+	([VarProbe -probeAsInt:]): If probing Java object use 
+	java_probe_as_int.
+	(java_probe_as_double): Add new function that extracts double
+	from a field.
+	([VarProbe -probeAsDouble:]):  If probing Java object use 
+	java_probe_as_double.
+	(java_probe_as_string): Add new function that converts field
+	value to string.
+	([VarProbe -probeAsString:Buffer:withFullPrecision:]): If probing
+	Java object use java_probe_as_string.
+	([VarProbe -setData:To:]): Prohibit setting fields in Java objects
+	from a pointer to a value.
+	(setFieldFromString): Add new function that sets field in Java
+	object from string.
+	([VarProbe -setData:ToString:]): If probing Java object use
+	setFieldFromString.
+	([VarProbe -drop]): Delete global references to instance variables
+	refering to Java objects.
+
+1999-06-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* objectbase.h, MessageProbe.[hm] ([MessageProbe
+	+create:setProbedSelector:]): New method.
+
+	* MessageProbe.m (nth_type): Used unsigned argument and counter.
+
+1999-06-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m ([MessageProbe +create:setProbedSelector:]): New
+	method.
+
+1999-06-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m (copy_to_nth_colon): Thinko.
+	(dynamicCallOn): Avoid setting retVal->val if there isn't a return
+	value.
+
+1999-06-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Pass jniEnv to JFINDJAVA.
+
+1999-06-17  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbe.m ([VarProbe -createEnd]): Make floatFormat string
+	larger than necessary to avoid false positive from Checker.
+
+	* MessageProbe.m (copy_to_nth_colon): Avoid running over end
+	of string in some corner cases.
+
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES, lib_LTLIBRARIES): Substitute
+	{inst,noinst}LIBS.
+	(EXTRA_LTLIBRARIES): New variable.
+	(libobjectbase_la_LDFLAGS): Substitute inst_LDFLAGS.
+
+	* swarm_rts_routines.m: Include misc.h.
+
+1999-05-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* objectbase.h: Include externvar.h.
+
+	* Makefile.am (INCLUDES): Add -I$(top_builddir)/libobjc.
+
+1999-05-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Arguments.m (swarm_version): Add externvardef.
+
+	* probing.m (probeLibrary): Add externvardef.
+
+	* objectbase.h: Use `externvar' for external variables.
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES): Switch from lib_LTLIBRARIES.
+	(FFIINCLUDES): Remove.
+	(INCLUDES): Don't include FFIINCLUDES.
+
+1999-04-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* objectbase.h (MessageProbe), MessageProbe.[hm] ([MessageProbe
+	-longDynamicCallOn:]): Replaces intDynamicCallOn:
+
+	* MessageProbe.m ([MessageProbe -objectDynamicCallOn:]): Permit
+	objects to be selectors.
+
+1999-04-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbe.m: Include swarmconfig.h.
+	([VarProbe -probeAsPointer:]): Use PTRUINT instead of locally-defined
+	PTRINT.  Remove local definition.
+
+1999-04-27  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Use JFINDJAVA instead of
+	respondsTo: + JavaProxy check.
+
+1999-04-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m: Remove support for avcall; use FArguments/FCall
+	support.
+	(dynamicCallOn): Cast retVal.val.object to jstring, jobject for
+	use with java_copy_string, JFINDOBJC, respectively.
+
+1999-04-24  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Don't truncate method
+	name if there are no colons.
+
+1999-04-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Add respondsTo: as a sufficient
+	condition for trying Java (in additon to target being a JavaProxy).
+	Strip off `:' from method signature for Java.
+	Handle string and object return conversions.
+
+1999-04-23  Alex Lancaster  <alex@santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Use #ifdef HAVE_JDK to protect
+	the Java-specific code.
+	Likewise protect the #include <directory.h>.
+
+1999-04-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Call setObjCReturnType on
+	FArguments instance.
+
+	* MessageProbe.[hm], objectbase.h ([MessageProbe
+	-stringDynamicCallOn:], [MessageProbe -objectDynamicCallOn:],
+	[MessageProbe -intDynamicCallOn:]): New methods.
+
+1999-04-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (JAVAINCLUDES): New variable for java/c + @JAVAINCLUDES@.
+	(INCLUDES): Use it.
+
+	* MessageProbe.m (dynamicCallOn): Convert ffi version to 
+	use FCall/FArguments and support Java.
+
+	* MessageProbe.m ([MessageProbe -setArg:ToString:]): In
+	the case of _C_CHARPTR, copy the string since Java stubs
+	will only provide the string conversion temporarily.
+
+	* Swarm.h: Include objectbase.h.  Don't include activity.h.
+	(Swarm): Add protocol compliance tag. 
+
+	* Swarm.m: Add Creating tag.
+
+	* VarProbe.h:  Include objectbase.h.
+	(VarProbe): Add protocol compliance tag. 
+
+	* MessageProbe.h:  Include objectbase.h.
+	(MessageProbe): Add protocol compliance tag. 
+
+	* objectbase.h (MessageProbe): Add setting tag.
+
+1999-04-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* objectbase.h (val_t): Use types_t instead of included union.
+
+	* MessageProbe.m: Accomodate types_t changes throughout 
+	(lexical _char to schar name changes..).
+
+1999-04-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* CustomProbeMap.m ([CustomProbeMap
+	+create:forClass:withIdentifiers:]): Check for NULL `identifier'
+	before deferencing.
+	
+1999-04-01  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* objectbase.h: Protocol Swarm inherits protocols SwarmProcess and
+	CREATABLE.
+
+1999-03-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* objectbase.h: Make SwarmObject creatable. 
+
+1999-03-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* objectbase.h: Add @class DefaultProbeMap.
+
+1999-03-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Revert last change.
+	(version.h): Remove.
+
+1999-03-16  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add JAVAINCLUDES.
+
+1999-03-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I for libobjc.
+
+1999-03-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* objectbase.h: Fix return type of getArg: (val_t), and correct
+	documentation for getArg: and getArgName:.
+
+1999-02-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* objectbase.h: Add CREATABLE tags to all non-abstract protocols.
+
+1999-02-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbe.h (VarProbe): Implement VarProbe, not _VarProbe.
+
+	* objectbase.h (VarProbe, _VarProbe): Merge.
+
+1999-02-15  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbe.m: Include ../defobj/internal.h.
+
+	* VarProbe.[hm], objectbase.h ([VarProbe -getRank], [VarProbe
+	-getDims], [VarProbe -getBaseType], [VarProbe iterateAsDouble:using:],
+	[VarProbe iterateAsInteger:using:], [VarProbe -drop]): New methods.
+	(probe_as_int): New function.
+	([VarProbe -probeAsInt:]): Use it.
+	(probe_as_double): New function.
+	([VarProbe -probeAsDouble:]): Use it.
+
+	* VarProbe.m ([VarProbe -free]): Remove.
+
+	* VarProbe.h (VarProbe): Add rank, dims, and baseType.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (CURRENT, REVISION, AGE): No changes.  Version 1.4.1.
+
+1999-01-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbe.m ([MessageProbe -doubleDynamicCallOn:]): 
+	Don't munge return types for the sake of avcall; it's not broken.
+
+1999-01-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* CompleteProbeMap.m, CompleteVarMap.m, CustomProbeMap.m,
+	DefaultProbeMap.m, Probe.m, ProbeMap.m, VarProbe.m: Use raiseEvent()
+	instead of raiseEvent: and WarningMessage instead of Warning.
+
+1999-01-20  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am (CURRENT): Bump.
+
+1998-12-21  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* VarProbe.m: Don't include objc/objc.h.  Include misc.h
+	instead of stdio.h.
+
+	* CustomProbeMap.m: Include misc.h instead of stdarg.h.
+
+1998-11-19  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* MessageProbe.m ([MessageProbe -createEnd]): Set arguments to NULL
+	if no arguments; don't attempt malloc of size zero.
+
+1998-11-12  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* objectbase.h (Arguments): Remove (moved to defobj.h).
+
+	* Makefile.am (SRC, objectbase_HEADERS): Remove Arguments.[mh] (moved
+	to defobj).
+	(version.h): Remove (now in defobj).
+	(install-data-local): Remove.
+
+1998-10-28  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Arguments.m (VARCHAR): Cast argument to int before passing
+	to isalnum.
+
+1998-10-27  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* Arguments.m (prefix): New function.
+	([Arguments -_getSwarmHome_:]): Use it to transform
+	SWARMHOME and PREFIX.
+
+1998-10-27  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Add case for void return
+	(both libffi and ffcall versions).
+
+1998-10-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m: Change SIGNATURE_FILE to swarmconfig.h,
+	SIGNATURE_SUBPATH to include/ and SIGNATURE_PATH to 
+	incclude/SIGNATURE_FILE.
+
+1998-10-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT, AGE): Increment. Swarm 1.3.1 released.
+
+	* Arguments.m ([Arguments -_getSwarmHome_:]): Do a search
+	for SWARMHOME if value in environment variable doesn't have
+	the signature file.
+
+1998-10-10  Marcus G. Daniels  <mgd@sangre.santafe.edu>
+
+	* Arguments.m (dropDirectory): Remove.
+	(findDirectory, countSlashes, findSwarm, [Arguments
+	-_runningFromInstall_]): Use dropdir (from misc) instead of
+	dropDirectory.
+
+1998-10-05  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m ([Arguments -_getSwarmHome_:], [Arguments
+	-getSwarmHome]): New method takes code of getSwarmHome, except it
+	calls returns findSwarm if argument is set.
+	([Arguments -_getPath_:subpath:]): Use ignoringEnvFlag to
+	get the SWARMHOME recognized by _runningFromInstall_.
+
+	* Arguments.h (Arguments): New ivar ignoringEnvFlag.
+
+	* swarm_rts_routines.[hm] (skip_offset, skip_type_qualifiers): 
+	Don't inline, this causes gratuitious warning messages from egcs.
+
+1998-09-13  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.[hm], objectbase.h ([Arguments
+	+createArgc:Argv:version:bugAddress:]): Added version:bugAddress:.
+
+1998-09-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ActivityControl.h (ActivityControl): Make status of type
+	id <Symbol>.
+
+1998-09-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): Add char support.  Add
+	workaround for bugs in libffi for shorts (like chars).
+
+	* objectbase.h (val_t): Add _short and _ushort.
+
+	* VarProbe.m ([VarProbe -createEnd]): Add short and unsigned short.
+	Use variable to hold type tag.
+	([VarProbe -probeAsPointer:]): Add char, unsigned char, short and
+	unsigned short.
+	([VarProbe -probeAsInt:]): Add short and unsigned short.
+	([VarProbe -probeAsString:Buffer:withFullPrecision:]): Likewise.
+	([VarProbe -setData:To:]): Likewise.
+	([VarProbe -setData:ToString:]): Likewise.
+
+	* MessageProbe.m ([MessageProbe -setArg:ToString:]): Add short
+	and unsigned short.  Unsigned int was improperly tagged a int.
+	(dynamicCallOn): Add char, short, and unsigned short types (all
+	cases).
+	([MessageProbe -doubleDynamicCallOn:]): Add char, short, and unsigned
+	short types.
+
+1998-09-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* objectbase.h (val_t): Add _uint, _ulong, and _long.
+
+	* VarProbe.m ([VarProbe -createEnd]): Add support for long
+	and unsigned long.
+	([VarProbe -probeAsPointer:]): Likewise.
+	([VarProbe -probeAsInt:]): Likewise.
+	([VarProbe -probeAsDouble:]): Likewise.
+	([VarProbe -probeAsString:Buffer:withFullPrecision:]): Likewise.
+	([VarProbe -setData:To:]): Likewise.
+	([VarProbe -setData:ToString:]): Likewise.
+
+	* MessageProbe.m ([MessageProbe -setArg:ToString:]): Add
+	support for unsigned int, long, and unsigned long.
+	(dynamicCallOn): Likewise.
+	([MessageProbe -doubleDynamicCallOn:]): Likewise.
+
+	* Arguments.m ([Arguments -parseKey:arg:]): --mode option
+	incorrectly tagged `a' (now `m').
+
+1998-08-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT): Increment.  Swarm 1.3 released.
+	(version.h): Only use sed for extracting version components.
+
+1998-08-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* VarProbe.m ([VarProbe -setProbedVariable:], 
+	([VarProbe -free]): use XFREE instead of xfree.
+
+	* Arguments.m ([Arguments -getAppConfigPath], [Arguments
+	-getAppDataPath]): Copy default value to heap.
+	(findDirectory, countSlashes, [Arguments -_getPath_:subpath:],
+	[Arguments -_runningFromInstall_]): Use XFREE instead of xfree.
+
+1998-08-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m (ensureEndingSlash): New function.
+	([Arguments -setDefaultAppConfigPath:], [Arguments
+	-setDefaultAppDataPath:]): Use it.
+	([Arguments -_getPath_:subpath:]): New method.
+	([Arguments -getConfigPath], [Arguments -getDataPath]): Use it
+	(latter is new).
+	([Arguments -_runningFromInstall_], [Arguments
+	-_appendAppName_:]):
+	([Arguments -getAppConfigPath], [Arguments -getAppDataPath]): Use
+	them (latter is new).
+	(SIGNATURE_SUBPATH, SIGNATURE, SIGNATURE_PATH): Versions for 
+	subdirectory, file, and combined.  SIGNATURE is now Makefile.appl
+	instead of VERSION.
+
+	* Arguments.[hm]: New ivar defaultAppDataPath and setter.
+
+	* Arguments.m ([Arguments +createBegin:]): Set a default for it.
+
+	* Arguments.h, objectbase.h: Declare -getDataPath and getAppDataPath.
+
+	* objectbase.h: Declare setDefaultAppDataPath:.
+
+1998-08-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* objectbase.h: Declare setDefaultAppConfigPath:.
+
+	* Arguments.m ([Arguments +createBegin:]): Set
+	defaultAppConfigPath to "./".
+	([Arguments -setDefaultAppConfigPath:]): New method.  Appends
+	slash if missing.
+	([Arguments -getSwarmHome]): Append slash if missing.
+	([Arguments -getAppConfigPath]): Use stat instead of strcmp
+	to see if directories are the same.
+
+	* Arguments.h (Arguments): New ivar defaultAppConfigPath and
+	setter.
+
+	* Arguments.m: Include objectbase.h, collections.h, and swarmconfig.h.
+	(countSlashes): New function.
+	(findSwarm): Use it to determine how many directories to drop.
+
+	* objectbase.h, Arguments.[hm]: New methods getConfigPath
+	and getAppConfigPath.
+
+	* Arguments.h: Don't declare singleton Arguments object here.
+
+	* objectbase.h: Do it here.
+
+1998-08-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m: Add show-current-time option.
+
+	* Arguments.m, objectbase.h: Put addOptions: and parseKey:arg: in
+	create phase.  Add setting phase.
+
+	* Arguments.[hm]: Add showCurrentTimeFlag accessors.
+
+1998-08-12  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbe.m (dynamicCallOn): New functions (one for libffi
+	and one for avcall).  
+	([MessageProbe -dynamicCallOn:]): Use dynamicCallOn.
+	Use _int for UCHR cases in libffi.
+
+1998-08-12  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* Makefile.am (INCLUDES): Use new subsituted variable 
+	FFIINCLUDES instead of -I$(ffidir)/include.
+
+	* MessageProbe.m: Include swarmconfig.h.
+
+1998-08-07  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* objectbase.h: Add @class SwarmObject.
+
+1998-07-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m ([Arguments +createArgc:Argv:]): Cast results
+	of find_executable to char * for program_invocation_name.
+
+1998-07-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbe.m (copy_to_nth_colon): Use xmalloc not malloc.
+	([MessageProbe -dynamicCallOn:]): Use long long buffer for return
+	value.  New macro VAL to deference to desired type. In mips64
+	case, adjust pointer.
+
+	* Arguments.m: Note use of access from misc.h.
+
+	* VarProbe.m ([VarProbe -setProbedVariable:]): Use xfree instead
+	of free.
+	([VarProbe -createEnd]): Use xmalloc instead of malloc.
+	([VarProbe -free]): Use xfree instead of free.
+
+	* Arguments.m, MessageProbe.m, VarProbe.m: Don't include stdlib.h.
+
+	* MessageProbe.m: Undef PACKAGE and VERSION after including
+	ffi.h.
+
+1998-07-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* objectbase.h: Split VarProbe into new features vs. user
+	presentation.
+
+	* VarProbe.m: Add phase tags.
+
+	* VarProbe.h: Include objectbase.h.
+	(VarProbe): Adopt to _VarProbe.
+
+1998-07-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* VarProbe.h (VarProbe): Rename interactive to interactiveFlag.
+	Make it boolean.
+
+	* VarProbe.[hm], objectbase.h: Rename isInteractive to
+	getInteractiveFlag.
+
+	* objectbase.h: Minor reformatting of documentation.
+
+1998-07-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m, MessageProbe.m: Include misc things last.
+
+1998-07-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ProbeMap.m, VarProbe.m: Include misc.h instead of string.h.
+
+1998-07-07  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* objectbase.h (Probe): Add argument to setProbeClass.
+
+	* CustomProbeMap.m: Include stdarg.h first to avoid problems on
+	Redhat 5.
+	
+1998-07-06  Alex Lancaster  <alex@santafe.edu>
+
+	* objectbase.h (Arguments): Further clarify use of Arguments with
+	main.m program fragment in Example.
+
+1998-06-25  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (version.h): Quote SWARM_VERSION value.
+	($(libobjectbase_la_OBJECTS)): Depend on version.h.
+	(objectbase_HEADERS): Remove version.h.
+	(install-data-local): New rule.
+
+1998-06-24  Alex Lancaster  <alex@santafe.edu>
+
+	* objectbase.h: (Arguments): Add protocol.  Add documentation
+	description for Arguments, including long example marked-up with
+	//E:.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* CompleteProbeMap.m, CompleteVarMap.m, CustomProbeMap.m,
+	DefaultProbeMap.m, Probe.m, ProbeMap.m, VarProbe.m:  Use
+	[Warning raiseEvent: ..] instead of fprintf.
+
+	* Makefile.am (lib_LIBRARIES, libobjectbase_a_SOURCES): Remove.
+	(noinst_HEADERS): Include local.h.
+
+1998-06-23  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LTLIBRARIES, libobjectbase_la_SOURCES,
+	libobjectbase_la_LDFLAGS, SRC, CURRENT, REVISION, AGE): New
+	variables.  Set *_SOURCES from SRC.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+	
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-06-17  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* objectbase.h: Document Swarm.
+
+1998-06-03  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* objectbase.h: Update documentation tags.
+
+1998-05-28  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* objectbase.h: Include defobj.h.
+
+	* Probe.m: Include collections.h.
+
+	* ActivityControl.[hm]: Include activity.h.
+
+1998-05-09  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbe.m: #include avcall.h and ffi.h, not #import.
+
+1998-05-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m ([Arguments -parseKey:arg:]): Send messages to
+	self, not arguments.
+
+1998-05-06  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* EmptyProbeMap.[hm]: Remove do-nothing -createEnd.
+
+	* objectbase.h: Spacing changes in method declarations throughout.
+	(ProbeConfig, DefaultProbeMap): Add description string.
+	(CompleteProbeMap): Add phase tags.
+	(EmptyProbeMap): Remove -createEnd.
+	(CompleteVarMap): Add //S.
+
+	* CustomProbeMap.m: Add phase tags.
+	
+	* CustomProbeMap.[hm]: Reformatting throughout.
+
+1998-04-29  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile (version.h): Extract SWARM_{MAJOR,MINOR,SUBMINOR} from
+	version file.
+
+	* Arguments.m (SIGNATURE_FILE): New symbol for filename that has
+	version information.
+	(findSwarm): Use it instead of "VERSION".  Use SWARM_VERSION
+	instead of VERSION throughout.
+
+1998-04-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ActivityControl.m, CustomProbeMap.m: Reformatting throughout.
+
+	* ActivityControl.m, CompleteProbeMap.m, CustomProbeMap.m,
+	MessageProbe.m, Probe.m, ProbeMap.m, Swarm.m, VarProbe.m: Move
+	documentation tags to objectbase.h.
+
+	* objectbase.h: Remove includes of SwarmObject.h and Swarm.h.
+
+1998-04-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbe.m ([MessageProbe -doubleDynamicCallOn:]): Convert
+	for float, too.
+
+1998-04-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* objectbase.h: Add //D: documentation comment tag for module.
+
+1998-04-15  Irene Lee  <lee@wijiji.santafe.edu>
+
+	* ActivityControl.m, CompleteProbeMap.m, CustomProbeMap.m,
+	MessageProbe.m, Probe.m, ProbeLibrary.m, ProbeMap.m, Swarm.m,
+	SwarmObject.m, VarProbe.m: Add tagged documentation comments.
+
+1998-04-06  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.h: Include misc/argp.h.
+
+	* Arguments.[hm]: New methods addOptions: and parseKey:arg:.
+
+	* Arguments.m (parse_opt): Call parseKey:arg:. 
+	Dynamically allocate arg (in +createBegin:)
+	(+createBegin:) New method.
+	
+1998-04-02  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m (findSwarm): return NULL if the SWARMHOME
+	can't be found.
+
+1998-03-30  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m ([Arguments +createArgc:Argv:]): glibc or not,
+	set program_invocation_name with expanded absolute path.
+
+1998-03-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbe.m ([MessageProbe -setArg:ToString:], [MessageProbe
+	-dynamicCallOn:]): Add _C_CHARPTR support.
+
+	* objectbase.h: Add const char * slot to val_t union.
+
+1998-03-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m: Include unistd.h and stdlib.h.
+	Define swarm_version to be equal to VERSION.
+	Define global Arguments object.
+	([Arguments -getExecutablePath]): New method.
+	([Arguments +createArgc:Argv:]): Use find_executable to
+	get value for program_invocation_name instead of using
+	theArgv[0] directly.
+	(dropDirectory, findDirectory, findSwarm): New functions.
+	([Arguments -getSwarmHome]): Use SWARMHOME or findSwarm
+	to find source tree.
+
+	* Arguments.h: Declare a global variable for an Argument
+	object (previously in simtools).
+	(Arguments): swarmHome new variable.
+	Declare getExecutablePath and getSwarmHome methods.
+
+	* objectbase.h: Declare swarm_version.
+
+1998-03-13  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile (version.h): New rule to create version.h.  
+	Arguments.o depends on it.
+
+	* Arguments.m: Include computed file version.h (from
+	Makefile.conf's VERSION).
+	Use VERSION to define argp_program_version.
+
+1998-03-09  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Arguments.m:  Include misc.h for strdup.
+	(getApplicationValue): Truncate return at `.'.
+
+1998-03-02  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* objectbase.h (MessageProbe): Declare doubleDynamicCallOn:.
+
+1998-02-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* objectbase.h (val_t): Add _uchar.
+
+	* MessageProbe.m ([MessageProbe -dynamicCallOn:]): Add a version
+	for libffi.  Only use avcall if USE_AVCALL is defined.  The
+	internal functions for both versions of push_argument now take a
+	pointer because libffi uses pointers instead of values for
+	arguments.
+	([MessageProbe -doubleDynamicCallOn:]): Add int,uchar->double coercion
+	capability (motivated by Bank).
+	([MessageProbe -dynamicCallOn:]): Add unsigned char support
+	to both versions.
+
+1998-02-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* swarm_rts_routines.[hm] (swarm_method_get_number_of_arguments):
+	Remove.  Remove my_objc prefixes.  Change skip_argspec to
+	return NULL when current type character is \0.
+
+	* objectbase.h (val_t): Define.  Change declarations per 
+	MessageProbe.h changes below.
+
+	* MessageProbe.h: Include objectbase.h.
+	Remove Imp types and use of Imp types.
+	Remove probedMessage, argNum and argLabels. 
+	arguments is now of type val_t.  
+	Hide result flag is now boolean and named hideResultFlag (not hr).
+	Remove setProbedMessage and setArg:ToObjectName. 
+	Rename setArg:To: to setArg:ToString.
+	hideResult accessors are boolean, as are isResultId and isArgumentId:
+	Rename getArgNum to getArgCount.
+
+	* MessageProbe.m:  Rewritten to use avcall library.
+
+1998-02-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbe.m ([MessageProbe -_trueDynamicCallOn_:resultStorage:]):
+	For now, abort(3) for USE_JAVA case where tkobjc_dynamicEval would
+	otherwise be used.
+
+1998-02-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile (OBJECTS, HEADERS): Add Arguments.
+
+	* Arguments.[hm]: New files.
+
+1998-02-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* objectbase.h: Change header comment to objectbase.h.
+	Include from swarmobject/ to objectbase/.
+
+	* Makefile (install-headers):  Remove.
+
+1998-01-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbe.m: Include tkobjc/common.h instead of tkobjc/control.h.
+	Don't include tclObjc.h.
+
+	* objectbase.h: In MesageProbe protocol, declare
+	setArg:ToObjectName:.  Constify To: argument of setArg:To:.
+	Constify second arugment to dynamicCallOn:resultStorage:.
+
+	* SwarmObject.m ([SwarmObject -getIdName]): New method (return
+	value of getInstanceName).
+
+	* SwarmObject.h: Declare getIdName.
+
+	* MessageProbe.m ([MessageProbe -createEnd], [MessageProbe
+	-_setImp_:]): Replace accesses to imps with imp.IMPTYPE.
+	([MessageProbe -createEnd]): New return category 3 for _C_ID, and
+	category 4 for _C_CLASS.
+	([MessageProbe -setArg:ToObjectName:]): New method.
+	([MessageProbe -_setImp_:]): Handle category 3 and 4.  Abort on
+	bad category.
+	([MessageProbe -dynamicCallOn:]): Likewise.
+	([MessageProbe -intDynamicCallOn:]): Abort on category 3 or 4.
+	([MessageProbe -floatDynamicCallOn:]): Likewise.
+	([MessageProbe -doubleDynamicCallOn:]): Likewise.
+	([MessageProbe -dynamicCallOn:resultStorage:]): Likewise.
+	([MessageProbe -_trueDynamicCallOn_:resultStorage:]): Use strcpy
+	instead of strcat for first item; use getObjectName instead of
+	tclObjc_objectName.
+
+	* MessageProbe.h: New types IdImp and ClassImp.
+	(MessageProbe): Put all the imps in a union.
+	Declare new method setArg:ToObjectName:.
+	Remove declaration of _trueDynamicCallOn_:resultStorage:.
+
+	* CompleteProbeMap.m:  Reformatting throughout.
+
+1998-01-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* CustomProbeMap.m: Add @end.
+
+1997-12-17  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* VarProbe.m ([VarProbe -createEnd]): Remove cast for assignment
+	to probedType.
+	([VarProbe -probeAsInt:]): Constify p.  Reformatting.
+	([VarProbe -probeAsDouble:]): Likewise.
+	([VarProbe -probeAsString:Buffer:withFullPrecision:]): Constify p.
+	([VarProbe -setData:To:]): Constify p.
+
+	* MessageProbe.m ([MessageProbe -createEnd]): Modify for const
+	arguments (several casts).
+	([MessageProbe -getArg:which]): Constify return.
+	([MessageProbe -setArg:To:]): Constify To argument.
+	([MessageProbe -_trueDynamicCallOn_:resultStorage:]): Constify
+	resultStorage argument.
+	([MessageProbe -_trueDynamicCallOn_:resultStorage:]): Remove cast
+	to *result for tkobjc_dynamicEval.
+	([MessageProbe -dynamicCallOn:]): Constify tmp. Cast argument to
+	free to void * to avoid warning.  Reformatting.
+	([MessageProbe -dynamicCallOn:resultStorage:]): Constify
+	resultStorage argument.  Write to non-const buf, and then assign
+	to *result.  Reformatting.
+	([MessageProbe -intDynamicCallOn:]): Constify tmp.
+	([MessageProbe -intDynamicCallOn:]): Cast argument to free to
+	void* to avoid warning.
+	([MessageProbe -floatDynamicCallOn:]): Constify tmp.  Cast
+	argument to free to void * to avoid warning.
+	
+	* MessageProbe.h (MessageProbe): Constify arguments.  Constify To
+	argument of setArg.  Constify return of getArg.  Constify
+	resultStorage argument of _trueDynamicCallOn_ and dynamicCallOn.
+
+1997-12-16  Alex Lancaster  <alex@wijiji.santafe.edu>
+
+	* tests: Added subdirectory to repository.
+
+1997-12-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* swarm_rts_routines.m (isDigit): Add macro to cast isdigit 
+	argument char to int (to avoid array index using char compiler 
+	warning). Reformatting throughout.
+	(my_objc_skip_typespec, my_objc_skip_offset): Use new macro isDigit. 
+
+	* VarProbe.m ([VarProbe -probeAsPointer:]): Initialize q to NULL
+	to prevent warning.
+	([VarProbe -probeAsInt:]): Initialize i to 0 to prevent warning.
+	([VarProbe -probeAsDouble:]): Initialize d to 0.0 to prevent warning.
+	([VarProbe -setData:ToString:]): Initialize rc to 0 to prevent warning.
+
+	* MessageProbe.m: Include tclObjc.h instead of tkobjc.h.
+	Minor reformatting. 
+	([MessageProbe -_trueDynamicCallOn_:resultStorage:result]): 
+	Update to renamed tkobjc_dynamicEval.
+	
+1997-12-09  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* objectbase.h: Constify argument to getProbedForVariable and
+	getProbeForMessage (SwarmObject). 
+	Constify return of getProbedType (Probe).
+	Constify argument to setProbedVariable (VarProbe).
+	Constify return of getProbedVariable (VarProbe).
+	Constify argument to setFloatFormat (VarProbe).
+	Constify return of probeAsString (VarProbe, both).
+	Constify ToString argument to setData (VarProbe).
+	Constify argument to setProbedMessage (MessageProbe).
+	Constify return of getArgName (MessageProbe).
+	Constify argument to getProbeForVariable
+	and getProbeForMessage (ProbeMap).
+	Constify argument to dropProbeForVariable
+	and dropProbeForMessage (ProbeMap).
+	Constify first argument to getProbeForVariable and getProbeForMessage
+	(ProbeLibrary).
+	Reformatting throughout.
+
+	* VarProbe.m ([VarProbe -setProbedVariable:]): Constify argument.
+	([VarProbe -getProbedVariable]): Constify return.
+	([VarProbe -createEnd]): Use intermediate pointer for the sake
+	of consting.
+	([VarProbe -free]): Cast to argument to free as void* to avoid warning.
+	([VarProbe -probeAsString:Buffer:buf]): Constify return.
+	([VarProbe -probeAsString:Buffer:withFullPrecision:]): Constify return.
+	([VarProbe -setData:ToString:]): Constify ToString: argument.
+	([VarProbe -setData:ToString:]): Cast withData: argument to void*
+	to avoid warning (twice).
+	([VarProbe -setFloatFormat:]): Constify argument.
+	Reformatting throughout.
+
+	* VarProbe.h (VarProbe): Constify probedVariable and floatFormat.
+	
+	* VarProbe.h: Constify argument to setProbedVariable and
+	setFloatFormat.  Constify return of getProbedVariable.  Constify
+	ToString: argument of setData.
+	Reformatting throughout.
+	
+	* SwarmObject.m ([SwarmObject -getProbeForVariable:]): 
+	Constify argument.
+	([SwarmObject -getProbeForMessage:]): Likewise.
+	([SwarmObject -eventOccurredOn:anObjectvia:aProbewithProbeType:
+	aProbeTypeon:probedElementofType:withData:]): Constify :on argument.
+	Reformatting throughout.
+
+	* SwarmObject.h: Constify argument to getProbeForVariable,
+	getProbeForMessage.  Constify on: argument to eventOccurredOn.
+	Reformatting throughout.
+
+	* Swarm.m ([Swarm -getProbeForVariable:]): Constify argument.
+	Reformatting througout.
+
+	* Swarm.h: Constify argument to getProbeForVariable.
+	Reformatting throughout.
+
+	* ProbeMap.m ([ProbeMap -dropProbeForVariable:]): Constify argument.
+	([ProbeMap -dropProbeForMessage:]): Likewise.
+	([ProbeMap -getProbeForMessage:]): Likewise.
+	([ProbeMap -getProbeForVariable:]): Likewise.
+	Reformatting throughout.
+
+	* ProbeMap.h: Constify argument to dropProbeForVariable,
+	dropProbeForMessage, getProbeForVariable, and getProbeForMessage.
+	Reformatting throughout.
+
+	* ProbeLibrary.m ([ProbeLibrary
+	-getProbeForVariable:inClass:aClass]): Constify first argument.
+	([ProbeLibrary -getProbeForMessage:inClass:aClass]): Constify
+	first argument. 
+	Reformatting throughout.
+
+	* ProbeLibrary.h: Constify first argument to getProbeForVariable
+	and getProbeForMessage.  Reformatting throughout.
+
+	* Probe.m ([Probe -getProbedType]): Constify return.
+	([Probe -probeAsString:anObject:buf]): Constify return.
+	([Probe -probeAsString:Buffer:withFullPrecision:precision]):
+	Constify return.
+	([Probe -setFloatFormat:]): Constify argument.
+	Reformatting throughout.
+
+	* Probe.h: Constify return of getProbedType.
+	Constify return of probedAsString methods.
+	Constify argument of setFloatFormat.
+
+	* Probe.h (Probe): Constify probedType.
+	
+	* MessageProbe.m: Include <tkobjc/control.h>.
+	(copy_to_nth_colon): Constify return.
+	([MessageProbe -setProbedMessage:aMessage]): Constify argument.
+	([MessageProbe -createEnd]): Constify argLabels.
+	([MessageProbe -_trueDynamicCallOn_:resultStorage:result]): Use
+	new tkobjc function dynamicEval.
+	Reformatting throughout.
+
+	* MessageProbe.h (MessageProbe): Constify probedMessage and
+	argLabels.  
+
+	* MessageProbe.h: Constify argument to setProbedMessage. 
+	Constify return of getArgName.  Reformatting throughout.  
+
+	* DefaultProbeMap.m: 
+	([DefaultProbeMap -createEnd]): Constification of probe instance
+	variable names. 
+	Reformatting throughout.
+
+	* MessageProbe.m (copy_to_nth_colon): Constify return.
+	([MessageProbe -setProbedMessage:aMessage]): Constify argument.
+	Refomratting throughout.
+
+	* Makefile (install-headers): Augment target to create symlinks
+	from objectbase{.h} to swarmobject{.h} (an alternative to nameswap).
+
+Mon Dec  8 22:30:43 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* nameswap.sh: Added a simple sed script to replace swarmobject.h
+	with objectbase.h and swarmobject/ with objectbase/ in users
+	apps.  Invoked via "make nameswap".
+
+	* objectbase.h: Moved all swarmobject files from swarmobject
+	directory to objectbase directory.  Renamed swarmobject.h to
+	objectbase.h.  Changed all instances of swarmobject.h to 
+	objectbase.h and all instances of swarmobject/ to objectbase/.
+
+1997-12-08  Alex Lancaster  <alex@wijiji.santafe.edu>
+
+	* Makefile: Removed references to obsolete test program (main.m) and
+	also removed main.m from the repository. Modified test program
+	now called (ProbeTest.m) is located in subdirectory (tests/)
+
+	* swarmobject.h: Changed protocols for Probe, VarProbe and 
+	ProbeLibrary to support the changes to the interface introduced
+	below.
+
+	* ProbeLibrary.[hm] Added a number of user-level methods:
+	([ProbeLibrary get/setDisplayPrecision:): sets and gets
+	integers for the number of significant figures for floats and doubles
+	displayed on a widget for any probes checked out of the ProbeLibrary.
+	Can be overrwritten by an individual probe.
+	([ProbeLibrary get/setSavedPrecision:): sets and gets the number 
+	of significant figures for floats and doubles when saving any objects 
+	through ObjectSaver. This is global for all probes checked and cannot
+	be overriden by an individual probe.
+
+	* Probe.[hm]: Added ([Probe -setFloatFormat]) and ([Probe 
+	probeAsString: .. withFullPrecision:]) to give superclass Probe 
+	these method. Currently only VarProbe implements them.
+
+	* VarProbe.[hm]: Added ([VarProbe -setFloatFormat]) to support
+	custom formatting of floats and doubles.
+	Added ([VarProbe probeAsString: .. withFullPrecision:]) to support
+	probing for different precision for floats and doubles in object 
+	saving rather than the displayed precision. 
+	
+
+Mon Dec  8 14:32:50 1997  glen e. p. ropella  <gepr@seamus.trail.com>
+
+	* swarmobject.h: Added the ProbeConfig protocol to handle
+	muliple inheritence of these methods across ProbeLibrary, 
+	ProbeMap, and Probe.
+
+	* VarProbe.m: Added probe creation call to method -clone:.
+	Added objectToNotify handling to -setData:To: and -setData:ToString:.
+	
+
+	* SwarmObject.m: Added subclass redirection for probe hook method.
+
+	* SwarmObject.h: Added default method 
+	(-eventOccurredOn:via:withProbeType:on:ofType:withData:
+	for SwarmObjects as receiver for probe hook.
+
+	* ProbeMap.m: Added overriding method +createBegin: in order
+	to initialize objectToNotify.
+	Added method -setObjectToNotify:.
+	Added method -getObjectToNotify.
+	Added inheritance of objectToNotify from ProbeLibrary to 
+	method -createEnd.
+	Added probe creation call to methods -createEnd, -addProbe:,
+	and -_fastAddProbe_:.
+
+	* ProbeMap.h: Added IVar objectToNotify.  Added overriding 
+	+createBegin: method in order to initialize objectToNotify.
+	Added methods -setObjectToNotify: and -getObjectToNotify.
+
+	* ProbeLibrary.m: Added overriding method +createBegin: in 
+	order to initialize IVar objectToNotify.
+	Added method -setObjectToNotify:.
+	Added method -getObjectToNotify.
+	Added probemap creation call for objectToNotify to methods
+	-getProbeMapFor:, -getCompleteProbeMapFor:, and -getCompleteVarMapFor:.
+	
+	
+	* ProbeLibrary.h: Added IVar objectToNotify.
+	Added methods -setObjectToNotify: and -getObjectToNotify.
+	
+	* Probe.m: Added override method +createBegin in order to 
+	initialize IVar objectToNotify.
+	Added a call to the superclass' createEnd.
+	Added method -setObjectToNotify:.
+	Added method -getObjectToNotify.
+
+	* Probe.h: Added IVar objectToNotify.
+	Added overriding method +createBegin and -createEnd.
+	Added methods -setObjectToNotify: and -getObjectToNotify.
+
+	* MessageProbe.m: Added temporary variable to catch the return
+	of [super createEnd] call in order to initialize objectToNotify.
+	Added probe creation setup call.
+	Added objectToNotify handling to _trueDynamicCallOn_.
+	
+	* CompleteProbeMap.m: added probe creation setup call
+	* DefaultProbeMap.m: added probe creation setup call
+
+1997-11-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* VarProbe.m: Return "<NULL>" if CHARPTR points to NULL.
+
+1997-11-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ProbeMap.m ([ProbeMap -addProbe:], [ProbeMap
+	-dropProbeMap:aProbeMap],[ProbeMap -_fastAddProbe_:]): Use
+	isKindOf instead of isMemberOf so that it is possible to use
+	subclasses of VarProbe.
+

@@ -1,0 +1,278 @@
+<?xml version="1.0"?>
+
+<project name="ARMSR" default="all" basedir=".">
+
+  <!-- Tell ant the compiler is Java 1.4 -->
+  <property name="build.compiler" value="modern"/>
+
+  <!-- Set the projectName -->
+  <property name="projectName" value="ARMSR"/>
+
+  <property name="debugFile" value="debug.out"/>
+  <property name="isDistFile" value=".isdist"/>
+
+  <!-- properties that should be overrided on the command line -->
+  <!-- if you are going to use the "verynew" option -->
+  <property name="ROOTDIR" value=".."/>
+  <property name="NAME" value="NONAME"/>
+
+  <property name="args" value=""/>
+
+  <!-- Set up dirs:
+       classDir is the directory the compiled code goes to
+       srcDir is the directory with the code in it
+       libDir is the directory with the libraries
+       libDir is only used with the distribution version
+       distDir is the dir that the distribution version is 
+       created in -->
+  <property name="binDir" value="bin"/>
+  <property name="classDir" value="classes"/>
+  <property name="srcDir" value="src"/>
+  <property name="libDir" value="lib"/>
+  <property name="distDir" value="dist"/>
+  <property name="saveDir" value="Saves"/>
+
+  <!-- This stuff tells where libraries are. -->
+  <property name="java.runtime" value="${java.home}/jre/lib/rt.jar"/>
+  <property name="repastDir" value="/appl/repast/repast2.0"/>
+  <property name="cscslibDir" value="/appl/java/CSCS"/>
+  <property name="visadDir" value="/appl/java/visad2.0"/>
+  <property name="xercesDir" value="/appl/xerces-2.4.0"/>
+
+  <fileset id="repast.jars" dir="${repastDir}/lib">
+    <include name="repast.jar"/>
+    <include name="colt.jar"/>
+    <include name="jgl3.1.0.jar"/>
+    <include name="plot.jar"/>
+    <include name="trove.jar"/>
+  </fileset>
+
+  <fileset id="cscs.jars" dir="${cscslibDir}">
+    <include name="graph3d.jar"/>
+    <include name="ioutils.jar"/>
+    <include name="hbbeta2-printf.jar"/>
+  </fileset>
+
+  <fileset id="visad.jars" dir="${visadDir}">
+    <include name="visad.jar"/>
+  </fileset>
+  <fileset id="xerces.jars" dir="${xercesDir}">
+    <include name="xercesImpl.jar"/>
+  </fileset>
+
+    <path id="classpath">
+      <!-- MsM <fileset refid="repastbeta.jars"/>-->
+      <pathelement location="${classDir}"/>
+      <fileset refid="repast.jars"/>
+      <fileset refid="cscs.jars"/>
+      <fileset refid="visad.jars"/>
+      <fileset refid="xerces.jars"/>
+    </path>
+    <property name="classpath.string" refid="classpath"/>
+
+  <target name="help"
+          depends="getDate,getTime">
+    <echo>
+---------
+ANT TASKS
+---------
+
+all             creates the &quot;${classDir}&quot; directory, compiles the code, 
+                and puts the compiled classes into the &quot;${classDir}&quot; 
+                directory.
+
+batchrun        run the program in batch mode.  arguments can be passed
+                to the batch run by doing:
+                    ant batchrun -Dargs="your arguments here"
+                see below about setting arguments on the command line
+
+clean           deletes the directory &quot;${classDir}&quot;
+
+compile         compiles the project and puts the compiled classes in 
+                &quot;${classDir}&quot;
+
+debug           run the project in debug mode, piping the output to ${debugFile}
+
+distjar         creates a distribution jarfile in &quot;${distDir}/${projectName}.jar&quot;
+
+parsereport     parses an XML report file given by the F argument.
+                for example, to parse the report file "report.xml.00" do:
+                ant parsereport -Dargs="report.xml.00"
+
+prepare         prepares the project to be compiled (creates the 
+                &quot;${classDir}&quot; directory)
+
+projecthelp     shows the help that is printed in the project
+
+realclean       deletes &quot;${classDir}&quot;, &quot;${libDir}&quot;, &quot;${distDir}&quot;, and the debug 
+                and report files
+
+run             run the program in GUI mode.  you can pass arguments to the 
+                model by doing:
+                    ant run -Dargs="your arguments here"
+                see below about setting arguments on the command line
+
+save            create a jarfile with the contents of the current directory
+                and store it in:
+                &quot;${saveDir}/projectName-today'sdate-timerightnow.jar&quot;
+                for example, if one were created right now it would have
+                the name:
+                &quot;${saveDir}/${projectName}-${today}-${timenow}.jar&quot;
+
+-------------------
+OPTIONAL PARAMETERS
+-------------------
+
+Here is the list of buildfile parameters that can be changed:
+
+NAME            DESCRIPTION
+----------------------------------------------------------------------
+debugFile       the debug file name
+
+args            a listing of the arguments to send to the java program
+                example:
+                    ant run -Dargs="iPFN=dat/parameters1.xml nA=100"
+
+debugFile and args could be used with any of the run commands
+
+To set any of the above parameters do -DNAMEOFARGUMENT="value"
+
+For example,
+    ant run -Dargs="iPFN=dat/parameters1.xml nA=100"
+    </echo>
+  </target>
+
+  <!-- This is the default target.  The default is to 
+       compile the project. -->
+  <target name="all"
+          description="creates the ${classDir} directory, compiles the code, and puts the compiled classes into the ${classDir} directory"
+          depends="prepare, compile"/>
+
+  <!-- Set up the directory the code will compile into -->
+  <target name="prepare" description="prepares the project to be compiled (creates the ${classDir} directory)">
+    <mkdir dir="${classDir}"/>
+  </target>
+
+  <!-- Compile the code -->
+  <target name="compile"
+          description="compiles the project and puts the compiled classes in ${classDir}"
+          depends="prepare">
+    <!-- Check to see if any one of the source files or build.xml were 
+         changed.  If any of them have a time stamp newer than the 
+         newest *.class file, then delete all of the *.class files 
+         This makes it so whenever you change anything, ant will 
+         recompile the entire project -->
+    <dependset>
+      <srcfileset dir="${srcDir}" includes="**/*.java"/>
+      <srcfileset dir="." includes="build.xml"/>
+      <targetfileset dir="${classDir}" includes="**/*.class"/>
+    </dependset>
+
+    <!-- Compile the code in srcDir and put it in classDir.
+         If srcDir does not have the same directory structure 
+         as classDir, then the code will always compile itself -->
+    <javac destdir="${classDir}"
+           srcdir="${srcDir}">
+      <classpath refid="classpath"/>
+    </javac>
+  </target>
+
+  <!-- Run the project.  If you run it through ant, you must 
+       tell it to fork (fork="true") or it will exit after
+       only a few seconds. -->
+  <target name="run"
+          description="run the project and send output to screen"
+          depends="compile">
+    <java classname="${projectName}.GUIModel"
+          fork="true">
+      <classpath refid="classpath"/>
+      <arg line="${args}"/>
+    </java>
+  </target>
+
+  <target name="debug"
+          description="run the project in GUI mode and pipe the output to ${debugFile}"
+          depends="compile">
+    <echo message="*** debug mode:  Piping debug output to ${debugFile} ***"/>
+    <java classname="${projectName}.GUIModel"
+          fork="true"
+          output="${debugFile}">
+      <classpath refid="classpath"/>
+      <arg line="${args}"/>
+    </java>
+  </target>
+
+  <target name="batchrun"
+          depends="compile"
+          description="run the project in batch mode">
+    <java classname="${projectName}.BatchModel"
+          fork="true">
+      <classpath refid="classpath"/>
+      <arg line="${args}"/>
+    </java>
+  </target>
+
+  <target name="projecthelp"
+          description="shows the help that is printed in the project"
+          depends="compile">
+    <java classname="${projectName}.GUIModel"
+          fork="true">
+      <classpath refid="classpath"/>
+      <arg line="--help"/>
+    </java>
+  </target>
+
+  <target name="clean"
+          description="deletes the directory ${classDir}">
+    <delete dir="${classDir}"/>
+  </target>
+
+  <target name="realclean"
+          description="deletes ${classDir}, ${libDir}, ${distDir}, and the debug and report files">
+    <delete dir="${classDir}"/>
+    <delete dir="${libDir}"/>
+    <delete dir="${distDir}"/>
+    <delete file="${debugFile}"/>
+    <delete file="report.00"/>
+  </target>
+
+  <target name="save"
+          depends="getDate, getTime"
+          description="create a save jar in ${saveDir}/${projectName}-${today}-${timenow}.jar">
+    <jar jarfile="${saveDir}/${projectName}-${today}-${timenow}.jar"
+         basedir="."
+         includes="${srcDir}/**, dat/**, *.txt, build.xml"/>
+    <echo message="The jarfile is in ${saveDir}/${projectName}-${today}-${timenow}.jar"/>
+  </target>
+
+  <target name="getDate">
+    <!-- This sets the variable ${today} to today's date in 
+         the format:
+         <last 2 numbers of year><2 digit month><2 digit day> -->
+    <tstamp>
+      <format property="today"
+              pattern="yyMMdd"/>
+    </tstamp>
+  </target>
+
+  <target name="getTime">
+    <!-- This sets the variable ${timenow} to the time
+         in the format:
+         <2 digit hour><2 digit time>  -->
+    <tstamp>
+      <format property="timenow"
+              pattern="HHmm"/>
+    </tstamp>
+  </target>
+
+  <target name="parsereport"
+          description="parse a report file given by the args argument"
+          depends="compile">
+    <java classname="mcharter.parseReport"
+          fork="true">
+      <classpath refid="classpath"/>
+      <arg line="${args}"/>
+    </java>
+  </target>
+
+</project>

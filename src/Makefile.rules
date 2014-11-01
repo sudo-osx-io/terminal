@@ -1,0 +1,36 @@
+.PHONY: headers swarm-link
+
+SUFFIXES = .m
+
+# Solaris JNI headers have some pragmas
+override CFLAGS += @CFLAGS_NOWARN_UNKNOWN_PRAGMAS@
+override OBJCFLAGS += @CFLAGS_NOWARN_UNKNOWN_PRAGMAS@
+
+# We are building Swarm 
+override CPPFLAGS += -DBUILDING_SWARM $(EXTRACPPFLAGS)
+
+MAKEH2X = $(top_srcdir)/src/defobj/make-h2x
+
+TYPEINFO = $(MODULE).xm $(MODULE)_types.h $(MODULE)_classes.h
+
+xm_file = $(firstword $(BUILT_SOURCES))
+$(filter-out $(xm_file),$(BUILT_SOURCES)): $(xm_file)
+
+headers: $(xm_file)
+
+swarm-link:
+	-rm -f Swarm
+	-rm -f $(srcdir)/Swarm
+	-$(LN_S) $(srcdir) Swarm
+	-$(LN_S) . $(srcdir)/Swarm
+
+$(firstword $(TYPEINFO)): $(MODULE).h $(MAKEH2X) # $(SOURCES)
+	OBJC="$(OBJC)" OBJCFLAGS='$(DEFS) $(INCLUDES) $(CPPFLAGS) $(OBJCFLAGS)' OBJECTS="$(lib$(MODULE)_la_OBJECTS)" GSED="$(GSED)" sh $(MAKEH2X) $(MODULE).xm $(srcdir)
+	mv $(MODULE).xt $(MODULE)_types.h
+	mv $(MODULE).xc $(MODULE)_classes.h
+
+#include_HEADERS = $(MODULE).h
+
+# Local variables:
+# mode: makefile
+# End:

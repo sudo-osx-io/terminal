@@ -1,0 +1,24 @@
+2008-08-25  Marcus G. Daniels  <marcus@snoutfarm.com>
+
+	* SwarmXMLRPCFProxy.m ([SwarmXMLRPCFProxy -forward::]):
+	Add protocol name to error message.
+
+2007-09-08  Marcus G. Daniels  <marcus@snoutfarm.com>
+
+	* SwarmXMLRPCFProxy.m ([SwarmXMLRPCFProxy -getName]): Copy the
+	internal string before returning.  (In cases like proxied foreign
+	objects, the underlying string returned by getName may move
+	around, e.g. from garbage collection.  Common usage is to copy and
+	have the user take responsibility for the memory (typically in the
+	scratch zone).
+
+2007-08-30  Gennady Telegin  <gepo@lvk.cs.msu.su>
+
+	* swarm_xmlrpc.[hm], SwarmXMLRPCFProxy.[hm], SwarmXMLRPCClient.[hm],
+	SwarmXMLRPCServer.[hm], xmlrpc.[hm], base64.[hm], encodings.[hm],
+	queue.[hm], simplestring.[hm], system_methods.[hm], xml_element.[hm],
+	xmlrpc_introspection.[hm], xmlrpc_private.h, xmlrpc_dandarpc.[hm],
+	xml_to_soap.[hm], xml_to_xmlrpc.[hm], Makefile.am, README: Initial version
+	of Swarm XML-RPC. It use modificated for Objective-C call version of
+	xmlrpc-epi library.
+

@@ -1,0 +1,1526 @@
+2009-11-24  Scott Christley  <schristley@mac.com>
+
+	* activity.h: Use activity directory to include generated file on
+	platforms other than OpenStep.
+
+2009-11-07  Scott Christley  <schristley@mac.com>
+
+	* Schedule.m: Use conformsToProtocol: on OpenStep.
+
+	* Action.m: Use setSelector:forTarget: on OpenStep.
+
+2009-09-24  Scott Christley  <schristley@mac.com>
+
+	* XActivity.m, ActionGroup.m, Schedule.m, Action.m,
+	CompoundAction.m: Adjust casts to eliminate compiler warnings.
+
+2009-04-02  Scott Christley  <schristley@mac.com>
+
+	* SwarmProcess.m, Schedule.m, Action.m, Makefile.am: ObjC runtime
+	abstraction.
+
+2008-06-25  Scott Christley  <schristley@mac.com>
+
+	* activity.h, Action.h, ActionGroup.h, CompoundAction.h,
+	Schedule.h, SwarmProcess.h, XActivity.h, activity.h, Makefile.am:
+	Standardize include directory structure to support libraries and
+	OpenStep frameworks.
+
+2007-03-04  Marcus G. Daniels  <marcus@snoutfarm.com>
+
+	* activity.h (_activity_context_error): Use C linkage.
+
+2005-04-14  Paul Johnson  <pauljohn@pols111.pols.ku.edu>
+
+	* CompoundAction.m:87: insert declaration (id <Symbol>) *
+	ActionGroup.h, Schedule.[hm], SwarmProcess.[hm]: (id <Activity>)
+	inserted
+
+2005-04-14  Paul Johnson  <pauljohn@pols111.pols.ku.edu>
+
+	* activity.h,XActivity.hm: Consistent Casts silence compiler warnings:
+	- (id<Activity>)getTopLevelActivity 
+	- (id <Activity>)getScheduleActivity;
+
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Use libobjc definition. Add GNUstep includes.
+
+2003-06-11  Paul E. Johnson  <pauljohn@pjdell.pols.ukans.edu>
+
+	* SwarmProcess.m ([CSwarmProcess -activateIn:]): cast 4th argument
+	 activity = [mergeSchedule _activateIn_: swarmContext
+                            : id_SwarmActivity_c
+                            : id_ScheduleIndex_c
+                            : (Zone_c *)activityZone];
+	
+	([CSwarmProcess -_performPlan_]): cast: newActivity = 
+	(Activity_c *)[self activateIn: nil];
+
+	* Schedule.m: To eliminate compiler warnings, throughout this
+	class, several variables were cast:
+
+	 (ScheduleIndex_c *)newActivity->currentIndex
+
+	3rd argument here:
+	   _activity_insertAction (self, tVal, (CAction *)newAction)
+	
+	(ActionConcurrent_c*)actionAtIndex;
+	 
+	(ScheduleIndex_c *)activity->swarmActivity->currentIndex;
+	activity = (ScheduleActivity_c *)theActivity;
+
+	([ActionChanged_c -_performAction_:]): schedIndex =
+	(ScheduleIndex_c *)((Activity_c *) anActivity)->currentIndex;
+
+2002-10-19    <pauljohn@dv253s74.lawrence.ks.us>
+
+	* Makefile.am (install-data-local): $(DESTDIR) added
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* Action.h, Action.m, ActionGroup.h, ActionGroup.m,
+	CompoundAction.h, CompoundAction.m, Schedule.h, Schedule.m,
+	SwarmProcess.h, SwarmProcess.m, XActivity.h, XActivity.m,
+	activity.h, activity.m, macros.h: Change copyright statement
+	to canonical version as suggested by GNU GPL.
+
+2001-11-04  Marcus G. Daniels  <mgd@HELEN>
+
+	* Makefile.am: Don't use multi-line values in variable assignments.
+	It confuses automake on Cygwin.
+	(INCLUDES): Add top_builddir.
+	(CLEAN_FILES): Assign.  Don't use included value since that will
+	confuse new automake.
+
+2001-10-26  Marcus G. Daniels  <mgd@condor>
+
+	* CompoundAction.m, Schedule.m: Change from MLINK to MLIST.
+	Now using beginMLinksList.
+
+2001-07-29  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* Action.m: Always include FCall.h.
+
+2001-07-26  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* SwarmProcess.m ([ActionMerge_c -_performAction_:]): Do need
+	remove dispatch here, e.g. GroupPermutedIndex_c vs. ScheduleIndex_c.
+
+2001-07-24  Marcus G. Daniels  <mgd@dhcp70.santafe.edu>
+
+	* SwarmProcess.m: Remove abort on getComponentZone.
+
+2001-07-06  Marcus G. Daniels  <mgd@dhcp70.santafe.edu>
+
+	* Makefile.am, macros.h: New file.
+
+	* ActionGroup.m, CompoundAction.m, Schedule.m, SwarmProcess.m,
+	XActivity.m: Utilize defobj, collections, and activity macros.h.
+
+2001-06-30  Marcus G. Daniels  <mgd@maya.santafe.edu>
+ 
+	* Schedule.m: Define FAST.
+	([Schedule_c -remove:], [Schedule_c -remove:]):
+	Disable some checking when FAST is set.
+	[ScheduleIndex_c -remove]): Check common cases before doing 
+	a conformsTo:.
+
+2001-06-30  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* Action.[hm]: Cache performCall method imp in perform_imp.
+	(PERFORM): New macro to call perform_imp.  Replace [call performCall]
+	with PERFORM throughout.
+	Add -createEnd to PAction to set up perform_imp.
+
+2001-06-11    <mgd@DRONE>
+
+	* Schedule.m (createGroup): Set Bit{Randomized,Concurrent} to
+	union of Schedule's setting and concurrent group template.
+
+	* activity.h (ActionSelector): Move setMessageSelector: to 
+	setting phase.
+
+	* Action.m ([ActionTo_c -setMessageSelector:]): Move to setting phase.
+	Recreate call if necessary.
+
+	* ActionHomogeneous.m: Likewise, resetting imp as necessary.
+
+2001-05-26  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* ActionHomogeneous.m ([-createEnd]): Use SD_JAVA_FIND_OBJECT_JAVA
+	instead of a check for a JavaProxy; don't rely on forwarding from
+	a Java-subclassed Objective C object.
+
+2001-05-01  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* Schedule.m (createGroup): Copy BitRandomized and BitConcurrent
+	to new concurrent group.
+
+2001-04-15  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Action.m: Include misc.h.
+
+2001-03-20  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* XActivity.[hm], activity.h ([Activity_c -stop]): Make return
+	type void.
+
+2001-03-12  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* Schedule.m ([ScheduleActivity_c -stepUntil:]): Change next to
+	nextAction change.
+
+	* XActivity.[hm], activity.h: Change next to nextAction and step to
+	stepAction.
+
+2000-12-03  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* Schedule.h (ActionConcurrent_c): Implement ActionConcurrent.
+
+2000-11-27  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Schedule.[hm] ([ActionConcurrent_c -getConcurrentGroup]): New
+	method.
+
+	* activity.h (ActionConcurrent): New protocol.
+
+	* activity.m (_activity_implement): Make association for 
+	above.
+
+2000-10-09  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Schedule.m (_update_mergeSchedules): Fix error message.
+
+2000-09-30  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* SwarmProcess.m: Include misc.h.
+	([CSwarmProcess -at:activate:],
+	([CSwarmProcess -at::activate:], ZMSG_R): Use abort instead of exit.
+
+	* ActionGroup.m: Include misc.h.
+
+2000-09-27  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* Action.h (ActionTo_c): Implement ActionTo.
+
+2000-09-19  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Action.m ([ActionTo_c -_createCall_:]): Call setLanguage:
+	LanguageObjc if target is not a proxy.
+
+2000-09-13  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Action.m ([ActionTo_c -_createCall_:]): Use setLanguage: instead
+	of setJavaFlag:.
+
+2000-07-24  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* activity.h (Action): Don't adopt RETURNABLE.
+
+2000-07-21  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ActionGroup.m ([GroupPermutedIndex_c -nextAction:]): Handle
+	auto drop.
+
+2000-07-20  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* XActivity.m ([Activity_c -drop]): Handle Completed.
+
+	* activity.h ([Schedule -setKeepEmptyFlag:]): Make create-time.
+
+2000-06-26  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Schedule.m (_activity_insertAction, [Schedule_c -insertGroup:]):
+	Don't assign to ownerActions.
+
+2000-06-25  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Schedule.m ([Schedule_c -remove:]): Check that owner of action
+	conforms to ConcurrentGroup rather than checking for the
+	_getEmptyActionConcurrent_ method.
+	([ActionConcurrent_c -describe:]): Print out contents of 
+	concurrentGroup.
+
+	* SwarmProcess.m ([ActionMerge_c -describe:]): Report Swarm,
+	when available.
+
+2000-06-23  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* CompoundAction.m ([CompoundAction_c -_createActivity_::::]): 
+	Eliminate redundant use of allocIVarsComponent:.
+
+	* activity.h (ConcurrentGroup): 
+	Add _setActionConcurrent_ and _getEmptyConcurrent_.
+	(ConcurrentSchedule): Adopt ConcurrentGroup instead of ActionGroup.
+
+2000-06-21  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Action.m ([ActionTo_c -describe:]): Print leading self pointer
+	value.
+
+2000-05-23  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Action.[hm] (ActionForEachHomogeneous_c): New class.
+
+	* ActionHomogeneous.[hm]: Split out homogeneous set up
+	code into a included file.
+
+	* ActionGroup.[hm], Schedule.[hm], activity.h: Add
+	createActionForEachHomogeneous:message:.
+
+	* Schedule.[hm], activity.h: Add
+	at:createActionForEachHomogeneous:message:.
+
+	* activity.h (ActionSelector): Split out of ActionTo.
+	(ActionForEachHomogeneous): New protocol.
+
+	* activity.m: Associate ActionForEachHomogeneous_c and
+	ActionForEachHomogeneous type.
+
+2000-05-20  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* SwarmProcess.m ([CSwarmProcess -activateIn:]): Set status
+	to Initialized.
+
+	* XActivity.m ([Activity_c -removeObsoleteMerges]): New method.
+	([Activity_c -_run_]): Use it.
+
+2000-05-18  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* activity.h ([{ActivationOrder,Schedule} remove:]): Hide in
+	a #ifndef IDL.
+
+2000-05-15  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* XActivity.m ([Activity_c -_run_]): Remove (subactivity) 
+	completed ActionMerges.
+
+2000-05-10  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Action.m: Update macro usage per directory changes in defobj.
+
+2000-05-03  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Action.m ([CAction -createEnd]): Include java.h instead of
+	directory.h and javavars.h.
+	([FActionForEachHomogeneous_c -createEnd]): Drop jniEnv argument
+	to SD_JAVA_FINDJAVA.
+
+2000-04-28    <mgd@nest.swarm.org>
+
+	* Action.m ([FActionForEachHomogeneous_c -createEnd]): 
+	Change from SD_FINDJAVA to SD_JAVA_FINDJAVA.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Makefile.am (CURRENT): Bump.  Swarm 2.1.1 frozen.
+	
+2000-03-25    <mgd@nest.swarm.org>
+
+	* Action.h: Don't include defobj/directory.h.
+	(CAction): Use JOBJECT instead of jobject.
+
+2000-03-25    <mgd@HELEN>
+
+	* Action.m (describeFunctionCall, describeMessageArgs): Use
+	PTRHEXFMT instead of PTRFMT.
+
+2000-03-15    <mgd@nest.swarm.org>
+
+	* Action.m ([FAction_c -createEnd]): Set autoDropFlag to NO.
+
+	* Action.h: Declare -createEnd.
+
+2000-03-14    <mgd@nest.swarm.org>
+
+	* Action.m ([ActionTo_c -_performAction_:]): Use dropAllocations:, 
+	not drop.
+
+	* Action.[hm] ([PFAction -mapAllocations:]): New method.
+
+	* Action.h (CAction, FAction_c): Move autoDropFlag to CAction.
+
+	* Action.[hm] (PFAction, FAction_c): Remove dropAllocations:.
+
+2000-02-18    <mgd@nest.swarm.org>
+
+	* Makefile.am (CURRENT, AGE): Bump.  Version 2.1.
+
+	* Schedule.h: Declare
+	at:createFActionForEach{Heterogeneous,Homogeneous}:call:.
+	Add Zone argument qualifications throughout.
+
+	* activity.h, Schedule.[hm] (Schedule): Return Action from
+	insertGroup and take a timeval, not an object.
+	(ConcurrentSchedule): Adopt Schedule.
+
+2000-02-09    <mgd@nest.swarm.org>
+
+	* ActionGroup.m ([ActionGroup_c -createActionTo:message::::]):
+	arg3 was being passed as arg2.
+	
+2000-02-08    <mgd@nest.swarm.org>
+
+	* Schedule.m (_activity_insertAction): Don't scrutinize 
+	Schedules's activities if it's not activated yet.
+
+2000-01-22    <mgd@nest.swarm.org>
+
+	* SwarmProcess.[hm] (CSwarmProcess): Remove -containsAlloc: stub
+	(to nothing).
+
+2000-01-16    <mgd@nest.swarm.org>
+
+	* Schedule.[mh] ([ActionChanged_c -mapAllocations:]): Add.
+
+	* Action.[hm] (CAction): Remove -drop.  Add -createEnd (for
+	setMappedAlloc) and mapAllocations:.
+	(FAction_c): Add autoDrop flag, setter, and dropAllocations:.
+	([... setDefaultOrder:]): Return self.
+
+	* ActionGroup.[hm], CompoundAction.[hm], Schedule.h, activity.h:
+	Change setAutoDrop and setDefaultOrder to return self
+
+	* ActionGroup.m ([GroupIndex_c -nextAction:]): Use dropAllocations:
+	instead of freeIVarsComponent:.
+
+1999-12-22    <mgd@nest.swarm.org>
+
+	* Action.m ([ActionTo_c -_createCall_:]): Use setJavaFlag:
+	followed by setSelector: instead of previous combination method.
+
+	* Action.[hm] ([FActionForEachHeterogeneous_c -createEnd]): Remove.
+	This was just a check that the call type was Objective C, which
+	was not a necessary constraint.
+
+1999-12-21    <mgd@nest.swarm.org>
+
+	* Action.m: Add declarations so that getUnsignedWithMin:withMax:
+	can be used without random/objectbase dependencies. 
+	([FActionForEachHomogeneous_c -_performAction_:]): 
+	Handle randomization for Java and Objective C calls.
+	([ActionTo_c -_createCall_:]): Use setSelector:setJavaFlag:.
+
+1999-12-15    <mgd@nest.swarm.org>
+
+	* Action.m ([ActionTo_c -_createCall_:]): Use new FCall
+	+create:target:selector:arguments: method instead of
+	conditional on respondsTo: M(isJavaProxy).
+
+1999-12-13    <mgd@nest.swarm.org>
+
+	* ActionGroup.[hm], activity.h ([ActionGroup_c
+	-createFActionForEachHomogeneous:call:],
+	[ActionGroup_c -createFActionForEachHeterogeneous:call:]): Return
+	respective protocol, not FActionForEach.
+
+	* Action.m ([FActionForEachHeterogeneous_c -createEnd]): 
+	Just check that the call type is objc.
+	([FActionForEachHomogeneous_c +createBegin:]): Initialize
+	targetCount, javaTargets, and objcTargets.
+	([FActionForEachHomogeneous_c -createEnd]): Fill javaTargets,
+	objcTargets as appropriate.
+	([FActionForEachHomogeneous_c -_performAction_:]): Handle
+	objc targets too.
+	([FActionForEachHomogeneous_c -drop]): Use free: to drop;
+	there's no extra globaref for javaTargets.  (The components
+	are already global in the directory.)
+
+	* Action.h (FActionForEach{Homogeneous,Heterogeneous}_c): 
+	Conform to respective protocol.  In former, use C arrays
+	for java and objc targets.  Rename javaAryLen to targetCount.
+
+1999-12-10    <mgd@nest.swarm.org>
+
+	* Action.[hm] (ActionTarget): New protocol.
+	
+	* activity.h, Action.[hm], ActionGroup.[hm], Schedule.[hm],
+	activity.m: Split FActionForEach into
+	FActionForEach{Homogeneous,Heterogeneous}.
+	
+1999-12-01  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* activity.h (ActionChanged): New type.
+
+	* activity.m (_activity_implement): Add implementation assocation.
+
+	* Schedule.m ([ScheduleIndex_c -nextAction:]): Create
+	a ActionChanged type rather than id_ActionChanged_c and put it in
+	the component zone.
+
+1999-11-25  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Schedule.m (_activity_insertAction): Test for non-predecessor
+	even when current time and new time are the same (in order to add
+	upstream actionmerges on new activations).
+	(ensureLeadingMerge): Break out from above function.
+
+1999-11-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Schedule.m ([ActionConcurrent_c -describe:]): Add more info.
+	([ActionChanged_c -describe:]): 
+
+	* SwarmProcess.m ([ActionMerge_c -describe:]): Likewise.
+
+1999-11-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* SwarmProcess.[hm]: Add protocol-conformance information for
+	getActivity, getSwarmActivity.
+
+	* XActivity.[hm]: Likewise for setOwnerActivity:, getOwnerActivity,
+	getControllingActivity, getTopLevelActivity, getSwarmActivity,
+	getScheduleActivity, getCurrentSubactivity, and getAction.
+
+	* SwarmProcess.h: Likewise for activateIn:.
+
+	* Schedule.m ([ScheduleActivity_c -dropAllocations:]): Cast
+	to ScheduleIndex_c * instead of Index_any * for dereferencing to
+	Schedule collection.
+
+	* SwarmProcess.m ([SwarmActivity_c -terminate], [SwarmActivity_c
+	-getSubactivities]): Likewise.
+
+	* Schedule.h, SwarmProcess.m ([SwarmActivity_c
+	-getSynchronizationSchedule]): Return object conforming to
+	Schedule.
+
+	* Schedule.m (_update_mergeSchedules): Make second argument a
+	ScheduleActivity_c *, not a SwarmActivity_c *.  Make mergeSchedule
+	a Schedule_c *, not generic object.
+	(_activity_insertAction): Make activity a ScheduleActivity_c *,
+	not generic object.  Get scheduleIndex without a cast.  Make
+	scheduleIndex a ScheduleIndex_c *, not a generic object.  Get
+	currentAction, currentTime, and swarmActivity without a cast.
+	Reference startTime without a cast.
+	([ScheduleIndex_c -nextAction:]): Reference swarmActivity,
+	currentIndex, and mergeAction without a cast.  Cast collection to
+	Schedule_c to pass to _activity_insertAction.  Cast Removed to an
+	object conforming to Action for assignment to currentAction.
+	([ActionChanged_c -_performAction_:],
+	[ActionConcurrent_c -_performAction_:]) Add phase tags.
+	([ScheduleActivity_c -stepUntil:]): Make nextStatus conform to
+	Symbol.
+	([ScheduleIndex_c -nextAction:]): Make actionAtIndex and
+	removedAction conform to Action.  Cast removedAction to id
+	for calling dropAllocations:.
+	([ScheduleIndex_c -get]): New temporary variable status to
+	defeat protocol check.
+
+	* Action.[hm] (PAction): New class to hold call and target.
+
+	* Action.h (PFAction, FAction_c): Inherit from it.
+	(CAction, PAction): Don't implement Action.
+
+	* Action.[hm], Schedule.[hm]: Add (id <Activity>) qualification to
+	_performAction_ throughout.
+
+	* Action.[mh] ([ActionForEach_c -setDefaultOrder:],
+	[ActionForEach_c -getDefaultOrder],
+	[FActionForEach_c -setDefaultOrder:],
+	[FActionForEach_c -getDefaultOrder]): Add Symbol protocol
+	conformance.
+	
+	* Schedule.h (ScheduleIndex_c): Make activity a ScheduleActivity_c *.
+	Make currentAction an object conforming to Action.
+	(ActionChanged_c): Inherit from CAction, conform to Action.
+	(ActionConcurrent_c): Implement Action.
+	(ActionMerge_c): Implement Action.
+	(SwarmActivity_c): Make nextActivation a long. 
+
+	* activity.h (ActivityIndex): New protocol.
+	(Activity): Move before Action.  Add _performAction_:.
+	(ActionTo, ActionCall): Adopt Action.
+	(ActionArgs): Don't adopt Action.
+	(COMPLETEDP, HOLDINGP, INITIALIZEDP, RELEASEDP, RUNNINGP,
+	STOPPEDP, TERMINATEDP): Remove (now) unnecessary casting.
+	(ProcessType): Moved to design document.
+
+	* ActionGroup.h (GroupIndex_c, GroupPermutedIndex_c, ForEachIndex_c):
+	Conform to ActivityIndex.
+
+	* ActionGroup.m (GroupIndex_c): Add phase delimiters.
+	([ForEachActivity_c +_create_::]): Cast
+	forEachAction to PAction instead of CAction.
+	([ForEachActivity_c +_createRandom_::]): Likewise.
+
+	* ActionGroup.[hm] ([ForEachIndex_c -setOffset:, -getOffset,
+	-setLoc:, -remove, -put:, -findPrev:, -findNext:, -prev, -next,
+	-getCollection]): New methods (aborts).
+	([ForEachIndex_c -getLoc]): Use object conforming to symbol.
+	([ActionGroup_c getDefaultOrder], [ActionGroup_c setDefaultOrder:]):
+	Likewise.
+
+	* Schedule.h ([Schedule_c getDefaultOrder]): Likewise.
+	
+	* CompoundAction.[hm] (setDefaultOrder, getDefaultOrder): Likewise.
+	([CompoundAction_c -getDefaultOrder]): Likewise.
+	([CompoundAction_c -_createActivity_::::]): Remove related cast.
+
+1999-11-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Action.m ([ActionTo_c -_performAction_:]): Drop arguments in
+	addition to call when constructing an FCall on the fly.
+
+	* Action.[hm] ([CFAction -dropAllocations:]): New method.
+
+1999-11-19  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Action.h (CAction): Move call and target here.  target is
+	dereferenced by both ForEach classes.
+
+	* Action.[hm]: Move finalization and Java specialization to
+	FActionForEach_c.
+
+	* ActionGroup.[hm], Schedule,[hm]: Add protocol qualifications to 
+	return values. 
+
+	* ActionGroup.[hm], Schedule.[hm], activity.[hm]: Add
+	createFActionForEach and variants.
+
+1999-11-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add FFINCLUDES.
+
+	* Action.m: Include directory.h, FCall.h, and javavars.h.
+
+	([ActionCall_c -createEnd]): Add arguments as local variable.
+	([ActionTo_c -_createCall_:]): Create arguments here.
+	([ActionTo_c -setTarget:]): Set protoTarget here.
+	([ActionForEach_c -createEnd]): Add code to handle finalizedFlag
+	with homogenous lists with and without Sequential Java lists.  All
+	are disabled pending FAction ForEach interface.  Performance
+	improvements are marginal, unfortunately.
+	([ActionForEach_c -_performAction_:], [ActionForEach_c -drop]): 
+	Handle case of sequential Java lists.
+
+	* Action.[hm], activity.h ([ActionForEach_c
+	-setFinalizationFlag:]): New method.
+
+	* Action.[hm] ([CFAction -_addArguments_:]): Add argument.  Remove
+	ivar for arguments.
+
+	* Action.h: Include directory.h for jarray and jsize (ary and aryLen).
+
+1999-11-14    <mgd@VAIO>
+
+	* CompoundAction.m ([CompoundAction_c -_createActivity_::::]): Add
+	casting so that topLevelAction needn't be statically typed.
+
+	* ActionGroup.h: Include activity.h.
+	(actionConcurrent): Make it an object conforming to Action instead
+	of CAction *.
+	(ForEachIndex_c): Make memberAction an object conforming to
+	ActionForEach instead of ActionForEach_c.
+
+	* ActionGroup.m (ActionGroup_c): Include Action.h 
+	([ForEachIndex_c -get]): Cast memberAction to ActionForEach_c
+	so that target can be dereferenced.
+
+	* XActivity.h (Activity_c): Include activity.h instead of 
+	Action.h.  Make topLevelAction an object conforming to Action
+	instead of CAction *.  Make status conform to Symbol.
+
+	* XActivity.m ([Activity_c -_run_]): Make initStatus conform
+	to Symbol.  Make nextAction conform to Action.
+
+	* Schedule.h: Include Action.h.
+
+1999-10-31  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* activity.h (ActionCreatingFAction): New protocol.
+	(ActionCreating): Adopt it.
+	(Schedule): Add at:createFAction: declaration.
+
+	* CompoundAction.m (getDefaultOrder): New function.
+
+	* Action.m ([ActionForEach_c -getDefaultOrder]): Use it.
+	([ActionForEach_c -setDefaultOrder:]): Use setDefaultOrder.
+
+	* Action.m ([Action{Call,To}_c {-createEnd, -_performAction_:}]):
+	All calls are done with FArguments/FCall. ([ActionTo_c _createCall_:]):
+	New method. Heterogeneous ForEach collections recreate the call
+	for each component and homogeneous collections just update the target.
+
+	* ActionGroup.m, Schedule.m: Use +createBegin:/-createEnd 
+	initialization of Action{Call,To,ForEach}_c instead of 
+	allocIVars and assignment.
+
+	* activity.h (FAction): Advertise.
+	(Action): Adopt Create and Drop.
+	(ActionArgs, ActionTo, ActionCall): Organize methods into creating
+	and using sections.
+
+	* activity.m: Remove setTypeImplemented relations for the
+	Action{Call,To,ForEach}_[123], replacing them with
+	Action{Call,To,ForEach}_c.
+
+	* ActionGroup.h (ForEachIndex_c): Make memberAction of type
+	ActionForEach_c instead of ActionForEach_0.
+
+	* Action.[hm] (CFAction): New class.
+	Remove Action{Call,To,ForEach}_[123] variant classes
+	replacing them with Action{Call,To,ForEach}_c classes inheriting 
+	from CFAction.
+
+1999-10-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* XActivity.m ([Activity_c -dropAllocations:]): Do next before
+	dropAllocations.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-09-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* CompoundAction.m: Move setDefaultOrder: to MIXIN_SET inclusion.
+
+	* ActionGroup.m (ActionGroup): Add setting phase tag w/ mixin.
+	(ConcurrentGroup_c): Add setting phase tag.
+
+	* Schedule.m (Schedule_c): Add setting mixin.
+	(ConcurrentSchedule_c, ActivationOrder_c): Add setting phase tag.
+
+	* activity.h: Add ActionTo,
+	ActionCall, and ActionForEach protocol-conforming return types.
+	(DefaultOrder): Move setDefaultOrder: to setting phase.
+
+	* XActivity.h (Activity_c): Add registeredOwnerActivity.
+
+	* SwarmProcess.m ([ActionMerge_c -mapAllocations:]): Disable
+	map of subactivity.
+
+	* XActivity.m (stopFunction, nextFunction, installNext,
+	instalStep): Make argument Activity_c * instead of id, to avoid
+	lots of redundant casting.
+	([Activity_c -dropAllocations:]): Check for registeredOwnerActivity
+	(new ivar) instead ownerActivity.  ownerActivity may change.
+	([Activity_c -mapAllocations:]): Disable map of currentSubactivity.
+
+	* CompoundAction.m (registerSubactivity): Don't use destroy
+	notification to maintain activitySet.
+
+	* XActivity.m ([Activity_c -dropAllocations:]): If there's an
+	owner, remove self from parent activitySet.
+
+1999-09-15  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Schedule.m ([ScheduleIndex_c -remove]): Avoid leaving behind
+	invalid ActivationOrder_c owners in mergeAction.
+
+	* Schedule.h (ConcurrentSchedule_c): Make actionConcurrent public.
+
+1999-09-12  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* SwarmProcess.m ([CSwarmProcess -activateIn:]): Pass activityZone
+	to _activateIn_::::.
+
+	* CompoundAction.m, ActionGroup.h, Schedule.h ([CompoundAction_c
+	-_activateIn_::::]): Add zone argument.
+
+1999-09-11  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* CompoundAction.m (registerSubactivity): New function.
+	([CompoundAction_c -_createActivity_::::]): Use it.
+
+	* ActionGroup.m ([ForEachActivity_c +_create_::],
+	[ForEachActivity_c +_createRandom_::]): Use it.
+	
+	* SwarmProcess.m ([CSwarmProcess -activateIn:]): Take swarmContext
+	as Zone or _activity_zone when context is nil.
+
+1999-09-10  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* XActivity.m ([Activity_c -dropAllocations:]): New method.
+
+	* XActivity.h (Activity_c): New ivars activitySet and
+	activitySetRefs.
+
+	* CompoundAction.m (notifyActivityDrop): New function.
+	([CompoundAction_c -_createActivity_::::]): Set it up.
+
+	* CompoundAction.h, activity.m (_activity_activitySetRefsType):
+	New global.
+
+	* activity.m (_activity_initialize): Set it up.
+
+1999-09-09  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* XActivity.m ([Activity_c -_run_]): Don't process immediateReturnFlag.
+
+	* XActivity.h (Activity_c): Remove immediateReturnFlag.
+
+	* Schedule.h (ActionMerge_c): Remove immediateReturnRequestFlag.
+
+	* SwarmProcess.m ([ActionMerge_c -_performAction_:]): Don't 
+	initialize immediateReturnRequestFlag.
+
+	* Schedule.m (_update_mergeSchedules): Drop index when finished.
+
+	* Schedule.[hm] ([Schedule_c -_activateUnderSwarm_::::]): Add
+	swarmZone argument. Pass it to _createActivity_::::.  Allocate
+	mergeAction in swarmZone.  Don't initialize mergeExternalAction.
+	Don't initialize immediateReturnRequestFlag in mergeAction.
+
+	* Schedule.h (ScheduleActivity_c): Remove mergeExternalAction.
+
+	* CompoundAction.m ([CompoundAction_c -_createActivity_::::]): Add
+	activityZone argument.  Don't get activityZone from ownerActivity.
+	Don't initialize immediateReturnFlag.
+
+	* CompoundAction.m ([CompoundAction_c -_activateIn_:::]): Use
+	swarmContext as zone unless it's nil, otherwise _activity_zone.
+	Pass zone to _activateUnderSwarm_::::.
+	([CompoundAction_c -_performPlan_]): Get zone from _activity_current
+	or _activity_zone if former is nil.
+
+	* ActionGroup.[hm] ([ActionGroup_c -_activateUnderSwarm_::::]): 
+	Add swarmZone argument.  Add Class typing to activityClass
+	and indexClass arguments.  Use zone argument for Schedule creation.
+	([ActionGroup_c -mapAllocations:]): Drop index when finished.
+
+1999-09-07  Alex Lancaster  <alex@santafe.edu>
+
+	* activity.h (Schedule): Re-enable conformance to Map.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* activity.h (Action, ActionCall, ActionTo, ActionForEach,
+	Activity, ScheduleActivity, SwarmActivity, ForEachActivity,
+	ConcurrentGroup, ConcurrentSchedule, ActivationOrder): Change from
+	CREATABLE to RETURNABLE.
+	(SwarmProcess): Remove CREATABLE.  Return id <Activity> for
+	getActivity.
+	(Schedule): Add Zone typing for +create:*.
+
+1999-08-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* activity.m: Don't define _activity_current, _activity_zone here.
+	Use externvardef for remaining symbols.
+
+	* SwarmProcess.m: Use externvar to declare _activity_swarmSyncType.
+
+1999-07-28  Alex Lancaster  <alex@santafe.edu>
+
+	* activity.h (Schedule): Add +create:setRepeatInterval: and
+	+create:setAutoDrop: convenience methods to CREATING phase of
+	protocol.
+
+	* Schedule.h: ([Schedule_c +create:setRepeatInterval:]): Declare
+	convenience method.
+
+	* Schedule.[hm] ([Schedule_c +create:setAutoDrop:]): New
+	convenience method.
+
+1999-07-12  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* activity.h (getCurrentSchedule): Typo.
+
+1999-07-11  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* activity.m (_activity_implement): Call setTypeImplemented for
+	various kinds of ActionTo, ActionForEach, ActionCall and Activity.
+
+	* activity.h: Make Action, ActionCall, ActionTo, ActionForEach,
+	Activity, ScheduleActivity, SwarmActivity, ForEachActivity 
+	CREATABLE protocols.
+
+1999-07-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Schedule.m ([Schedule_c -_activateUnderSwarm_:::]): Set
+	newIndex->currentTime to swarmIndex->currentTime.  This is for the
+	case of a subswarm has no preceding actions, and the startTime is
+	taken from the currentTime for the sake of a Schedule tagged with
+	RelativeTime.
+	([Schedule_c at:createActionTo:message:arg1:arg2:arg3:]): Make
+	newAction of type ActionTo_3.  Set arg3.  Thanks to Noberto Eiji Nawa.
+
+1999-06-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* activity.h (RelativeTime): Make setRelativeTime: return self.
+	(RepeatInterval): Likewise.
+
+	* Schedule.[hm] ([Schedule_c -setRelativeTime:],
+	[Schedule_c -setRepeatInterval:]): Likewise.
+	
+1999-06-10  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (BUILT_SOURCES): Use TYPEINFO.
+	(module_headers): Remove.
+
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I$(srcdir)/../misc.
+	(module_headers): Use $(TYPEINFO).
+	(noinst_LTLIBRARIES, lib_LTLIBRARIES): Substitute {noinst,inst}LIBS.
+	(EXTRA_LTLIBRARIES): Set to libactivity.la
+	(libactivity_la_LDFLAGS): Substitute inst_LDFLAGS.
+
+	* Schedule.m: Include misc.h.
+
+1999-06-03  Alex Lancaster  <alex@santafe.edu>
+
+	* activity.h (ActionCreatingTo): Fix missing message receiver in
+	the example code provided.  Thanks to Ken Cline
+	<kcline@c3i.saic.com> for the report.
+ 
+1999-05-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I$(top_builddir)/libobjc.
+
+	* Action.m: Don't include objc/objc-api.h.
+
+	* ActionGroup.m ([ActionGroup_c -_activateUnderSwarm_:::]):
+	Declare return type as (id <Activity>).
+
+	* CompoundAction.m ([CompoundAction_c -activate],
+	[CompoundAction_c -activateIn:], [CompoundAction_c
+	-_activateIn_:::]): Likewise.
+
+	* SwarmProcess.m ([CSwarmProcess -activate], [CSwarmProcess
+	-activate:], [CSwarmProcess -activateIn:]): Likewise.
+
+	* activity.h: Include externvar.h.
+	(ActionForEach, CompoundAction, ActionGroup): Add
+	DefaultOrder compliance.
+	(ActionType): Add (id <Activity>) return types to activate*
+	methods.  Rearrange protocols so that the Activity protocol will
+	be declared for (id <Activity>).
+
+1999-05-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* XActivity.m (_activity_current, _activity_zone,
+	_activity_trace): Add externvardef.
+
+	* activity.h: Use `externvar' for external variable declarations.
+	(TimebaseMax): Remove; it's unused.
+
+1999-05-26  Alex Lancaster  <alex@santafe.edu>
+
+	* activity.h, XActivity.[hm] ([Activity_c -run]): Cast return to
+	(id <Symbol>).
+	([Activity_c -_run_]): Likewise.
+	([Activity_c -next]): Likewise.
+	([Activity_c -step]): Likewise.
+	([Activity_c -getStatus]): Likewise.
+	([Activity_c -getHoldType]): Likwise
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES): Switch from lib_LTLIBRARIES.
+
+1999-04-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* SwarmProcess.[hm] ([CSwarmProcess -getPageSize]: Change return
+	to size_t.
+	
+1999-03-17  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* Action.h: Include defobj.h instead of FCall.h for protocol FCall.
+	(FAction): Change call field type from FCall * to  id <FCall>. 
+
+	* Action.m ([FAction -_performAction_:]): Call performCall on FCall
+	instead of _performAction_:
+
+1999-03-16  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* Schedule.h: New method at:createFAction: which creates a FAction
+	from a FCall instance.
+	New method createFAction: which calls at:createFAction:
+
+	* Schedule.m ([Schedule_c -at:createFAction:]): New method.
+	([Schedule_c -createFAction:]): New method.
+
+	* Action.h: New class FAction that performs a foreign function call
+	through FCall class.
+
+	* Action.m: New class FAction.
+
+	* ActionGroup.h: New method createFAction: which creates a FAction
+	that performs a foreign function call.
+
+	* ActionGroup.m ([ActionGroup_c -createFAction:]): New method.
+
+1999-03-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am: Revert last change.
+
+1999-03-16  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add JAVAINCLUDES to INCLUDES variable.
+
+1999-03-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I for libobjc.
+
+1999-03-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* CompoundAction.m ([CompoundAction_c -_createActivity_:::]): Use 
+	setActivity: in non-Randomized case.
+
+	* ActionGroup.[hm] ([GroupIndex_c -setActivity:]): New method.
+
+	* Schedule.[hm] ([ScheduleIndex_c -setActivity:]): New method.
+
+1999-03-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* XActivity.m (Activity_c): Add phase tags.
+
+	* XActivity.h (Activity_c): Implement Activity protocol.
+
+	* ActionGroup.[hm] ([GroupPermutedIndex_c +createBegin:],
+	[GroupPermutedIndex_c -setCollection:], 
+	[GroupPermutedIndex_c -createEnd]): Remove.
+	([GroupPermutedIndex_c -setActivity:]): New setter.
+	([ActionGroup_c -_createPermutedIndex_:activity:]): Add activity:
+	argument, which sets activity slot in index. Use previous method.
+
+	* CompoundAction.m ([CompoundAction_c -_createActivity_:::]): 
+	Use previous method.
+
+1999-03-04  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ActionGroup.m (GroupPermutedIndex_c, ForEachIndex_c): Add phase tags.
+	([GroupPermutedIndex_c +createBegin:]): Revert last change.
+
+1999-03-04  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* ActionGroup.m ([GroupPermutedIndex_c +createBegin:]):
+	Call allocIVars: with [self getClass] as an arguments instead of 
+	self and setClass to self.
+
+1999-03-03  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* ActionGroup.m ([GroupPermutedIndex_c +createBegin:]): Use getCZone
+	instead of getComponentZone: method.
+	([GroupPermutedIndex_c -createEnd]): Likewise.
+	
+1999-03-02  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* ActionGroup.m ([GroupPermutedIndex_c +createBegin:]): Use 
+	allocIVars: instead of call to [cuper createBegin:].
+	([GroupPermutedIndex_c -createEnd]): Call [collection createEnd]
+	instead of [super createEnd].
+	([GroupPermutedIndex_c -createEnd]): Call setMappedAlloc on self.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (CURRENT, AGE): Increment.  Version 1.4.1.
+
+1999-02-06  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* CompoundAction.m (setDefaultOrder): Add setDefaultOrder function.
+
+	* CompoundAction.h: Add setDefaultOrder function.
+
+	* Action.m ([ActionForEach_1 -setDefaultOrder:]): Use 
+	setDefaultOrder function. 
+	
+	* Action.m ([ActionForEach_1 -setDefaultOrder:]): Likewise.
+
+	* Action.m ([ActionForEach_2 -setDefaultOrder:]): Likewise.
+	
+	* Schedule.m (createGroup): Use create: instead of createBegin:
+	and createEnd: to avoid customization problems.
+
+1999-02-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* activity.h (Schedule): Declare -setKeepEmptyFlag:.
+
+	* Schedule.[hm] ([Schedule_c +createBegin:]): New method (set
+	keepEmptyFlag default to YES). 
+	([ConcurrentSchedule_c +createBegin:]): New method,
+	set keepEmptyFlag default to NO.
+
+	* Schedule.h (Schedule_c): Rename keep -> keepEmptyFlag.
+
+	* XActivity.h (Activity_c): Likewise.
+
+	* Schedule.m ([Schedule_c -_activateUnderSwarm_:::]),
+	XActivity.m ([Activity_c -_run_]): Accommodate.
+
+	* XActivity.[hm], Schedule.[hm]: Rename setKeepEmpty ->
+	setKeepEmptyFlag.
+
+1999-02-01  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* Schedule.h: Add setKeepEmpty:.
+
+	* Schedule.m ([Schedule_c -setKeepEmpty:val]): Add setKeepEmpty:.
+	([Schedule_c -_activateUnderSwarm_:::]): Activity inherits keep 
+	from the schedule.
+	(_activity_insertAction): Check for empty schedule and do necessary 
+	updates of merge schedules.
+
+	* XActivity.m: Add setKeepEmpty:.
+	([Activity_c -_run_]): Check keep.
+
+	* XActivity.h: Add setKeepEmpty:.
+	(Activity_c): Add keep field.
+
+1999-01-22  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* Schedule.m ([Schedule_c -remove:]): Another conformsTo: check -
+	used in the case of concurrent merge actions.
+
+1999-01-20  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am (CURRENT): Bump.
+
+1999-01-20  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* Schedule.m ([Schedule_c -remove:]): Replace respondsTo with 
+	conformsTo.
+
+1999-01-14  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Schedule.m ([Schedule_c -createEnd]): Use
+	compareUnsignedIntegers instead of compareIDs.
+
+1999-01-13  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* Makefile.am (SUBDIRS): Remove. Directory tests moved to the top. 
+
+1999-01-13  Alex Lancaster  <alex@santafe.edu>
+
+	* Makefile.am (SUBDIRS): Add variable and assign to `tests'.
+
+1999-01-04  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* ActionGroup.m ([GroupPermutedIndex_c -createEnd]): Remove
+	a [[self getCollection] createEnd] because createEnd on collection
+	is already called from [super createEnd].
+
+1998-12-28  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* CompoundAction.m ([CompoundAction_c -_createActivity_:::]): 
+	Don't call generatePermutation after creation of a permuted
+	index.
+
+	* ActionGroup.m ([ActionGroup_c -_createPermutedIndex_:]): Use
+	-setCollection: instead of +createBegin:forCollection:.
+	([GroupPermutedIndex_c -setCollection:]): New method.
+	([GroupPermutedIndex_c -createEnd]): Call super createEnd and
+	createEnd on collection.
+	([ForEachActivity_c +_createRandom_::]): Don't call
+	generatePermutation.
+
+	* ActionGroup.h: Remove +createBegin:forCollection:. 
+	Add -setCollection:.
+
+1998-12-22  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* Action.h (ActionForEach_0): Add setDefaultOrder:.
+	(ActionForEach_1): Likewise.
+	(ActionForEach_2): Likewise.
+	(ActionForEach_3): Likewise.
+
+	* Action.m ([ActionForEach_0 -setDefaultOrder:]): Implement default 
+	order setting.
+	([ActionForEach_1 -setDefaultOrder:]): Likewise.
+	([ActionForEach_2 -setDefaultOrder:]): Likewise
+	([ActionForEach_3 -setDefaultOrder:]): Likewise.
+
+	* ActionGroup.h (GroupPermutedIndex_c): Remove +createBegin:.
+	(GroupPermutedIndex_c): Add +createBegin: forCollection:.
+
+	* ActionGroup.m ([ActionGroup_c -createActionForEach:message:]): 
+	Remove inheritance of the default order.
+	([ActionGroup_c -createActionForEach:message::]):
+	Likewise.
+	([ActionGroup_c -createActionForEach:message:]): 
+	Likewise.
+	([ActionGroup_c -createActionForEach:message:]): 
+	Likewise.
+	([ActionGroup_c -_createPermutedIndex_:]): Use 
+	[GroupPermutedIndex -createBegin: forCollection:] instead of
+	[GroupPermutedIndex -createBegin:].
+	([GroupPermutedIndex_c +createBegin: forIndexSubclass:]): 
+	Remove.
+	([GroupPermutedIndex_c +createBegin:forCollection:]): Modify 
+	[GroupPermutedIndex_c +createBegin:] to support new PermutedIndex
+	class.
+	([GroupPermutedIndex_c -createEnd]): Modify to support new 
+	PermutedIndex class.
+	([GroupPermutedIndex_c -dropAllocations:]): Likewise.
+
+	* Schedule.m ([Schedule_c -at:createActionForEach:message:]): 
+	Remove inheritance of the default order.
+	([Schedule_c -at:createActionForEach:message::]):
+	Likewise.
+	([Schedule_c -at:createActionForEach:message:::]):
+	Likewise.
+	([Schedule_c -at:createActionForEach:message::::]):
+	Likewise.
+	
+	
+1998-12-22  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* activity.h (ActionType): Remove activate:.
+
+1998-12-22  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* CompoundAction.m ([CompoundAction_c -_createActivity_:::]): 
+	Use conformsTo: instead of isKindOf:.
+
+1998-12-21  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* SwarmProcess.h: Declare setPageSize:, describeForEach:, 
+	describeForEachID:, containsAlloc:, getReclaimPolicy, 
+	getStackedSubzones, getSynchronizationType from the Zone and 
+	SynchronizationType protocol. 
+
+	* SwarmProcess.m (CSwarmProcess): Implement setPageSize:, 
+	describeForEach:, describeForEachID:, containsAlloc:,
+	getReclaimPolicy, getStackedSubzones, getSynchronizationType
+	from the Zone and SynchronizationType protocol. 
+
+1998-12-20  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* activity.h (Activity): Remove stepEntry and stepExit methods
+	(moved to design document).
+	(ScheduleActivity): Remove setTerminateAtEnd:, getTerminateAtEnd,
+	getSynchronizedMode, and getCurrentTimebase (moved to design
+	document). Add creating phase tag.
+	(ActionType): Remove -getActionType.
+	
+	* Schedule.m (ConcurrentSchedule_c, ActivationOrder_c,
+	ScheduleActivity_c): Add phase tags.
+
+	* SwarmProcess.h (CSwarmProcess): Implement SwarmProcess protocol.
+
+	* Schedule.h (ConcurrentSchedule_c): Implement ConcurrentSchedule
+	protocol.
+	(ActivationOrder_c): Implement ActivationOrder protocol.
+	(ScheduleActivity_c): Implement ScheduleActivity protocol.
+	(SwarmActivity_c): Implement SwarmActivity protocol.
+
+	* ActionGroup.m (ForEachActivity_c): Add creating and using phase
+	tags.
+
+	* ActionGroup.h (ActionGroup_c): Implement ActionGroup protocol.
+	(ForEachActivity_c): Implement ForEachActivity protocol.
+
+1998-12-17  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* activity.h (ActionGroup): Don't adopt OrderedSet.
+	(Schedule): Don't adopt Map.
+	(RelativeTime): Remove create:setRelativveTime:.
+	(RepeatInterval): Remove create:setRepeatInterval:.
+	(Action): Disable declaration of -getActionType.
+	(ActionType): Disable declaration of activate:.
+
+	* Schedule.h (Schedule): Implement Schedule protocol.
+
+	* ActionGroup.h (ActionGroup_c): Implement ActionGroup protocol.
+	(ConcurrentGroup_c): Implement ConcurrentGroup protocol.
+
+	* Action.m (CAction): Add Using phase tag.
+
+	* Action.h (CAction): Implement Action protocol.
+
+1998-12-16  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* ActionGroup.m ([GroupPermutedIndex_c -createEnd]): Use component 
+	zone for internal objects of GroupPermutedIndex.
+
+1998-12-15  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* CompoundAction.m ([CompoundAction_c -_createActivity_:::]): 
+	Allow subclasses of ActionGroup to be randomized.
+
+1998-12-12  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Action.m ([CAction -drop]): Use YES instead of 1 as argument
+	to dropAllocations:.
+
+	* ActionGroup.m ([GroupIndex_c -dropAllocations:],
+	[GroupPermutedIndex_c -dropAllocations:]):  Likewise.
+
+	* activity.m (_activity_initialize): Add defsymbols for
+	Randomized, Sequential, and Concurrent.
+
+	* Makefile.am (module_headers): Add activity.xm.
+
+1998-12-11  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* Action.h (CAction): Add new field bits to allow setting 
+	BitRandomized in ActionForEach.
+
+	* Action.m ([ActionForEach_0 -_performAction_:]): Support for 
+	randomized ActionForEach.
+	([ActionForEach_1 -_performAction_:]): Likewise.
+	([ActionForEach_2 -_performAction_:]): Likewise.
+	([ActionForEach_3 -_performAction_:]): Likewise.
+		
+	* ActionGroup.m ([ActionGroup_c -createActionForEach:message:]): 
+	Mechanism for forEachAction created from within the ActionGroup to 
+	inherit the default order of schedule.
+	([ActionGroup_c -createActionForEach:message::]): Likewise.
+	([ActionGroup_c -createActionForEach:message:::]): Likewise.
+	([ActionGroup_c -createActionForEach:message::::): Likewise.
+	([ActionGroup_c -_createPermutedIndex_:aZone]): New method that
+	creates a GroupPermutedIndex.
+	(GroupPermutedIndex_c): New class used for radnomized traversal 
+	of a action group.
+	([ForEachActivity_c +_createRandom_::]): Support for randomized
+	ForEachAction - creates an randomized index for traversal of a
+	structure that is the target of ForEachAction.
+
+	* ActionGroup.h (ActionGroup_c): Methods setDefaultOrder and 
+	getDefaultOrder reinserted. New method _createPermutedIndex_ used
+	to create PermutedIndex for traversal of the ActionGroup.
+	(PermutedIndex_c): Add new class for randomized traversal of action 
+	groups.
+	([ForEachActivity_c _createRandom_::]): New method for creation of 
+	ForEachActivity that supports randomized traversal.
+
+	* CompoundAction.m ([CompoundAction_c -setDefaultOrder:]): 
+	Reinserted.
+	([CompoundAction_c -getDefaultOrder]): Likewise.
+	([CompoundAction_c -_createActivity_:::]): Support for Randomized
+	Concurrent/ActionGroups implemented.
+
+	* CompoundAction.h: activity.h need not be imported.
+
+	* Schedule.h (Schedule_c): Methods setDefaultOrder and 
+	getDefaultOrder inserted.
+
+	* activity.h (DefaultOrder): DefaultOrder reinserted.
+
+	* Schedule.m (createGroup): Mechanism for groups created from 
+	within the schedule to inherit the default order of schedule.
+	([Schedule_c -at:createActionForEach:message:]): Mechanism for 
+	forEachAction created from within the Schedule to inherit the 
+	default order of schedule.
+	([Schedule_c -at:createActionForEach:message::]): Likewise.
+	([Schedule_c -at:createActionForEach:message:::]): Likewise.
+	([Schedule_c -at:createActionForEach:message::::): Likewise.
+       
+1998-11-19  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	
+	* Schedule.m (_activity_insertAction): modifications to detect 
+	dynamic scheduling and "adjacency test" to check if the action
+	is to be added before pending action; update of indexes
+	if necessary; update mergeSchedules through _update_mergeSchedule
+	routine 
+	(_update_mergeSchedules): new routine used for updates of merge 
+	Schedules in case of dynamic scheduling
+	([ScheduleIndex_c -describe:]): modified to print out start time 
+	and current time of the schedule index 
+
+	* Schedule.h (ActionMerge_c): Add collectionOfActions
+	field to ActionMerge_c to speed up access to schedule
+	that is merged
+	
+	([Schedule_c -_activateUnderSwarm_:::]): using new 
+	collectionOfActions field in ActionMerge_c instead 
+	of self->subactivity->currentIndex->collection
+
+	* SwarmProcess.m ([ActionMerge_c -describe:]): 
+	Likewise
+	
+
+1998-10-29  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* activity.h (ActionCreatingTo): Fix example syntax for
+	createActionTo:message:.
+
+1998-10-27  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* SwarmProcess.m (notifySwarm): Remove activityRef. 
+	([CSwarmProcess -activateIn:]): Likewise.
+
+	* SwarmProcess.h (CSwarmProcess): Likewise.
+
+1998-10-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (REVISION): Increment.  Swarm 1.3.1 released.
+
+1998-09-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* activity.h (COMPLETEDP, HOLDINGP, INITIALIZEDP, RELEASEDP,
+	RUNNINGP, STOPPEDP, TERMINATEDP): New macros.
+
+	* XActivity.m: Reformatting throughout. 
+	Use YES/NO instead of 1/0 throughout.
+	(auditRunRequest): Use RUNNINGP and COMPLETEDP.
+	([Activity_c -_run_]): Use INITIALIZEDP, RELEASEDP, STOPPEDP,
+	TERMINATEDP, HOLDINGP, COMPLETEDP, 
+	([Activity_c -terminate]): Use RUNNINGP.
+	(stopFunction): Use HOLDINGP.
+	([Activity_c -stop]): Use TERMINATEDP.
+	(nextFunction): Use HOLDINGP.
+	(installNext, installStep): Use COMPLETEDP.
+	([Activity_c -setOwnerActivity:]): Use RUNNINGP.
+	([Activity_c -drop]): Use TERMINATEDP and RUNNINGP.
+
+	* SwarmProcess.m ([ActionMerge_c -_performAction_:]): Use HOLDINGP.
+
+	* Schedule.m: Reformatting throughout.  
+	Use YES/NO instead of 1/0 throughout.
+	([ScheduleActivity_c -stepUntil:]): Use COMPLETEDP.
+	([ScheduleIndex_c -nextAction:]): Use INITIALIZEDP.
+	([ScheduleIndex_c -getCurrentTime]): Use INDEXSTARTP.
+	([ScheduleIndex_c -get]): Use COMPLETEDP.
+	
+1998-08-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT, AGE): Increment.  Swarm 1.3 released.
+	(install-data-local): Do two installs, for install-sh case.
+
+1998-07-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* activity.h: Replace @deftype with @protocol throughout.
+
+1998-07-12  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* activity.h (Schedule): Declare -insertGroup:.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (module_headers): Rename from class_headers.
+	(libactivity_la_SOURCES, lib_LIBRARIES):  Remove.
+	(install-data-local): New target for modules_headers.
+	(activity_HEADERS): Remove $(module_headers).
+
+1998-06-23  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LTLIBRARIES, libactivity_la_SOURCES,
+	libactivity_la_LDFLAGS, SRC, CURRENT, REVISION, AGE): New
+	variables.  Set *_SOURCES from SRC.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+	
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-06-15  Alex Lancaster  <alex@santafe.edu>
+
+	* Action.m (describeFunctionCall): Removed cast of pointer to
+	unsigned long.
+	(describeMessageArgs): Likewise.
+
+1998-06-14  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* activity.h: Remove DefaultOrder; don't adopt it in CompoundAction.
+	Remove example that uses it in ConcurrentGroupType.
+	Remove mention of partially ordered sets from ActionGroup, Schedule,
+	and Action.
+	Remove InternalTimeMultiplier; don't adopt it in SwarmProcess.
+
+	* ActionGroup.h, Schedule.h: Don't declare setDefaultOrder: or
+	getDefaultOrder.
+
+	* CompoundAction.m: Don't define setDefaultOrder: or getDefaultOrder.
+
+1998-06-05  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* activity.h: Add/update documentation tags.  Declare
+	addLast: and remove: (in using phase).
+
+1998-06-01  Alex Lancaster  <alex@santafe.edu>
+
+	* activity.h (ActionType): Added method -activate: anActionType.
+
+1998-05-22  Alex Lancaster  <alex@santafe.edu>
+
+	* activity.h: (getCurrentTime,getTopLevelActivity): Added
+	(//#) documentation strings. (_activity_zone, _activity_trace):
+	Made existing inline comments into (//G) doc strings:
+
+1998-05-08  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* CompoundAction.m ([CompoundAction_c -getAutoDrop]): Convert
+	the presence of BitAutoDrop in bits to a boolean.
+
+1998-05-06  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* activity.h: Remove instances of <p> Minor spacing changes to
+	methods. 
+	(ActionType, ActionCreatingCall, ActionCreatingTo,
+	ActionCreatingForEach, ActionCreating, Action, ActionArgs,
+	ActionCall, ActionTo, Activity, ForEachActivity,
+	ScheduleActivity, SwarmActivity): Add phase tags.
+	(GetSubactivityAction): Add //S and //D tags.
+	(SynchronizationType, InternalTimeMultiplier): Add //S.
+
+1998-04-29  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* activity.h: Include new protocols DefaultOrder, AutoDrop in
+	CompoundAction.  Include new protocols ActionCreatingTo,
+	ActionCreatingForEach in ActionCreating.  Include new protocols
+	RelativeTime, RepeatInterval, ConcurrentGroupType, SingletonGroups
+	in Schedule.  Include SynchronizationType and InternalTimeMultiplier
+	in SwarmProcess. 
+	Disable setTerminateAtEnd:, getTerminateAtEnd,
+	setSynchronizedMode:, getSynchronizedMode, and getCurrentTimebase
+	from ScheduleActivity protocol.
+	Add documentation tags throughout.
+
+1998-04-28  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Schedule.m (_activity_insertAction): Disable code that attempts
+	to cope with changes from external schedules.
+
+1997-12-17  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* activity.h: Constify argument to _activity_context_error.
+
+	* XActivity.m (auditRunRequest): Constify request.  Reformat
+	function.
+	(_activity_context_error): Constify macroName. Reformat function.
+
+1997-12-11  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* XActivity.m ([Activity_c -getTopLevelActivity]): Handle activities
+	that don't have owners.
+
+	* Schedule.m (_check_external_activity): Check to make sure
+	that the schedule associated with non-current activity 
+	is still within same activity hierarchy.
+	Minor reformatting.
+
+1997-11-13  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* XActivity.m ([Activity_c -_run_]): Do not advance to next action
+	if immediateReturnFlag is set; return as holding.
+
+	* Schedule.m ([Schedule_c -_activateUnderSwarm_:::]): Initialize
+	mergeExternalAction (a merge action with configurable slots).
+	(_schedule_external_activity): Add internal function for
+	scheduling merges for one-shot actions.
+	(_check_external_activity): Add internal function for detecting
+	schedules that are outside the scope of the current activity.
+	(_activity_insertAction): Call check for schedules changes to
+	external activities.
+
+	* SwarmProcess.m ([ActionMerge_c -_performAction_:]): Set immediate
+	return flag in activity if requested by merge.
+
+	* CompoundAction.m ([CompoundAction_c -_createActivity_:::]):
+	Initialize immediateReturnFlag.
+
+	* XActivity.h (Object_s): Add immediateReturnFlag.
+	
+	* Schedule.[hm] ([ScheduleActivity_c -setCurrentTime :]):  Add method
+	to synchronize schedules with a given time.
+	
+	* Schedule.h (ScheduleActivity_c): Add mergeExternalAction instance
+	variable for merging external Swarms.
+
+	* Schedule.h (ActionMerge_c): Add flag instance variable
+	`immediateReturnRequestFlag' for requesting that next execution of
+	activity not proceed to next timestep, but instead return.
+	
+
+

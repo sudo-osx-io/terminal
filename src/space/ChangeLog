@@ -1,0 +1,722 @@
+2009-11-09  Scott Christley  <schristley@mac.com>
+
+	* Makefile.am (ENABLE_OPENSTEP): Change from ENABLE_GNUSTEP.
+
+2009-09-24  Scott Christley  <schristley@mac.com>
+
+	* Discrete2d.m: Adjust casts to eliminate compiler warnings.
+
+2009-04-02  Scott Christley  <schristley@mac.com>
+
+	* space.h: #ifndef SWARM_OSX classes not applicable for Mac OSX.
+
+2008-08-25  Marcus G. Daniels <marcus@snoutfarm.com>
+
+	* Makefile.am (EXTRA_DIST): Add.
+
+2008-07-06  Scott Christley  <schristley@mac.com>
+
+	* Discrete2d.m: Cast so compiler finds correct method definition.
+
+2008-06-25  Scott Christley  <schristley@mac.com>
+
+	* Ca2d.h, ConwayLife2d.h, DblBuffer2d.h, Diffuse2d.h,
+	Discrete2d.h, Grid2d.h, Int2dFiler.h, Object2dDisplay.h,
+	Value2dDisplay.h, space.h, Makefile.am: Standardize include
+	directory structure to support libraries and OpenStep frameworks.
+
+2008-04-29  Scott Christley  <schristley@mac.com>
+
+        * Makefile.am (SRC): Do not build Object2dDisplay and
+        Value2dDisplay when GNUstep is enabled.
+        (space_HEADERS): Likewise.
+
+        * space.h: #ifndef GNUSTEP classes not applicable when
+        GNUstep is enabled.
+
+2006-08-19  Marcus G. Daniels <mgd@santafe.edu>
+
+	* space.h: -setObjectFlag: is void return
+	(to be consistent with implementation).
+
+2004-07-21  Scott Christley  <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Parameterize simtoolsgui and gui.
+	(SRC): Do not build Object2dDisplay and Value2dDisplay for a
+	non-gui Swarm build.
+
+	* space.h: #ifndef DISABLE_GUI class not applicable for a
+	non-gui Swarm build.
+
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Use libobjc definition.  Add GNUstep
+	includes.
+
+	* Object2dDisplay.m ([Object2dDisplay -makeProbeAtX:Y:]): Do not
+	call GUI_BEEP for GNUstep.
+
+2004-04-20  Marcus G. Daniels <mgd@santafe.edu>
+
+	* Discrete2d.m ([Discrete2d hdf5OutShallow]): Implement shallow object
+	serialization.
+
+	* Discrete2d.[hm], space.h: Add method -setObjectFlag:.
+
+2003-09-05  Marcus G. Daniels <mgd@santafe.edu>
+
+	* Value2dDisplay.m (-display): Don't derference drawPointImp to
+	check for NULL.
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* Ca2d.h, Ca2d.m, ConwayLife2d.h, ConwayLife2d.m, DblBuffer2d.h,
+	DblBuffer2d.m, Diffuse2d.h, Diffuse2d.m, Discrete2d.h,
+	Discrete2d.m, Grid2d.h, Grid2d.m, Int2dFiler.h, Int2dFiler.m,
+	Object2dDisplay.h, Object2dDisplay.m, Value2dDisplay.h,
+	Value2dDisplay.m, space.h: Change copyright statement to canonical
+	version as suggested by GNU GPL.
+
+2002-03-14  Marcus G. Daniels  <mgd@condor>
+
+	* Grid2d.m ([Grid -putObject:atX:Y:]): Print out name of object along
+	with pointer.
+
+2001-11-04    <mgd@HELEN>
+
+	* Makefile.am: Avoid multi-line values as they confuse Cygwin.
+
+2001-10-26  Marcus G. Daniels  <mgd@condor>
+
+	* Discrete2d.m: Change from getName to getHDF5Name.
+
+2001-08-10  Marcus G. Daniels  <mgd@condor.santafe.edu>
+
+	* Ca2d.m, Discrete2d.h, Discrete2d.m, Object2dDisplay.m,
+	Value2dDisplay.m: Use raiseEvent macro instead of method.
+
+2001-08-10  Marcus G. Daniels  <mgd@condor.santafe.edu>
+
+	* Discrete2d.[hm], space.h ([{Object,Value}2dDisplay
+	+create:setDisplayWidget:setDiscrete2dToDisplay:setDisplayMessage:,
+	-setDiscrete2dToDisplay:]): Anticipate a GridData conforming
+	object.
+
+	* space.h (GridData): New protocol.
+	(Discrete2d): Adopt it.
+	
+2000-06-29  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Discrete2d.[hm]: Remove return type from
+	{hdf5,lisp}Out{Deep,Shallow}:.
+
+2000-04-27    <mgd@nest.swarm.org>
+
+	* space.h
+	([{Discrete2d,DblBuffer2d,Ca2d,Value2dDisplay,ConwayLife2d}
+	-createEnd]): Remove.
+	([{Grid2d,DblBuffer2d} +create:setSizeX:Y:]): Remove.
+	([{DblBuffer2d,Grid2d} -putObject:atX:Y, -putValue:atX:Y:]):
+	Protect with #ifndef IDL.
+	([{ConwayLife2d,Diffuse2d} -initializeLattice, -stepRule]):
+	Likewise.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Swarm 2.1.1 frozen.
+
+2000-02-12    <mgd@nest.swarm.org>
+
+	* Makefile.am (REVISION): Bump.  Version 2.1.
+
+2000-01-23    <mgd@nest.swarm.org>
+
+	* Makefile.am (INCLUDES): Add JAVAINCLUDES.
+
+2000-01-11    <mgd@nest.swarm.org>
+
+	* Discrete2d.m (lispInLatticeValues): Use fcall_type_t for type
+	instead of a string.
+	(lispOutLatticeValues): Use lisp_process_array, not
+	lisp_output_type.
+	([Discrete2d hdf5OutShallow:]): Use
+	storeAsDataset:typeName:type:rank:dims:ptr instead of
+	storeDataset:typeName:type:ptr.
+
+2000-01-03  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* Discrete2d.m (lispOutLatticeObjects): Use catEndCons 
+	and catEndParse instead of catEndExpr.
+	([Discrete -lispOutShallow:]): Use catEndMakeInstance
+	instead of catEndExpr.
+
+1999-12-31  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* Discrete2d.m (lispOutLatticeObjects, lispOutLatticeValues,
+	[Discrete2d -lispOutShallow:], [Discrete2d -lispOutDeep:]): Use
+	new OutputStream methods.
+
+1999-12-29    <mgd@drone.swarm.org>
+
+	* Discrete2d.m ([Discrete2d -hdf5InCreate:, -hdf5In:,
+	-hdf5OutShallow:, -hdf5OutDeep:]): Use setWriteFlag: instead of
+	setCreateFlag:.
+	
+1999-11-16    <mgd@VAIO>
+
+	* Discrete2d.m ([Discrete2d -lispIn:]): Use archiver_list_p instead
+	of listp (simple rename).
+
+1999-10-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m ([Discrete2d +create:setSizeX:Y:]): Send
+	+createBegin: to self, not super.
+
+	* Object2dDisplay.m ([Object2dDisplay
+	+create:setDisplayWidget:setDiscrete2dDisplay:setDisplayMessage:]):
+	Likewise.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-09-12  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m (lispInLatticeObjects): Call getQuotedObject for
+	coordinate.
+
+1999-09-11  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m: Include defalloc.h.
+	([Discrete2d -allocLattice], [Discrete2d -makeOffsets],
+	[Discrete2d -hdf5In:], lispInLatticeObjects, [Discrete2d
+	-setDiscrete2d:toFile:]): Use getZone () instead of method.
+	([Discrete -drop]): Drop offsets as well.
+
+1999-09-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m ([Discrete2d -hdf5In{Create}:]): Use free: instead of
+	XFREE for rowNames.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* space.h: Add Discrete2d and Raster typing on convenience factory
+	methods (for use by Java).
+
+1999-08-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* space.h: Add Zone typing to +create* methods.  Don't touch
+	arguments that are subclasses of Discrete2d because we don't
+	have a stubbing mechanism for that.
+
+1999-08-13  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m (lispInLatticeValues): Use convertToType:dest:
+	instead of memcpy.
+
+1999-08-03  Alex Lancaster  <alex@santafe.edu>
+
+	* space.h (Diffuse2d): Make initializeLattice a CREATING method to
+	match implementation.
+	
+1999-08-02  Alex Lancaster  <alex@santafe.edu>
+
+	* Diffuse2d.m ([Diffuse2d
+	+create:setSizeX:Y:setDiffusionConstant:setEvaporationRate:]): Fix
+	object initialization; createEnd was being called too early.
+ 
+1999-08-01  Alex Lancaster  <alex@santafe.edu>
+
+	* space.h (Object2dDisplay, Value2Display, Discrete2d, Diffuse2d,
+	DblBuffer2d, Grid2d): Add +create: convenience methods to these
+	CREATABLE protocols.
+
+	* Value2dDisplay.[hm] ([Value2dDisplay
+	create:setDisplayWidget:colormap:setDiscrete2dToDisplay:]):
+	Convenience method.
+
+	* Object2dDisplay.[hm] ([Object2dDisplay
+	create:setDisplayWidget:setDiscrete2dToDisplay:setDisplayMessage:]):
+	Convenience method.
+
+	* Discrete2d.[hm] ([Discrete2d +create:setSizeX:Y:]): Convenience
+	method.
+
+	* Diffuse2d.[hm] ([Diffuse2d
+	+create:setSizeX:Y:setDiffusionConstant:setEvaporationRate:]):
+	Convenience method.
+
+	* DblBuffer2d.[hm] ([DblBuffer2d +create:setSizeX:Y:]):
+	Convenience method.
+
+	* Grid2d.[hm] ([Grid2d +create:setSizeX:Y:]): Convenience method.
+
+1999-07-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m ([Discrete2d hdf5In:]): Do createEnd after
+	the call the shallowLoadObject.
+	
+1999-07-09  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* space.h (Object2dDisplay): Add -makeProbeAtX:Y:.
+
+1999-07-02  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m (lispInLatticeValues, lispInLatticeObjects,
+	lispOutLatticeObjects, lispOutLatticeValues): New static functions
+	replace internal methods.  lispInLatticeValues checks to see that
+	size of array element is the same as size of an id.
+
+1999-06-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m ([Discrete2d setDiscrete2d:toFile:]): Use InFile
+	+create:setName: instead of +create:withName:.
+
+	* Int2dFiler.m ([Int2Filer -fileTo:]): Likewise.  Use raiseEvent
+	macro instead of method.
+
+1999-06-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ConwayLife2d.h: Declare implemented methods.
+
+1999-06-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Value2dDisplay.m ([Value -display]): Remove METHODS and USE_JAVA
+	ifdefs.  Add a conditional on drawPointImp, in case it came
+	up NULL due to a JavaProxy.
+
+1999-06-11  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m ([Discrete2d hdf5In{Create}:]): Handle compound
+	data types.
+	
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES, lib_LTLIBRARIES): Substitute
+	{inst,noinst}LIBS.
+	(EXTRA_LTLIBRARIES): New variable.
+	(libspace_la_LDFLAGS): Substitute inst_LDFLAGS.
+
+1999-05-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I$(top_builddir)/libobjc.
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES): Switch from lib_LTLIBRARIES.
+
+1999-05-05  Alex Lancaster  <alex@santafe.edu>
+
+	* space.h (Ca2d): Remove CREATABLE tag in protocol definition,
+	since this protocol is intended to be abstract.
+	(Discrete2d): Add example of Lisp output serialization.
+	(Int2dFiler): Note as deprecated protocol, point user to
+	Discrete2d serialization.
+
+1999-05-04  Alex Lancaster  <alex@santafe.edu>
+
+	* Discrete2d.m ([Discrete2d -_lispInLatticeObjects_:]): Use
+	putObject:atX:Y: method rather than discrete2dSiteAt macro, so can
+	be overriden in subclasses.
+	([Discrete2d -hdf5In:]): Likewise.
+	([Discrete2d -_lispOutLatticeObjects_:]): Use getObjectAtX:Y:
+	method rather than discrete2dSiteAt macro.
+	([Discrete2d -hdf5OutDeep:]): Likewise.
+	
+1999-05-02  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m ([Discrete2d -hdf5InCreate:]): Use
+	checkDatasetName: "lattice" instead of checkName: "ivars"
+	so that ivars aren't required.
+	([Discrete2d -hdf5In:]): Don't require ivars group.
+	([Discrete2d -_lispInLatticeObjects_:], 
+	[Discrete2d -_lispOutLatticeObjects_:]): 
+	Use pair for coordinates, not list.
+	([Discrete2d -_lispOutLatticeValues_:]): Array encoding was reversed.
+	([Discrete2d -hdf5In{Create}]): Uses group shallow encoding
+	to separate ivars and lattice.  Implement deep loading.
+	([Discrete2d -hdf5Deep:]): Implement.
+
+1999-05-01  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m ([Discrete2d -setSizeX:Y:], [Discrete -createEnd]):
+	Use raiseEvent macro instead of method invocation.
+	([Discrete2d -lispInCreate:]): Move to creating phase.
+	([Discrete2d -hdf5InCreate:]): Implement.
+	([Discrete2d -hdf5In:]): Implement.
+	([Discrete2d -_lispInLatticeValues_:], [Discrete2d
+	-_lispOutLatticeObjects_:]): Don't use tempArray.
+	([Discrete2d -hdf5OutShallow:]): Implement
+
+	* Discrete2d.h (Discrete2d):  -{{hdf5,lisp}{In,Out}}: Declare.
+
+	* space.h (Discrete2d): Remove setUseObjects and setUseValues.
+
+	* Discrete2d.m ([Discrete2d +createBegin:]): Remove.
+	([Discrete2d -setUse{Objects,Values}]): Remove.
+	([Discrete2d -_lispInAttr_:]): Remove.
+	([Discrete2d -_lispInLatticeValues_:]): Renamed from
+	_lispInAttrAsValues_.  Don't set (removed) useValues.
+	([Discrete2d -_lispInLatticeObjects_:]): Renamed from
+	_lispInAttrAsObjects_.  Don't set (removed) useObjects.
+	([Discrete2d -_lispInLatticeObjects_:]): Don't call -_lispInAttr_:.
+	([Discrete2d -_lispOutLatticeObjects_:]):
+	([Discrete2d -_lispOutAttr_:anObject:atX:Y]): Removed.
+	([Discrete2d -_lispOutLatticeObjects_:], [Discrete
+	-_lispOutLatticeValues_:]): New methods.
+	([Discrete2d -lispOutShallow:]): Use -lispOutVars:deep: and
+	_lispOutLatticeValues_: (previous implementation threw an
+	exception).
+	([Discrete2d -lispOutDeep:]): Use -lispOutVars:deep: and
+	_lispOutLatticeObjects:.
+
+	* Discrete2d.h (Discrete2d): Remove useObjects and useValues.
+
+1999-04-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* DblBuffer2d.m ([DblBuffer -createEnd]): Include misc.h.
+
+1999-04-26  Alex Lancaster  <alex@santafe.edu>
+
+	* Discrete2d.m ([Discrete2d -setUseObjects]): Make option
+	exclusive with `useValues'.
+	([Discrete2d -setUseValues]): Likewise with `useObjects'.
+
+1999-04-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.m ([Discrete2d -lispOutDeep:]): Remove strdup of buf.
+
+1999-04-25  Alex Lancaster  <alex@santafe.edu>
+
+	* Discrete2d.m ([Discrete2d -lispInCreate:], [Discrete2d
+	-lispIn:]): Custom input Lisp parsing routines for Discrete2d
+	lattices for create-time and use-time, respectively.
+	([Discrete2d -lispOutShallow:], [Discrete2d -lispOutDeep:]):
+	Custom output Lisp for lattices.  Don't allow shallow
+	serialization.
+	([Discrete2d -_lispOutAttr_:anObject:atX:Y:], [Discrete2d
+	-_lispInAttr_:]): Local customization for reading and writing
+	objects into lattice.
+	([Discrete2d -_lispInAttrAsValues_:], [Discrete2d
+	-_lispInAttrAsObjects_:]): Internal parsing methods.
+
+	* space.h: ([Discrete2d -setUseObjects], [Discrete2d
+	-setUseValues]):  Add to SETTING phase.
+
+	* Discrete2d.[hm] ([Discrete2d -setUseObjects], [Discrete2d
+	-setUseValues]): New methods to set the kind of serialization
+	required for instance (only required in cases when it cannot be
+	inferred from the archiver).  Add respective BOOL instance
+	variables.
+	
+1999-04-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Ca2d.[hm], ConwayLife2d.[hm], DblBuffer2d.[hm], Diffuse2d.[hm],
+	Grid2d.[hm], Int2dFiler.h, Object2dDisplay.h, Value2dDisplay.h:
+	Add protocol compliance tags to the @interfaces, reorganizing
+	the phase tags as necessary.
+
+1999-03-19  Alex Lancaster  <alex@santafe.edu>
+
+	* DblBuffer2d.m ([DblBuffer2d -drop]): Add method.  Free extra
+	memory used by the `newLattice' pointer, like Discrete2d.
+
+1999-03-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I for libobjc.
+
+1999-03-14  Alex Lancaster  <alex@santafe.edu>
+
+	* Discrete2d.m ([Discrete2d -drop]): Add method.  Call [Zone
+	-free:] using the current Zone, on the lattice instance, before
+	calling drop on `super', to deallocate memory used by the lattice.
+
+1999-03-10  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Diffuse2d.m: Remove const unsigned maxStates and replace with
+	macro.
+
+1999-02-26  Alex Lancaster  <alex@santafe.edu>
+
+	* Value2dDisplay.m ([Value2dDisplay -setDiscrete2dToDisplay:]):
+	Check for Discrete2d instead of _Discrete2d.
+
+	* Object2dDisplay.m ([Object2dDisplay -setDiscrete2dToDisplay:]):
+	Likewise.
+	
+1999-02-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* space.h: Merge _Discrete2d with Discrete2d.  Add CREATABLE
+	tags for all non-abstract protocols.
+
+	* Discrete2d.m ([Discrete2d setDiscrete2d:toFile:], 
+	[Discrete2d copyDiscrete2d:toDiscrete2d:]): Check for Discrete2d
+	instead of _Discrete2d.
+
+	* Discrete2d.h (Discrete2d): Implement Discrete2d protocol.
+
+1999-02-15  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Discrete2d.[hm], space.h ([Discrete2d -setLattice:]): New
+	method.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (CURRENT, REVISION, AGE): No changes.  Version 1.4.1.
+
+1998-10-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT): Increment.
+	Swarm 1.3.1 released.
+
+	* space.h (_Discrete2d): Make x and y arguments to setSizeX:Y:,
+	getObjectAtX:Y: getValueAtX:Y:, putObject:atX:Y:, putValue:atX:Y:
+	unsigned.  Make return values of getSize{X,Y} unsigned.
+	(DblBuffer2d): Make x and y arguments to putObject:atX:Y: and
+	putValue:atX:Y: unsigned.
+	(Grid2d): Likewise.
+	(Ca2d): Make argument to setNumStates: unsigned.
+	
+	* Object2dDisplay.[hm] ([Object -makeProbeAtX:Y:]): Make x and
+	y unsigned.
+
+	* Grid2d.m ([Grid -putObject:atX:Y:]): Make x and y unsigned.
+
+	* Discrete2d.m ([Discrete2d -makeOffsets]): Make i unsigned.
+	([Discrete2d -setDiscrete2d:toFile]): Make x, y, fileXSize, and
+	fileYSize unsigned.
+	([Discrete2d -copyDiscrete2d:toDiscrete2d:]): Make x and y
+	unsigned.
+
+	* Discrete2d.[hm] ([Discrete2d -setSizeX:Y:], [Discrete2d
+	-getSizeX],
+	[Discrete2d -getSizeY], [Discrete2d -getObjectAtX:Y:], [Discrete2d
+	-getValueAtX:Y:], [Discrete2d -putObject:atX:Y:], [Discrete2d
+	-putValue:atX:Y:], [Discrete2d -makeOffsets]): Make x and y
+	unsigned.
+
+	* DblBuffer2d.m ([DblBuffer -putObject:atX:Y:], 
+	[DblBuffer -putValue:atX:Y:]): Make x and y arguments unsigned.
+
+	* Ca2d.[hm]: Make numStates and setter unsigned.
+
+1998-08-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (AGE, CURRENT): Increment.  Swarm 1.3 released.
+
+1998-07-24  Alex Lancaster  <alex@santafe.edu>
+
+	* DblBuffer2d.m ([DblBuffer -updateLattice]): Fixed WarningMessage
+	to report error to DblBuffer2d rather than Ca2d.
+
+1998-07-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Int2dFiler.m ([Int -fileTo:]): Remove warning on nil outFile --
+	a warning will be issued by OutFile, anyway.  Return nil in this
+	case.
+
+	* Discrete2d.m ([Discrete2d -setDiscrete2d:toFile:]): Add protocol
+	name to error message.
+	
+1998-07-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* space.h (_Discrete2d): Split Discrete2d into new and
+	presentation interface.
+
+	* Discrete2d.m ([Discrete2d -setDiscrete2d:toFile:], [Discrete2d
+	-copyDiscrete2d:toDiscrete2d:, [Discrete2d
+	-setDiscrete2dToDisplay:]): Confirm conformance to _Discrete2d
+	(not Discrete2d).
+
+	* Object2dDisplay.m ([Object2dDisplay -setDiscrete2dToDisplay:]):
+	Likewise.
+	
+	* Value2dDisplay.m ([Value2dDisplay -setDiscrete2dToDisplay:]):
+	Likewise.
+	
+	* Discrete2d.h: Include space.h
+	(Discrete2d): Conform to _Discrete2d.
+
+1998-07-09  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add misc.
+
+1998-07-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Discrete2d.m: Include misc.h instead of string.h.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LIBRARIES, libspace_a_SOURCES): Remove.
+
+1998-06-23  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LTLIBRARIES, libspace_la_SOURCES,
+	libspace_la_LDFLAGS, SRC, CURRENT, REVISION, AGE): New variables.
+	Set *_SOURCES from SRC.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+	
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-06-03  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* space.h: Add a module summary documentation tag.
+
+1998-05-28  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Discrete2d.m: Include string.h.
+
+1998-05-06  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* space.h (Discrete2d, Ca2d): Add phase tags, reorder in sync.
+	(DblBuffer2d, Value2dDisplay, ConwayLife2d, Diffuse2d, Grid2d,
+	Object2dDisplay, Int2dFiler): Add phase tags.
+	(Value2dDisplay): Declare -createEnd.
+	(Grid2d, Int2dFiler): Declare +createBegin.
+
+	* Grid2d.m ([Grid2d +createBegin:]): Directly initialize
+	overwriteWarnings to YES (not 1).
+	
+	* Diffuse2d.m ([Diffuse +createBegin:]): Directly initialize
+	diffusionConstant, evaporationRate, and numStates; don't use
+	accessor methods.
+
+	* Ca2d.m, ConwayLife2d.m, DblBuffer2d.m, Diffuse2d.m,
+	Discrete2d.m, Grid2d.m, Int2dFiler.m, Object2dDisplay.m,
+	Value2dDisplay.m: Add phase tags, reorder definitions in sync.
+
+	* Diffused2d.h: Add +createBegin and -initializeLattice.
+
+1998-04-25  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Discrete2d.m, Object2dDisplay, Value2dDisplay.m: Include defobj.h.
+
+1998-04-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Discrete2d.m: Include space.h.  
+
+	* Discrete2d.[hm] (copyDiscrete2d:toDiscrete2d:,
+	setDiscrete2d:toFile:): Replace static typing of Discrete2d with
+	generic objects. In implementation, check for compliance
+	with the Discrete2d protocol.
+
+	* Object2dDisplay.[hm], Value2dDisplay.[hm]: Replace static
+	typings of Discrete2d with objects conforming to the Discrete2d
+	protocol. 
+	(setDiscrete2dDisplay): Argument is a generic object which is
+	checked for protocol conformance at runtime.
+
+	* Ca2d.m, ConwayLife2d.m, DblBuffer2d.m, Diffuse2d.m
+	Discrete2d.m, Grid2d.m, Int2dFiler.m, Object2dDisplay.m,
+	Value2dDisplay.m, space.h: Move documentation tags here.
+
+	* space.h: Now a protocol definition file instead of a full
+	set of includes.
+
+1998-04-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Object2dDisplay.h, Discrete2d.h, Int2dFiler.h: Include 
+	objectbase/SwarmObject.h instead of objectbase.h.
+
+1998-04-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Ca2d.m, ConwayLife2d.m, DblBuffer2d.m, Diffuse2d.m,
+	Discrete2d.m, Grid.m, Int2dFiler.m Object2dDisplay.m
+	Value2dDisplay.m, space.h:  Merge documentation.
+
+	* Ca2d.h, Conway2d.h, DblBuffer2d.h, Discrete2d.h, Grid2d.h:
+	Reformatting throughout.
+	
+1998-02-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Object2dDisplay.m:  Include simtoolsgui.h instead of simtools.h.
+	Reformatting throughout.
+
+	* Int2dFiler.m: Reformatting throughout.
+
+	* Discrete2d.m: Include simtools.h.  Reformatting throughout.
+
+	* Diffuse2d.m: Don't include simtools/global.h.
+	Reformatting throughout.
+
+	* Diffuse2d.h: Reformatting throughout.
+
+	* ConwayLife2d.m: Don't include simtools/global.h.
+	Reformatting throughout.
+
+1998-02-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Value2dDisplay.m ([Value -setDisplayWidget:colormap:]): Use
+	methodFor in USE_JAVA case.  (temporary)
+
+1998-01-27  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Value2dDisplay.h: Rename Colormap: key to colormap:.
+	* Value2dDisplay.m ([Value -setDisplayWidget:colormap:]): Likewise.
+	Include gui.h.
+
+1998-01-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Value2dDisplay.m ([Value -setDisplayWidget:Colormap:]): 
+	First argument is now id <Raster> instead of Raster*, second
+	is id <Colormap> instead of XColormap*.
+	Reformatting throughout.
+
+	* Value2dDisplay.h (Value2dDisplay): Make displayWidget conform
+	to the Raster protocol instead of being statically typed. 
+	Make colormap conform to the Colormap protocol instead of being
+	statically typed to XColormap.  setDisplayWidget now takes an
+	id <Raster> instead of a Raster*.
+
+	* Object2dDisplay.m: Include gui.h instead of tkobjc/control.h.
+	([Object -setDisplayWidget:]): Takes an id <Raster> instead of Raster*.
+	([Object -makeProbeAtX:Y:]): Use GUI_BEEP instead of tkobjc_ringBell.
+
+	* Object2dDisplay.h: Include gui.h instead of tkobjc.h.
+	(Object2dDisplay): Declare displayWidget as id <Raster>.
+	Make setDisplayWidget take an id <Raster> instead of Raster*.
+
+	* Int2dFiler.h: Don't include tkobjc.h.
+
+1998-01-13  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Object2dDisplay.m ([Object -makeProbeAtX:Y:]): Use
+	CREATE_PROBE_DISPLAY instead of calling createProbeDisplayFor
+	method.
+
+1997-12-17  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Discrete2d.h: Constify toFile argument to setDiscrete2d.
+	Reformatting throughout.
+	
+	* Discrete2d.m ([Discrete2d -setDiscrete2d: toFile]): Constify
+	toFile argument.  Reformatting throughout.
+
+1997-12-11  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Int2dFiler.m ([Int -fileTo:aFileName]): Constify argument.
+	Reformatting throughout.
+
+	* Int2dFiler.h: Constify argument to fileTo.
+	Reformatting throughout.
+
+1997-12-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Object2dDisplay.m: Include tkobjc/control.h.
+	([Object -makeProbeAtX:Y:]):  Use new wrapper function tkobjc_ringBell.
+
+Mon Dec  8 22:40:48 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* Int2dFiler.h, Object2dDisplay.h, Discrete2d.h: replaced 
+	all instances of swarmobject.h with objectbase.h and 
+	swarmobject/ with objectbase/.
+

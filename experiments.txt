@@ -1,0 +1,1132 @@
+4/09/04 - mzellner
+sweep thresholds of decision rules to see effects.
+see if there's more variation within one landscape or
+across landscapes. Then see how many landscapes we have to use.
+
+3/15/04 - mzellner
+
+Realized that the threshold for isRolling was too low, and with 
+heterogeneous elevation, isRolling was always true. Changed threshold
+to 0.3, and will run again experiments with heterogeneous elevation
+only, and with all three heterogeneous maps.
+
+Logging on to complesso...
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+Change elevation:
+cp elevation-heterogeneous-mirror.txt elevation.txt
+cp water-flat.txt water.txt
+cp forest-flat.txt forest.txt
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-75)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-75/ > flat-elev-results75.txt
+
+
+All heterogeneous:
+cp elevation-heterogeneous-mirror.txt elevation.txt
+cp water-heterogeneous-mirror.txt water.txt
+cp forest-heterogeneous-mirror.txt forest.txt
+
+~rlr/Drone/drone-linux  test11.ctrl (experiment-76)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-76/ > hetero-results76.txt
+
+
+
+3/12/04 - mzellner
+
+- Fix zoning at 1,1, and then vary landscape by adding one heterogeneous
+  layer at a time, and then have all three combined. Only low-high income
+  is swept. Use test10.ctrl
+- Fix heterogeneous landscape (3 layers), sweep policy with low-high income. Use test11.ctrl
+- Fix landscape with heterogeneous forest, sweep policy, with low-high income. Use test11.ctrl
+
+OK, preparing new set of maps, where heterogeneous landscape is mirrored in both
+townships:
+
+elevation-heterogeneous-mirror.txt
+water-heterogeneous-mirror.txt
+forest-heterogeneous-mirror.txt
+
+Go back to using test10.ctrl and test11.ctrl.
+Logging on to complesso...
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+So only experiment-54 data for flat landscape is usable. Repeat all
+the rest. Repeat all heterogeneous experiments...
+
+
+Change elevation:
+cp elevation-heterogeneous-mirror.txt elevation.txt
+cp water-flat.txt water.txt
+cp forest-flat.txt forest.txt
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-71)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-71/ > flat-elev-results71.txt
+
+
+Change water:
+cp elevation-flat.txt elevation.txt
+cp water-heterogeneous-mirror.txt water.txt
+cp forest-flat.txt forest.txt
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-72)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-72/ > flat-water-results72.txt
+
+WITH FOREST AND HETEROGENEOUS, USE ONLY TEST11.CTRL, BECAUSE IT SWEEPS THROUGH
+ZONING 1,1.
+
+Change forest:
+cp elevation-flat.txt elevation.txt
+cp water-flat.txt water.txt
+cp forest-heterogeneous-mirror.txt forest.txt
+
+~rlr/Drone/drone-linux  test11.ctrl (experiment-73)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-73/ > flat-forest-results73.txt
+
+
+
+All heterogeneous:
+cp elevation-heterogeneous-mirror.txt elevation.txt
+cp water-heterogeneous-mirror.txt water.txt
+cp forest-heterogeneous-mirror.txt forest.txt
+
+~rlr/Drone/drone-linux  test11.ctrl (experiment-74)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-74/ > hetero-results74.txt
+
+
+
+3/11/04 - mzellner
+
+The results look good, but I think that the landscape is heterogeneous enough, that
+we need to test all the combinations of policy. So need to run fixed forest-hetero
+landscape and all hetero landscape varying policy for combinations that are not
+included in test11.ctrl. Need to create test12.ctrl, based on test11.ctrl.
+
+Logging on to complesso...
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+Have all of them be heterogeneous:
+cp water-heterogeneous-scale.txt water.txt
+cp elevation-heterogeneous.txt elevation.txt
+cp forest-heterogeneous-scale2.txt forest.txt
+
+Run test12.ctrl to sweep zoning and income:
+
+~rlr/Drone/drone-linux  test12.ctrl (experiment-69)
+
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-69/ > hetero-results69.txt
+
+
+
+Change to heterogeneous forest, and run test12.ctrl:
+cp water-flat.txt water.txt
+cp elevation-flat.txt elevation.txt
+cp forest-heterogeneous-scale2.txt forest.txt
+
+~rlr/Drone/drone-linux  test12.ctrl (experiment-70)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-70/ > hetero-forest-results70.txt
+
+OK, I think I'm pretty much done with all experiments. Now I'll run significance
+tests, to see the differences between townships in terms of tax base and forest.
+
+There may be a problem with the fact that one township has more forest than the
+other. May need to re-run experiments with townships having mirror landscapes,
+as per Rick's suggestion. Will discuss with the group.
+
+
+3/10/04 - mzellner
+
+- Fix zoning at 1,1, and then vary landscape by adding one heterogeneous
+  layer at a time, and then have all three combined. Only low-high income
+  is swept. Use test10.ctrl
+- Fix heterogeneous landscape (3 layers), sweep policy with low-high income. Use test11.ctrl
+- Fix landscape with heterogeneous forest, sweep policy, with low-high income. Use test11.ctrl
+
+OK, so I have to run again the experiments that used heterogeneous forest with
+correct maps, and use the new water maps for experiments I could not run
+yesterday. The heterogeneous maps needed are:
+
+water-heterogeneous-scale.txt (needed to be scaled because of thresholds)
+forest-heterogeneous-scale.txt (idem)
+elevation-heterogeneous.txt (did not need to be scaled, because there are no thresholds)
+
+So all the flat experiments and the experiments with only elevation-heterogeneous.txt
+are fine. I.e. experiment-54 and experiment-55 are fine, but experiment-56 and
+experiment-57 should be discarded.
+
+Logging on to complesso...
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+Now change to heterogeneous water:
+cp water-heterogeneous-scale.txt water.txt
+cp elevation-flat.txt elevation.txt
+cp forest-flat.txt forest.txt
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-58)
+
+THERE WAS A MISTAKE. INVESTIGATING...
+I CAN'T FIND IT. MAYBE I DID NOT COMPILE AFTER COMMITTING, AND THIS IS NECESSARY?
+COMPILED, AND TRYING AGAIN (experiment-59)
+
+ANOTHER ERROR. ASKING BILL AND RICK FOR HELP. THERE WAS A BUG IN SUBDIVISION.JAVA, WHERE
+IT WAS ASKING FOR THE AREA OF WATER TO BE ABOVE A CERTAIN THRESHOLD, RATHER THAN LOOKING
+AT THE PERCENTAGE. IT SEEMS TO BE OK NOW, BUT WE'LL SEE. Starting again... (experiment-60)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-60/ > flat-results60.txt
+
+
+
+Now change to heterogeneous forest:
+cp water-flat.txt water.txt
+cp elevation-flat.txt elevation.txt
+cp forest-heterogeneous-scale.txt forest.txt
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-61)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-61/ > flat-results61.txt
+
+
+
+Now have all of them be heterogeneous:
+cp water-heterogeneous-scale.txt water.txt
+cp elevation-heterogeneous.txt elevation.txt
+cp forest-heterogeneous-scale.txt forest.txt
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-62)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-62/ > flat-results62.txt
+
+JUST FOUND OUT THAT THE SCALED FOREST MAP HAS ONLY 15% ABOVE THE THRESHOLD. WILL
+CONTINUE AS IS, AND WILL DETERMINE IF THESE NEED TO BE RE-RUN.
+
+Keep all heterogeneous, and run test11.ctrl to sweep zoning and income:
+
+~rlr/Drone/drone-linux  test11.ctrl (experiment-63)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-63/ > hetero-results63.txt
+
+
+
+Change to heterogeneous forest, and run test.11 ctrl:
+cp water-flat.txt water.txt
+cp elevation-flat.txt elevation.txt
+cp forest-heterogeneous-scale.txt forest.txt
+
+~rlr/Drone/drone-linux  test11.ctrl (experiment-64)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-64/ > hetero-forest-results64.txt
+
+DONE! Put all data in experiment-results2.xls.
+From what I'm seeing, I may need to re-run these experiments with a
+different forest map...
+
+
+
+
+OK, prepare a new forest, with 25% of cells over the threshold. Re-run experiments
+with this new map.
+
+Now re-run with forest-heterogeneous-scale2.txt.
+
+Logging on to complesso...
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+
+Now change to heterogeneous forest:
+cp water-flat.txt water.txt
+cp elevation-flat.txt elevation.txt
+cp forest-heterogeneous-scale2.txt forest.txt
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-65)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-65/ > flat-results65.txt
+
+
+
+Now have all of them be heterogeneous:
+cp water-heterogeneous-scale.txt water.txt
+cp elevation-heterogeneous.txt elevation.txt
+cp forest-heterogeneous-scale2.txt forest.txt
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-66)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-66/ > flat-results66.txt
+
+
+
+
+Keep all heterogeneous, and run test11.ctrl to sweep zoning and income:
+
+~rlr/Drone/drone-linux  test11.ctrl (experiment-67)
+
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-67/ > hetero-results67.txt
+
+
+
+Change to heterogeneous forest, and run test.11 ctrl:
+cp water-flat.txt water.txt
+cp elevation-flat.txt elevation.txt
+cp forest-heterogeneous-scale2.txt forest.txt
+
+~rlr/Drone/drone-linux  test11.ctrl (experiment-68)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-68/ > hetero-forest-results68.txt
+
+
+3/9/04 - mzellner
+
+Put all the data in experiment-results1a.txt in this directory. Saw that income
+is the main demographic factor affecting the measures we're looking at.
+I'm going to run a few sample runs to show the effects of landscape, in
+combination with zoning, but not sure which to run. I'll consult with the
+group.
+
+Arrggg, just discovered that the heterogeneous maps were wrong. Need to make
+new ones and start over with the heterogeneous runs.
+
+New set of experiments:
+- Change move out rate to 0.0
+- Derek is generating new heterogeneous maps. Will use those.
+- Fix zoning at 1,1, and then vary landscape by adding one heterogeneous
+  layer at a time, and then have all three combined. Only low-high income
+  is swept. Use test10.ctrl
+- Fix landscape with heterogeneous forest, sweep policy, with low-high income. Use test11.ctrl
+- Fix heterogeneous landscape (3 layers), sweep policy with low-high income. Use test11.ctrl
+
+Then try to figure out what intuitions we can derive from these runs.
+Create tables for townships.
+
+Need to send command runs for Rick, for zoning = 3,3
+nice -5 /users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/bin/batchrun.sh zonedMinLotSize0=3 zonedMinLotSize1=3 demogrIncome=0.5 stopT=300
+nice -5 /users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/bin/batchrun.sh zonedMinLotSize0=3 zonedMinLotSize1=3 demogrIncome=0.2 stopT=300
+
+OK, I don't have water, there's some error in the file that Derek sent.
+So, I'll start with running zoning = 1,1 and sweep income with flat, 
+elevation and forest.
+Then, continue with fixed forest, and varying zoning and income.
+When water ready, do zoning = 1,1 with water, and all heterogeneous,
+sweeping income.
+Continue with all heterogeneous and run all zoning combinations, 
+sweeping income.
+
+Bill just found a bug in the code. Need to check out new version of code
+before starting again.
+
+OK, starting now:
+First, copy flat maps to defaults:
+cp water-flat.txt water.txt
+cp elevation-flat.txt elevation.txt
+cp forest-flat.txt forest.txt
+
+Now, start running test10.ctrl with these maps. Need to wait till it's done
+to run with the other maps.
+
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-54 in alveare)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-54/ > flat-results54.txt
+
+Now change elevation:
+cp elevation-heterogeneous.txt elevation.txt
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-55 in prateria)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-55/ > flat-results55.txt
+
+
+Now change forest:
+cp elevation-flat.txt elevation.txt
+cp forest-heterogeneous.txt forest.txt
+
+~rlr/Drone/drone-linux  test10.ctrl (experiment-56 in alveare)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-56/ > flat-results56.txt
+
+Stay like this, and run test.11 ctrl to sweep zoning and income:
+~rlr/Drone/drone-linux  test11.ctrl (experiment-57 in alveare)
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-57/ > flat-results57.txt
+
+Made a mistake in the control file:
+ReadControlFile: Error parsing control file line: (zonedMinLotSize0 zonedMinLotSize1) (1 1) (1 2) (1 3) (2 2) (2 3) (3 3)
+
+Re-run... Still experiment-57
+
+
+#$%%^^^ I forgot to change the maps!!!!!!!! Anyway, now I have the water map as well.
+So let's start all over, and in order...
+
+More errors. Will convert again. Will run experiments tomorrow...
+
+
+3/4/04 - mzellner
+
+Trying drone
+
+nice -5 /users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/bin/batchrun.sh iPFN=/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-15/experiment-15.in S=273562215 rN=29  demogrKids=0.5 demogrIncome=0.5 demogrEnv=0.1
+
+So what seems to be happening is that Drone tries to read a map in its own
+directory, and since there aren't any, then it generates a default which then
+allows for development to occur. Rick suggested creating a new parameter that
+specifies the directory in which the maps should be found. I'll set that
+directory to be /users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/,
+and add that to each file name in Model.java.
+
+Let's first make sure that if we include the directory, Drone would produce
+the expected results. Yes, it's working in gui. Now try running drone.
+
+~rlr/Drone/drone-linux  test6.ctrl
+
+alveare-ARMSR$ ~rlr/Drone/drone-linux  test6.ctrl
+Drone version 970829a
+Running on host alveare
+Started on Thu Mar  4 12:34:32 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-17...
+Going into the background...
+
+NOW, it's working. OK, so we need to create this parameter. And need
+to change control files to add this parameter! Done.
+
+Now start running all over again, and after that, with new maps that Derek
+created. Check them out first.
+
+With flat maps:
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+~rlr/Drone/drone-linux  test2.ctrl (experiment-18)
+~rlr/Drone/drone-linux  test3.ctrl (experiment-19)
+~rlr/Drone/drone-linux  test4.ctrl (experiment-20)
+~rlr/Drone/drone-linux  test5.ctrl (experiment-21)
+~rlr/Drone/drone-linux  test6.ctrl (experiment-22)
+~rlr/Drone/drone-linux  test7.ctrl (experiment-23)
+
+HOSTNAME     NPROC    MHz      NUSERS   LOAD     MEMTOT   MEMUSE   SWAPTO   SWAPUS
+alveare      4        2657     1        0.00     2012     551      1999     0
+ghiandi      4        2657     1        1.00     1508     388      1999     0
+posare       4        2657     0        1.00     1003     165      1999     0
+lastrada     4        2657     0        0.00     1508     124      1999     0
+battistini   4        2657     1        0.00     1508     418      1999     0
+complesso    4        2790     1        1.00     2012     290      1999     0
+
+Shoot, it didn't work because I entered the directory name in the control files
+in "", so it's not reading the maps. Change control files.
+
+Let's try with test7.ctrl first, and then go down to test2.ctrl.
+Now it's working! Run them all again.
+
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+~rlr/Drone/drone-linux  test7.ctrl (experiment-24)
+~rlr/Drone/drone-linux  test6.ctrl (experiment-25)
+~rlr/Drone/drone-linux  test5.ctrl (experiment-26)
+~rlr/Drone/drone-linux  test4.ctrl (experiment-27)
+~rlr/Drone/drone-linux  test3.ctrl (experiment-28)
+~rlr/Drone/drone-linux  test2.ctrl (experiment-29)
+
+Now checking Derek's maps. Some problems with elevation. Need to re-do.
+Maybe not. Used the first one he sent yesterday night.
+
+Command to aggregate data (from rlriolo):
+here is how to run a script to get just the average over the last lines of
+the report files:
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-24/ > flat-results24.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-25/ > flat-results25.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-26/ > flat-results26.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-27/ > flat-results27.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-28/ > flat-results28.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-29/ > flat-results29.txt
+
+
+Now run the same control files, but with heterogeneous maps. First, copy
+*-heterogeneous.txt files into *.txt files. Now run the following:
+
+~rlr/Drone/drone-linux  test7.ctrl (experiment-30)
+~rlr/Drone/drone-linux  test6.ctrl (experiment-31)
+~rlr/Drone/drone-linux  test5.ctrl (experiment-32)
+~rlr/Drone/drone-linux  test4.ctrl (experiment-33)
+~rlr/Drone/drone-linux  test3.ctrl (experiment-34)
+~rlr/Drone/drone-linux  test2.ctrl (experiment-35)
+
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+alveare      4        2657     1        0.00     2012     551      1999     0
+ghiandi      4        2657     1        1.00     1508     388      1999     0
+posare       4        2657     0        1.00     1003     165      1999     0
+lastrada     4        2657     0        0.00     1508     124      1999     0
+battistini   4        2657     1        0.00     1508     418      1999     0
+complesso    4        2790     1        1.00     2012     290      1999     0
+
+To aggregate data:
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-30/ > hetero-results30.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-31/ > hetero-results31.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-32/ > hetero-results32.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-33/ > hetero-results33.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-34/ > hetero-results34.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-35/ > hetero-results35.txt
+
+
+Now I have to run with one heterogeneous map at a time. So copy the flat maps
+to forest and water. Leave elevation heterogeneous.
+Now run all again:
+
+~rlr/Drone/drone-linux  test7.ctrl (experiment-36)
+~rlr/Drone/drone-linux  test6.ctrl (experiment-37)
+~rlr/Drone/drone-linux  test5.ctrl (experiment-38)
+~rlr/Drone/drone-linux  test4.ctrl (experiment-39)
+~rlr/Drone/drone-linux  test3.ctrl (experiment-40)
+~rlr/Drone/drone-linux  test2.ctrl (experiment-41)
+
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+alveare      4        2657     1        0.00     2012     551      1999     0
+ghiandi      4        2657     1        1.00     1508     388      1999     0
+posare       4        2657     0        1.00     1003     165      1999     0
+lastrada     4        2657     0        0.00     1508     124      1999     0
+battistini   4        2657     1        0.00     1508     418      1999     0
+complesso    4        2790     1        1.00     2012     290      1999     0
+
+To aggregate data:
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-36/ > hetero-elev-results36.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-37/ > hetero-elev-results37.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-38/ > hetero-elev-results38.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-39/ > hetero-elev-results39.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-40/ > hetero-elev-results40.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-41/ > hetero-elev-results41.txt
+
+WATCH IT. I HAVEN'T BEEN CHANGING THE TITLE OF THE CONTROL FILE, SO IT SAYS
+FLAT MAPS FOR ALL THE EXPERIMENTS, BUT IT'S NOT RIGHT.
+
+Now, copy elevation-flat.txt to elevation.txt and water-heterogenous.txt to
+water.txt. Now run again:
+
+~rlr/Drone/drone-linux  test7.ctrl (experiment-42)
+~rlr/Drone/drone-linux  test6.ctrl (experiment-43)
+~rlr/Drone/drone-linux  test5.ctrl (experiment-44)
+~rlr/Drone/drone-linux  test4.ctrl (experiment-45)
+~rlr/Drone/drone-linux  test3.ctrl (experiment-46)
+~rlr/Drone/drone-linux  test2.ctrl (experiment-47)
+
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+alveare      4        2657     1        0.00     2012     551      1999     0
+ghiandi      4        2657     1        1.00     1508     388      1999     0
+posare       4        2657     0        1.00     1003     165      1999     0
+lastrada     4        2657     0        0.00     1508     124      1999     0
+battistini   4        2657     1        0.00     1508     418      1999     0
+complesso    4        2790     1        1.00     2012     290      1999     0
+
+To aggregate data:
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-42/ > hetero-water-results42.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-43/ > hetero-water-results43.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-44/ > hetero-water-results44.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-45/ > hetero-water-results45.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-46/ > hetero-water-results46.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-47/ > hetero-water-results47.txt
+
+
+Now, copy water-flat.txt to water.txt and forest-heterogenous.txt to
+forest.txt. Now run again:
+
+~rlr/Drone/drone-linux  test7.ctrl (experiment-48)
+~rlr/Drone/drone-linux  test6.ctrl (experiment-49)
+~rlr/Drone/drone-linux  test5.ctrl (experiment-50)
+~rlr/Drone/drone-linux  test4.ctrl (experiment-51)
+~rlr/Drone/drone-linux  test3.ctrl (experiment-52)
+~rlr/Drone/drone-linux  test2.ctrl (experiment-53)
+
+cd Sluce/aag/policyModel/repastCode/sluce/ARMSR/
+
+alveare      4        2657     1        0.00     2012     551      1999     0
+ghiandi      4        2657     1        1.00     1508     388      1999     0
+posare       4        2657     0        1.00     1003     165      1999     0
+lastrada     4        2657     0        0.00     1508     124      1999     0
+battistini   4        2657     1        0.00     1508     418      1999     0
+complesso    4        2790     1        1.00     2012     290      1999     0
+
+To aggregate data:
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-48/ > hetero-forest-results48.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-49/ > hetero-forest-results49.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-50/ > hetero-forest-results50.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-51/ > hetero-forest-results51.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-52/ > hetero-forest-results52.txt
+
+/users/rlr/Scripts/getLastLineAvgsFromDirs.pl -c1,2,3,4 -v -f"report.\d\d" -N -d/users/mzellner/Sluce/aag/policyModel/repastCode/sluce/ARMSR/expdata/experiment-53/ > hetero-forest-results53.txt
+
+
+
+3/3/04 - mzellner
+
+Following recommendations below, I'm running in gui mode with flat maps, to see
+different outputs and explanations. The changes on water restrictions have not
+been implemented, yet, but it doesn't matter (unless there's a bug) because
+there's no water.
+
+1. Zoning = 1,1. Basically, there's development all around the roads of both
+   CS and HS. This is reasonable, considering the rules that CS or HS will most
+   likely be developed around roads, while other farms not adjacent to roads
+   won't be built. I assume the tax base is similar (forgot to check).
+2. Zoning = 1,2. Basically the same, except that CS are only developed in
+   the township that allows such density. Interestingly, the tax base is much
+   greater for denser township. Again, this may also relate to the weight we
+   assign to each person, but we're saying high income pay double low
+   income. Is that realistic? Asked the group. Joan replied:
+   "right - based on the assessed valuation of their property.  We're looking
+   at less than $250K, vs. more than $400K.  On the average, that's at least
+   double in property taxes."
+3. Zoning = 1,3. As expected, there is only development along the roads of
+   only one township.
+4. Zoning = 2,3. As expected, only hs in one township.
+5. Zoning = 3,3. As expected, no development.
+
+The question is, should there be any difference if demographics change?
+My intuition is that there shouldn't, except in the tax base, when
+proportion of low income increases. No, it should also make a difference
+because of other preferences associated with the type of group they belong to.
+So need to run all of them. So if for some reason, a group defined by a 
+characteristic other than income prefers a certain sub type, which can
+only be developed in one township, there will be a different result in
+tax base. Wow, changing income makes a VERY different pattern, when zoning
+is 1,2.
+
+OK, so to start running the experiments, I need to copy the *-flat.txt maps
+into *.txt maps (the default name written in Model.java).
+
+Once I have the other maps, I'll create new directories and copy the code
+to each, then copy the corresponding map name to *.txt.
+
+So let's start running experiments!
+
+With flat maps:
+
+~rlr/Drone/drone-linux  test2.ctrl
+~rlr/Drone/drone-linux  test3.ctrl
+~rlr/Drone/drone-linux  test4.ctrl
+~rlr/Drone/drone-linux  test5.ctrl
+~rlr/Drone/drone-linux  test6.ctrl
+~rlr/Drone/drone-linux  test7.ctrl
+
+HOSTNAME     NPROC    MHz      NUSERS   LOAD     MEMTOT   MEMUSE   SWAPTO   SWAPUS
+alveare      4        2657     1        0.00     2012     551      1999     0
+ghiandi      4        2657     1        1.00     1508     388      1999     0
+posare       4        2657     0        1.00     1003     165      1999     0
+lastrada     4        2657     0        0.00     1508     124      1999     0
+battistini   4        2657     1        0.00     1508     418      1999     0
+complesso    4        2790     1        1.00     2012     290      1999     0
+
+Use any of the above.
+
+Started with alveare, running test2.ctrl (closed window before I saved experiments.txt).
+
+posare-ARMSR$ ~rlr/Drone/drone-linux  test3.ctrl
+Drone version 970829a
+Running on host posare
+Started on Wed Mar  3 18:17:07 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-6...
+Going into the background...
+
+
+lastrada-ARMSR$ ~rlr/Drone/drone-linux  test4.ctrl
+Drone version 970829a
+Running on host lastrada
+Started on Wed Mar  3 18:18:35 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-7...
+Going into the background...
+
+
+complesso-ARMSR$ ~rlr/Drone/drone-linux  test5.ctrl
+Drone version 970829a
+Running on host complesso
+Started on Wed Mar  3 18:21:14 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-8...
+Going into the background...
+
+
+ghiandi-ARMSR$ ~rlr/Drone/drone-linux  test6.ctrl
+Drone version 970829a
+Running on host ghiandi
+Started on Wed Mar  3 18:27:24 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-9...
+Going into the background...
+
+
+battistini-ARMSR$ ~rlr/Drone/drone-linux  test7.ctrl
+Drone version 970829a
+Running on host battistini
+Started on Wed Mar  3 18:28:57 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-10...
+Going into the background...
+
+I MADE A TYPO IN THE CONTROL FILES!!! Now I have to correct and
+start all over.... (grrrrr).
+
+
+
+Let's start again. Then check that when zoning = 3,3 there's no income.
+It's ok when I run it in gui, but I'm not sure that it's doing the same
+when running with drone.
+
+alveare-ARMSR$ ~rlr/Drone/drone-linux  test2.ctrl
+Drone version 970829a
+Running on host alveare
+Started on Wed Mar  3 19:14:55 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-11...
+Going into the background...
+
+
+ghiandi-ARMSR$ ~rlr/Drone/drone-linux  test3.ctrl
+Drone version 970829a
+Running on host ghiandi
+Started on Wed Mar  3 19:15:55 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-12...
+Going into the background...
+
+
+posare-ARMSR$ ~rlr/Drone/drone-linux  test4.ctrl
+Drone version 970829a
+Running on host posare
+Started on Wed Mar  3 19:17:15 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-13...
+Going into the background...
+
+
+lastrada-ARMSR$ ~rlr/Drone/drone-linux  test5.ctrl
+Drone version 970829a
+Running on host lastrada
+Started on Wed Mar  3 19:18:34 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-14...
+Going into the background...
+
+
+battistini-ARMSR$ ~rlr/Drone/drone-linux  test6.ctrl
+Drone version 970829a
+Running on host battistini
+Started on Wed Mar  3 19:19:36 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-15...
+Going into the background...
+
+
+complesso-ARMSR$ ~rlr/Drone/drone-linux  test7.ctrl
+Drone version 970829a
+Running on host complesso
+Started on Wed Mar  3 19:20:24 2004
+
+Reading control file...
+Initializing...
+Running experiment experiment-16...
+Going into the background...
+
+
+There's a bug somewhere. When running with drone, though
+zoning is 3 (therefore no development can occur), income
+is greater than zero, which is impossible. This does not
+occur when running in gui mode.
+
+Running time is approx. 30 mins.
+
+
+
+Date: Wed, 3 Mar 2004 12:47:03 -0500 (EST)
+From: Rick Riolo <rlriolo@umich.edu>
+To: Moira Zellner <mzellner@umich.edu>
+Cc: sluce.model@umich.edu, Joan Nassauer <nassauer@umich.edu>,
+     Bobbi S. Low <bobbilow@umich.edu>
+Subject: Re: experiments
+                                                                                
+                                                                                
+re # cases in a control file:
+it basically depends on how long it takes to run.
+you want the experiment to finish in some reasonable
+lenght of time (eg < 12 hours for sure).
+ - r
+                                                                                
+Rick Riolo                           rlriolo@umich.edu
+Center for the Study of Complex Systems (CSCS)
+4477 Randall Lab
+University of Michigan         Ann Arbor MI 48109-1120
+Phone: 734 763 3323                  Fax: 734 763 9267
+http://cscs.umich.edu/~rlr
+                                                                                
+On Wed, 3 Mar 2004, Moira Zellner wrote:
+                                                                                
+> Date: Wed, 03 Mar 2004 09:59:13 -0500
+> From: Moira Zellner <mzellner@umich.edu>
+> To: Rick Riolo <rlriolo@umich.edu>
+> Cc: sluce.model@umich.edu, Joan Nassauer <nassauer@umich.edu>,
+>      Bobbi S. Low <bobbilow@umich.edu>
+> Subject: Re: experiments
+>
+> Dear all:
+>
+> Thanks so much for your feedback. A few comments/questions regarding your
+> recommendations:
+>
+> 1. Yes, I was thinking of running each case in gui mode first, check that
+> there are differences in the patterns and measures, and then run the
+> experiments.
+>
+> 2. I will run one set at a time. I had prepared 6 different control files
+> to run them, each for a particular landscape.  These control files contain
+> all combinations of demographics with one particular set of zoning
+> policies. Is that acceptable, or would each set be too much?
+>
+> 3. I'm only trying out two values for each demographic factor. These are
+> what I think "realistic extremes," according to our discussions (i.e. 0.05
+> and 0.1 for environmental group, 0.2 and 0.5 for kids and income). Should I
+> start with these, or should I work with hypothetical extremes (i.e. 0 and
+> 1)? I've done gui runs with the hypothetical extremes resulting in the
+> expected differences.
+> Thanks again!
+>
+> Moira
+>
+> --On Tue, Mar 2, 2004 10:23 PM -0500 Rick Riolo <rlriolo@umich.edu> wrote:
+>
+> >
+> > two comments:
+> >
+> > - i would schedule some time to look at
+> >    a) individual run or two of each condition, with gui,
+> >       to make sure nothing really crazy occurs
+> >    b) time to reflect after one set before going on to
+> >       the next, as you may discover bugs to fix
+> >       or hints about what are likely to be fruitful
+> >       or not fruitful parameter combinations
+> >
+> > regarding trying to reduce the number of cases to try:
+> >
+> > - if you are going for the "hope we are lucky" strategy,
+> >   i'd first try these with your guess as to what
+> >   is the "most realistic" parameters (in particular,
+> >    demographic parameters).
+> >   then i'd go for the combinations that you think are more likely
+> >    to show up some differences (ie "extremes").
+> >    if the "extremes" don't produce what you expect,
+> >    there may be problems, or at least things to think about,
+> >    before trying any of the "intermediates".
+> >   ie, try to find cases such that
+> >      if x,y,z then we ought to see
+> >           zoning p1 -> result a
+> >           zoning p2 -> result b different from a
+> >    and so on.
+> >
+> > - r
+> >
+> > --
+> > Rick Riolo                           rlriolo@umich.edu
+> > Center for the Study of Complex Systems (CSCS)
+> > 4477 Randall Lab
+> > University of Michigan         Ann Arbor MI 48109-1120
+> > Phone: 734 763 3323                  Fax: 734 763 9267
+> > http://cscs.umich.edu/~rlr
+> 
+
+
+3/2/04 - mzellner
+
+After our meeting today, we will run the following experiments, to start with:
+
+1. Start with flat landscape maps:
+   - elevation = 0.5
+   - forest = 0.0
+   - water = 0.0
+
+   And constant demographics:
+   - Env = 0.05
+   - High_Income = 0.5
+   - W_Kids = 0.5
+
+   Just vary zoning, through following cases (twnshp0,twnshp1):
+   - 1,1
+   - 1,2
+   - 1,3
+   - 2,2
+   - 2,3
+   - 3,3
+
+Using the elevation-flat.txt, water-flat.txt
+and forest-flat.txt maps.
+
+2. Repeat above with heterogeneous landscape maps, adding one at a time:
+   - elevation = 0.5 (any variation)
+   - forest = 25% cells over 50% threshold of forest
+   - water = 5% cells over 1% threhsold of water
+   These maps will have same degree of spatial autocorrelation, but
+   different degrees of correlation among them, as follows:
+   - elevation negatively correlated to water (-0.5)
+   - water positively correlated to forest (+0.5)
+
+Change map names.
+
+3. Repeat 1 and 2, changing demographics:
+
+   all combinations of:
+   - Env = 0.05, 0.2
+   - High_Income = 0.2, 0.5
+   - W_Kids = 0.2, 0.5
+
+These 3 tests will use test2.ctrl through test7.ctrl. Just remember to 
+change the names of the maps in the code when using heterogeneous layers.
+
+2/25/04 - mzellner
+
+After correcting a few things, will try running experiments again. Using the
+same control file as yesterday..
+
+prateria-ARMSR$  ~rlr/Drone/drone-linux  test1.ctrl
+Drone version 970829a
+Running on host prateria
+Started on Wed Feb 25 16:36:56 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-4...
+Going into the background...
+
+Date: Wed, 25 Feb 2004 17:19:38 -0500
+From: Moira Zellner <mzellner@fiore.physics.lsa.umich.edu>
+To: mzellner@umich.edu
+
+From: mzellner@umich.edu
+To: mzellner@umich.edu
+Subject: Experiment experiment-4 finished
+Experiment experiment-4 finished.
+
+Started on Wed Feb 25 16:36:56 2004
+Finished on Wed Feb 25 17:19:38 2004
+Total elapsed wall-clock time: 2562 s.
+
+Is this fast? Let me check the files, to see if there are errors...
+No errors.
+
+Try to run script files on reports:
+/users/rlr/Scripts/getAvgColsOverDirs.pl -c1,2,3,4 -f"report.*" -v expdata/experiment-4/zMLS*  > outfile
+
+It works, but it's probably taking the first lines of the report file 
+into consideration. Oh, hold on a second! It's also taking into consideration
+the report.xml.* files! I wonder how to switch that off.
+
+Let's try this:
+/users/rlr/Scripts/getAvgColsOverDirs.pl -c1,2,3,4 -e"# end" -f"report.*" -v expdata/experiment-4/zMLS*  > outfile
+This seems to work, and it may actually leave out the report.xml.* because
+they don't have a "# end" marker. Is this right. Wait a minute, the columns
+don't seem to be working... Let's try this:
+/users/rlr/Scripts/getAvgColsOverDirs.pl -c1,2,3,4 -e"# end" -f"report.*" -v expdata/experiment-4/  > outfile
+
+Interesting, only this is produced:
+# Average data vs time        Wed Feb 25 18:22:40 EST 2004
+# From directories: expdata/experiment-4/
+# FilePattern report.*
+# Column number in files: 1,2,3,4
+
+So I may need to specify each directory...
+/users/rlr/Scripts/getAvgColsOverDirs.pl -c1,2,3,4 -e"# end" -f"report.*" -v expdata/experiment-4/zMLS0=1-zMLS1=1  > outfile
+
+It's printing only one column! Is it making an average of the columns?
+I think it's only printing the first one. Still, do I want the whole time
+series? Probably not. I just want end of runs.
+
+So what we need is a script like getAvgEquil, that averages across last time
+step. Let's see...
+
+/users/rlr/Scripts/getEquilAvgsFromDirs.pl -c1,2,3,4 -e"# end" -l299-300 -f"report.*" -d"expdata/experiment-4"
+
+OK, got all zeros... That's right! It's t=299 but for the script, it's 298.
+Let's see...
+/users/rlr/Scripts/getEquilAvgsFromDirs.pl -c1,2,3,4 -e"# end" -l298-299 -f"report.*" -d"expdata/experiment-4"
+
+OK, now I have values! Print to a file, so that it's easier to see.
+/users/rlr/Scripts/getEquilAvgsFromDirs.pl -c1,2,3,4 -e"# end" -l298-299 -f"report.*" -d"expdata/experiment-4" > outfile
+
+This doesn't look right at all. The last values are around 600 for income in
+the last time step (column 1). Here it shows an average of 150. I'm not sure
+what's going on. Asked Bill and Rick.
+
+
+Now I'm trying extreme values, to make sure this works. Try running with
+test-xtrm1.in file, which has zoning set for zero for both townships.
+Let's see if this works...
+
+ant run -DIF=test-xtrm1.in
+No, it doesn't. -DIF is not right. Let's see like this...
+
+ant run -PF=test-xtrm1.in
+
+And I just found out that Bill has been working on reading par file, 
+but doesn't work yet. So, let's see if this works:
+
+ant run -DzonedMinLotSize0=0
+
+Nope, so I'll just type in the values in the GUI. So, first try
+with both townships zoning for 0. Anything could be built. Now let's try with
+min lot size 16 for both. Nothing is developed, as expected.
+The way it's set up, if the township zones for bigger lots than the min
+lot size of each sub type, then that sub type cannot be developed, even though
+some lots may end up being larger than the min size because of adjacency.
+Now try minLotSize of 0 and 16. Works fine, development only in one township.
+
+Look at demographics now. Try first with all params set to 0. A remnant and
+a hort are subdivided, but cannot be developed. Reason: There are no high
+income people that can buy them, and given landscape characteristics, these
+are the only ones that can be developed.
+Now have all demographics set to 1. All developed and filled up, I think even
+faster than with other settings.
+
+Generate other maps now. Use the "twin peaks." 
+Change zoning to be the same in both.
+
+So first, generate the maps. I'll need to be very careful with this. Let
+me see if I can change the code so that it's easier to change the map names.
+Done, now use genMaps.pl to generate maps.
+
+Run it /users/mzellner/Sluce/Scripts/genMap.pl > forest-peaks.txt
+Run it /users/mzellner/Sluce/Scripts/genMap.pl > water-peaks.txt
+Run it /users/mzellner/Sluce/Scripts/genMap.pl > elevation-peaks.txt
+
+Now use these new maps, one at a time, to see how it changes. Make sure
+zoning is the same in both townships. Hmmm, not much difference just changing
+to forest-peaks. Besides, there are no country subs! Let's add the water-peaks.
+Wow! That really made a difference! Practically no development. Let's use flat
+forest now. Apparently, water makes all the difference. Probably because
+it prevents development. That doesn't happen with forest. Let's try
+elevation. I'm not sure I see a difference, but it seems to be following
+the lines of elevation. Let's combine it with forest-peaks. I'm not sure how
+it's different. We may want to use yet different maps. I'll make new ones like
+Bill had generated (*-incl.txt). The patterns look different, but not
+sure. Water is the main restriction. Why aren't there any country subs formed?
+Let me put all back on. Still not there. Could it be the roads?
+Let me check. Nope...
+
+Maybe it's the restrictions regarding water. That wasn't there before
+Bill left. We'll need to change the value of some of these things (go 
+to notes.txt for details).
+
+Repeating above, with new threshold for presence/absence of water (0.65 acres).
+Running all flat, plus simple road, t=100.
+Now change water to water-peaks.txt. Almost nothing can be developed! OK,
+let's increase the threshold of water preventing development to 0.9.
+
+
+2/24/04 - mzellner
+
+Running an experiment, just to try it out. It's changing only zoning on a 
+homogeneous landscape.
+
+prateria-ARMSR$ ~rlr/Drone/drone-linux  test1.ctrl
+Drone version 970829a
+Running on host prateria
+Started on Tue Feb 24 21:25:13 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-2...
+Going into the background...
+[2]+  Done                    emacs test1.ctrl
+
+Why is starting with experiment-2? I though I had deleted experiment-1...
+Maybe I didn't.
+
+Uh-oh, I just got an e-mail with 
+
+Date: Tue, 24 Feb 2004 21:26:45 -0500
+From: Moira Zellner <mzellner@fiore.physics.lsa.umich.edu>
+To: mzellner@umich.edu
+
+From: mzellner@umich.edu
+To: mzellner@umich.edu
+Subject: Experiment experiment-2 finished
+Experiment experiment-2 finished.
+
+Started on Tue Feb 24 21:25:13 2004
+Finished on Tue Feb 24 21:26:45 2004
+Total elapsed wall-clock time: 92 s.
+
+This doesn't look good. Checking if there are errors.
+Of course, this is what I found:
+
+Exception in thread "main" java.lang.NoClassDefFoundError: ARMSR/BatchModel
+
+Will ask Rick what this means.
+
+I had forgotten to change the path in bin/batchrun.sh. I fixed it. Try again...
+
+prateria-ARMSR$ ~rlr/Drone/drone-linux  test1.ctrl
+Drone version 970829a
+Running on host prateria
+Started on Tue Feb 24 22:01:43 2004
+ 
+Reading control file...
+Initializing...
+Running experiment experiment-3...
+Going into the background...

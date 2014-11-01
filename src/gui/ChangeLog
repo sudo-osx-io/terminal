@@ -1,0 +1,406 @@
+2009-11-07  Scott Christley  <schristley@mac.com>
+
+	* gui.h: Exclude tk for Mac OSX.  Rename Line to SwarmLine for OpenStep.
+
+2008-06-25  Scott Christley  <schristley@mac.com>
+
+	* gui.h, Makefile.am: Standardize include directory structure to
+	support libraries and OpenStep frameworks.
+
+2006-04-02  Paul Johnson
+
+        * gui.h: drawHistogramWithInt: change (int*) to  (unsigned*) because
+	Histograms take only nonnegative values.
+
+
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* gui.h (GUI_*): Exclude tk macros for GNUstep.
+
+2003-06-23  Paul E. Johnson  <pauljohn@pjdell.pols.ukans.edu>
+
+	* gui.h: declare ZoomRaster method - (void)fillCenteredRectangleX0:
+	(int)x0 Y0: (int)y0 X1: (int)x1 Y1: (int)y1 Color: (Color)color;
+	In case users want to draw rectangles whose position does not change
+	when zooming rasters.
+
+2001-05-13  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* gui.h (Histogram): Name count: argument to setColors:count: and
+	setLabels:count: "count".
+
+2001-04-18  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* gui.h (NodeItem): New method -resetString:.
+	(LinkItem): New method -setDirectedFlag:.
+
+2001-03-29  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* gui.h (Pixmap): Remove drawX:Y:, it's in Drawer.
+	(CanvasItem): Remove initiateMoveX:Y:, it's in CanvasAbstractItem.
+	(NodeItem): Change argument name of setString to label.
+
+2001-03-20  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* gui.h (Graph, Histogram): Make setTitle and setAxisLabelsX:Y:
+	have object returns because there are analysis methods in creating
+	phase.
+
+2001-03-13  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* gui.h: Add setSymbolSize: to GraphElement.
+
+2001-03-12  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* gui.h: Many changes to remove ugly object returns.
+
+2001-03-03  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* gui.h (NodeItem): Move setString, setFont, and setX:Y: into
+	create phase.  (In the last case, note there is a moveX:Y:
+	method.)
+	
+2000-09-20  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* gui.h (ArchivedGeometryWidget): Declare -updateSize.
+
+2000-06-29    <mgd@DRONE>
+
+	* gui.h (ArchivedGeometryWidget): Remove return type on
+	updateArchiver:.
+
+2000-05-23  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* gui.h (Pixmap): Adopt drop.
+
+2000-05-18  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* gui.h
+	([{Widget,ArchivedGeometryWidget,Pixmap,LinkItem,ScheduleItem}
+	-drop]): Remove.
+	([Raster -setWidth:Height:]): Remove.
+
+2000-04-20    <mgd@nest.swarm.org>
+
+	* gui.h: Note that window geometry record names must not have
+	spaces.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Swarm 2.1.1 frozen.
+
+2000-02-18    <mgd@nest.swarm.org>
+
+	* Swarm 2.1 frozen.
+
+	* gui.h: Remove extra +createBegin and -createEnd throughout.
+	Move +create:setWindowGeometryRecordName: to ArchivedGeometryWidget.
+	Remove from Raster and ZoomRaster.
+
+1999-10-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* gui.h (ArchivedGeometryWidget): Add -setSaveSizeFlag:.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-09-14  Alex Lancaster  <alex@santafe.edu>
+
+	* gui.h (Raster, ZoomRaster): Add factory
+	+create:setWindowGeometryRecordName: method to protocols.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-07-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* gui.h (Form): Change Boolean: argument type to unsigned *
+	(from BOOL *).
+	(InputWidget): Likewise.
+
+1999-06-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* gui.h (Colormap): New method unsetColor:.  Thanks to Ken Cline.
+
+1999-05-01  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* gui.h (Histogram): Change setNumBins: to setBinCount:.
+	Change type of setActiveOutlierText:count: arguments to unsigned.
+
+1999-03-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* gui.h (WindowGeometryRecord): Don't tag as CREATABLE.
+	Add @class for CheckButton, Form, CanvasIteim, NodeItem, and
+	Rectangle.
+
+1999-02-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* gui.h: Add CREATABLE tags for all non-abstract protocols.
+
+1999-02-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* gui.h: Merge internal protocols into advertised protocols.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* gui.h (_ArchivedGeometryWidget): Add archiver argument to
+	updateArchiver:.  Version 1.4.1.
+
+1999-01-06  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* gui.h (_Histogram): Change argument to setNumBins: to unsigned.
+	Add count argument to setColors and setLabels.
+
+1998-11-18  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* gui.h (Widget, WindowGeometryRecord, GraphElement,
+	CanvasAbstractItem): Adopt Create and Drop instead of SwarmObject.
+	(_ClassDisplayLabel, _CompleteProbeDisplayLabel,
+	_ClassDisplayHideButton, _MessageProbeEntry, _TextItem, _Circle):
+	Add USING tag.
+	(_ButtonPanel, _CompositeItem): Add CREATING tag.
+
+1998-11-17  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* gui.h (_WindowGeometryRecord): Adopt Serialization protocol;
+	don't redeclare methods.
+
+1998-11-16  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* gui.h: Remove creating phase +in:.  Rename in: and out: to
+	lispin: and lispout:.
+
+1998-09-30  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (_Histogram): -setNumBins:, -setLabels:, -setColors:,
+	+createBegin:, createEnd: Split out setNumPoints:Labels:Colors:
+	into different methods.
+
+1998-09-28  Alex Lancaster  <alex@santafe.edu>
+
+	* gui.h (ScheduleItem): Fixed incorrect documentation markup of
+	`Description' entry for protocol.
+
+1998-09-28  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (_Canvas, _Frame): Move Frame's assertGeometry to 
+	Canvas as checkGeometry:.
+
+1998-09-25  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (_Canvas): Use addWidget:X:Y:centerFlag: and removeWidget:.
+
+1998-09-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (_ScheduleItem): Add trigger:X:Y:.
+	(_CompleteProbeDisplayLabel): Remove setProbeDisplayManager: and
+	rename setProbeDisplay: to setTargetWidget:.
+
+1998-09-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (_ScheduleItem): Add at:owner:widget:x:y:.
+
+1998-09-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (Circle): Make argument to setRadius: unsigned.
+	Provide Circle, Line, ScheduleItem, and TextItem class objects.
+	(_ScheduleItem, ScheduleItem): New protocols.
+	(_TextItem): Add +createBegin: and setCenterFlag:.
+
+1998-09-17  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (Pixmap): New method setDecorationsFlag:.
+
+1998-09-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (Widget): Declare -getParent and -getTopLevel.
+	Revert removal of -getWindowGeometry and -setWindowGeometry:, but don't
+	document them.
+	(Histogram): Declare setXaxisMin:max:step:precision:.
+
+1998-08-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (Pixmap): Add setDirectory:.
+
+1998-08-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (Pixmap): Revert create:widget: and create:file: addition
+	and use setFile: and setWidget: instead.
+
+1998-08-06  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (_Pixmap): Add create:widget: and create:file:.
+	Move setRaster: to using phase (still need to make implementation
+	synchronize).  Add save:.
+
+1998-07-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (Graph): Add setRangesXMin:Max:.
+
+1998-07-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (Graph): Arguments to setScaleModeX:Y: are now boolean, not
+	integers. 
+
+1998-07-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (_VarProbeEntry): Replace setProbeType: with setVarProbe:.
+	Add getVarProbe.
+
+1998-07-07  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (_GraphElement): New method -setWidth:.
+
+1998-07-01  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* gui.h (Widget): Rename setPositionX:Y: to setX:Y:.  Add new
+	methods -getX and -getY.
+	(_WindowGeometryRecord): Remove getWindowGeometry and
+	setWindowGeometry:.  Remove -describe:.  Add setX:Y:,
+	setWidth:Height:, getSizeFlag, getPositionFlag, getWidth,
+	getHeight, getX, and getY.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+	
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-06-14  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* gui.h: Make separate ifdefs for GUI macros to work with the
+	protocol script.  Use #if 0 for awt.
+
+1998-06-05  Alex Lancaster  <alex@santafe.edu>
+
+	* gui.h: Fixed (#if 1) around the tk macros - erroneosly set to
+	(#if 0).
+
+1998-06-03  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* gui.h: Update documentation tags.
+	Use #if 0 for macros to avoid multiple definitions in protocol.el.
+
+1998-05-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* gui.h (_ArchivedGeometryWidget): Declare -loadWindowGeometryRecord,
+	-registerAndLoad, +createBegin:, -updateArchiver, -getDestroyedFlag,
+	and -drop.
+
+1998-05-13  Marcus G. Daniels  <mgd@tewa.santafe.edu>
+
+	* gui.h: InputWidget: new protocol.  Make CheckButton and Entry
+	inherit from InputWidget, not _InputWidget.
+
+1998-05-06  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* gui.h (_Widget, _WindowGeometryRecord, _ArchivedGeometryWidget,
+	_Frame, _Canvas, _ProbeCanvas, _GraphElement, _Graph, _Histogram,
+	_Label, _ClassDisplayLabel, _VarProbeLabel,
+	_CompleteProbeDisplayLabel, _Button, _ClassDisplayHideButton,
+	_SimpleProbeDisplayHideButton, _SuperButton, _InputWidget, _Entry,
+	_MessageProbeEntry, _VarProbeEntry, _ButtonPanel, _Form,
+	_Colormap, _Drawer, _Raster, _Pixmap, _CanvasAbstractItem,
+	_CanvasItem, _CompositeItem, _NodeItem, _LinkItem, _OvalNodeItem,
+	_RectangleNodeItem, _TextItem, _Circle, _Rectangle, _Line): Add
+	phase tags.
+	(_Widget, _WindowGeometryRecord, _ArchivedGeometryWidget, _Frame,
+	_ProbeCanvas, _Raster, _ZoomRaster, _Pixmap, _CanvasAbstractItem,
+	_NodeItem, _LinkItem): Reorder definitions for above.
+
+	Move all //S and //D comments in internal protocols to external
+	protocols.
+
+	(_GraphElement): Declare -setOwnerGraph:, -createEnd, and
+	+createOwnerGraph:.
+
+	(_Raster): Declare +createBegin and -createEnd.
+
+	(_Graph, _Histogram, _Label, _ClassDisplayLabel, _Button,
+	_SimpleProbeDisplayHideButton, _InputWidget, _Form, _Colormap,
+	_ZoomRaster): Declare -createEnd.
+	
+1998-04-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h: Add documentation tags to all protocols.  Bring in sync
+	with tkobjc changes.
+
+1998-04-17  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (Raster): Add ellipseX0:Y0:X1:Y1:Width:Color,
+	lineX0:Y0:X1:Y1:Width:Color:, and rectangleX0:Y0:X1:Y1:Width:Color:.
+	New protocols ButtonPanel, Form, CheckButton, OvalNodeItem,
+	RectangleNodeItem, CanvasItem, TextItem, Circle, Rectangle, and Line. 
+	Split all protocols into `New' and `Usage' parts.
+
+1998-04-13  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h: Colormap and Pixmap protocols now are drived from Create
+	protocol.  (Thanks to Ken Cline.)
+	Add "@class Raster".  (Thanks to Pietro Terna.)
+	(Pixmap): Add getWidth and getHeight methods to protocol.
+
+1998-04-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h: Create class object for Raster.
+	(Drawer): Use it to declare drawX:Y: method spec.
+	(Raster): Declare draw:X:Y: method spec.
+	(Pixmap): New protocol.
+	Create class object for Pixmap.
+
+1998-02-27  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (Entry): Add linkVariableInt: to protocol (used in testIPD).
+	(Graph) Add setRangesYMin:Max:.
+	(GraphElement): Add setColor:, setDashes:, setSymbol:, and resetData.
+	(Entry): Add linkVariableDouble: and linkVariableBoolean:.
+
+1998-02-24  Alex Lancaster  <alex@santafe.edu>
+
+	* gui.h (GUI_UPDATE_IDLE_TASKS): Added to call the new
+	parametrized (tkobjc_updateIdleTasks) for the Tk #ifndef and a
+	stub added for the Java version.
+
+1998-02-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h: Change javaobjc to awtobjc throughout.  Use initAWTObjc
+	instead of initJavaObjc.
+
+1998-02-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h: Add AWT placeholders for GUI_* macros.
+	Change GUI_INIT to take a single argument, the Arguments object.
+	Switch from #ifdef _TK_ to #ifndef USE_JAVA.
+	(Widget): Add setPositionX:Y:.
+
+1998-01-27  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h: Remove GUI_ prefixes from GUI_Color and GUI_PixelValue.
+	Notes about XPixmap and XDrawer.  Remove GUI_ButtonRight.  Add
+	ButtonLeft, ButtonMiddle, and ButtonRight defines.  Use #import
+	for tkobjc/common.h and tkobjc/global.h.  Rename class XColormap
+	to Colormap and BLTGraph to Graph.  Add @class Entry.  Add
+	getParent for Widget.  Add fillRectangeX0:Y0:X1:Y1:Color: to
+	Raster.  Add moveX:Y: to CompositeItem.
+
+1998-01-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h: Remove some USING tags. 
+
+1998-01-25  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* gui.h (Widget): Remove setBorderWidth.  Add packToRight.
+	(Frame): Change enableRelief to setRelief:. Add setBorderWidth to 
+	Frame.
+	(Label): Remove anchorEast, anchorWest, colorBlue.
+	(ClassDisplayLabel, VarProbeLabel, ClassDisplayHideButton): Added.
+	(SuperButton): Add createEnd, setOwner, setUser.
+	Add ClassDisplayLabel, VarProbeLabel.
+
+1998-01-25  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+        * gui.h: New file.

@@ -1,0 +1,192 @@
+#!/bin/sh
+
+# Swarm library. Copyright © 1996-2000 Swarm Development Group
+# This library is distributed without any warranty; without even the
+# implied warranty of merchantability or fitness for a particular purpose.
+# See file LICENSE for details and terms of copying.
+
+# make-h2x -- generate .xm, .xt, and .xc files from module source directory
+
+if [ $# -lt 1 ]; then
+  echo 'Usage: make-h2x <module-name>.xm'
+  exit 1
+fi
+
+if [ $# -ge 2 ] ; then
+  srcdir="$2"
+else
+  srcdir="."
+fi
+
+m=`basename $1 .xm`
+if [ ! -f $srcdir/$m.h ]; then
+  echo "make-h2x: header file $m.h does not exist in directory"
+  exit 1
+fi
+
+echo making $m.xm $m.xt $m.xc
+
+# generate #import statements in generated file
+
+echo \
+'#import <Swarm/'$m'.h>
+#import <Swarm/swarm-objc-api.h>
+' >$m.xm
+
+# extract all declared symbols into temporary file
+# note that we identify Symbol, Warning, Error and Event
+# *only* in the context of `extern', and we use a second
+# sed script to remove the `extern' after identification
+grep -v '^#import' $srcdir/$m.h | \
+sh -c "$OBJC $OBJCFLAGS -Ddisable_externvar -x objective-c -E -" | \
+$GSED -n \
+  -e 's@//.*$@@' \
+  -e 's/	//g' \
+  -e 's/[ ][ ]*//g'  -e 's///g' \
+  -e '/externvarid<Symbol>/,/^\($\|#[0-9]\)/p' \
+  -e '/externvarid<Warning>/,/^\($\|#[0-9]\)/p' \
+  -e '/externvarid<Error>/,/^\($\|#[0-9]\)/p' \
+  -e '/externvarid<Event>/,/^\($\|#[0-9]\)/p' | \
+$GSED -e '/^#[0-9]/d;s/externvar/externvardef /g' >$m.xm+
+
+# define symbol identifiers in generated file
+
+$GSED -e 's/<.*>/ /' -e '/^$/d' -e 's/\([,;]\)/=0\1/g' <$m.xm+ >>$m.xm
+
+# generate array of defined symbols
+
+echo '
+void *_'$m'_symbols[]={' >>$m.xm
+$GSED <$m.xm+ >>$m.xm \
+  -e 's/externvardef id<.*>//g' -e '/^$/d' -e 's/;/,/g' \
+  -e 's/\([A-Za-z0-9_][A-Za-z0-9_]*\)/\&\1/g'
+echo 0, >>$m.xm
+$GSED <$m.xm+ >>$m.xm \
+  -e '/^$/d' -e 's/externvardef id[ ]*<\(.*\)>/0\1,/g' -e 's/;/,/g' \
+  -e 's/\([A-Za-z0-9_][A-Za-z0-9_]*\)/"\1"/g' -e 's/<"/"\\r/g'
+echo '0};
+' >>$m.xm
+
+# extract all declared types into temporary file
+
+$GSED <$srcdir/$m.h >$m.xm+ \
+  -e 's/	//g' \
+  -e '/^@protocol/!d' \
+  -e 's/@protocol[ *]\([A-Za-z0-9_][A-Za-z0-9_]*\).*/\1/'
+
+# generate module.xt file (exported by make file as <module/module_types.h>)
+
+echo 'extern void *_'$m'_[];
+' >$m.xt
+$GSED <$m.xm+ >>$m.xt \
+  -e 's/^Zone/SwarmZone/' \
+  -e 's/^EventType/SwarmEventType/' \
+  -e 's/^Collection/SwarmCollection/' \
+  -e 's/\(.*\)/externvar id \1;/'
+echo '
+#ifdef DEFINE_CLASSES
+#import "'$m'_classes.h"
+#endif' >>$m.xt
+
+# define type identifiers in generated file
+
+$GSED <$m.xm+ >>$m.xm \
+  -e 's/^Zone/SwarmZone/' \
+  -e 's/^EventType/SwarmEventType/' \
+  -e 's/^Collection/SwarmCollection/' \
+  -e 's/\(.*\)/externvardef id \1=0;/'
+
+# generate array of defined types
+
+echo '
+void *_'$m'_types[]={' >>$m.xm
+$GSED <$m.xm+ >>$m.xm \
+  -e 's/Zone/SwarmZone/' \
+  -e 's/^EventType/SwarmEventType/' \
+  -e 's/^Collection/SwarmCollection/' \
+  -e 's/\(.*\)/\&\1,/'
+echo 0, >>$m.xm
+$GSED 's/\(.*\)/@protocol(\1),/' <$m.xm+ >>$m.xm
+echo '0};
+' >>$m.xm
+
+# extract all implemented classes into temporary file
+
+for object in $OBJECTS; do
+  base=`echo $object | $GSED -e 's/\.lo$//' -e 's/\.o$//'`
+  source=$srcdir/${base}.m
+  if [ -f $source ]; then sources="$sources $source"; fi
+done
+if [ "$sources" = "" ]; then
+  echo "no files with .m suffix found to match any .o file in $(OBJECTS)"
+  exit 1
+fi
+cat $sources | $GSED >$m.xm+ \
+  -e 's/	//g' \
+  -e '/^[ ]*@implementation[ ][ ]*_/d' \
+  -e '/^[ ]*@implementation/!d' \
+  -e 's/^[ ]*@implementation[ ][ ]*\([A-Za-z0-9][A-Za-z0-9_]*\).*/\1/'
+
+# generate module.xc file (exported by make file as <module/module_classes.h>)
+
+$GSED 's/\(.*\)/externvar id id_\1;/' <$m.xm+ >>$m.xc
+
+# define class identifiers in generated file
+
+$GSED 's/\(.*\)/externvardef id id_\1=0;/' <$m.xm+ >>$m.xm
+
+# generate array of defined classes
+
+echo '
+void *_'$m'_classes[]={' >>$m.xm
+$GSED 's/\(.*\)/\&id_\1,/' <$m.xm+ >>$m.xm
+echo '0};
+' >>$m.xm
+
+# generate declarations for classes referenced below
+
+$GSED 's/\(.*\)/@class \1;/' <$m.xm+ >>$m.xm
+
+# generate initial contents of module definition object
+
+echo '
+extern void _'$m'_implement(void);
+extern void _'$m'_initialize(void);
+
+void *_'$m'_[]=
+{
+0,
+"'$m'",
+(void *)_'$m'_implement,
+(void *)_'$m'_initialize,
+_'$m'_types,
+_'$m'_symbols,
+_'$m'_classes,
+};
+' >>$m.xm
+
+# generate class which initializes module
+
+echo '
+@interface Module_super_
++ self;
+@end
+@interface Module__'$m'_ : Module_super_
+@end
+@implementation Module__'$m'_
++ initialize
+{
+// initialize class id constants and link all classes into module' >>$m.xm
+$GSED 's/\(.*\)/id_\1=[\1 self];/' <$m.xm+ >>$m.xm
+echo '
+// Mainly for GNU ObjC runtime, insure dispatch tables are installed' >>$m.xm
+$GSED 's/\(.*\)/swarm_class_getMethodImplementation(id_\1, swarm_sel_getUid("self"));/' <$m.xm+ >>$m.xm
+echo '
+// return module object
+return (id)_'$m'_;
+}
+@end' >>$m.xm
+
+# remove temporary file containing class names
+
+rm $m.xm+

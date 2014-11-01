@@ -1,0 +1,896 @@
+2009-11-09  Scott Christley  <schristley@mac.com>
+
+	* Makefile.am (ENABLE_OPENSTEP): Change from ENABLE_GNUSTEP.
+
+2009-09-24  Scott Christley  <schristley@mac.com>
+
+	* Average.m: Adjust casts to eliminate compiler warnings.
+
+2009-04-02  Scott Christley  <schristley@mac.com>
+
+	* EZBin.m: ObjC runtime abstraction.
+
+2008-06-25  Scott Christley  <schristley@mac.com>
+
+	* ActiveGraph.h, ActiveOutFile.h, Averager.h, EZBin.h,
+	EZDistribution.h, EZGraph.h, Entropy.h, FunctionGraph.h,
+	analysis.h, Makefile.am: Standardize include directory structure
+	to support libraries and OpenStep frameworks.
+
+2008-04-29  Scott Christley  <schristley@mac.com>
+
+        * Makefile.am (SRC): Do not build ActiveGraph, EZBin,
+	EZDistribution, EZGraph, and FunctionGraph for GNUstep.
+        (HEADERS): Likewise.
+
+        * analysis.h; #ifndef GNUSTEP classes not applicable when
+        GNUstep is enabled.
+
+2005-04-14  Paul Johnson  <pauljohn@ku.edu>
+
+	* Averager.m ([Averager -addValueToAverage:]): Reset min and max
+	on count == 0.
+
+2004-11-24  Bill Northcott <W.Northcott@unsw.edu.au>
+
+	* Averager.m :remove lvalue casts.
+	
+2004-07-30  Marcus G. Daniels <mgd@santafe.edu>
+
+	* analysis.h (EZAverageSequence, EZSequence): Also exclude in
+	--disable-gui case, as they won't be implemented.
+
+2004-07-21  Scott Christley  <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Parameterize simtoolsgui and gui.
+	(SRC): Do not build ActiveGraph, EZBin, EZDistribution, EZGraph,
+	and FunctionGraph for a non-gui Swarm build.
+
+	* analysis.h: #ifndef DISABLE_GUI classes not applicable for
+	a non-gui Swarm build.
+
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Use libobjc definition. Add GNUstep includes.
+
+2003-06-11  Paul E. Johnson  <pauljohn@pjdell.pols.ukans.edu>
+
+	* EZGraph.m ([EZSequence -setActiveOutFile:]): to stop compiler
+	 harrassment, cast 
+	activeOutFile = (ActiveOutFile *)anActiveOutFile;
+
+2002-09-13  Paul Johnson   <pjohnson@localhost.localdomain>
+ 
+ 	* EZBin.m ([EZBin -createEnd]): changed i to unsigned.
+ 	([EZBin -reset]): ditto
+ 	([EZBin -update]): ditto
+ 	([EZBin -outputToFile]): ditto
+
+
+
+
+2002-05-15  Marcus G. Daniels  <mgd@condor>
+
+	* analysis.h (ActiveGraph): Move getCurrentValue to using phase.
+	(ActiveOutFile): Add getCurrentValue.
+
+	* EZGraph.m ([EZSequence -getCurrentValue]): Handle getCurrentValue
+	in file case.
+
+	* ActiveOutFile.[hm] ([ActiveOutFile -getCurrentValue]): Add.
+	([ActiveOutFile -step]): Set currentValue.
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* ActiveGraph.h, ActiveGraph.m, ActiveOutFile.h, ActiveOutFile.m,
+	Averager.h, Averager.m, EZBin.h, EZBin.m, EZDistribution.h,
+	EZDistribution.m, EZGraph.h, EZGraph.m, Entropy.h, Entropy.m,
+	FunctionGraph.h, FunctionGraph.m, analysis.h: Change copyright
+	statement to canonical version as suggested by GNU GPL.
+
+2002-04-10  Marcus G. Daniels  <mgd@condor>
+
+	* EZGraph.m ([EZSequence -setUnsignedArg:]): Don't treat GUI
+	and file graphing as mutually exclusive.
+
+2002-01-13  Marcus G. Daniels  <mgd@condor>
+
+	* EZGraph.[hm], analysis.h ([EZSequence -getCurrentValue]): New method.
+	([EZAverageSequence -getAverager]): New method.
+
+	* ActiveGraph.[hm] (ActiveGraph): Add currentValue and getter.
+
+	* ActiveGraph.m (-step): Use getCurrentValue.
+
+2002-01-07  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* EZDistribution.m ([EZDistribution -output]): Use putDouble 
+	instead of putInt.
+
+	* EZBin.m ([EZBin -setAxisLabelsX:Y:], 
+	[EZBin -setPrecision:]): Put these messages in Creating phase.
+
+2001-11-04    <mgd@HELEN>
+
+	* Makefile.am: Avoid multi-line values as they confuse Cygwin
+	automake.
+
+2001-10-31  Marcus G. Daniels  <mgd@condor.santafe.edu>
+
+	* EZGraph.[hm], EZGraph.m: Add setSaveSizeFlag constructor variant.
+
+2001-09-25  Marcus G. Daniels  <mgd@condor.santafe.edu>
+
+	* Averager.m ([Averager -getVariance]): Handle count less than two.
+	([Averager -getMovingVariance]): Likewise. Use actualCount in
+	denominator.
+
+2001-07-12  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* EZGraph.m ([EZGraph
+	-createGraphSequence:forSequence:withFeedFrom:andSelector:]):
+	Make hdf5Dataset a local.
+	([EZGraph -drop]): Drop hdf5Group after dropping sequences.
+	([EZSequence -drop]): If hdf5Dataset is set, drop it.
+	
+	* ActiveOutFile.h (ActiveOutFile): Make hdf5Dataset public.
+	(EZGraph): Remove hdf5Dataset. 
+	(EZSequence): Statically type activeOutFile.
+
+2001-07-11  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* Averager.h: Add getLocImp, nextImp, addImp, and callImp for
+	predispatched methods.  Add totalCount.
+	
+	* Averager.m: Use totalCount for moving average & variance
+	computations and count for normal average & variance.
+	([Averager -createEnd]): Setup new ivars above.	
+	([Averager -update]): Remove zero length check.
+	Remove maWidth check, instead discriminating between count
+	and totalCount.  Use NEXT, GETLOC, ADD, and CALL macros.
+
+	* Makefile.am (INCLUDES): Add FFIINCLUDES.
+
+	* ActiveGraph.m: Include DefObject.h.
+	([ActiveGraph -createEnd]): Use getClass instead of class message.
+
+2001-05-13  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* analysis.h (EZBin, EZGraph): For the sake of COM, name the count:
+	argument "count".
+
+2001-03-20  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* ActiveGraph.[hm], ActiveOutFile.[hm], Averager.[hm], EZBin.[hm],
+	EZGraph.[hm], Entropy.[hm], FunctionGraph.[hm], analysis.h: Change
+	to void returns as appropriate: -step, -update, -reset,
+	-setPrecision:, -output, -outputGraph, -outputToFile,
+	-setRangesXMin:Max:, -setRangesYMin:Max:,
+	setActive{OutFile,Grapher}:, -setUnsignedArg:, -setAverager:,
+	-setScaleModeX:Y:, -setAverager:, -graph:.
+
+2001-03-19  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* EZGraph.m ([EZSequence -setUnsignedArg:]): Check for activeOutFile
+	if no activeGrapher.
+
+2001-03-19  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* EZGraph.h (EZGraph): New ivars hdf5{Container,Group,Dataset}.
+	Rename fileName to baseName.
+
+	* EZGraph.[hm], analysis.h:
+	New method +create:setHDF5Container:setPrefix:, and setHDF5Container:.
+
+	* EZGraph.m: Replace 0/1 with NO/YES, as appropriate.
+	(-createGraphSequence:forSequence:withFeedFrom:andSelector:):
+	Add support for HDF5 group/datasets.
+
+	* ActiveOutFile.[hm], analysis.h: Add setHDF5Dataset:.
+
+	* ActiveOutFile.h: Include defobj.h.
+	(ActiveOutFile): Add hdf5Dataset.  Rename theFile to file.
+
+	* EZGraph.m ([EZGraph -drop], [EZGraph +create:setFileName:]): 
+	The filename must be copied.
+
+2001-03-12  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* EZDistribution.m, EZGraph.[hm], analysis.h: Remove silly object
+	returns.
+	
+2001-01-17  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* EZGraph.[hm] (EZSequence, EZAverageSequence): Add
+	-setUnsignedArg:.
+
+	* analysis.h (EZSequence): Add setUnsignedArg:.
+	(EZAverageSequence): Adopt EZSequence.
+
+2000-10-03  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Entropy.m ([Entropy -update]): Remove obsolete comments.
+
+	* Entropy.m: Include misc.h instead of math.h.
+
+	* EZGraph.m, Entropy.m: Use getZone() instead of -getZone.
+	Include defalloc.h.
+
+2000-09-20  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* EZGraph.m ([EZGraph -createEnd]): Call setSaveSizeFlag:.
+
+	* EZBin.m ([EZBin -createEnd]): Likewise.
+
+2000-07-15  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Makefile.am (INCLUDES): Add -I$(srcdir)/../random for swarm.h
+	via simtools.h which is for OutFile.  (sigh)
+
+2000-05-17  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* EZGraph.[mh], analysis.h ([EZGraph
+	-createMovingAverageSequence:withFeedFrom:andSelector:andWidth:]):
+	([EZGraph
+	-createMovingVarianceSequence:withFeedFrom:andSelector:andWidth:]):
+	([EZGraph
+	-createMovingStdDevSequence:withFeedFrom:andSelector:andWidth:]):
+	New methods.
+
+	* Averager.m ([Averager -createEnd], [Averager -update]):
+	Additions to support moving averages.
+
+	* Averager.[mh], analysis.h ([Averager -setWidth:],
+	[Averager -getMovingAverage], [Averager -getMovingVariance],
+	[Averager -getMovingStdDev], [Averager addValueToAverage:],
+	[Averager mapAllocat): New methods.
+
+	* Averager.h (Averager): Rename collection to target.
+	New ivars isList, maWidth, maTotal, maTotalSquared, maData.
+
+2000-05-09  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* EZBin.m: Include defobj.h.
+	([EZBin -setTitle:], [EZBin -setFileName:],
+	[EZBin -setAxisLabelsX:Y:]): Duplicate arguments.
+
+	* EZGraph.m ([EZGraph -setTitle:], [EZGraph -setAxisLabelsX:Y:],
+	[EZGraph -setFileName:]): Likewise.
+
+2000-04-30  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* EZBin.m ([EZBin -createEnd]): Put
+	SET_COMPONENT_WINDOW_GEOMETRY_RECORD_NAME before aHisto createEnd.
+
+2000-04-27    <mgd@nest.swarm.org>
+
+	* analysis.h ([{Averager,Entropy,EZDistribution,EZGraph}
+	-createEnd]): Remove.
+	([{EZBin,FunctionGraph] +createBegin:, -createEnd]): Remove.
+	([EZDistribution -update, -output]): Protect with #ifndef IDL.
+
+2000-04-23    <mgd@nest.swarm.org>
+
+	* EZGraph.m ([EZGraph
+	-_createAveragerSequence_:withFeedFrom:probeSelector:graphSelector:]):
+	New method.
+	([EZGraph -createAverageSequence:withFeedFrom:andSelector:],
+	[EZGraph -createTotalSequence:withFeedFrom:andSelector:], 
+	[EZGraph -createMinSequence:withFeedFrom:andSelector:],
+	[EZGraph -createMaxSequence:withFeedFrom:andSelector:], 
+	[EZGraph -createCountSequence:withFeedFrom:andSelector:aSel]): 
+	Use it.
+
+	* EZGraph.[hm], analysis.h ([EZGraph
+	-createVarianceSequence:withFeedFrom:andSelector:],
+	[EZGraph -createStdDevSequence:withFeedFrom:andSelector:]):
+	New methods.
+	
+	EZBin.[hm], analysis.h ([EZBin -getStdDev]): Renamed from -getStd.
+
+	* Averager.m: Include misc.h.
+	([Averager -update]): Initialize and accumulate
+	sum of squares.
+	([Averager -getVariance], [Averager -getStdDev]): New methods.
+
+	* Averager.h (Averager): Add totalSquared.  Make count unsigned.
+	Declare -getVariance and -getStdDev.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Swarm 2.1.1 frozen.
+
+2000-02-12    <mgd@nest.swarm.org>
+
+	* Makefile.am (CURRENT): Bump.  Version 2.1.
+
+1999-12-20    <mgd@nest.swarm.org>
+
+	* EZGraph.m ([EZGraph -drop]): Only drop graph if graphics is set.
+	([EZSequence -drop]): Only drop activateGraph if non-nil.
+
+1999-11-12    <mgd@VAIO>
+
+	* Averager.m ([Averager -update]): Use next/getLoc idiom
+	instead of nil-check for loop.
+
+1999-10-31  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* EZGraph.m ([EZSequence -drop]): Only drop activeOutFile if non-nil.
+
+1999-10-17  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* EZBin.m ([EZBin -update]): Don't look for prototype in
+	collection if it is empty.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-09-12  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* EZGraph.[hm], analysis.h ([EZGraph
+	+create:setTitle:setAxisLabelsX:Y:setWindowGeometryRecordName:]):
+	Add recordName argument.
+
+1999-09-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* EZGraph.m (sequence_graph_filename): Use alloc: instead of xmalloc.
+
+	* EZDistribution.m: Include defalloc.h.
+	([EZDistribution -createEnd]): Use alloc: instead of xmalloc.
+	([EZDistribution -drop]): Use free: instead of free:.
+
+	* EZBin.m: Include defalloc.h.
+	([EZBin -createEnd]): Use alloc: instead of xmalloc.
+	([EZBin -drop]): Use free: instead of XFREE.
+
+1999-09-07    <mgd@HELEN>
+
+	* analysis.h: Add @class EZAverageSequence;
+
+1999-09-07  Alex Lancaster  <alex@santafe.edu>
+
+	* EZGraph.[hm] (EZSequence): Make interface conform to protocol.
+	Add PHASE tags in implementation.
+	(EZAverageSequence): Likewise.
+
+	* analysis.h (EZAverageSequence): New protocol, make RETURNABLE.
+
+	* analysis.h (EZGraph), EZGraph.[hm]:
+	([EZGraph -createSequence:withFeedFrom:andSelector:]) returns an
+	object of type EZSequence.
+	([EZGraph
+	-create{Average,Min,Max,Count}Sequence:withFeedFrom:andSelector:]):
+	returns an object of type EZAverageSequence.
+	
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* analysis.h: Add Zone typing to +create:* methods.
+	(EZSequence): Change from CREATABLE to RETURNABLE.
+
+1999-08-09  Alex Lancaster  <alex@santafe.edu>
+
+	* analysis.h (EZGraph): Add two convenience methods for batch-mode
+	(non-graphical) instances of EZGraph
+	(+create:setFileOutput:, +create:setFileName:).
+
+	* EZGraph.[hm] ([EZGraph +create:setFileOutput:]): New convenience
+	method.
+	([EZGraph +create:setFileName:]): Likewise.
+
+1999-08-02  Alex Lancaster  <alex@santafe.edu>
+
+	* analysis.h (EZGraph): Add new convenience factory method to
+	protocol.
+
+	* EZGraph.[hm] ([EZGraph +create:setTitle:setAxisLabelsX:Y:]): New
+	convenience factory method for creating `graphics' only EZGraphs.
+
+1999-07-21  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* analysis.h: Add EZSequence protocol.
+
+1999-06-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* EZBin.m ([EZBin -createEnd]): Use OutFile create:setName: instead
+	of create:withName:.
+
+	* EZGraph.m ([EZGraph
+	-createGraphSequence:forSequence:withFeedFrom:andSelector:]):
+	Likewise.
+
+	* FunctionGraph.[hm], analysis.h ([FunctionGraph
+	-setElement:setDataFeed:setFunctionSelector:]): Remove.
+
+1999-06-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* EZBin.m ([EZBin -update]): Create and use a message probe for 
+	getting values from collection items.
+
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES, lib_LTLIBRARIES): Substitute
+	{noinst,inst}LIBS.
+	(EXTRA_LTLIBRARIES): New variable.
+	(libanalysis_la_LDFLAGS): Substitute @inst_LDFLAGS@.
+
+1999-05-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I$(top_builddir)/libobjc.
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES): Switch from lib_LTLIBRARIES.
+
+1999-05-01  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* analysis.h, FunctionGraph.[hm] ([FunctionGraph
+	-setXMin:Max:Resolution:]): Make resolution argument unsigned.
+
+	* EZGraph.m (defaultGraphColors): New static variable.
+	(graphColors): Remove (as a global).
+	([EZGraph +createBegin:]): Set graphColors to defaultGraphColors.
+	Set colorCount to NUMCOLORS.
+
+	* EZGraph.[hm], analysis.h ([EZGraph -setColors:count:]): New method.
+
+	* EZGraph.h (EZGraph): New variables graphColors and colorCount.
+
+	* EZDistribution.m ([EZDistribution -createEnd], [EZDistribution
+	-update], [EZDistribution -output]): Use binCount instead of
+	numBins.
+
+	* EZBin.m (defaultBinColors): New variable.  
+	(binColors): Remove.
+	([EZBin +createBegin:]): Set binColors to defaultBinColors and
+	binColorCount to NUMCOLORS.
+	([EZBin -createEnd]): Switch to unsigned casts for mallocs.
+	Make i unsigned.  Use setBinCount: instead of setNumBins: with
+	Histogram.
+	([EZBin -createEnd]): Pass binColorCount instead of NUMCOLORS to
+	Histogram setColors:count:.
+
+	* EZBin.h (EZBin): Rename binNum to binCount. Make distribution,
+	binCount, count, and outliers unsigned.  Make clean a boolean.
+	Add binColors and binColorCount. 
+
+	* EZBin.[hm]: Adjust getters and setters per above.
+
+	* EZBin.[hm], analysis.h ([EZBin -setColors:colors:]): New method.
+
+1999-04-26  Alex Lancaster  <alex@santafe.edu>
+
+	* analysis.h (EZBin, EZGraph): Add compliance to SwarmObject
+	protocol.
+
+1999-04-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ActiveGraph.[hm], ActiveOutFile.[hm], Averager.[hm], EZBin.h,
+	EZDistribution.h, EZGraph.h, Entropy.[hm], FunctionGraph.[hm]:
+	Add protocol compliance tags to @interfaces.  Reorganize
+	phase stuff as necessary.
+
+1999-03-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I for libobjc.
+
+1999-02-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* analysis.h: Add CREATABLE tags to all non-abstract protocols.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (CURRENT, REVISION, AGE): No changes.  Version 1.4.1.
+
+1999-01-20  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am (CURRENT): Bump.
+
+1999-01-17  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* EZBin.[hm], defobj.h ([EZBin -getCount]): Change return to
+	unsigned.
+
+	* defobj.h (Analysis): Change -getCount return to unsigned.
+
+1999-01-16  Alex Lancaster  <alex@santafe.edu>
+
+	* analysis.h ([EZGraph -setFileName:]): Update method
+	documentation.
+
+	* EZGraph.m (sequence_graph_filename): Add static function to
+	generate the filename for the EZGraph in batch mode.  If the
+	fileName iVar is *not* set, don't prepend it to the SEQUENCENAME.
+	([EZGraph
+	-createGraphSequence:forSequence:withFeedFrom:andSelector:]): Use
+	it.
+
+1999-01-06  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* EZBin.m ([EZBin -createEnd]): Use setColors:count: instead
+	of setColors:.
+
+1998-12-28  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Averager.[hm] ([Averager -getCount]): Return unsigned.
+	
+1998-12-21  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* EZBin.m: Include misc.h instead of math.h.
+
+1998-12-10  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* EZGraph.m: Include misc.h.
+	 ([EZGraph -createGraphSequence:forSequence:withFeedFrom:andSelector:]):
+	Prepend filename to ".SEQUENCENAME".
+
+	* EZBin.[hm], EZGraph.[hm]: Add filename and accessors.  Rename
+	theTitle to title.  Default filename to title in setTitle.
+
+	* analysis.h (EZBin, EZGraph): Declare getFilename and setFilename:.
+	Add getTitle.
+
+1998-10-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT, AGE): Increment.  Swarm 1.3.1 released.
+
+1998-09-30  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* analysis.h (EZBin): Add setMonoColorBars:.
+	(EZGraph): Change getGraph return type, and include createEnd.
+
+	* EZGraph.m ([EZGraph +createBegin:]): Add more colors, change
+	scheme. 
+
+	* EZGraph.h (EZGraph): Make theGraph conform to Graph protocol.
+
+	* EZGraph.[hm]: Make getGraph return object conforming to Graph
+	protocol.
+
+	* EZBin.m: New array binColors.
+	([EZBin +createBegin:]): Initialize monoColorsBars to NO.
+	([EZBin -createEnd]): Call setColors: if not monoColorsBars.
+
+	* EZBin.[hm]: New setter setMonoColorsBars:.
+
+	* EZBin.h (EZBin): Add monoColorBars.
+
+1998-09-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* analysis.h (EZBin): Note that the upper bound is not inclusive.
+
+1998-09-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZBin.[mh] ([EZBin -getHistogram]), analysis.h: New method.
+
+1998-09-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZBin.m ([EZBin +createBegin:]): Initialize precision to 3.
+	([EZBin -createEnd]): Use setXaxisMin:max:step:precision: instead of
+	conditional on binNum and step adjustment.
+
+	* EZBin.[mh] ([EZBin -setPrecision:]): New method.
+
+	* analysis.h: Likewise.
+
+	* EZBin.h (EZBin): New ivar precision.
+
+1998-08-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT): Increment. Swarm 1.3 released.
+
+	From Sven Thommesen <sthomme@humsci.auburn.edu>:
+	
+	* analysis.h (EZGraph): Return value is now a sequence for
+	create{,Average,Count,Min,Max,Total}Sequence:withFeedFrom: methods.
+	Declare new method -dropSequence:.
+
+	* EZGraph.m ([EZGraph -dropSequence:]): New method.
+
+	* EZGraph.m ([EZGraph -create
+	{,Average,Count,Min,Max,Total}Sequence:withFeedFrom:andSelector:]):
+	Return sequence instead of self.
+	
+1998-08-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	From Sven Thommesen <sthomme@humsci.auburn.edu>:
+
+	* EZBin.[hm] (EZBin): New methods -outputGraph and -outputToFile.
+
+	* EZGraph.[hm] (EZGraph): Likewise.
+
+	* EZGraph.[hm] (EZSequence): Likewise.
+
+	* EZGraph.[hm] (EZSequence): New method -update.
+	
+	* EZGraph.[hm] (EZAverageSequence): Likewise.
+
+1998-08-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZDistribution.m ([EZDistribution -drop]): Use XFREE instead of
+	xfree.
+
+	* EZBin.m ([EZBin -drop]): Likewise.
+
+1998-07-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZGraph.[hm], analysis.h: Add setRanges[XY]Min:Max: and
+	setScaleModeX:Y:.
+
+1998-07-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZBin.m ([EZBin -drop]): Use xfree instead of free.
+
+1998-07-10  Alex Lancaster  <alex@santafe.edu>
+
+	* analysis.h (FunctionGraph): Add phase tags CREATING and USING.
+
+1998-07-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZGraph.m: Include analysis.h.  Don't include simtoolsgui.h.
+
+	* analysis.h (ActiveGraph, ActiveOutFile, FunctionGraph):  Add 
+	protocols and class objects.
+
+	* ActiveGraph.[hm]: Moved from simtoolsgui.
+
+	* ActiveOutFile.[hm]: Moved from simtools.
+
+	* FunctionGraph.[hm]: New files.
+
+	* Makefile.am (SRC, analysis_HEADERS): Add ActiveGraph, ActiveOutFile,
+	and FunctionGraph.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LIBRARIES, libanalysis_a_SOURCES): Remove.
+
+1998-06-23  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LTLIBRARIES, libanalysis_la_SOURCES,
+	libanalysis_la_LDFLAGS, SRC, CURRENT, REVISION, AGE): New
+	variables.  Set *_SOURCES from SRC.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+	
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-06-03  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* analysis.h: Updated documentation tags.
+
+1998-05-06  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* analysis.h (Averager, Entropy, EZBin, EZDistribution, EZGraph):
+	(EZBin): Declare +createBegin:.
+	(Entropy, EZDistribution): Declare -createEnd.
+	(EZBin, EZGraph): -setGraphs and -setFileOutput take a BOOL, not int as
+	an argument.  Reorder for phase tags.
+	
+	* EZBin.[hm], EZGraph.[hm]: Make graphics and fileOutput BOOL
+	instead of int.  Likewise for accessors.  Reorder for phase tags.
+
+	* Averager.m, EZBin.m, EZDistribution.m, Entropy.m: Add phase tags. 
+
+1998-04-25  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZDistribution.m ([EZDistribution -drop]): Use xfree instead of free.
+
+1998-04-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* analysis.h: Remove includes of analysis things.  Replace
+	with protocols for Averager, EZBin, EZDistribution, EZGraph,
+	and Entropy.  Add a @class for each.
+
+	* Averager.m, EZBin.m, EZDistribution.m, EZGraph.m, Entropy.m:
+	Move documentation tags to analysis.h.
+
+1998-04-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Averager.m, EZBin.m, EZDistribution.m, EZGraph.m, Entropy.m:
+        Change method documentation sentinel from "//*" to "//M:".
+
+	* Averager.m, EZBin.m, EZDistribution.m, EZGraph.m, Entropy.m,
+	analysis.h: Merge more documentation using //D: and //S: comments.
+
+1998-04-09  Irene Lee  <lee@wijiji.santafe.edu>
+
+	* Averager.m, EZBin.m, EZDistribution.m, EZGraph.m, Entropy.m:
+	Add documentation strings.
+
+1998-02-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZGraph.m: Don't include collections.h.  Include simtoolsgui.h.
+	Reformatting throughout.
+
+	* EZDistribution.m ([EZDistribution -createEnd]): Include misc.h.
+	Use xmalloc instead of malloc.
+
+	* EZBin.m: Don't include collections.h or gui.h.  Include misc.h.
+	([EZBin -createEnd]): Use xmalloc for distribution, cachedLimits,
+	and locations.
+
+	* EZBin.h: Include simtoolsgui/GUIComposite.h, not
+	simtools/GUIComposite.h.
+
+	* Averager.h: Reformatting throughout.
+
+1998-02-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Averager.m: Reformatting throughout.
+	([Averager -update]): Don't call updateMethodCache:.
+
+	* Entropy.m: Likewise.
+
+1998-01-27  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZGraph.m ([EZGraph -createEnd]): Use Graph instead of BLTGraph.
+
+1998-01-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZGraph.m: Minor reformatting.
+	([EZGraph -createEnd]): Use renamed methods setTitle and
+	setAxisLabelsX:Y:.
+
+	* EZDistribution.m: Include gui.h instead of tkobjc.h and
+	tkobjc/control.h.  Use renamed drawHistogramWithDouble:atLocations:.
+
+	* EZDistribution.h: Reformatting throughout.
+
+	* EZBin.m: Include gui.h instead of tkobjc.h and tkobjc/control.h.
+	([EZBin -createEnd]): Use Histogram instead of Histo.  Use renamed
+	method setAxisLabelsX:Y: and setTitle:.  Use new methods
+	setBarWidth:, setXaxisMin:, setupZoomStack, hideLegend,
+	setupActiveOutlierMarker, and setupActiveItemInfo instead of 
+	tkobjc_* frobbing.
+	([EZBin -output]): Use renamed drawHistogramWithInt:atLocations:.
+
+	* EZBin.h: Include gui.h.
+	(EZBin): Make aHisto conform to the Histogram protocol.
+
+1998-01-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZGraph.m:  Don't import <tkobjc.h>.
+
+1998-01-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZBin.m ([EZBin -createEnd]): Use
+	SET_COMPONENT_WINDOW_GEOMETRY_RECORD_NAME to set archiving key.
+
+	* EZGraph.m ([EZGraph -createEnd]): Likewise.  Remove call to
+	enableDestroyNotification:notificationMethod.
+
+	* EZGraph.m ([EZGraph -createEnd]): Use GUIComposite's
+	windowGeometryRecordNameForComponent to derive archiving key.
+	([EZGraph -createEnd]): Add call to enableDestroyNotification.
+
+	* EZGraph.h (EZGraph): Inherit from GUIComposite. Remove
+	graphWindowGeometryRecordName and setter.
+
+1998-01-06  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZBin.m ([EZBin -setWindowGeometryRecordName]): Remove.
+	([EZBin -createEnd]): Use inherited windowGeometryRecordName method
+	to get value previously provided by graphWindowGeometryRecordName.
+
+	* EZBin.h (EZBin): Include GUIComposite.h, and inherit from it instead
+	of SwarmObject.  Remove graphWindowGeometryRecordName and setter.
+
+	* EZBin.m ([EZBin -update]): Include objc-api.h and talk directly
+	to the runtime to extract a double from a collection item.
+
+	* EZBin.h: Subclass from SwarmObject not MessageProbe.
+
+1998-01-05  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZBin.m ([EZBin -setWindowGeometryRecordName:]): Add.
+	([EZBin -createEnd]): pass on windowGeometryRecordName to Histo.
+
+	* EZBin.h (EZBin): New instance variable graphWindowGeometryRecordName.
+	 Declare setWindowGeometryRecordName setter.
+	
+	* EZGraph.h: Rename setGraphWindowGeometryRecordName to
+	setWindowGeometryRecordName.
+
+	* EZGraph.m ([EZGraph -setWindowGeometryRecordName:]): Likewise.
+
+1997-12-11  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZBin.m ([EZBin -createEnd]): Enable and use renamed
+	tkobjc_setupHistogramActiveOutlierMarker.
+
+	* EZGraph.m: Constify graphColors.
+	([EZGraph -setAxisLabelsX:Y:]): Constify arguments.
+	([EZGraph -setTitle:]): Constify argument.
+	([EZGraph
+	-createGraphSequence:forSequence:withFeedFrom:andSelector:]):
+	Constify first argument.
+	([EZGraph -createSequence:withFeedFrom:andSelector:aSel]):
+	Constify first argument.
+	([EZGraph -createAverageSequence:withFeedFrom:andSelector:]):
+	Likewise.
+	([EZGraph -createTotalSequence:withFeedFrom:andSelector:]):
+	Likewise.
+	([EZGraph -createMinSequence:withFeedFrom:andSelector:]):
+	Likewise.
+	([EZGraph -createMaxSequence:withFeedFrom:andSelector:]):
+	Likewise.
+	([EZGraph -createCountSequence:withFeedFrom:andSelector:aSel]):
+	Likewise.
+	Reformatting throughout.
+
+	* EZGraph.h (EZGraph): Constify xLabel, yLabel, and title.
+	Constify argument to setTitle. 
+	Constify arguments to setAxisLabelsX:Y:. 
+	Constify first argument to
+	createSequence:withFeedFrom:andSelector:. 
+	Constify first argument to
+	createAverageSequence:withFeedFrom:andSelector.
+	Constify first argument to
+	createMinSequence:withFeedFrom:andSelector.
+	Constify first argument to
+	createMaxSequence:withFeedFrom:andSelector.
+	Constify first argument to
+	createCountSequence:withFeedFrom:andSelector:.
+	Reformatting throughout.
+
+1997-12-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZDistribution.m ([EZDistribution -output]): Use new wrapper
+	function tkobjc_setHistogramActiveOutlierText.
+	Reformatting throughout.
+
+	* EZDistribution.h: Reformatting throughout.
+
+	* EZBin.m: Include tkobjc/control.h.
+	([EZBin -createEnd]): Use new wrapper functions
+	tkobjc_setHistogramBarWidth, tkobjc_setHistogramXaxisRange,
+	tkobjc_setupZoomStack, tkobjc_setupHistogramLegend,
+	tkobjc_histogramActiveItemInfo.  Include
+	tkobjc_setupHistogramMisc, but don't use it, since the
+	functionality appears to be repeated in active_item_info.
+	([EZBin -output]): Use new wrapper function
+	tkobjc_setHistogramActiveOutlierText.
+	Reformatting throughout.
+	([EZBin -setTitle:]): Constify argument.
+	([EZBin -setAxisLabelsX:Y:]): Constify arguments.
+
+	* EZBin.h: Constify argument to setTitle.  Constify arguments
+	to setAxisLabelsX:Y:. Constify theTitle, xLabel, and yLabel.
+
+	Reformatting throughout.
+
+Mon Dec  8 22:28:28 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* Averager.h: changed swarmobject to objectbase
+
+Mon Dec  8 22:27:57 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* EZBin.h: changed swarmobject to objectbase
+
+Mon Dec  8 22:27:30 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* Entropy.h ([-getEntropy]): changed swarmobject to objectbase
+
+Mon Dec  8 22:26:53 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* EZGraph.h: changed swarmobject.h to objectbase.h
+
+1997-11-29  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* EZGraph.m ([EZGraph -setGraphWindowGeometryRecordName:]): Add.
+	([EZGraph -createEnd]): Add create-time call to
+	setWindowGeometryRecordName to BLTGraph.
+
+	* EZGraph.h (EZGraph): Add graphWindowGeometryRecordName instance
+	variable and setter.
+

@@ -1,0 +1,3273 @@
+2010-04-11  Marcus G. Daniels <marcus@snoutfarm.com>
+
+	* internal.h: Include swarmconfig.h instead of misc.h as all that is
+	needed are the autoconf defines, in particular HAVE_PNG.
+
+2009-09-24  Scott Christley  <schristley@mac.com>
+
+	* ArchivedGeometryWidget.m, Pixmap.m, VarProbeEntry.m, TkExtra.m:
+	Adjust casts to eliminate compiler warnings.
+
+2009-04-02  Scott Christley  <schristley@mac.com>
+
+	* ScheduleItem.m, VarProbeEntry.m, Button.m,
+	WindowGeometryRecord.m, common.h: ObjC runtime abstraction.
+
+	* Makefile.am: Standardize include directory structure to support
+	libraries and OpenStep frameworks.
+
+2007-06-17  Bill Northcott <W.Northcott@unsw.edu.au>
+
+	* internal.m: remove secondaryLibraryPath stuff
+		
+2007-06-06  Bill Northcott <W.Northcott@unsw.edu.au>
+
+	* TkExtra.m: TEA updates
+		
+2005-01-12  Marcus G. Daniels <mgd@santafe.edu>
+
+	* TkExtra.m (ensureBltSupportFiles): Use lib/blt2.4 for both
+	Cygwin and Mingw32.
+
+2004-11-14  Marcus G. Daniels <mgd@santafe.edu>
+
+	* TkExtra.m: Add an ifdef for what BLT we expect for __MINGW32__.
+
+	* internal.m (setSecondaryPath): Similarly, use lib/ for __MINGW32__.
+
+2004-07-20  Marcus G. Daniels <mgd@santafe.edu>
+
+	* Makefile.am (INCLUDES): Reorder so that X headers and Xpm are
+	first. This is to ensure that the Xpm and Tk (the non-X11 Tk on
+	Windows) get the right X headers from Cygwin Tk.  Otherwise
+	classes like Colormap get the wrong structure relative to Win32 Tk.
+
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Use libobjc definition.  Add GNUstep
+	includes.
+
+2004-07-13  Marcus G. Daniels <mgd@santafe.edu>
+
+	* TkExtra.m (ensureBltSupportFiles): Check for graph.tcl instead of 
+	bltGraph.tcl.
+	([TkExtra -preInitWithArgc:argv:]): Load graph.tcl instead of
+	bltGraph.tcl.
+
+2004-07-12  Marcus G. Daniels <mgd@santafe.edu>
+
+	* TkExtra.m ([TkExtra -preInitWithArgc:argv:], newBLTp): Handle BLT 3.0.
+
+2004-02-24  Marcus G. Daniels <mgd@santafe.edu>
+
+	* internal.m (tkobjc_pixmap_save): Don't use stack allocated buffers
+	for rgbbuf and palbuf.
+
+2003-09-14    <mgd@DRONE>
+
+	* ZoomRaster.m ([ZoomRaster -handleButton:X:Y:]): Adjust
+	coordinates for change of 06-23.
+
+2003-09-05  Marcus G. Daniels <mgd@santafe.edu>
+
+	* win32dib.c (dib_get_color): Avoid using color indicies out of range.
+
+2003-06-23  Paul E. Johnson  <pauljohn@pjdell.pols.ukans.edu>
+
+	* ZoomRaster.m: new method 
+	-(void)fillCenteredRectangleX0: (int)x0 Y0: (int)y0 X1: (int)x1 Y1:
+	(int)y1 Color: (Color)c. Assures "stable positioning" of points
+	and rectangles.  A point at a given position, say
+	zoomFactor*(x0,y0), will stay in the same position relative to
+	lines and elipses that are on or near it.
+	
+	([ZoomRaster -drawPointX:Y:Color:]): use fillCenteredRectangle to
+	draw points.
+	
+	
+	- (void)rectangleX0: (int)x0 Y0: (int)y0 X1: (int)x1 Y1: (int)y1
+              Width: (unsigned)penWidth Color: (Color)c
+	Modified to assure stable positioning (like fillCenteredRectangle).
+	
+2003-06-11  Paul E. Johnson  <pauljohn@pjdell.pols.ukans.edu>
+
+	* Pixmap.m ([Pixmap -drawX:Y:]): cast (Raster *)raster
+	([Pixmap -setRaster:]):  cast (Raster *)raster
+
+2003-04-22    <pauljohn@localhost.localdomain>
+
+	* Makefile.am (%_tcl.x): Fix the %_tcl.x sed script to delete
+	copyright comments as well as force each line to look like
+	"words\".
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* ArchivedGeometryWidget.h, ArchivedGeometryWidget.m, Button.h,
+	Button.m, ButtonPanel.h, ButtonPanel.m, Canvas.h, Canvas.m,
+	CanvasAbstractItem.h, CanvasAbstractItem.m, CanvasItem.h,
+	CanvasItem.m, CheckButton.h, CheckButton.m, Circle.h, Circle.m,
+	ClassDisplayHideButton.h, ClassDisplayHideButton.m,
+	ClassDisplayLabel.h, ClassDisplayLabel.m, Colormap.h, Colormap.m,
+	CompleteProbeDisplayLabel.h, CompleteProbeDisplayLabel.m,
+	CompositeItem.h, CompositeItem.m, Entry.h, Entry.m, Form.h,
+	Form.m, Frame.h, Frame.m, Graph.h, Graph.m, Histogram.h,
+	Histogram.m, InputWidget.h, InputWidget.m, Label.h, Label.m,
+	Line.h, Line.m, LinkItem.h, LinkItem.m, MessageProbeEntry.h,
+	MessageProbeEntry.m, NodeItem.h, NodeItem.m, OvalNodeItem.h,
+	OvalNodeItem.m, Pixmap.h, Pixmap.m, ProbeCanvas.h, ProbeCanvas.m,
+	Raster.h, Raster.m, Rectangle.h, Rectangle.m, RectangleNodeItem.h,
+	RectangleNodeItem.m, ScheduleItem.h, ScheduleItem.m,
+	SimpleProbeDisplayHideButton.h, SimpleProbeDisplayHideButton.m,
+	SuperButton.h, SuperButton.m, TextItem.h, TextItem.m, TkExtra.h,
+	TkExtra.m, VarProbeEntry.h, VarProbeEntry.m, VarProbeLabel.h,
+	VarProbeLabel.m, Widget.h, Widget.m, ZoomRaster.h, ZoomRaster.m,
+	analysis.tcl, common.h, common.m, global.h, internal.h,
+	internal.m, simtools.tcl, testFrame.m, testGraph.m,
+	testHistogram.m, testRaster.m, tkobjc.m: Change copyright
+	statement to canonical version as suggested by GNU GPL.
+
+2002-01-31  Marcus G. Daniels  <mgd@condor>
+
+	* Colormap.m ([Colormap -nextFreeColor]): Ise integer for search.
+
+	* internal.m (tkobjc_raster_setColormap): Don't re-initialize 
+	eraseColor if already set.
+
+	* Raster.[hm] (eraseColor): Make it an integer.  Initialize to -1.
+
+2002-01-14    <mgd@condor>
+
+	* Graph.m (getName): Return a new value in scratchZone.
+
+2001-11-04    <mgd@HELEN>
+
+	* Makefile.am: Don't use multi-line values as they confuse Cygwin.
+
+2001-08-24    <mgd@HELEN>
+
+	* win32dib.c: Include win32dib.h.
+
+	* win32dib.h (_WIN32): Define if __CYGWIN__ is set.
+	Temporarily define BOOL around inclusion of misc.h.
+
+	* internal.m (tkobjc_raster_clear): Use DefaultColormap macro
+	instead of screens[0].cmap.
+
+	* internal.h (_WIN32): Define if __CYGWIN__ is set.
+
+	* Makefile.am (XINCLUDES): Substitute.
+	(INCLUDES): Add XINCLUDES.
+
+2001-08-14  Marcus G. Daniels  <mgd@condor.santafe.edu>
+
+	* internal.m (tkobjc_pixmap_create_from_widget): Always do
+	override.
+
+2001-08-07    <mgd@DRONE>
+
+	* internal.m (tkobjc_raster_drawPoint): Fix rgb/bgr problem and
+	x offset problem in 24 bit mode.
+
+2001-08-01  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* ZoomRaster.m: Scale rectangle, ellipse, and line widths with 
+	zoom factor.
+ 
+2001-06-21  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* Makefile.am (%_tcl.x): Don't use multi-line string literals.
+
+2001-05-13  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* Pixmap.m ([Pixmap -set{Directory,File}:]): Handle NULL arguments.
+	([Pixmap +createBegin:]): Copy constant for the sake of the -drop.
+
+2001-04-18  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* NodeItem.[hm] ([NodeItem -resetString:]): New method.
+
+	* LinkItem.m ([LinkItem +createBegin:]): New method.  Set directedFlag
+	to YES.
+	([LinkItem -createItem], [LinkItem -update]) 
+	([LinkItem -setColor:]): Use directedFlag.
+	([LinkItem -drop]): Free line1 and line2 if set.
+
+	* LinkItem.[hm] ([LinkItem -setDirectedFlag:]): New ivar and setter.
+
+2001-03-20  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* Raster.[mh]: Sync up void returns with ZoomRaster.
+
+	* Graph.[hm] ([Graph -setTitle:], [Graph -setAxisLabelsX:Y:]): 
+	Make return type be an object.
+
+	* Histogram.[hm] ([Histogram -setTitle:], [Histogram
+	-setAxisLabelsX:Y:]): Likewise.
+
+2001-03-14  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* Pixmap.m ([Pixmap -drop]): Drop directory and filename string if set.
+	([Pixmap -setDirectory:], [Pixmap -setFile:]): Copy strings.
+
+2001-03-13  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* gui.h, Graph.[hm]: Add setSymbolSize:.
+
+2001-03-12  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* ArchivedGeometryWidget.m, Button.[hm], ButtonPanel.[hm],
+	CanvasAbstractItem.[hm], CanvasItem.[hm], CheckButton.[hm],
+	Colormap.[hm], CompositeItem.[hm], Entry.[hm], Form.[hm],
+	Frame.[hm], Graph.[hm], Histogram.[hm], InputWidget.[hm],
+	LinkItem.[hm], NodeItem.[hm], Pixmap.[hm], ScheduleItem.[hm],
+	Widget.[hm], ZoomRaster.[hm]: Eliminate gratuitous object returns
+	in most using-phase methods.  Use getZone () as appropriate.
+
+2001-03-03  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* NodeItem.m ([NodeItem -setString:], [NodeItem -setFont:]): Copy
+	string.
+	([NodeItem -drop]): And drop them.
+
+2001-02-07  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* VarProbeEntry.m ([VarProbeEntry -createEnd]): Don't crash if
+	no probedType set.
+
+2000-12-03  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* ScheduleItem.m ([ScheduleItem -_createItem_]): Use conformsTo
+	instead of isKindOf for matching ActionConcurrent.
+
+2000-10-01  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* internal.m (tkobjc_setName): Simplfy string build expression.
+
+2000-09-20  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Widget.m ([Widget -setWidth:Height:]): Use to setWindowGeometry:
+	when widget has no parent.
+
+	* ArchivedGeometryWidget.[hm] ([ArchivedGeometryWidget -updateSize]): 
+	New method.
+
+	* ArchivedWidget.m ([ArchivedGeometryWidget -registerAndLoad]):
+	Remove size assignment.
+
+	* Raster.m ([Raster -createEnd]): Call updateSize.
+
+	* Histogram.m ([Histogram -createEnd]): Likewise.
+
+	* Graph.m ([Graph -createEnd]): Likewise.
+
+	* Canvas.m ([Canvas -createEnd]): Likewise.
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord -lispOutShallow:]): 
+	Use catInt: for x and y.
+
+2000-09-18  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Makefile.am (INCLUDES): Add -I$(srcdir)/../simtoolsgui.
+
+2000-06-29    <mgd@DRONE>
+
+	* ArchivedGeometryWidget.[hm]
+	([ArchivedGeometryWidget -updateArchiver:]): Remove return type.
+
+2000-06-14    <mgd@DRONE>
+
+	* ScheduleItem.m: Include tkobjc/CanvasItem.h.
+	(canvasItemDestroyNotify): Get item from obj.  Don't use drop
+	method here.
+	([ScheduleItem -update]): Don't drop line, minTextItem, and
+	maxTextItem here.
+	([ScheduleItem -_createItem_]): Pass canvas to canvasItemDestroyNotify
+	addRef.  Create refs for minTextItem and maxTextItem.
+
+	* CanvasItem.m: Include defobj/defalloc.h.
+	([CanvasItem -createEnd]): Call setMappedAlloc.
+	([CanvasItem -mapAllocations:]): New method.
+	([CanvasItem -dropAllocations:]): New method.  Free item here.
+	([CanvasItem -drop]): Not here.
+
+	* CanvasItem.h (CanvasItem): Make item public.
+
+2000-05-22  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* common.[hm] (tkobjc_createText): Add zone argument.
+
+	* NodeItem.m ([NodeItem -createText], [NodeItem
+	-createPaddedText]): Modify per tkobjc_createText change.
+	([NodeItem -drop]): Free text and item.
+
+	* TextItem.m ([TextItem -createItem]): Likewise.
+
+	* CanvasItem.m ([CanvasItem -drop]): Free item and call drop.
+
+	* CanvasAbstractItem.m ([CanvasAbstractItem -createEnd]): 
+	Call createEnd.
+
+2000-04-20    <mgd@nest.swarm.org>
+
+	* Widget.m ([Widget -setWindowGeometry:], [Widget
+	-setWindowTitle:]): Use {} instead of "" quoting.
+
+	* Button.m ([Button -setText:], [Button
+	-setButtonTarget:method:]): Likewise.
+
+	* TkExtra.m (setBltLibrary): Likewise.
+
+	* Raster.m ([Raster -createEnd]): Likewise.
+
+	* Label.m ([Label -setText:]): Likewise.
+
+	* Histogram.m ([Histogram -setLabels:count:],
+	[Histogram -setColors:count:],
+	[Histogram -setTitle:],
+	[Histogram -setAxisLabelsX:Y:],
+	[Histogram -setXaxisMin:max:step:precision:],
+	[Histogram -setActiveOutlierText:count:]): Likewise.
+
+	* Graph.m ([Graph -setTitle:], [Graph -setAxisLabelsX:Y:]): Likewise.
+
+	* Entry.m ([Entry -setValue:]): Likewise.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Makefile.am (REVISION): Swarm 2.1.1 frozen.
+
+2000-03-25    <mgd@HELEN>
+
+	* Makefile.am (TCLFILES): Remove tkbusy.tcl and comm.tcl.
+
+	* tkobjc.m: Don't include tkbusy_tcl.x or comm_tcl.x.
+	(initTkObjc): Don't eval tkbusy_tcl or comm_tcl.
+	Disable `send'. 
+
+2000-03-14    <mgd@nest.swarm.org>
+
+	* internal.m (tkobjc_pixmap_update_raster): Add check for nil
+	colormap.  Thanks to Ralf Stephan.
+
+2000-02-21    <mgd@nest.swarm.org>
+
+	* Makefile.am (CURRENT): Bump.  Version 2.1.
+	Disable optimization for internal.lo when
+	CONSERVATIVE_OPTIMIZATION automake conditional is set.
+
+2000-02-18    <mgd@nest.swarm.org>
+
+	* ArchivedGeometryWidget.[hm]: Add
+	+create:setWindowGeometryRecordName:.
+
+	* Raster.[hm], ZoomRaster.[hm]: Remove above.
+
+2000-01-24    <mgd@nest.swarm.org>
+
+	* ZoomRaster.m ([ZoomRaster -handleConfigureWidth:Height:]): 
+	Don't do anything unless configureFlag is set.
+
+	* ZoomRaster.[hm] ([ZoomRaster -pack]): Custom method to turn off
+	window size configuration until pack is called.
+
+	* ZoomRaster.h (ZoomRaster): New ivar configureFlag.
+
+2000-01-20    <mgd@nest.swarm.org>
+
+	* win32dib.c (dib_snapshot): height/width was swapped for 
+	screen snapshot.
+
+	* internal.m (win32_pixmap_create_from_window): Likewise.
+
+2000-01-09    <mgd@nest.swarm.org>
+
+	* internal.m (x_get_managed_toplevel_window): Check that a window
+	with WM_STATE was found and return it (not parent).
+	(x_get_wm_child): New function.
+	(x_set_private_colormap): Use it. Disable X{G/S}etWMColormapWindow.
+
+2000-01-03  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord -lispOutShallow:]): 
+	Use catEndQuotedList and catEndMakeInstance instead of catEndExpr.
+
+1999-12-31  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord -lispOutShallow:]): Use
+	new OutputStream methods.
+
+1999-12-01    <mgd@HELEN>
+
+	* TkExtra.m (setBltLibrary): New function.
+	(ensureBltSupportFiles): Use it.
+	([TkExtra -preInitWithArgc:argv:]): Use checkTclLibrary instead of
+	[info library], remove check for empty [info library].
+
+	* win32dib.h: Undef BOOL before including misc.
+
+1999-11-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m (tkobjc_raster_setColormap): Only set privateColormapFlag
+	if one was actually made.
+
+1999-11-19    <mgd@VAIO>
+
+	* Makefile.am (INCLUDES): Add JAVAINCLUDES.
+
+1999-10-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ArchivedGeometryWidget.m, Colormap.[hm], Form.m, InputWidget.m,
+	Pixmap.m, ScheduleItem.m, common.m, internal.m, tkobjc.m: Use
+	include not import of internal.h.
+
+	* Pixmap.m: Don't include png.h.
+	(compareRGB): Only define if HAVE_PNG.
+	([Pixmap -_loadPNG_]): Raise an error if not HAVE_PNG.
+
+	* internal.m (tkobjc_pixmap_create): Likewise.
+
+	* internal.h:  Add minimal png types if not HAVE_PNG.
+	Add multiple include protection.
+
+1999-10-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-registerAndLoad]): Use top level widget for setting geometry.
+
+1999-10-03    <mgd@HELEN>
+
+	* tkobjc.m (globalTkInterp): Define using externvardef.
+
+	* global.h (globalTkInterp, WindowCreation, WindowUsage,
+	PaletteError, MissingFiles, PixmapError,
+	WindowGeometryRecordError): Declare using externvar, not extern.
+	
+1999-09-23    <mgd@HELEN>
+
+	* win32dib.c (dib_snapshot): Force width of new bitmap (and
+	buffer) to four byte boundary but only copy the original width
+	size.
+	
+	* internal.m (win32_pixmap_create_from_window): Set width
+	to bmiHead.biWidth after the snapshot; it may have been adjusted
+	by the backend.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-09-15    <mgd@HELEN>
+
+	* internal.m (win32_pixmap_create_from_window): Get width 
+	and height from GetDeviceCaps when window is desktop.
+
+	* win32dib.c (dib_snapshot): Likewise.
+
+1999-09-14  Alex Lancaster  <alex@santafe.edu>
+
+	* Raster.[hm] ([Raster +create:setWindowGeometryRecordName:]): New
+	factory method.
+
+	* ZoomRaster.m ([ZoomRaster
+	+create:setWindowGeometryRecordName:]): New factory method.
+
+1999-09-13    <mgd@HELEN>
+
+	* Raster.m ([Raster -setWidth:Height:]): Don't copy more
+	than new size.  When geometry shrinks, make an geometry request to
+	shrink the toplevel window.
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-setWindowGeometryRecordName:]): Only duplicate if non-NULL.
+
+1999-09-12  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-setWindowGeometryRecordName:]): Copy argument.
+	([ArchivedGeometryWidget -drop]): Drop it if set.
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord -lispIn:]): Use
+	getQuotedObject for position/size arguments.
+
+1999-09-07  Alex Lancaster  <alex@santafe.edu>
+
+	* ScheduleItem.m ([ScheduleItem -_createItem_]): Use mapBegin:
+	rather to generate Index, rather than begin: for MapIndex protocol
+	conformance.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-26    <mgd@HELEN>
+
+	* win32dib.[ch]: Avoid BOOL conflicts.
+
+1999-08-25  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ScheduleItem.m ([ScheduleItem -_createItem_]): Use getDisplayName
+	instead of getIdName.
+
+1999-08-24    <mgd@HELEN>
+
+	* TkExtra.m (ensureBltSupportFiles): Use share/blt2.4 instead of
+	lib/blt2.4.
+
+1999-08-12  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* WindowGeometryRecord.m (getVal): Don't check type here, -getInteger
+	will do it.
+
+1999-08-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Circle.m, ClassHideDisplayButton.m, Histogram.m, Line.m,
+	LinkItem.m, OvalNodeItem.m, Pixmap.m, Rectangle.m: Include
+	defobj.h instead of misc.h.
+
+	* common.m (tkobjc_dynamicEval): Use SSTRDUP instead of strdup.
+	(tkobjc_createText): Use OSTRDUP instead of strdup.
+
+	* TkExtra.m (ensureBltSupportFiles): Use OSTRDUP instead of strdup.
+
+	* TextItem.m: Don't include misc.h.
+
+	* ScheduleItem.m ([ScheduleItem -_createItem_]): Use alloc: and free:
+	instead of xmalloc and XFREE.
+
+	* Pixmap.m ([Pixmap -_loadPNG_]): Use alloc: instead of xmalloc.
+	([Pixmap -_loadPNG_]): Use free: instead of XFREE.
+
+	* ButtonPanel.m: Don't include misc.h.
+
+	* OvalNodeItem.m ([OvalNodeItem -createItem]): Use STRDUP and
+	FREEBLOCK instead of strdup and XFREE.
+
+	* RectangleNodeItem.m ([RectangleNodeItem -createItem]): Likewise.
+
+	* Circle.m ([Circle -createItem]): Use STRDUP instead of strdup.
+
+	* Histogram.m ([Histogram -createEnd]): Likewise.
+
+	* Line.m ([Line -createItem]): Likewise.
+
+	* LinkItem.m ([LinkItem -createItem]): Likewise.
+
+	* Rectangle.m ([Rectangle -createItem]): Likewise.
+
+	* Graph.m ([GraphElement -createEnd], [BLTVector -createEnd]):
+	Use STRDUP instead of strdup.
+
+	* ClassDisplayHideButton.m (tkobjc_packForgetArmSuperAndResize): 
+	Use OSTRDUP instead of strdup.
+	(tkobjc_packForgetArmSuperAndResize): Use OFREEBLOCK instead of XFREE.
+
+1999-08-03  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m (x_get_managed_toplevel_window): Check to see
+	if return value is root.  If so, go back one.
+	(tkobjc_pixmap_create_from_widget): Do override_redirect
+	on topWindow after Map attempt, if map fails, retry once w/ warning.
+
+1999-08-02  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m (x_toplevel_p, x_get_parent_function): New functions.
+	(x_get_managed_toplevel_window): Use them.
+	(x_set_override_redirect): New function.
+	(tkobjc_pixmap_create_from_widget): Use it. Don't use Tk "wm frame"
+	command for X11, use x_get_managed_toplevel_window.
+	Record last position and parent window in order to reparent
+	to current root window and then back, when necessary.
+
+1999-08-01    <mgd@HELEN>
+
+	* internal.m (tkobjc_raster_create): Initialize
+	pm and oldpm to NULL.
+
+	* win32dib.[ch] (dib_copy_metadata): New function.
+
+	* internal.m (tkobjc_raster_createPixmap): Use it.
+
+	* win32dib.c (dib_augmentPalette): Check colormap entries
+	to see if they are the same -- in that case do nothing.
+	(dib_copy): Copy dibInfo and colormap.
+	(dib_destroy): Free colormap if set.
+
+1999-08-01  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m (tkobjc_raster_erase): Assume colormap
+	is set. 
+
+	* Raster.m ([Raster -setColormap:]): Remove conditional call to
+	erase and call to tkobjc_raster_setBackground.
+	([Raster -setWidth:Height:]): Remove call to tkobjc_raster_setColormap
+	and call tkobjc_raster_createPixmap after [super setWidth:Height:].
+
+	* ZoomRaster.m (USE_GRID): New macro.
+	([ZoomRaster -setZoomFactor:]): Add code to support ZoomRaster
+	without grid support.  This can work better with the window
+	manager.
+	([ZoomRaster -setWidth:Height:]): Include call to "wm grid" only
+	if USE_GRID is set.
+
+1999-07-31    <mgd@HELEN>
+
+	* win32dib.c (dib_get_color): In 24 bit case, lookup colorValue
+	via dib_paletteIndexForObject.
+	(dib_augmentPalette): Re-use palette position if client object
+	already present.
+
+	* win32dib.[hc] (dib_fill, dib_ellipse, dib_line, dib_rectangle):
+	Add client object argument.  Use dib_get_color instead of
+	get_color.
+	(dib_get_color): Renamed and from private get_color.
+
+	* internal.m: Undef BOOL before avoidance set.
+	(tkobjc_raster_fillRectangle): Add raster argument to
+	dib_fill.
+	(tkobjc_raster_ellipse): Add raster argument to dib_ellipse.
+	(tkobjc_raster_line): Add raster argument to dib_line.
+	(tkobjc_raster_rectangle): Add raster argument to dib_rectangle.
+	(tkobjc_raster_drawPoint): Use dib_get_color to set rgb
+	components.
+	(tkobjc_raster_setColormap): Always set eraseColor.
+
+	* Raster.m ([Raster +createBegin:]): Don't initialize 
+	eraseColor.
+	([Raster -setColormap:]): Do a save/create/copy/drop sequence
+	to update the colo
+
+	* Raster.h (Raster) Use `Color' as type of eraseColor.
+
+1999-07-31  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ZoomRaster.m ([ZoomRaster -setZoomFactor:]): When intended
+	physical geometry differs from actual geometry, tell the 
+	window manager to force it.
+	([ZoomRaster -handleConfigureWidth:Height:]): Compute a new
+	zoom based on the max {X,Y} physical/logical ratio.
+	([ZoomRaster -setWidth:Height:]): Disable gridding.
+
+1999-07-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* TkExtra.m (ensureBltSupportFiles): Guess lib/blt2.4 instead
+	of share/blt8.0.
+
+1999-07-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* InputWidget.[hm]: Change argument type of linkVariableBoolean:
+	to unsigned * (from BOOL *).
+
+	* TkExtra.m ([TkExtra -preInitWithArgc:argv:]): Import blt::table
+	namespace.
+
+	* Form.[hm]: Rename numEntries to entryCount.  Change type
+	to unsigned.  Change type of entryWidth to unsigned, and setter.
+	([Form -addLineName:Boolean:]): Change type of boolean
+	argument to unsigned * (not BOOL *).
+
+1999-07-15  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Widget.m (makeWidgetName): Use PTRUINTFMT with PTRUINT instead of %p.
+
+	* InputWidget.m ([InputWidget -getValue]): Raise a
+	SubclassMustImplement event.
+
+	* Entry.m ([Entry -getValue]): Move from InputWidget.
+
+	* CheckButton.h (CheckButton): Declare getValue and setValue:.
+
+	* Entry.h (Entry): Declare getValue.
+
+	* global.h (TkExtra): Declare variableValue: method. 
+
+	* CheckButton.m ([CheckButton -getValue]): New method.  Use 
+	variableValue:.
+	
+1999-07-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m (tkobjc_animate_message): Be pessimistic that there
+	won't be enough colors.
+	(xpmerrcheck): Modify usage to take file and line number instead
+	of descriptive string.
+	(XPMERRCHECK): Call xpmerrcheck, passing __FILE__ and __LINE__.
+	(tkobjc_animate_message, x_pixmap_create_from_window,
+	tkobjc_pixmap_update_raster): Use XPMERRCHECK instead of xpmerrcheck.
+
+1999-07-03  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* WindowGeometryRecord.m (getVal): Expect a _C_LNG from ArchiverValue.
+
+1999-06-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.tcl (gimme_ddobj): Was `gimme' with an argument.
+
+	* common.m (tkobjc_drag_and_drop_object): Accommodate.
+
+1999-06-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.tcl (do_package, do_package_arg): Eliminate window argument.
+	Get this using [winfo parent $token].
+
+	* common.m (oldSetupDragAndDrop, newSetupDragAndDrop): Eliminate
+	window argument to do_package.
+	(oldSetupDragAndDropArg, newSetupDragAndDropArg): Likewise for
+	do_package_arg.
+
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES, lib_LTLIBRARIES): Substitute
+	{inst,noinst}LIBS. 
+	(EXTRA_LTLIBRARIES): New variable.
+	(libtkobjc_la_LDFLAGS): Substitute inst_LDFLAGS.
+
+	* Entry.m, Form.m: Include misc.h.
+
+1999-06-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Colormap.m ([Colormap -setColor:ToName:]): Don't mark color
+	index as set if color lookup fails.
+
+	* Colormap.[hm] ([Colormap -unsetColor:]): New method.
+	Thanks to Ken Cline.
+
+1999-05-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I$(top_builddir)/libobjc.
+
+1999-05-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* tkobjc.h: Replace with error message.
+
+1999-05-27  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* win32dib.c (dib_snapshot): Select depth from device context
+	depth (BITSPIXEL).
+	(dib_snapshot): Move plp to function scope; don't free it until
+	the end, and only if set.  Make colors by a LPBYTE, not a pointer
+	to RGBQUAD.  Get rgb values from logical palette (plp).
+	(dib_augmentPalette): Don't use getcolor to set dibInfo->rgb,
+	use colormap.
+
+	* internal.m (keep_inside_screen): For Windows, use GetDeviceCaps
+	instead of GetWindowRect for determining desktop pixel size.
+	(tkobjc_pixmap_save): ncolors <= 256, not < 256.
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES): Switch from lib_LTLIBRARIES.
+
+1999-05-04  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* global.h: Extern globalTkInterp and initTkObjc.
+
+1999-05-01  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Histogram.[hm] ([Histogram -setBinCount:]): Replaces -setNumBins:.
+	([Histogram -setActiveOutlierText:count:]): Change arguments
+	to be unsigned.
+
+	* Histogram.m: Adjust throughout for numBins -> binCount.
+
+	* Histogram.h (Histogram): Change numBins to binCount.
+
+1999-04-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.h: Include swarmconfig.h and use HAVE_XPM_H and
+	HAVE_X11_XPM_H to decide where to include xpm.h from.
+
+1999-04-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Pixmap.m ([Pixmap -_loadPNG_]): Use PTRUINT as cast intermediary.
+
+	* Raster.m: Include swarmconfig.h
+	([Raster -handleButton:X:Y:]): Cast x and y to PTRINT before
+	casting to void *.
+
+	* internal.h: Include misc.h before png.h (include standard
+	headers in a well-behaved way that would otherwise be done 
+	unprotected in png.h).
+
+1999-04-27  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m (tkobjc_pixmap_update_raster): Don't call XFreeColors
+	with alloc_pixels if alloc_pixels doesn't exist (e.g. Irix 6.5).
+	(tkobjc_pixmap_update_raster): Likewise don't request
+	XpmReturnAllocPixels.  [Note: this is untested as to whether a memory
+	leak occurs on XpmFreeAttributes or not.]
+
+1999-04-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord -lispIn:]): Move 
+	to setting phase.
+
+1999-04-19  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* LinkItem.m ([LinkItem -createItem]): Add extra parens around
+	method call arguments to strdup.
+
+	* OvalNodeItem.m ([OvalNodeItem -createItem]): Likewise.
+
+	* RectangleNodeItem.m ([RectangleNodeItem -createItem]): Likewise.
+
+	* common.m (tkobjc_dynamicEval): Likewise.
+
+	* common.m (tkobjc_createText): Likewise.
+
+1999-04-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m (tkobjc_pixmap_update_raster): Put pixmap and mask
+	frees inside pixmap->display conditional.  In this context, also
+	call XFreeColors using xpmattrs.{colormap,alloc_pixels,nalloc_pixels}. 
+	Call XpmFreeAttributes.
+
+	* Pixmap.h (Pixmap): Add xpmattrs.
+
+1999-04-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m (tkobjc_pixmap_update_raster): If pixmap or
+	mask are set, free them.  Set pixmap->display to current display
+	(for use with free).
+
+	* Pixmap.m ([Pixmap +createBegin:]): Initialize pixmap, mask and
+	display to zero in non-_WIN32 case.
+
+1999-03-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m: Hide Rectangle during Win32 header file includes.
+
+1999-03-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Revert last change.
+
+1999-03-16  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add JAVAINCLUDES.
+
+1999-03-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I for libobjc.
+
+1999-03-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am: Use @CFLAGS_NOWARN_IMPLICIT_INT@ instead of
+	-Wno-implicit-int.
+
+1999-02-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Graph.h (GraphElement): Implement GraphElement instead of
+	_GraphElement.
+
+1999-02-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Raster.h ([Raster -setWidth:Height:]): Declare.
+
+	* Raster.[hm] ([Raster -setWidth:], [Raster -setHeight:]): New methods.
+
+1999-02-20    <mgd@DELLXPS1>
+
+	* win32dib.c (dib_fill): Adjust frameWidth to four byte boundary
+	and then compute new variable row_width (for 24 bit case), which
+	is also adjusted to four byte boundary
+	
+1999-02-18    <mgd@HELEN>
+
+	* win32dib.c (dib_fill): In 24 bit case, adjust frame width up to
+	four byte boundary.  Compute ybase from this adjusted width and clipx.
+
+	* internal.m (tkobjc_pixmap_create): Round width and row_width
+	(new variable) up to a four byte boundary.  row_width adjusts
+	adjusts for 8/24 bit width.  Set new variable row_pos from
+	row_width * ri and assign color indexes / color values to it.
+
+1999-02-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* win32dib.c (dib_rectangle): Compute ending y using height, not
+	width.  Thanks to Glen Ropella <gepr@swarm.com>.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (CURRENT): Bump.  Version 1.4.1.
+
+1999-02-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ArchivedGeometryWidget.[hm] ([ArchivedGeometryWidget
+	-updateArchiver:]): Add archiver argument.
+
+1999-01-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m (raster_private): Add a privateColormapFlag
+	(tkobjc_raster_create): Initialize it.
+	(tkobjc_raster_setColormap): If private colormap is created,
+	set privateColormapFlag.  Don't do it twice.
+	(tkobjc_raster_drawPoint): Reverse rgb order.
+
+	* Colormap.m, Graph.m, Histogram.m, Pixmap.m, Widget.m,
+	WindowGeometryRecord.m, ZoomRaster.m: Change from raiseEvent:
+	to raiseEvent().
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-loadWindowGeometryRecord], [ArchivedGeometryWidget
+	-updateArchiver], [ArchivedGeometryWidget -drop]): 
+	Use lispArchiver instead of archiver.
+
+	* internal.m (x_set_private_colormap, tkobjc_raster_setColormap):
+	Use WarningMessage instead of Warning.
+	(xpmerrcheck): Use WarningMessage instead of Warning and
+	PixmapError instead of Error.
+
+	* win32dib.c (get_color): New function.
+	(dib_augmentPalette, dib_fill, dib_ellipse, dib_line, dib_rectangle): 
+	Use it.
+	win32dib.c (dib_fill): Array order is B, G, R.
+
+	* win32dib.[ch]: colorMap -> colormap throughout.
+	* win32dib.[hc] (dib_fill, dib_ellipse, dib_line, dib_rectangle): 
+	Make color argument an unsigned int.
+
+1999-01-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* internal.m (tkobjc_raster_copy): Don't free old pixmap (X11 case).
+	(tkobjc_raster_setColormap): Raise a warning if colormap is nil.
+	If unset, set eraseColor to black before augmenting palette;
+	avoid gratuitous duplication in win32dib palette.
+	(tkobjc_pixmap_update_raster): Disable palette augments for pixmaps.
+
+	* internal.[hm] (tkobjc_raster_dropOldPixmap): New function.
+
+	* Raster.m ([Raster -setWidth:Height:]): Use it.
+	Reset colormap after creating resized pixmap.
+
+	* internal.m (setSecondaryPath): Use share/ instead of ../library.
+	Swarm 1.4 Win32 layout will follow GNU conventions.
+
+	* TkExtra.m (ensureBltSupportFiles): Likewise (share/blt8.0).
+
+1999-01-20  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am (CURRENT): Bump.
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-loadWindowGeometryRecord]): Use lispGet: instead of
+	lispArchiverGet().
+	([ArchivedGeometryWidget -updateArchiver]): Likewise.  Use
+	lispPutShallow: instead of lispArchiverPut().
+
+1999-01-19  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* WindowGeometryRecord.[hm] ([WindowGeometryRecord -lispOutDeep:]): 
+	([WindowGeometryRecord -lispOutShallow:]): Split -lispOut:deep:
+	into two methods.
+
+1999-01-16  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* internal.m: Use raiseEvent macro instead of method throughout.
+	(tkobjc_pixmap_update_raster): Move call to XpmCreatePixmapFromXpmImage
+	from tkobjc_pixmap_create.  Set colormap in xpmattrs.  If need be
+	create a private colormap and retry.
+
+	* internal.h: Protect String, Widget, and Object symbols.
+
+1999-01-15  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* internal.m (tkobjc_raster_setColormap): Loop until
+	Tk_DoOneEvent goes false.
+
+1999-01-10  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* WindowGeometryRecord.[hm] ([WindowGeometryRecord -lispOut:deep:]):
+	Add deep: option.
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-updateArchiver]): Pass (new) deep-serialize option to
+	lispArchiverPut.
+
+1999-01-08  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord -lispOut:]): Use
+	MAKE_INSTANCE_FUNCTION_NAME instead of MAKE_OBJC_FUNCTION_NAME.
+
+1999-01-06  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Widget.m ([Widget -setParent:]): Check for nil, not 0.
+	([Widget -createEnd]): Set shellFrameFlag if parent is nil.
+	([Widget -drop]): Use shellFrameFlag to determine if parent
+	should be dropped.
+
+	* Widget.h (Widget): New flag shellFrameFlag.
+
+	* Histogram.m ([Histogram +createBegin:]): Initialize numBins
+	to 0 instead of -1.
+	([Histogram -createEnd]): Make i unsigned.
+	([Histogram -setLabels:count:], [Histogram -setColors:count:]):
+	Modulus index by {label,color}Count.  Don't check for
+	entry of NULL.
+	([Histogram -drawHistogramWithInt:], 
+	[Histogram -drawHistogramWithDouble:],
+	[Histogram -drawHistogramWithInt:atLocations:],
+	[Histogram -drawHistogramWithDouble:points:locations]): 
+	Make i unsigned.
+
+	* Histogram.h (Histogram): Make numBins unsigned. 
+
+	* Histogram.[hm]: Add count argument to setLabels and setColors.
+
+1998-12-31  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Widget.m ([Widget -drop]): Handle widgets which had shell
+	Frames at create time.
+
+1998-12-18  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* ArchivedGeometryWidget.m: Include defobj.h instead of declaring
+	archiver interface functions.  Use 
+	([ArchivedGeometryWidget -loadWindowGeometryRecord], 
+	[ArchivedGeometryWidget -updateArchiver]): Use lispArchiver{Get,Put}
+	instead of archiver{Get,Put}.
+
+1998-12-11  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Colormap.m ([Colormap -setColor:ToRed:Green:Blue:]): Revert
+	back to #RRGGBB format (for Cygwin Tk).
+
+	* internal.[hm] (tkobjc_setColor): New function.  Use XParseColor
+	for Win32.
+
+	* Colormap.m ([Colormap -createEnd]): Remove reference to xwin.
+	Display and screen are local.
+	([Colormap -setColor:ToName:]): Use tkobjc_setColor instead of
+	using X things directly.  Switch to virtual
+	colormap and retry if XAllocColor fails -- don't revert to white.
+
+	* Colormap.h (Colormap): Remove display and xwin.  Make tkwin
+	public.
+
+	* Makefile.am: Use OBJCFLAGS instead of CFLAGS, and add
+	-Wno-implicit-int to OBJCFLAGS instead of CPPFLAGS.
+
+1998-12-10  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Colormap.m ([Colormap -setColor:ToRed:Green:Blue:]): Scale to
+	256 but trim at 255.  Use rgb:r/g/b syntax instead of #RRGGBB
+	syntax.
+	([Colormap -setColor:ToName:]): Use XLookupColor, using
+	screen-matching instead of exact pixel values.
+
+	* internal.m (x_get_managed_toplevel_window,
+	x_set_private_colormap): New internal functions.
+	(tkobjc_raster_setColormap): Sync up Tk things and call
+	x_set_private_colormap if it is different from the default.
+
+1998-11-19  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord -lispIn:]): Get
+	value lists directly from index.
+	(getValueList): Remove.
+
+1998-11-18  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am: Add -Wno-implicit-int (but this may not be portable
+	enough).
+
+	* WindowGeometryRecord.[hm]: Remove lispInCreate: stub (will 
+	inherit).
+
+	* ArchivedGeometryWidget.h Button.h ButtonPanel.h Canvas.h
+	CanvasAbstractItem.h CanvasItem.h CheckButton.h Circle.h
+	ClassDisplayHideButton.h ClassDisplayLabel.h Colormap.h
+	CompleteProbeDisplayLabel.h CompositeItem.h Entry.h Form.h Frame.h
+	Graph.h Histogram.h InputWidget.h Label.h Line.h LinkItem.h
+	MessageProbeEntry.h NodeItem.h OvalNodeItem.h Pixmap.h
+	ProbeCanvas.h Raster.h Rectangle.h RectangleNodeItem.h
+	ScheduleItem.h SimpleProbeDisplayHideButton.h SuperButton.h
+	TextItem.h VarProbeEntry.h VarProbeLabel.h Widget.h
+	WindowGeometryRecord.h ZoomRaster.h: Conform to respective
+	external protocol instead of `new features' protocol.
+	Add phase tags where missing.
+
+	* ButtonPanel.m ClassDisplayHideButton.m Circle.m
+	ClassDisplayLabel.m CompleteProbeDisplayLabel.m CompositeItem.m
+	Line.m MessageProbeEntry.m OvalNodeItem.m ProbeCanvas.m
+	Rectangle.m RectangleNodeItem.m ScheduleItem.m
+	SimpleProbeDisplayHideButton.m SuperButton.m TextItem.m
+	VarProbeLabel.m: Add phase tags where missing.
+
+1998-11-17  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* WindowGeometryRecord.h (WindowGeometryRecord): Conform to
+	Serialization protocol.  
+
+	* WindowGeometryRecord.[hm]: Handle renames of lisp{in,out} to
+	lisp{In,Out}.
+
+1998-11-16  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Widget.m (get_geometry_element): Don't count `-' as a separator.
+
+	* WindowGeometryRecord.m: Don't include misc.h.  Include
+	objc/objc-api.h.
+	(getVal): Expect ArchiverValue instead of String.
+	([WindowGeometryRecord -lispin:]): Expect keyword instead of String.
+
+	* WindowGeometryRecord.h: Don't declare +lispin:expr.
+
+	* tkobjc.m: Include defobj.h instead of objectbase/Arguments.h.
+
+1998-11-13  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord -lispin:]): Handle
+	either #: or : keyword syntax.
+	([WindowGeometryRecord -lispout:]): Use #: keyword syntax.
+	Add (make-objc) wrapper.
+
+1998-11-12  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* internal.m: Include defobj.h instead of objectbase/Arguments.h.
+
+	* WindowGeometryRecord.[hm] ([WindowGeometryRecord +lispin:expr:]): 
+	Remove.
+	([WindowGeometryRecord -lispin:]): Renamed from -in:.
+	([WindowGeometryRecord -lispout:]): Renamed from -out:.
+
+	* TkExtra.m: Include defobj.h instead of objectbase.h and
+	objectbase/Arguments.h.
+
+1998-11-09  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* ScheduleItem.h: Declare _drop_.
+
+	* internal.m (tkobjc_pixmap_create): Reverse bit order for paletted
+	bitmaps (less than 8 bits) for both Unix and Win32 code.
+
+1998-10-30  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* ScheduleItem.m ([ScheduleItem -update]): Set processingUpdate
+	during duration of method.
+	([ScheduleItem -update]): Iterate through pendingEvents, stopping
+	if pendingDrop occurs (instead of forEach:).
+	([ScheduleItem -_drop_]): Contents of previous drop.
+	([ScheduleItem -drop]): Call _drop_ if not processingUpdate otherwise
+	set pendingDrop.
+
+	* ScheduleItem.h (ScheduleItem): New status variables
+	processingUpdate and pendingDrop.
+
+1998-10-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (tkobjc_pixmap_create_from_widget): Ignore return
+	values of XChangeWindowAttributes, XMapWindow, XUnmapWindow -- they
+	don't have one.
+
+1998-10-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT): Increment.  Swarm 1.3.1 released.
+	
+	* internal.m (setSecondaryPath): Instead of $SWARMHOME/lib/ 
+	use $SWARMHOME/../library/$dirname, where dirname is a new argument.
+	(tkobjc_initTclInterp, tkobjc_initTkInterp): Pass "tcl8.0" and
+	"tk8.0" respectively as new arguments.
+
+1998-10-15  Alex Lancaster  <alex@santafe.edu>
+
+	* trigger.xpm, schedule.xpm: Add pixmaps to support ScheduleItem
+	widget.
+
+1998-10-06  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (XPMINCLUDES): New substituted variable.
+	(INCLUDES): Use it.
+
+1998-10-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (XPMFILES): New variable.
+	(EXTRA_DIST): Include it.
+	
+	* TkExtra.m (ensureBltSupportFiles): Check ../BLT/library instead
+	of lib.  Quote the value for set of blt_library.
+
+1998-10-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Widget.m (get_geometry_element): Make i unsigned.
+
+	* win32dib.h (dib_paletteIndexForObject): Change "for" to "For".
+	
+	* win32dib.c (dib_snapshot): Remove i.  Initialize holdPal to
+	NULL.  Cast height to int for comparison with return of GetDIBits.
+	Don't call SelectObject for holdPal unless it is non-NULL.
+	(dib_paletteIndexForObject): Make i unsigned.
+	(dib_fill): Cast width, frameWidth, height, and frameHeight to int
+	before comparison with x and y.
+
+	* internal.m (tkobjc_animate_message): Likewise.  Remove ps.
+	(tkobjc_pixmap_update_raster): Likewise.
+	(tkobjc_pixmap_create): Likewise.  Make palette_size unsigned.
+	(Xfill): Don't define if _WIN32.
+	(tkobjc_raster_erase): Only define private if _WIN32.
+	(offset_for_object): Remove.
+	(tkobjc_pixmap_save): Move ncolors to a scope closer to where
+	it is used.  Cast ncolors to unsigned for ci loop comparision.
+	
+	* ScheduleItem.m ([ScheduleItem -_createItem_]): Make key a timeval_t.
+
+1998-10-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (tkobjc_raster_setColormap, tkobjc_raster_clear):
+	Move private into _WIN32, since it is only used there; avoid
+	warning.
+	(check_for_overlaps): Remove rr, rb, and root.
+	(tkobjc_pixmap_create_from_widget): Cast address to int *.
+	Removed configured.
+	(tkobjc_pixmap_create): Remove rc.
+
+	* WindowGeometryRecord.m (getVal): Reverse logic so that routine
+	ends with return.
+
+	* Widget.m, WindowGeometryRecord.m: Include misc.h.
+
+	* ScheduleItem.m: Include internal.h.
+	([ScheduleItem -_createItem_]): Initialize max to avoid warning.
+	Use %lu instead of %d.
+
+	* Histogram.m ([Histogram -setNumBins:]): Remove i.
+
+1998-10-01  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Pixmap.m ([Pixmap -_loadPNG_]): Handle PNG files with alpha
+	channel.  Move row_columns initialization to the scope where it is
+	used.  Check for !PNG_COLOR_TYPE_PALETTE (for rgb or rgb+alpha)
+	rather than the PNG_COLOR_TYPE_RGB bits, since the latter is a
+	subset of the former.
+
+1998-09-30  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Histogram.[mh] ([Histogram -setNumBins:], [Histogram
+	-setLabels:], [Histogram -setColors:], [Histogram +createBegin:],
+	[Histogram -createEnd]):  Split out setNumPoints:Labels:Colors:
+	into different methods.
+
+1998-09-28  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ButtonPanel.m ([ButtonPanel -addButtonName:target:method:]): 
+	Disabled the "unfortunate" code; it seems that way to me, too.
+
+	* Canvas.[hm], Frame.[hm]: Move assertGeometry to Canvas and
+	call it checkGeometry:.
+
+1998-09-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (tkobjc_animate_message): Add support for Win32. 
+	(tkobjc_animate_message, win32_pixmap_create_from_window,
+	keep_inside_screen):  Use HWND_DESKTOP instead of GetDesktopWindow.
+
+1998-09-25  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (tkobjc_animate_message): Handle stepFactors
+	that result in 0 xstep or ystep.  Use sleepTime to handle
+	slow-stepping `trigger' animation.
+	(tkobjc_pixmap_create_from_widget): Use deiconify message instead
+	of doing it by globalTkInterp.
+
+	* ScheduleItem.[hm] ([ScheduleItem -getSleepTime]): New method.
+
+	* Schedule.m ([ScheduleItem -drop]): Do drops of line,
+	minTextItem, maxTextItem, and sleepTime manually.
+	([ScheduleItem -trigger:X:Y:]): Handle zoomFactor.
+
+	* ScheduleItem.h (ScheduleItem): Add line, minTextItem, maxTextItem,
+	and sleepTime. 
+
+	* Frame.h: Remove assertPosition (functionality now
+	in Canvas as addWidget:X:Y:centerFlag:).
+
+	* Canvas.[hm] ([Canvas -addWidget:X:Y:centerFlag:], 
+	[Canvas -removeWidget:]): New methods.
+
+	* ArchivedGeometryWidget.[hm]: Move destroy notifcation
+	support to Widget.[hm] (drop, getDestroyedFlag, _notify_Target_, 
+	structure_proc, enableDestroyNotification:notificationMethod:,
+	disableDestroyNotifcation.
+
+1998-09-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* CompleteProbeDisplayLabel.m: Include misc.h
+	([CompleteProbeDisplayLabel -createEnd]): Use targetWidget instead
+	of probeDisplay.
+
+	* CompleteProbeDisplayLabel.[hm] (CompleteProbeDisplayLabel): Remove
+	probeDisplayManager and setter.  Use an extern to the singleton global
+	object.
+
+	* internal.m (tkobjc_animate_message): Add a flag to select
+	between trigger and schedule images.
+
+	* ScheduleItem.[hm] ([ScheduleItem -trigger:X:Y:]): New method.
+
+1998-09-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.[hm]: New function tkobjc_animate_message (only X support).
+
+	* ScheduleItem.m (PendingEvent): Add.  Add getXForBar, getYForTime,
+	and at:owner:widget:x:y:.
+
+	* CanvasAbstractItem.[hm]: New method getCanvas.
+
+1998-09-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ScheduleItem.[hm]: New files.
+
+	* TextItem.h (TextItem): Add centeredFlag ivar.
+
+	* TextItem.[hm]: New methods +createBegin: and -setCenterFlag:.
+
+	* NodeItem.m ([NodeItem -createText],
+	[NodeItem -createPaddedText]): Pass YES for centerFlag to
+	tkobjc_createText.
+
+	* Makefile.am (SRC, tkobjc_HEADERS): Add ScheduleItem.
+
+	* CanvasItem.m ([CanvasItem -drop]): New method.
+
+	* CanvasAbstractItem.h (CanvasAbstractItem): Remove item ivar.
+
+	* CanvasItem.h, NodeItem.h: Add item var.
+
+	* common.[hm] (tkobjc_createText): Add centerFlag for switching
+	between centered and left justified.
+
+	* TextItem.m ([TextItem -createItem]): Pass canvas as first
+	argument to tkobjc_createText.
+
+	* Circle.[hm]: Change argument type of setRadius: to unsigned.
+
+1998-09-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (keep_inside_screen):  Account for border width in
+	X11 version.  Do a Tk event sync after move.
+	(tkobjc_pixmap_create_from_widget): In X11 version, do
+	keep_inside_screen before check_for_overlaps so that
+	coordinate comparisons will be what they ultimately must.
+	In Win32 version, call keep_inside_screen with topWindow.
+	Call SetWindowPos to make topWindow topmost for snapshot.
+	Do Tk sync and GdiFlush before snapshot.
+
+1998-09-17  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Pixmap.[hm] ([Pixmap -setDecorationsFlag:], [Pixmap +createBegin:],
+	[Pixmap -createEnd], Pixmap): parentFlag is now decorationsFlag.
+
+	* internal.m (tkobjc_pixmap_create_from_widget):
+	Add Exposure binding to set obscured, since Visibility 
+	doesn't seem to get sent if a move occurs while already 
+	underneath a window being kept on top by the window manager.
+	(win32_pixmap_create_from_window, tkobjc_pixmap_create_from_widget): 
+	Rename parentFlag to decorationsFlag.
+
+1998-09-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (overlap_p): Pass parent as second argument compare
+	with child before accepting.
+	(check_for_overlaps): Rename unmappedWindows and unmappedCount to
+	overlapWindows, and overlapCount.
+	(tkobjc_pixmap_create_from_widget): Use get_top_level_window, and
+	use it for all WM-related things.  Do keep_inside_screen,
+	Tk_RestackWindow within override_redirect.  Temporarily map
+	toplevel window for snapshot (for WMs with virtual desktops).  Use
+	Visibility binding in Tk to set an obscured flag if restacking
+	didn't not result in a clean display.  If that happens, retry the
+	restacking after unmapping all the overlapWindows (and undo when
+	finished with snapshot).  Undo Tk Visibility binding when done.
+	Copy keep_inside_screen and Tk_RestackWindow to win32 version.
+
+1998-09-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (overlap_p, check_for_overlaps): New functions.
+	(tkobjc_pixmap_create_from_widget): Save override_redirect flag,
+	check for visible, depth > 0 windows with overlapping areas,
+	then for each set override_redirect, and unmap.
+	Then flush, take a snapshot, and for each remap and restore
+	its override_redirect.
+
+1998-09-13  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* win32dib.[ch] (dib_snapshot): Add windowDCFlag.  When
+	set, use whole window DC, not just contents.
+
+	* internal.m (tkobjc_pixmap_save): palbuf needs same scope as
+	row_pointers.
+	(keep_inside_screen): Change usage from widget to tkwin and window
+	arguments (latter serves to distinguish parent from non-parent
+	snapshots).  Compute relocation to ensure enough is visible for
+	parent case.
+	(win32_pixmap_create_from_window): Change usage to take Window,
+	not a HWND and add parentFlag argument.  Take Window = 0 to mean a
+	request for root window.  Conditional to get HWND for these cases.
+	Pass parentFlag to dib_snapshot.
+	(keep_inside_screen): Handle parent case for Win32.
+	(tkobjc_pixmap_create_from_widget): Pass parent flag to
+	win32_pixmap_create_from_window.
+
+	* internal.[hm] (tkobjc_pixmap_create_from_widget): New argument
+	parentFlag.  When set, request the window's parent window, which
+	is decorated by the window manager.
+
+	* Pixmap.m ([Pixmap +createBegin:]): Initialize parentFlag to NO.
+	([Pixmap -createEnd]): Pass parentFlag to
+	tkobjc_pixmap_create_from_widget.
+
+	* Pixmap.[hm] ([Pixmap -setParentFlag:]): New method.
+
+1998-09-12  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ZoomRaster.m ([ZoomRaster -setWidth:Height:]): Use
+	logical{Width,Height} to set aspect ratio.
+
+	* internal.m (tkobjc_pixmap_create_from_widget): Deiconify,
+	process events, move, restack and process events again to 
+	handle iconification, partial-offscreen, and overlap cases.
+
+1998-09-11  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (keep_inside_screen): New function.
+	(x_pixmap_create_from_window): Use 0/0 for x/y.
+	(tkobjc_pixmap_create_from_widget): Call keep_inside_screen and then
+	Tk_RestackWindow.
+
+1998-09-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* WindowGeometryRecord.m (getValueList): Use ARCHIVERLITERALP.
+
+1998-09-05  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (tkobjc_pixmap_save): Abort if ncolors == -1 in X11 case.
+
+	* win32dib.c: Use XFREE instead of xfree throughout.
+	Use LPBYTE instead of BYTE * throughout.
+	(dib_create): Initialize new slot colorMap to NULL.
+	(dib_createBitmap): Delete disabled free-if-bitmap-already-exists
+	code.  Switch to 24 bit count.
+	(dib_snapshot): Remove unused newColorMap and palette variables.
+	Remove offs, now unused.  Get pgmp from existing dib->dibInfo.
+	Don't free it when finished.  Switch to 24 bit count.
+	Don't augment palette in (new) 24 bit case.
+	(dib_augmentPalette): Remove "new" prefixing argument variable names.
+	Don't set DIB color table in 24 bit case.
+	(dib_fill): Handle 24 bit case.
+	
+	* win32dib.h (CDIB_PALETTE): Remove.
+	(dib): Add colorMap.  Use LPBYTE instead of BYTE * throughout.
+
+	* internal.m (tkobjc_raster_drawPoint): Handle bitmaps
+	of 8 (palette) and 24 (rgb) depths.
+	(tkobjc_pixmap_create): Likewise.
+	(tkobjc_pixmap_save): Set ncolors to -1 when there's no palette,
+	e.g. a screen snapshot.
+	(tkobjc_pixmap_save): Handle > 256 color colormaps and the
+	absence of colormaps.
+
+1998-09-04  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* internal.m (tkobjc_pixmap_save): Write RGB PNG file when
+	color count exceeds 256.
+
+1998-09-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* tkobjc.m (initTkObjc): Define fmtx Tcl procedure.
+
+	* Histogram.m ([Histogram -setXaxisMin:max:step:precision:]):
+	New method.
+	([Histogram -setXaxisMin:max:step:]): Use it with a default of 3
+	for precision.
+
+	* Widget.[hm]: Remove static typing from arguments to -setParent:,
+	+createParent: and from return values of -getParent and -getTopLevel.
+
+1998-08-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT): Increment.  Swarm 1.3 released.
+
+1998-08-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ClassDisplayHideButton.m (tkobjc_packForgetArmSuperAndResize): 
+	Use XFREE instead of xfree.
+
+	* RectangleNodeItem.m ([RectangleNodeItem -createItem]): Likewise.
+
+	* Pixmap.m ([Pixmap -_loadPNG_]): Likewise.
+
+	* OvalNodeItem.m ([OvalNodeItem -createItem]): Likewise.
+
+1998-08-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Pixmap.m ([Pixmap +createBegin:]): Default directory to ./.
+	([Pixmap -_loadPNG_]): Prepend directory to filename.
+
+	* Pixmap.[hm]: Add setDirectory:. 
+
+1998-08-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (tkobjc_pixmap_update_raster): Don't augment
+	raster palette if it has already been done for this pixmap.
+
+	* win32dib.[ch] (dib_paletteIndexForObject): New function.
+
+	* Pixmap.[hm] ([Pixmap +createBegin:], [Pixmap -setFile:],
+	[Pixmap -setWidget:], [Pixmap -createEnd]):
+	Remove +create:{widget,file} and provide setter methods.
+
+	* win32dib.c (dib_copy): Don't update DIB color table.
+
+	* internal.m (tkobjc_pixmap_update_raster): Remove raster palette
+	update code.
+
+	* Pixmap.m ([Pixmap -_loadPNG_:]): Remove num_palette and palette
+	local variables (use ivars).
+	([Pixmap -_loadPNG_:]): Simplified usage of tkobjc_pixmap_create.
+	([Pixmap -setRaster:]): Call new tkobjc_pixmap_update_raster.
+
+	* Pixmap.h (Pixmap): Add palette_size and palette ivars.
+
+	* internal.[hm] (tkobjc_pixmap_create): Drop palette and palette_size
+	arguments.  New function tkobjc_pixmap_update_raster.
+
+1998-08-17  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* WindowGeometryRecord.m: Include global.h.
+
+	* Pixmap.h: Don't declare PixmapError here.
+
+	* WindowGeometryRecord.h: Don't declare WindowGeometryRecordError here.
+
+	* global.h: Declare PixmapError and WindowGeomtryRecordError here.
+
+	* analysis.tcl: Declare hideOption, hideYes, and hideNo as globals.
+	Use throughout for -hide/-mapped.
+
+	* Histogram.m ([Histogram -hideLegend],
+	[Histogram -setupActiveOutlierMarker]): Use hide{Option,Yes,No}.
+
+	* tkobjc.m (initTkObjc): Define globals hideOption, hideYes, and 
+	hideNo per newBLTp.  Don't include Pixmap.h or WindowGeometryRecord.h.
+
+1998-08-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (tkobjc_initTclInterp, tkobjc_initTkInterp): 
+	Set argc to 1.  (We use our own CLI argument processing.)
+
+1998-08-11  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* Pixmap.m ([Pixmap -_loadPNG_:]): Initialize row_bytes to zero.
+	Return self.
+
+	* internal.m (tkobjc_pixmap_create_from_widget): Add <Widget>
+	qualifier to argument.
+
+	* internal.h (tkobjc_pixmap_create_from_widget): Declare.
+
+1998-08-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (INCLUDES): Use $(srcdir)/../tclobjc instead of
+	$(tclobjcincludedir).
+
+1998-08-09  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* WindowGeometryRecord.h, tkobjc.m (WindowGeometryRecordError):
+	Declare new error type.
+
+	* tkobjc.m (initTkObjc): Initialize it.
+	
+	* WindowGeometryRecord.m (getVal, getValueList,
+	[WindowGeometryRecord -in:]): Use it.
+	
+	* Widget.m (get_geometry_element): New local function.
+	([Widget -getWidth], [Widget -getHeight], [Widget -getX],
+	[Widget -getY]): Use it.
+
+	* internal.[hm] (tkobjc_move): New function.
+
+1998-08-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (x_pixmap_create_from_window): Store
+	pixmap->{height,width}.
+
+	* win32dib.c (SNAPSHOTPALETTE): Placeholder for colormap
+	entry for palette generated on the fly for snapshot.
+	(dib_augmentPalette): Don't create DIB color table if there
+	isn't actually a bitmap (the case of a snapshot).
+	(dib_destroy): Handle case where bitmap is NULL and bits has
+	a value (e.g. a snapshot).
+	(dib_snapshot): Don't allocate extra for bitmap data, use permanent
+	buffer.  Free pbmp.
+
+	* win32dib.[ch] (dib_snapshot): New function.
+
+	* tkobjc.m: Only include comm_tcl.x and tkbusy_tcl.x when _WIN32.
+
+	* internal.m (x_pixmap_create_from_window): Renamed from
+	tkobjc_pixmap_create_from_window.  (Only defined when not _WIN32.)
+	(win32_pixmap_create_from_window): New function. (Only defined
+	when _WIN32).
+	(pixmap_create_from_root_window): Renamed from
+	tkobjc_pixmap_create_from_root_window and made static.
+	(tkobjc_pixmap_create_from_widget): Handle case above.  Add support
+	for Win32.
+	(tkobjc_pixmap_save): Reorganize to handle both X11 and Win32.
+	(tkobjc_pixmap_drop): Drop dib for Win32.
+
+	* Pixmap.m ([Pixmap +create:widget:]): Use only
+	tkobjc_pixmap_create_from_widget.
+
+1998-08-07  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* comm.tcl (commConnect): Remove extra brackets around
+	non-namespace assignment to port.
+
+	* internal.m (tkobjc_pixmap_save): Add support for writing PNG
+	files (only from a XpmImage so far).
+
+1998-08-06  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* tkobjc.m: Add PixmapError error variable.
+
+	* internal.m (xpmerrcheck, tkobjc_pixmap_create_from_window): 
+	New functions.
+	(tkobjc_pixmap_create): image is now an instance variable of
+	Pixmap, deference through pixmap. 
+
+	* internal.[hm] (tkobjc_pixmap_create_from_root_window,
+	tkobjc_pixmap_save, tkobjc_pixmap_drop): New functions.
+
+	* Pixmap.m ([Pixmap -setFile:]): Remove.  
+	([Pixmap -setRaster:]): Move to using phase.
+	([Pixmap -createEnd]): Remove. 
+	([Pixmap +create:file:]): New method, call _loadPNG_.
+	([Pixmap +create:widget:]): New method.
+	([Pixmap -save:], [Pixmap -_loadPNG_:], [Pixmap -drop]): New methods.
+
+	* Pixmap.h: Declare PixmapError.
+	(Pixmap): Remove filename.  Add display and xpmimage.
+	Remove createEnd and setFile:.  Add +create:file: and +create:widget:
+	and save:.
+
+1998-08-05  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* comm.tcl (commConnect): Trap errors from lookup of application
+	port, and try non-namespace qualified lookup (shouldn't come up,
+	since this script is only used on Windows, and we'll always use
+	the latest version of BLT there).
+
+	* Makefile.am (tkobjc.lo): Make this the only thing depending on
+	TCLFILES.
+
+1998-08-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Pixmap.m ([Pixmap -createEnd]): Move row_columns to block with
+	row_pointers, initialize it there, not in RGB vs.  palette
+	conditional.  Free row_pointers after the map has been dropped.
+	Add sanity check for missing indices for a given RGB triplet.
+
+1998-08-02  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Pixmap.m (compareRGB): New function.
+	([Pixmap -createEnd]): Add support for RGB format PNG files;
+	uniquify colors and re-paletteize. 
+
+	* global.h, tkobjc.m (initTkObjc): Add PaletteError.
+
+	* internal.m: Use it.
+
+1998-07-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am: Add override to append of CFLAGS with X_CFLAGS.
+
+	* TkExtra.m: Don't include unistd.h.
+
+1998-07-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Graph.m ([Graph -setRangesXMin:Max:YMin:Max:]): Use
+	setRanges[XY]Min:Max: for the job.
+
+	* Graph.[hm]: Add setRangesXMin:Max:.
+
+1998-07-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Graph.m: Don't include stdlib.h.
+
+	* Graph.[hm]: Arguments to setScaleModeX:Y: are now boolean, not
+	integers.
+
+1998-07-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ButtonPanel.m: Don't include collections/String.h.
+
+1998-07-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* TkExtra.m ([TkExtra -preInitWithArgc:argv:]): Do namespace
+	import for BLT things in the case of BLT 2.4 (as with 8.0-unoff).
+
+1998-07-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* CompleteProbeDisplayLabel.m ([CompleteProbeDisplayLabel
+	-createEnd]): Don't set up drag and drop or class browsing if
+	there is no probe object.
+
+	* common.m (tkobjc_dragAndDropTarget, dragAndDropTargetArg): Pass
+	window name (%%W) to idReceive:.
+
+	* VarProbeEntry.m ([VarProbeEntry -createEnd]): Replace call
+	to getProbedType with ([getVarProbe getProbedType])[0].
+
+	* VarProbeEntry.h (VarProbeEntry): Replace probeType with varProbe.
+
+	* VarProbeEntry.[hm] ([VarProbeEntry -setVarProbe:]): Change accessor
+	for same.  Add getVarProbe.
+
+1998-07-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.tcl (do_package): Pass window to package:.
+	(do_package_arg): Pass window to package:arg:.
+
+	* common.m (oldSetupDragAndDrop, newSetupDragAndDrop): 
+	 Pass %%W to do_package.
+	 (oldSetupDragAndDropArg, newSetupDragAndDropArg): Pass %%W
+	to do_package_arg.
+	(tkobjc_bindButton3ToSpawn): Pass widgetName to Spawn:.
+	(tkobjc_bindButton3ToArgSpawn): Pass widgetName to argSpawn:arg:.
+	Focus on widget, not self.
+
+	* VarProbeEntry.m (tkobjc_bindReturnToSetValue): Use setVariableValue:
+	instead of setValue: (to discriminate different semantics of the
+	two calls).
+
+	* Entry.m ([Entry -setValue:]): Reset xview to 0 after inserting
+	replacement value.
+
+1998-07-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (TCLFILES): Name the Tcl files here, use in EXTRADIST.
+	($(libtkobjc_la_OBJECTS)): Depend on _tcl.x files.
+
+1998-07-07  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Graph.[hm] (-createElement, -destroyElement:, -setOwnerGraph:,
+	+createOwnerGraph:): Change to use of an object conforming to the
+	GraphElement protocol, not a statically-typed object.
+	(GraphElement): Make ownerGraph an object that conforms to the
+	Graph protocol instead of being statically typed.
+
+1998-07-06  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-registerAndLoad]): Use it to override class and resource names
+	provided by Tk.
+
+	* internal.[hm] (tkobjc_setName): New function to set 
+	class name from application name and mode, as well as the resource
+	name, if supplied.
+
+1998-07-01  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord -in:]): Recognize
+	:position and :size keywords.
+	(getVal, getValueList): New functions.
+	([WindowGeometryRecord -out:]): Modify to output :size and :position
+	lists per sizeFlag and positionFlag.
+
+	* WindowGeometryRecord.h (WindowGeometryRecord): New ivars
+	positionFlag and sizeFlag.
+
+	* WindowGeometryRecord.[hm]: Remove -getWindowGeometry and
+	-setWindowGeometry:.  Add setX:Y:, setWidth:Height:, -getX, -getY,
+	-getWidth, -getHeight, -getSizeFlag, -getPositionFlag.
+
+	* Widget.[hm]: Remove "position" from name of getPositionX,
+	getPositionY, and setPositionX:Y:.
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-setSaveSizeFlag:]):  New method.
+	([ArchivedGeometryWidget -registerAndLoad]): Check to see
+	if size or position are set in geometry record, and if so set them
+	in the widget.
+	([ArchivedGeometryWidget -updateArchiver]): Use setWidth:Height: 
+	instead of setWindowGeometry:.
+
+	* ArchivedGeometryWidget.h (ArchivedGeometryWidget): New ivar
+	saveSizeFlag.  Declare -setSaveSizeFlag:.
+
+1998-06-30  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* TkExtra.m ([TkExtra -getBltFullVersion]): Put blt_versions
+	variable name in scratch buffer before handing it to Tcl_GetVar.
+
+1998-06-25  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord
+	-setWindowGeometry:]): Don't use LiteralString, just tweak
+	literal flag.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* internal.m: Make private_raster_t access visible for
+	all code that needs it (both X11 and Win32 backends).
+
+	* Makefile.am (EXTRA_DIST): Include tcl files.
+	(lib_LIBRARIES, libtkobjc_a_SOURCES): Remove.
+	(%_tcl.x): New rule.
+	(SUBDIRS): Add tk.
+	(PNGINCLUDES, ZLIBINCLUDES): Add (substitutions).
+
+	* WindowGeometryRecord.m ([WindowGeometryRecord
+	-setWindowGeometry:]): Use create:setC: instead of two calls.
+
+	* Pixmap.m: Include Pixmap.h first.
+
+	* InputWidget.m: Include InputWidget.h first.
+
+1998-06-23  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LTLIBRARIES, libtkobjc_la_SOURCES,
+	libtkobjc_la_LDFLAGS, SRC, CURRENT, REVISION, AGE): New variables.
+	Set *_SOURCES from SRC.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+
+	* internal.m: Declare raster_private_t.
+	(tkobjc_raster_create): New function.
+	(tkobjc_raster_erase, tkobjc_raster_fillRectangle,
+	tkobjc_raster_ellipse, tkobjc_raster_line,
+	tkobjc_raster_rectangle, tkobjc_raster_drawPoint,
+	tkobjc_raster_createContext, tkobjc_raster_setColormap,
+	tkobjc_raster_createPixmap, tkobjc_raster_setBackground,
+	tkobjc_raster_flush, tkobjc_raster_savePixmap, tkobjc_raster_copy,
+	tkobjc_pixmap_create, tkobjc_pixmap_draw): Indirect gc, pm, oldpm,
+	tkwin through private.
+
+	* internal.h: Declare tkobjc_raster_create.
+
+	* Raster.h: Don't include internal.h.
+	(Raster): Declare only private (not pm, oldpm, tkwin and gc).
+
+	* Raster.m ([Raster -createEnd]): Use tkobjc_raster_create,
+	instead of using Tk functions directly.
+
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-05-28  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* win32dib.[ch]: Include contents only if _WIN32.
+
+	* Graph.m: Include collections.h.
+
+1998-05-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* ArchivedGeometryWidget.m: Add phase tags.
+
+1998-05-06  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Button.m, ButtonPanel.m, Canvas.m, CanvasAbstractItem.m,
+	CanvasItem.m, CheckButton.m, Circle.m, ClassDisplayHideButton.m,
+	ClassDisplayLabel.m, Colormap.m, CompleteProbeDisplayLabel.m,
+	CompositeItem.m, Entry.m, Form.m, Frame.m, Graph.m, Histogram.m,
+	InputWidget.m, Label.m, Line.m, LinkItem.m, MessageProbeEntry.m,
+	NodeItem.m, OvalNodeItem.m, Pixmap.m, ProbeCanvas.m, Raster.m,
+	Rectangle.m, RectangleNodeItem.m, SimpleProbeDisplayHideButton.m,
+	SuperButton.m, TextItem.m, VarProbeEntry.m, VarProbeLabel.m,
+	Widget.m, WindowGeometryRecord.m, ZoomRaster.m:  Add phase tags.
+ 
+	* CanvasAbstractItem.m, NodeItem.m, WindowGeometryRecord.m,
+	ZoomRaster.m: Reorder methods for above.
+
+1998-04-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* OvalNodeItem.h, RectangleNodeItem.h: Declare createItem.
+	
+	* NodeItem.m ([NodeItem -moveX:Y:]): Get canvasName and use it
+	instead of calling getWidgetName twice.
+
+	* CanvasAbstractItem.h (CanvasAbstractItem): Add item as an instance
+	variable.
+
+	* CanvasItem.h (CanvasItem): Remove item as an instance variable.
+
+	* CanvasItem.[hm]: Don't declare createItem.
+
+	* Circle.[hm]:  Remove reportClick and reportMoveX:Y:.
+
+	* NodeItem.h: Remove item.
+
+	* NodeItem.m (createButton3Binding, createButton1Binding,
+	createButton1MotionBinding): New static functions.
+	([NodeItem -createBindings]): Use them.
+
+1998-04-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* CanvasAbstractItem.[hm]: New files.
+
+	* MessageProbeEntry.[hm]: Rename resultIdFlag to idFlag (and setter).
+
+	* Makefile (OBJECTS, HEADERS): Add CanvasAbstractItem.[oh].
+	(CanvasAbstractItem.o): Add.
+
+	* CanvasItem.[hm], CompositeItem.[hm]: Superclass is now
+	CanvasAbstractItem.  Remove canvas, target, clickSel, moveSel, and
+	postMoveSel instance variables and accessors.  Don't
+	declare/define createEnd or clicked.
+
+	* InputWidget.[hm]: linkVariable{Int,Double,Boolean}: now take
+	a pointer to the accompanying type as an argument, not void *.
+
+	* Entry.[hm]: Declare/define setHeight: not setWidth:Height:.
+	setHeight: now aborts, since Tk doesn't deal with the height of
+	an Entry.
+
+	* Form.m ([Form -_addLineName_:Variable:Type:]): Use setWidth:
+	not setWidth:Height: since height doesn't work for Tk Entry widgets.
+
+	* Form.[hm]: Rename -addLineName:Variable:Type: to be internal.
+	New methods: -addLineName:{Boolean,Int,Double}:.
+
+1998-04-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ZoomRaster.m: ([ZoomRaster _setConfigureInfo_:]): Use getObjectName
+	instead of getObjcName.
+	[ZoomRaster handleConfigureWidth:Height:): Remove debugging code.
+
+	* Widget.m (makeWidgetName): Use getObjectName instead of getObjcName.
+
+	* Widget.h: Remove objcName and getter. 
+
+	* Widget.m: Don't compute objcName.  Remove getter.  Remove drop.
+
+	* Raster.m ([Raster -createEnd]): Use getObjectName instead of
+	getObjcName.
+
+	* InputWidget.[hm]: Remove linkVariable:Type:.  New static function
+	relink that serves the link methods.
+
+	* InputWidget.m ([InputWidget -createEnd]): Use getObjectName
+	instead of getObjcName.
+
+	* SimpleProbeDisplayHideButton.m ([SimpleProbeDisplayHideButton
+	-createEnd]): Remove pack to get relative placement of class 
+	name and hide button; this is now done in SimpleProbeDisplay.
+
+	* SimpleProbeDisplayHideButton.[hm]: Remove frame and setFrame
+	accessor.
+
+	* ClassDisplayHideButton.m (tkobjc_packForgetArmSuperAndResize): 
+	Copy the name of the object.
+
+	* ButtonPanel.m ([ButtonPanel -setButtonTarget:]): Assign target
+	variable; don't compute targetName.
+	([ButtonPanel -addButtonName:target:method:]): Use
+	setButtonTarget:method: not setCommand:.
+	([ButtonPanel -addButtonName:method:]): Use
+	addButtonName:target:method:; don't compute command name.
+
+	* ButtonPanel.h (ButtonPanel): Replace targetName with target.
+	Replace addButtonName:Command: with addButtonName:target:method:
+	and addButtonName:actionName: with addButtonName:method:.
+
+	* Button.m: Include objc-api.h.
+	([Button -setButtonTarget:method:]): Compute command name;
+	don't hard code to `dynamic'.
+
+	* Button.[hm]: Remove setCommand:.
+
+	* NodeItem.[hm] ([NodeItem -createPaddedText]): New method.
+
+	* OvalNodeItem.m ([OvalNodeItem -createItem]): Use it.
+
+	* RectangeNodeItem.m ([RectangleNodeItem -createEnd]): Use it.
+
+	* NodeItem.[hm], TextItem.[hm]: Remove gratuitous usingFont
+	convenience setter methods.
+
+	* common.[hm] (tkobjc_createText): New function.
+
+	* TextItem.m ([TextItem -createItem]): Use tkobjc_createText.
+
+	* TextItem.[hm]: Reformatting throughout.
+
+	* OvalNodeItem.m ([OvalNodeItem -createItem]): Use -createText.
+
+	* RectangleNodeItem.m ([RectangleNodeItem -createItem]): Likewise.
+
+	* NodeItem.[hm] (-createText): New method.  Reformatting throughout.
+
+	* internal.m (tkobjc_raster_drawPoint): Use color index,
+	not pixel value.  (Thanks to Pietro Terna.)
+
+1998-04-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m (tkobjc_raster_drawPoint): Don't assign to bit map
+	unless point within range.
+
+	* win32dib.c (dib_fill): Add more clipping checking.
+
+1998-04-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ZoomRaster.m ([ZoomRaster ellipseX0:Y0:X1:Y1:Width:Color:],
+	[ZoomRaster lineX0:Y0:X1:Y1:Width:Color:], 
+	[ZoomRaster rectangleX0:Y0:X1:Y1:Width:Color:]): New methods.
+
+1998-04-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Raster.m ([Raster -drawPointX:Y:Color:]): Pass a color index,
+	not a pixel value to tkobjc_raster_drawPoint.
+
+1998-04-17  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* common.m: Include internal.h instead of tk.h.
+
+	* Form.m, Histogram.m: Include internal.h not TkExtra.h.
+
+	* ArchivedGeometryWidget.h Button.h ButtonPanel.h Canvas.h
+	CanvasItem.h CheckButton.h Circle.h ClassDisplayHideButton.h
+	ClassDisplayLabel.h Colormap.h CompleteProbeDisplayLabel.h
+	CompositeItem.h Entry.h Form.h Frame.h Graph.h Histogram.h
+	InputWidget.h Label.h Line.h LinkItem.h MessageProbeEntry.h
+	NodeItem.h OvalNodeItem.h Pixmap.h ProbeCanvas.h Raster.h
+	Rectangle.h RectangleNodeItem.h SimpleProbeDisplayHideButton.h
+	SuperButton.h TextItem.h VarProbeEntry.h VarProbeLabel.h Widget.h
+	WindowGeometryRecord.h ZoomRaster.h: Include gui.h and add
+	<_protocol> enforcement.
+
+	* win32dib.[hc] (dib_line, dib_rectangle): New functions.
+
+	* internal.[hm] (tkobjc_raster_line, tkobjc_raster_rectangle): New
+	functions.
+
+	* Raster.m ([Raster -setColormap:]): If colormap is nil, call erase.
+
+	* Raster.[hm]: New methods lineX0:Y0:X1:Y1:Width:Color: and
+	rectangleX0:Y0:X1:Y1:.
+
+1998-04-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* testGraph.m, testHistogram.m: Don't include stdio.h, stdlib.h,
+	or collections.h.
+	
+	* RectangleNodeItem.m: Include Widget.h and global.h.
+
+	* Circle.m, Rectangle.h, RectangleNodeItem.h, TextItem.h: Don't
+	include global.h or Widget.h.
+
+	* LinkItem.m: Include NodeItem.h.
+
+	* LinkItem.h: Don't include NodeItem.h.
+
+	* common.m: Include misc.h instead of string.h.
+
+	* CheckButton.m, Entry.m, Form.m: Don't include stdio.h, stdlib.h,
+	or string.h.
+
+	* TkExtra.m: Don't include stdarg.h, stdio.h, or string.h. Remove
+	duplicate include of unistd.h. 
+
+	* Entry.m: Don't include tclObjc.h or TkInterp.h.
+
+	* Button.m, ButtonPanel.m, Circle.m, ClassDisplayHideButton.m,
+	Histogram.m, Line.m, LinkItem.m, OvalNode.m, Rectangle.m,
+	RectangleNodeItem.m: Don't include string.h, stdio.h, or stdlib.h.
+	Include misc.h.
+
+	* Circle.m, Line.m, Rectangle.h, WindowGeometryRecord.h: Reformatting
+	throughout.
+
+	* ClassDisplayHideButton.m (tkobjc_packForgetArmSuperAndResize),
+	OvalNode.m (-createItem), RectangleNodeItem.m (-createItem): Use
+	xfree instead of free.
+
+	* ClassDisplayHideButton.m:
+	(tkobjc_packForgetArmSuperAndResize): Use -getObjectName instead
+	of tclObjc_objectToName. 
+	(tkobjc_configureWidgetToDrop): Likewise.
+
+	* InputWidget.m: Don't include stdlib.h.  Include misc.h.
+	Use xmalloc instead of malloc.
+
+	* CompositeItem.m: Don't include string.h, stdio.h, or stdlib.h.
+	Reformatting throughout.
+
+	* ArchivedGeometryWidget.h, Circle.h, Line.h, LinkItem.h,
+	NodeItem.h, OvalNodeItem.h, Rectangle.h, RectangleNodeItem.h,
+	TextItem.h: Don't include objectbase/SwarmObject.h.
+
+1998-04-11  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* win32dib.c (dib_copy): Copy the colormap information.
+
+1998-04-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* win32dib.h (dib): New members colorMapOffsets, colorMapObjects,
+	colorMapBlocks and colorMapSize.
+	(dib_setPalette, dib_realizePalette): Remove declarations.
+	(dib_copy): Add x, y target offset.
+
+	* win32dib.c (dib_create): Initialize colorMapBlocks,
+	colorMapSize, colorMapOffsets, and colorMapObjects to zero.
+	(dib_destroy, dib_createBitmap): Handle case that there is no
+	window context.
+	(dib_augmentPalette): Replaces dib_setPalette.
+	(dib_realizePalette): Removed.
+	(dib_copy): Add x,y target offset.
+
+	* tkobjc.m (initTkObjc): Set up MissingFiles as an error type.
+
+	* tkobjc.h: Include Pixmap.h.  Never include XDrawer.h or XPixmap.h.
+
+	* internal.m: Include global.h.
+	(Xfill, tkobjc_raster_drawPoint): Use X11Pixmap instead of Pixmap
+	when appropriate.
+	(tkobjc_raster_erase): Allocate erase color using nextFreeColor
+	instead of fixing it at 255.  Use fillRectangeX0:Y0:X1:Y1:Color:
+	to do erase (for ZoomRaster).
+	(tkobjc_raster_setColormap): Use dib_augmentPalette instead of
+	bothering with the colormap Tk setup; we're using DIBs anyway.
+	(tkobjc_raster_createPixmap): Remove casting between dib and pm.
+	(tkobjc_raster_savePixmap): New function.
+	(tkobjc_raster_copy): dib_copy now has x, y offset.
+	(offset_for_object, tkobjc_pixmap_create, tkobjc_pixmap_draw): New
+	functions.
+
+	* internal.h: Define Pixmap as X11Pixmap for duration of
+	tk and X11 includes.  Include png.h.  Include tkobjc/Pixmap.h
+	and make class object. Declare new functions tkobjc_raster_savePixmap,
+	tkobjc_pixmap_create, and tkobjc_pixmap_draw.
+
+	* global.h: Declare MissingFiles as an tkobjc error type.
+
+	* ZoomRaster.m: Don't include Drawer.h, include gui.h
+	instead.
+
+	* ZoomRaster.h: Include gui.h to get Drawer protocol.
+
+	* Raster.m ([Raster +createBegin:]): Initialize eraseColor to -1.
+	Don't erase; there's not yet a colormap for win32 background.
+	([Raster -setWidth:Height:]): Use new function
+	tkobjc_raster_savePixmap.  tkobjc_raster_copy usage is modifed
+	to get oldPm from object.
+
+	* Raster.h: Don't include tkobjc/Drawer.h; it's in the gui
+	protocol now.
+	(Raster): New instance variable oldpm.  Declare pm and oldpm
+	as X11Pixmap and void * for Unix and Win32, respectively.
+	Add instance variable eraseColor.
+
+	* Makefile (OBJECTS,HEADERS): Add Pixmap.
+
+	* Colormap.[hm] (nextFreeColor): New method.
+
+	* OvalNodeItem.m, TextItem.m (-createItem): Mention that new font
+	variable is used here too.
+
+	* RectangleNodeItem.m (-createItem): Use font variable here as well.
+
+Thu Apr 09 21:56:00 1998    <gepr@swarm.com>
+
+	* NodeItem.[hm], TextItem.[hm]: New methods setText:usingFont: and
+	setFont: allow one to specify font to be used.  Added
+	corresponding IVar const char *font.
+
+1998-04-05  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ZoomRaster.m ([ZoomRaster -handleConfigureWidth:Height:]): 
+	When newHeight exceeds newWidth, make the zoom be the smaller
+	(perhaps already adjusted width).
+
+1998-04-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ZoomRaster.m: Include Drawer.h.
+	([ZoomRaster -draw:X:Y:]): Define in both X and Win32 cases.
+
+	* XPixmap.m ([XPixmap -createEnd]): Add better error checking
+	after XpmReadFileToPixmap.
+	([XPixmap -drawX:Y:raster:]): drawOn:X:Y:GC:Caller renamed to this.
+	GC and the pixmap come from looking in the statically typed Raster
+	argument.
+
+	* Raster.m ([Raster -draw:X:Y:]): Now calls drawX:Y:raster:,
+	not drawOn:X:Y:GC:Caller.  Define in both X and Win32 cases.
+
+	* Raster.h: Include Drawer.h, not XDrawer.h.  Do it in both
+	X and Win32 cases.
+	(-draw:X:Y:): Make first argument conform to Drawer, not XDrawer
+	protocol.  Do it in both X and Win32 cases.
+
+	* Makefile (XDRAWER_H): Remove.  Change to Drawer.h throughout.
+
+	* Drawer.h:  Renamed from XDrawer.h.  Protocol is now consists
+	of the method drawX:Y:raster:, not drawOn:X:Y:GC:Caller:.
+
+1998-04-02  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* win32dib.[ch] (dib_fill): Make width and height arguments unsigned.
+	(dib_ellipse): New function.
+
+	* internal.[hm]: New function tkobjc_raster_ellipse.
+
+	* Raster.[hm]: New method ellipseX0:Y0:X1:Y1:Width:Color:.
+
+	* TkExtra.m (ensureBltSupportFiles): Cope with the inability
+	to find the Swarm source tree; use the current directory.
+	([TkExtra -preInitWithArgc:argv:]): Load bltGraph.tcl instead
+	of setting up the autoload path.  Look for word.tcl in the
+	current directory if there is not value for [info library].
+
+1998-03-31  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ZoomRaster.m ([ZoomRaster -handleConfigureWidth:Height:]): Don't
+	adjust newWidth unless there is disagreement between the computed
+	width and height zoom.
+
+1998-03-29  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* win32dib.c (dib_createBitmap): Round frameWidth up to 4.
+	(dib_blit, dib_paintBlit): Round down in case width + x exceeds
+	frameWidth.
+
+	* internal.m (tkobjc_raster_clear): New function.
+
+	* internal.h: Declare tkobjc_raster_clear.
+
+	* ZoomRaster.m ([ZoomRaster -_setConfigureInfo_:]): New method.
+	([ZoomRaster -createEnd]): Call _setConfigureInfo_ for Configure
+	and Expose instead of just a (inline) Configure.
+	([ZoomRaster -handleConfigureWidth:Height:]): Let newWidth exceed
+	newHeight (Win32 seems to like to think better of small window
+	widths).
+	([ZoomRaster -handleExposeWidth:Height:]): New method.  Calls
+	tkobjc_raster_clear for new extent.
+
+	* ZoomRaster.h: Declare handleExposeWidth:Height:.
+
+	* Raster.m ([Raster +createBegin:]): Define default 
+	width and height in a createBegin, not createEnd.
+
+	* Raster.h: Declare createBegin and createEnd.
+
+1998-03-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* TkExtra.m (ensureBltSupportFiles): Don't call getSwarmHome
+	twice; use the local variable.  Duplicate basePath so that it
+	may be printed later in a diagnostic message.
+
+1998-03-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m: Don't include stdlib.h.
+	(setSecondaryPath): Now takes `arguments' argument to get swarmHome
+	instead of using SWARMHOME environment variable.
+
+	* TkExtra.m: Include objectbase.h and objectbase/Arguments.h.
+	(ensureBltSupportFiles): Enhance to check for usable blt_library
+	in swarmHome/lib.  Now takes `arguments' argument.
+
+1998-03-17  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* tkobjc.h: Don't include XDrawer.h if Win32.
+
+	* ZoomRaster.m ([ZoomRaster -draw:X:Y:]): Don't define if
+	Win32.
+
+	* Raster.m ([Raster -draw:X:Y:]): Don't define if Win32.
+
+	* Raster.h: Don't include XDrawer.h if Win32.  Don't declare
+	- draw: (id <XDrawer):X:Y: in Win32.
+
+	* Makefile (XDRAWER_H): Define as XDrawer.h if not Win32. 
+	Put XDRAWER_H in BACKEND_H.  Replace XDrawer.h with XDRAWER_H 
+	throughout.
+
+1998-03-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m: Include stdlib.h (for getenv).
+	(setSecondaryPath): New function sets a secondary {TCL,TK}_LIBRARY
+	path from $SWARMHOME/lib.
+	(tkobjc_initTclInterp, tkobjc_initTkInterp): Use it.
+
+1998-03-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m: Include sys/time.h, protecting against redefinition
+	of timezone.  Undo (X11) Status define to avoid warnings in
+	Win32 header files.
+
+	* win32dib.h: Declare new function dib_copy. 
+	Uncomment dib_{un}lock.
+
+	* win32dib.c (dib_fill): Make frameWidth even if it isn't.
+	Include starting y offset in base.  
+	(dib_{un}lock): Uncomment.
+	(dib_copy): New function.
+
+	* internal.m (tkobjc_raster_erase): Reserve 255/black for erasing
+	rather than using temporary colormap.
+	(tkobjc_raster_copy): Use new function dib_copy to copy
+	old pixmap.
+
+1998-03-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* tkobjc.h: Don't include XPixmap when _WIN32.
+
+	* internal.m: Remove dummy Tcl_{Create,Delete}FileHandler for
+	unused BLT bgExec support.
+
+1998-03-13  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.h: Move inclusion of Raster and Colormap after inclusion
+	of tk.h.
+
+1998-03-12  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ClassDisplayHideButton.m (tkobjc_configureWidgetToDrop): Send
+	markForDrop, not drop.
+
+	* win32dib.c: Include win32dib.h not dib.h.
+
+	* Makefile (BACKEND_{H,O}): Renamed from XPIXMAP_{H,O}.  Include
+	win32dib.[hm] for gnu-win32.
+
+	* internal.m (Colormap): Define as X11Colormap during inclusion
+	of tkWinInt.h.
+	(tkobjc_raster_createPixmap): Use renamed tkobjc_raster_setColormap.
+
+	* Makefile: Remove defines for Tk headers.  Make a rule
+	for internal.o.
+	(XPIXMAP_{H,O}): Define conditionally on MACHTYPE vs i386-pc-cygwin32.
+
+	* internal.m: Include win32dib.h and Tk internal header files only
+	if _WIN32.  Include <misc.h>.
+	(Xfill): New function.
+	(tkobjc_raster_fillRectangle}): Use dib_fill in Win32 case and
+	Xfill in X case.
+	(tkobjc_raster_erase): In Win32 case, setup a temporary colormap
+	and use tkobjc_raster_fillRectangle with index of 0 to erase. 
+	In X case, use Xfill.
+	(tkobjc_raster_drawPoint,tkobjc_setColormap): New functions.
+	(tkobjc_raster_createPixmap, tkobjc_raster_flush): Handle Win32
+	case.
+	(tkobjc_raster_copy): Disabled in Win32 case.
+	(XDrawPoint, XCreatePixmap, XFreePixmap): Remove.
+
+	* internal.h: Include <tkobjc/Colormap.h> and make a @class.
+	(tkobjc_raster_{fillRectangle,drawPoint}): Takes a colormap index
+	not a PixelValue.
+	(tkobjc_raster_{erase,setColormap}): Declare.
+
+	* Raster.m ([Raster -setColormap:]): Call tkobjc_setColormap.
+	([Raster -erase]): Call tkobjc_raster_erase instead of
+	tkobjc_raster_fillRectangle.
+	([Raster fillRectangleX0:Y0:X1:Y1:Color:]): Color is now a colormap
+	index, not a PixelValue.
+	([Raster -drawSelf]): Remove debug message.
+
+	* Raster.h (Raster): Make colormap public.
+
+	* Colormap.h (Colormap): Make map, isSet, and cmap public.
+
+	* win32dib.[hc]: New files.
+
+1998-03-09  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* common.m (tkobjc_updateIdleTasks, tkobjc_releaseAndUpdate):
+	Disable use of BLT busy in _WIN32 case.
+
+	* tkbusy.tcl: Note that isbusy isn't implemented.
+
+	* tkobjc.m (initTkObjc): Evaluate comm_tcl, create a comm channel,
+	and evaluate tkbusy_tcl in _WIN32 case.
+
+	* Makefile (%_tcl.x): Handle backslashes.
+	(tkobjc.o): Depend on comm_tcl.x, tkbusy_tcl.x as well.
+
+	* comm.tcl, tkbusy.tcl: New files.
+
+1998-03-06  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* internal.m: Define WindowsArguments as Arguments during load of
+	tkWinInt.h.  Define BOOL as BOOL_ during load of tkInt.h.
+	Do these includes before Swarm class includes.
+	(XDrawPoint, XCreatePixmap, XFreePixmap): New functions for __WIN32_.
+
+	* internal.h: Don't include X11/xpm.h if __WIN32__.
+	gnu-win32 B19 supplies X11 header files.  
+
+        * internal.[hm]: Make width and height arguments unsigned.
+
+	* internal.m: Don't include tkobjc/Widget.m. Include internal.h
+	first.  Define BOOL to be BOOL_ to avoid conflict with Xmd.h.
+	Include tkInt.h and, if __WIN32__, tkWinInt.h. 
+	(tkobjc_linkVar): Make second argument void *.
+	tkobjc_raster_{fillRectangle,drawPoint,createContext,createPixmap,
+	setBackground,copy,flush}: New functions.
+
+	* internal.h: Define Colormap as X11Colormap before including X11
+	things.  Otherwise, don't try to preserve Colormap preprocessor
+	definitions.  Include and define Raster class.  Declare
+	tkobjc_raster_{fillRectangle,drawPoint,createContext,createPixmap,
+	setBackground,copy,flush}.
+
+	* XDrawer.h: Include internal.h instead of X11/Xlib.h.
+
+	* Raster.m ([Raster -createEnd]): Don't set display or xwin
+	(variables removed).
+	([Raster -getDisplay]): Removed.
+	([Raster -createEnd]): Use tkobjc_raster_createContext and
+	tkobjc_raster_createPixmap instead of calling X primitives.
+	([Raster -setColormap:]): Use tkobjc_raster_setBackground instead
+	of using X primitives.
+	([Raster -setWidth:Height:]): Use tkobjc_raster_createPixmap and
+	tkobjc_raster_copy instead of using X primitives.
+	([Raster -erase]): Use tkobjc_raster_fillRectangle rather than
+	using X primitives.  Don't bother preserving foreground color.
+	([Raster -drawPointX:Y:Color:]): Use tkobjc_raster_drawPoint
+	rather than X primitives.
+	([Raster -fillRectangleX0:Y0:X1:Y1:Color:]): Use
+	tkobjc_raster_fillRectangle rather than using X primitives.
+	([Raster -drawSelf]): Use tkobjc_raster_flush rather than 
+	X primitives.
+
+	* Raster.h (Raster):  Make tkwin, gc, pm, width and height
+	public (for access by internal.m routines).  Remove display, and xwin.
+
+	* Colormap.m ([Colormap -setColor:ToName:]): Get xc in two
+	steps:  XParseColor and XAllocColor instead of XAllocNamedColor.
+	(More precision in error reports and Tk 8 lacks an emulation
+	routine for the latter.)
+
+	* Colormap.h: Type of cmap renamed from Colormap_ to X11Colormap.
+
+1998-02-27  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* InputWidget.[mh] ([InputWidget -linkVariableDouble:], 
+	[InputWidget -linkVariableBoolean:]): New methods.
+
+	* Graph.m: Don't include string.h, stdio.h, or collections.h.
+	Include misc.h for strdup.
+
+	* Graph.h (Graph): Add setRangesYMin:Max:.
+
+1998-02-24  Alex Lancaster  <alex@santafe.edu>
+
+	* common.[hm] (tkobjc_updateIdleTasks): Renamed from
+	(tkobjc_updateIdleTasksAndHold) and parameterized to take an
+	argument (int hold) to specify hold status.
+
+1998-02-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* TkExtra.m ([TkExtra -preInitWithArgc:argv:]): Constify argv.
+
+	* tkobjc.m: Include objectbase/Arguments.h.  Change initTkObjc
+	to take an Arguments object.
+
+	* testHistogram.m: Include objectbase/Arguments.h.  Create an
+	Arguments object and pass it to initTkObjc.
+
+	* testGraph.m (main): Include objectbase/Arguments.h. Create Graph
+	not BLTGraph, and use setTitle: and setAxisLabelsX:Y:.  Create an
+	Arguments object and pass it to initTkObjc.
+
+	* testFrame.m (main): Include objectbase/Arguments.h. Use
+	initModule(collections) instead of initCollections().  Create an
+	Arguments object as pass it to initTkObjc.
+
+	* testRaster.m (main): Likewise.  Use Colormap instead of XColormap.
+
+	* internal.h (tkobjc_initT{cl,k}Interp): Now take id as argument
+	instead of argc, argv.
+
+	* internal.m (tkobjc_initT{cl,k}Interp): Likewise.
+
+	* global.h: Add promptAndEval to TkExtra protocol.
+	(initTkObjc): Now takes id as argument instead of argc, argv.
+
+	* Makefile (testFrame, testHistogram, testRaster, testGraph): 
+	Use -ltkobjc -lsimtools $(LIBS) instead of naming everything
+	(simtools is for archiving routines).
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget -drop]): 
+	Disable destroy notification before dropping.
+
+1998-02-05  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* tkobjc.m: Include global.h.
+
+	* TkExtra.m ([TkExtra -preInitWithArgc:argv:]): 
+	For Tcl 8, preload word.tcl to avoid inexplicable error
+	about second argument to tcl_wordBreak{Before,After} with
+	first use of a double-click on a VarProbeEntry. 
+	Thanks to Paul Johnson for reporting this.
+
+1998-02-01  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Colormap.m ([Colormap -setColor:ToName:]): Remove cast
+	to Color for assignment to map[].
+	([Colormap -pixelValue:]): Remove cast to PixelValue for white.
+
+1998-01-28  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* TkExtra.m ([TkExtra -preInitWithArgc:argv:]): In 8.0-unoff, 
+	don't import everything, just the BLT features we really need.
+
+1998-01-27  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* InputWidget.[hm]: New method linkVariableInt:.
+
+	* tkobjc.m (initTkObjc): Remove assignment to Colormap.
+
+	* tkobjc.h: Include tkobjc/Graph.h instead of tkobjc/BLTGraph.h
+	and tkobjc/Colormap.h instead of tkobjc/XColormap.h.
+
+	* internal.m: New functions tkobjc_createEventHandler and
+	tkobjc_deleteEventHandler.
+
+	* internal.h: Include X11/Xlib.h for XColormap and X11/Xutil.h for
+	ZoomRaster.  Include objc/objc.h.  Declare new functions
+	tkobjc_createEventHandler and tkobjc_deleteEventHandler.
+
+	* ZoomRaster.m: Reformatting throughout.
+
+	* Widget.m ([Widget -createEnd]): Use getObjectName instead of
+	tclObjc_objectToName.  Reformatting throughout.
+
+	* SimpleProbeDisplayHideButton.m ([SimpleProbeDisplayHideButton
+	-createEnd]): Use getObjectName instead of tclObjc_objectToName.
+
+	* NodeItem.m:  Don't include string.h, stdio.h, or stdlib.h.
+	([NodeItem -createBindings]): Store widget name and object
+	name in variables and use those.  Reformatting throughout.
+
+	* Makefile (OBJECTS, HEADERS): Change BLTGraph to Graph, and
+	XColormap to Colormap.
+	(Graph.o): Renamed from BLTGraph.o.
+	(Colormap.o): Renamed from Colormap.o.
+
+	* CanvasItem.m: Don't include string.h, stdio.h, or stdlib.h.
+	([CanvasItem -createBindings]): Use getObjectName instead of
+	tclObjc_objectToName.  Reformatting throughout.
+
+	* Canvas.m: Don't include string.h, stdio.h, or stdlib.h.
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-setWindowGeometryRecordName:]): Include internal.h.
+	([ArchivedGeometryWidget -setWindowGeometryRecordName:]): Change
+	from "global.h" to tkobjc/global.h.
+	([ArchivedGeometryWidget
+	-enableDestroyNotification:notificationMethod:]): Use
+	tkobjc_createEventHandler.
+	([ArchivedGeometryWidget -disableDestroyNotification]): Use
+	tkobjc_deleteEventHandler.
+
+ 	* Graph.[hm]:  Renamed from BLTGraph.[hm].
+
+	* Colormap.[hm]: Renamed from XColormap.[hm].
+	
+	* tkobjc.m: Include internal.h and gui.h.  Don't include
+	tkobjc/TkExtra.h Define globalTkInterp to conform to the TkExtra
+	protocol.
+	(initTkObjc): Constify argv.  Use tkobjc_initTclInterp and
+	tkobjc_initTkInterp.  Set Colormap to XColormap.
+
+	* global.h: Make globalTkInterp extern conform to TkExtra
+	protocol, declared immediately above.  Constify argv argument to
+	initTkObjc declaration.
+
+	* common.m: Include defobj.h and tk.h.
+	(tkobjc_dragAndDropTarget, dragAndDropTargetArg,
+	oldSetupDragAndDrop, newSetupDragAndDrop, oldSetupDragAndDropArg,
+	newSetupDragAndDropArg, tkobjc_bindButton3ToSpawn,
+	tkobjc_bindButton3ToArgSpawn): Use getObjectName method instead of
+	tclObjc_objectToName.
+	(tkobjc_drag_and_drop_object): Use new defobj nameToObject
+	function instead of tclObjc_nameToObject.
+
+	* common.h: Use #include <objc/objc.h>, not #import <objc/objc.h>.
+
+	* ZoomRaster.m: Don't include string.h, stdio.h, stdlib.h,
+	tclObjc.h, tkobjc/TkExtra.h, or X11/Xutil.h.  Include
+	internal.h. Reformatting throughout.
+
+	* XPixmap.m ([XPixmap -setFile:]): Include internal.h.
+	Don't include tkobjc/TkExtra.h or X11/xpm.h.
+	([XPixmap -createEnd]): Use tkobjc_nameToWindow.
+
+	* XPixmap.h: Include gui.h.  Don't include tk.h.
+
+	* XColormap.m: Don't include TkInterp.h.  Include gui.h.
+	([XColormap -map]): Return PixelValue, again.
+	([XColormap -pixelValue:]): Likewise. 
+	([XColormap -setColor:ToName:]): Use Color not GUI_Color.
+	([XColormap -setColor:ToRed:Green:Blue:]): Likewise.
+	([XColormap -setColor:ToGrey:]): Likewise.
+	([XColormap -white]): Return PixelValue, not GUI_PixelValue.
+	([XColormap -black]): Likewise.
+	([XColormap -colorIsSet:]): Take Color as argument, not GUI_Color.
+
+	* XColormap.h: Don't provide typedefs for PixelValue or Color,
+	they come from gui.h now.  map, pixelValue:, white, and black return
+	a PixelValue again.  The setColor methods and colorIsSet: once
+	again use PixelValue, not GUI_PixelValue.
+
+	* TkExtra.h: Don't include tk.h.
+
+	* SuperButton.m: Don't include tclObjc.h, tkobjc/common.h, stdlib.h,
+	or string.h.
+	(tkobjc_configureWidgetToPackBeforeAndFillLeftThenDisableAndResize): 
+	Don't use tclObjc_objectToName, use getObjectName.
+
+	* Raster.m: Don't include string.h, stdio.h, stdlib.h, tclObjc.h,
+	or TkInterp.h.  Include internal.h.
+	([Raster -createEnd]): Use tkobjc_nameToWindow.
+	([Raster -setButton:Client:Message:]): Use ButtonLeft/Middle/Right
+	symbols instead of integers in case statement.
+	([Raster -handleButton:X:Y:]): Likewise.
+
+	* Raster.h: Don't include tk.h, or XColormap.h.  Don't
+	define ButtonLeft, ButtonMiddle, or ButtonRight, they come
+	from gui.h now.  Include internal.h.  Minor reformatting.
+
+	* Makefile (OBJECTS,HEADERS): Add internal.
+	(internal.o): Add.
+
+	* InputWidget.m:  Include internal.h.  Don't include TkInterp.h,
+	stding.h, or stdio.h.
+	([InputWidget -linkVariable:Type:]): Use tkobjc_unlinkVar and
+	tkobjc_linkVar.
+
+	* internal.[hm]:  New files.  These routines encapsulate
+	sorts of interpreter access only used internally.  The header
+	file loads X headers files, but keeps Colormap free.
+
+1998-01-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Histogram.m ([Histogram -hideLegend]): Only use -hide yes
+	if using BLT 2.3, not BLT 2.1 or BLT 8.0-unoff.
+
+	* TkExtra.m ([TkExtra -getBltFullVersion]): Check for 8.0 before
+	getting the patchlevel; asking for
+	blt::blt_versions(BLT_patchlevel) caused Tcl7.6/Tk4.2 to core dump
+	in LookupVar.
+
+1998-01-25  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ClassDisplayLabel.[hm], VarProbeLabel.[hm]: New files.
+	
+	* Widget.[hm]: Remove enableRelif, setBorderWidth:,
+	setupWindowExitColor setupWindowExitColor, and focus.
+
+	* Makefile (OBJECTS,HEADERS): Add ClassDisplayLabel and VarProbeLabel.
+	(ClassDisplayLabel.o, VarProbeLabel.o): Add.
+
+	* Label.m: Remove anchorEast, anchorWest, and colorBlue.
+
+	* Label.h: Likewise.  Declare createEnd.
+
+	* Frame.m ([Frame -setBorderWidth:], [Frame -setReliefFlag:]): New
+	methods.
+	([Frame -createEnd]): Create relief if reliefFlag is set.
+	Set borderwidth if non-zero.
+
+	* Frame.h (Frame):  Add borderWidth and reliefFlag.  Declare
+	setters.
+
+	* CompleteProbeDisplayLabel.m ([CompleteProbeDisplayLabel
+	-createEnd]): Remove calls to anchorWest and colorBlue, they are
+	now inherited.  Replace calls to setupWindow{Entry,Exit}Color with
+	direct calls to globalTkInterp; those methods were only used
+	here, and therefore have been removed.
+
+	* CompleteProbeDisplayLabel.h: Include ClassDisplayLabel.h instead
+	of Label.h. (CompleteProbeDisplayLabel): Inherit from
+	ClassDisplayLabel.
+
+	* tkobjc.m: Don't include unistd.h or string.h.
+	(ensureBltSupportFiles): Remove.
+	(initTkObjc): Don't append $blt_library to auto_path.
+
+	* TkExtra.m: Include unistd.h and string.h.
+	(ensureBltSupportFiles): Moved from tkobjc.m.
+	([TkExtra -preInitWithArgc:argv:]): Check to see that Blt_Init
+	returns TCL_OK; possibily more strict.  Use getBltFullVersion to
+	see BLT is 8.0-unoff.  In that case, import from blt::.  Call
+	ensureBltSupportFiles and append $blt_library to autopath.
+	([TkExtra -getBltFullVersion]): New method.
+	([TkExtra -newBLTp]): Return NO in the case of 8.0-unoff; it uses
+	the BLT 2.1 semantics.
+
+	* TkExtra.h: Declare getBltFullVersion.
+
+1998-01-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* SimpleProbeDisplayHideButton.m, ClassDisplayHideButton.m, tkobjc.m:
+	Include tkobjc/common.h instead of tkobjc/control.h.
+
+	* XDrawer.h: Reformatting throughout.
+
+	* ClassDisplayHideButton.[hm], CompleteProbeDisplayLabel.[hm],
+	MessageProbeEntry.[hm], ProbeCanvas.[hm],
+	SimpleProbeDisplayHideButton.[hm],
+	SuperButton.[hm],VarProbeEntry.[hm]: New classes to encapsulate
+	tkobjc_* functionality and give some explict semantics.
+
+	* Histogram.[hm]:  Renamed from Histo.[hm].
+	
+	* tkobjc.m (registerInterp): New static function.
+	(initTkObjc): Use registerInterp instead of
+	tkobjc_registerCommand.
+
+	* tkobjc.h: Use Histogram.h instead of Histo.h.
+	Add ClassDisplayHideButton.h, SimpleProbeDisplayHideButton.h,
+	SuperButton.h, MessageProbeEntry.h, VarProbeEntry.h, ProbeCanvas.h.
+	Drop DragDrop.h.
+
+	* common.[hm]: Add (remaining tkobjc_* routines from control).
+	
+	* control.[hm], DragDrop.[hm]:  Remove.
+	
+	* ZoomRaster.h: Reformatting throughout.
+
+	* XColormap.m ([XColormap -map], [XColormap -pixelValue:],
+	[XColormap -white], [XColormap -black]): Use GUI_PixelValue for
+	return type.
+	([XColormap -setColor:ToName:], [XColormap -colorIsSet:]): Use
+	GUI_Color for first argument.
+	([XColormap -setColor:ToRed:Green:Blue:]): Likewise.
+	([XColormap -setColor:ToGrey:]): Likewise.
+
+	* XColormap.h: Include <gui.h>
+	Make XColormap conform to <Colormap>.
+	Use GUI_PixelValue for map, pixelValue, white, black methods.
+	Use GUI_Color for pixelValue for colorIsSet: and setColor methods.
+
+	* Widget.m: Don't include string.h, stdio.h, stdlib.h, stdarg.h,
+	tclObjc.h, and TkInterp.h.  Include tkobjc/common.h.
+	([Widget -createEnd]): Use new method setWidgetNameFromParent:
+	instead of makeNameFromParentName:.
+	([Widget -pack]): Use tclobjc_pack instead of calling
+	globalTkInterp directly.
+	(makeWidgetName): New static function (functionality of
+	makeNameFromParentName).
+	([Widget -makeWidgetNameFor:], [Widget -setWidgetNameFromParent:],
+	[Widget -setWidgetNameFromParentName:], [Widget -packToRight:],
+	[Widget -packBeforeAndFillLeft:expand:],
+	[Widget -packFillLeft:], [Widget -packFill], [Widget
+	-packForgetAndExpand], [Widget -setActiveFlag:], [Widget
+	-enableRelief], [Widget -setBorderWidth:], [Widget
+	-setupWindowEntryColor], [Widget -setupWindowExitColor], [Widget
+	-focus]): New methods for tkobjc_* functionality.
+
+	* Widget.h: New methods packToRight:,
+	packBeforeAndFillLeft:expand:, packFillleft:, packFill,
+	packForgetAndExpand, setActiveFlag:, enableRelief,
+	setBorderWidth:, setupWindowEntryColor, setupWindowExitColor,
+	focus, setWidgetNameFromParent:, setWidgetNameFromParentName:,
+	makeWidgetNameFor:.
+
+	* Raster.m ([Raster -getColormap]): Return id <Colormap>.
+	([Raster -setColormap:]): Take id <Colormap>.
+
+	* Raster.h: Include gui.h.
+	(Raster): Make colormap an id conforming to Colormap protocol
+	not a XColormap *.
+	getColormap now returns a id <Colormap>.
+	setColormap takes a id <Colormap>.
+	drawPointX:Y:Color:, fillRectangleX0:Y0:X1:Color:  Use GUI_Color.
+	
+	* Makefile (OBJECTS, HEADERS): Add ClassDisplayHideButton,
+	SimpleProbeDisplayHideButton, SuperButton, MessageProbeEntry,
+	VarProbeEntry, CompleteProbeDisplayLabel, ProbeCanvas, and common.
+	Drop DragDrop and control.  Change Histo to Histogram.
+	(OTHERCLEAN): Change testHisto to testHistogram.
+	(testHistogram): Change from testHisto.
+	(Histogram.o): Replaces Histo.o.
+	(DragDrop.o, control.o): Drop.
+	(ClassDisplayHideButton.o, SimpleProbeDisplayHideButton.o,
+	SuperButton.o, MessageProbeEntry.o, VarProbeEntry.o,
+	ProbeCanvas.o, common.o): Add.
+
+	* Label.m ([Label -anchorEast], [Label -anchorWest], [Label
+	-colorBlue]): New methods to replace tkobjc_* functionality.
+
+	* Label.h: Declare new methods anchorEast, anchorWest, and colorBlue.
+
+	* Frame.m: Don't include string.h, stdio.h, stdlib.h, or
+	TkInterp.h.  Include tkobjc/common.h.
+	([Frame -createEnd]): Use new method setWidgetNameFromParentName
+	instead of removed makeNameFromParentName.
+	([Frame -createEnd]): Use tkobjc_makeFrame to create a frame
+	instead of calling globalTkInterp directly.
+	([Frame -assertPosition], [Frame -assertGeometry], [Frame
+	-withdraw], [Frame -deiconify]): New methods replace tkobjc_*
+	functionality.
+
+	* Frame.h: Declare new methods assertGeometry, assertPosition,
+	withdraw, and deiconify.
+
+	* Entry.m: Reformatting throughout.
+
+	* Entry.h: Declare createEnd, setValue:, and setWidth:.
+
+	* CompositeItem.h: Reformatting throughout.
+
+	* ButtonPanel.m: Don't include tclObjc.h or TkInterp.h.
+	([ButtonPanel -setButtonTarget:]): New method, drop
+	setTargetName.
+	([ButtonPanel -addButtonName:actionName:]): Use targetName
+	instead of defaultTargetName.
+
+	* ButtonPanel.h: New method setButtonTarget:.
+	(ButtonPanel): Rename instance variable defaultTargetName to
+	targetName.  Drop setTargetName.
+
+	* Button.m ([Button -createEnd]): Don't include tclObjc.h or
+	TkInterp.h.
+	([Button -setButtonTarget:method:]): New method.
+
+	* Button.h: Declare new method setButtonTarget:.
+
+	* BLTGraph.m ([BLTGraph -setTitle:]): Rename from title:.
+	([BLTGraph -setAxisLabelsX:Y:]): Rename from axisLabelsX:Y:.
+
+	* BLTGraph.h: Rename title: to setTitle: and axisLabelsX:Y:
+	to setAxisLabelsX:Y:.
+
+1998-01-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* TkExtra.h, BLTGraph.m, Button.m, ButtonPanel.m, CheckButton.m,
+	Entry.m, Form.m, Frame.m, Histo.m, InputWidget.m, Label.m,
+	Raster.m, Widget.m, XColormap.m: Tk.h changed to TkInterp.h.
+
+1998-01-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* tkobjc.m (ensureBltSupportFiles): New function.  Looks for
+	bltGraph.tcl and exits with warning message upon failure.
+	(initTkObjc): Use above.
+
+	* control.m: Include stdlib.h for free.
+	(tkobjc_configureHideBitmap): Use the `hide' bitmap.
+	(tkobjc_configureHideButton): Use the `special' bitmap.
+	(tkobjc_packForgetArmSuperAndResize): Copy the subclass name
+	so that tclObjc_objectToName can be used on owner; free it at the end.
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-disableDestroyNotification]): Don't try to disable the event
+	handler if already disabled; set destroyNotificationTarget to nil
+	after disabling so that we know.
+
+1998-01-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Frame.m ([Frame -drop]): Don't destroy if already destroyed.
+
+	* BLTGraph.m ([GraphElement -drop]): Don't delete elements in
+	the case the graph has been destroyed.
+	
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-getDestroyedFlag]): New method.
+	([ArchivedGeometryWidget +createBegin:]): Initialize destroyedFlag
+	to NO.
+	([ArchivedGeometryWidget -drop]): Don't destroy if already
+	destroyed.
+	([ArchivedGeometryWidget -_notifyTarget_]): Don't drop (renamed
+	method), and pass self as an argument to the notification method.
+	(structure_proc): Use renamed _notifyTarget_.
+	([ArchivedGeometryWidget
+	-enableDestroyNotification:notificationMethod:]): Don't setup
+	handler if target is nil.
+
+	* ArchivedGeometryWidget.h (ArchivedGeometryWidget): Add
+	destroyedFlag, and getter.
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget
+	-disableDestroyNotification]):  New method.
+
+	* Frame.m ([Frame -drop]): Call archiverUnregister since we
+	aren't calling [super drop].
+
+1998-01-12  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ArchivedGeometryWidget.m (structure_proc): New function.  A
+	handler for Structure changes to the widget (e.g. destruction).
+	([ArchivedGeometryWidget -_notifyTargetAndDrop_]): New internal
+	method called by above handler.
+	([ArchivedGeometryWidget
+	-enableDestroyNotification:notificationMethod:]):  Configures
+	an event handler for structure changes, and sets the target
+	and method for notification.
+
+	* Raster.m ([Raster -drop]):  Remove. 
+
+	* Raster.[hm]: Reformatting throughout.
+
+	* Frame.m ([Frame -createEnd]): Minor reformatting.
+
+	* Canvas.m ([Canvas -drop]): Remove; leave that to superclass.
+
+	* Canvas.[hm]: Minor reformatting.
+
+	* BLTGraph.m ([GraphElement -drop]): Leave destruction of widget
+	to superclass.
+
+	* BLTGraph.[hm]: Minor reformatting.
+
+	* ArchivedGeometryWidget.m ([ArchivedGeometryWidget -drop]): 
+	Destroy the parent widget on drop.
+
+	* ArchivedGeometryWidget.h (ArchivedGeometryWidget): Add
+	destroyNotificationTarget and destroyNotificationMethod variables, and
+	declare enableDestroyNotification.
+
+	* CanvasItem.m ([CanvasItem -createBindings]): Constify temp.
+
+1998-01-11  Alex Lancaster  <alex@santafe.edu>
+
+	* Canvas.m: ([Canvas -drop]): Added "destroy" Tk command to
+	drop canvas when it is dropped, in the same way as a BLTGraph.
+
+1998-01-05  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Histo.h (Histo): Subclass from ArchivedGeometryWidget.
+	* Canvas.h (Canvas): Likewise.
+
+	* BLTGraph.m ([GraphElement -createEnd]): Use different code
+	for setting active line width and symbol between BLT 2.1 and BLT 2.3.
+	([GraphElement -setColor:]): Set the active line color to be the
+	same as the inactive line color.  Different versions for BLT 2.1
+	and BLT 2.3.
+
+	* DragDrop.m (new_BLT_p): Remove.
+	(setupDragAndDrop): Use newBLTp method now in TkExtra.
+	(setupDragAndDropArg): Likewise.
+	(setupHandler): Likewise.
+
+	* TkExtra.m ([TkExtra -newBLTp]): Move new_BLT_p predicate from
+	DragDrop and rename it to newBLTp.
+
+	* TkExtra.h: Add newBLTp.
+
+1997-12-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* WindowGeometryRecord.h: Remove get_expr_func_t and
+	put_string_func_t typedefs.
+
+1997-12-11  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* analysis.tcl: Delete troublesome newlines for parameters
+	in first line of active_item_info.
+
+	* control.[hm] (tkobjc_setupHistogramActiveOutlierMarker): Use 
+	a descriptive name (was tkobjc_setupHistogramMisc).
+
+1997-12-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.tcl: Delete extra line in sitecmd.
+
+	* XPixmap.m ([XPixmap -setFile:]): Constify argument.
+	Reformatting throughout.
+
+	* XPixmap.h (XPixmap): Constify filename.
+	Constify argument to setFile.
+	Reformatting throughout.
+
+	* XColormap.m ([XColormap -setColor:ToName:]): Constify ToName
+	argument.  Reformatting throughout.
+
+	* XColormap.h: Constify ToName argument to setColor.
+	Reformatting throughout.
+
+	* Form.m ([Form -addLineName:Variable:Type:]): Constify first
+	argument.  Reformatting throughout.
+
+	* Form.h: Constify first argument to addLineName.
+	Reformatting throughout.
+
+	* CanvasItem.m: Reformatting throughout.
+
+	* CanvasItem.h (CanvasItem): Constify item.
+	Reformatting throughout.
+
+	* RectangleNodeItem.m ([RectangleNodeItem -createItem]): Cast
+	argument to free to void* to avoid warning.
+	Reformatting throughout.
+
+	* RectangleNodeItem.h: Reformatting throughout.
+
+	* Rectangle.[hm]: Reformatting throughout.
+
+	* OvalNodeItem.m ([OvalNodeItem -createItem]): Cast argument
+	to free to void* to avoid warning. 
+	Reformatting throughout.
+
+	* OvalNodeItem.h (NodeItem): Reformatting throughout.
+
+	* NodeItem.m ([NodeItem -setColor:]): Constify argument.
+	([NodeItem -setBorderColor:]): Likewise.
+	([NodeItem -setString:]): Likewise.
+	Reformatting throughout.
+
+	* NodeItem.h (NodeItem): Constify text, item and string.
+	Constify argument to setString, setColor, and setBorderColor.
+	Reformatting throughout.
+
+	* LinkItem.m ([LinkItem -setColor:]): Constify argument.
+	Reformatting throughout.
+
+	* LinkItem.h (LinkItem): Constify line1 and line2.
+	Constify argument to setColor.
+	Reformatting throughout.
+
+	* BLTGraph.m ([BLTGraph -title:]): Constify argument.
+	([BLTGraph -axisLabelsX:Y:]): Constify arguments.
+	([GraphElement -getName]): Constify return.
+	([BLTVector -getName]): Likewise.
+	([GraphElement -setLabel:]): Constify argument.
+	([GraphElement -setColor:]): Likewise.
+	([GraphElement -setSymbol:]): Likewise.
+	Reformatting throughout.
+
+	* BLTGraph.h: Constify argument to BLTGraph title.
+	Constify arguments to BLTGraph axisLabelsX:Y:.
+	(GraphElement): Constify name.
+	Constify getName, setLabel, setColor, setSymbol.
+	(BLTVector): Constify name.
+	Constify getName.
+
+	* Histo.m ([Histo -setNumPoints:Labels:Colors:]): Constify arguments.
+	([Histo -title:]): Constify argument.
+	([Histo -axisLabelsX:Y:]): Constify arguments.
+	Reformatting throughout.
+
+	* Histo.h (Histo): Constify elements.
+	Constify arguments to setNumPoints.
+	Constify argument to title.
+	Constify argument to axisLabels.
+	Reformatting throughout.
+
+	* control.[hm]: Add new functions tkobjc_setupZoomStack,
+	tkobjc_setHistogramBarWidth, tkobjc_setHistogramXaxisRange,
+	tkobjc_setupHistogramMisc, tkobjc_setupHistogramLegend,
+	tkobjc_histogramActiveItemInfo,
+	tkobjc_setHistogramActiveOutlierText.  These features were
+	used in the analysis/EZBin and analysis/EZDistribution classes.
+
+	* control.[hm] (tkobjc_gimme_drag_and_drop_object): Renamed from
+	tkobjc_gimme_ddobj.
+
+	* DragDrop.m (new_BLT_p): New function.
+	(oldSetupDragAndDrop): New function.
+	(newSetupDragAndDrop): New function.
+	(setupDragAndDrop): New function.
+	(oldSetupDragAndDropArg): New function.
+	(newSetupDragAndDropArg): New function.
+	(setupDragAndDropArg): New function.
+	(oldSetupHandler): New function.
+	(newSetupHandler): New function.
+	(setupHandler): New function.
+	(setupDragAndDrop): Use new functions newSetupDragAndDrop and
+	oldSetupDragAndDrop.
+	(setupDragAndDropArg): New function.
+	(dragAndDrop): Use new function setupHandler.
+	(dragAndDropArg): Use new functions setupDragAndDropArg and
+	setupHandler.
+
+	* WindowGeometryRecord.m: Include collections/predicates.h.
+
+	* TkExtra.m ([TkExtra -preInitWithArgc:argv:]): Constify return
+	of preInitWithArgc.  Minor reformatting.
+
+	* tkobjc.m (initTkObjc): Update to renamed tkobjc_registerCommand.
+
+	* simtools.tcl: Add `super' bitmap.
+
+	* control.[hm]: Prefix everybody with "tkobjc_".  Add
+	tkobjc_configureHideBitmap, tkobjc_configureSpecialBitmap,
+	tkobjc_configureSuperBitmap, tkobjc_configureWidgetToBeep,
+	tkobjc_configureWidgetToDrop,
+	tkobjc_configureWidgetToPackBeforeAndFillLeftThenDisableAndResize,
+	tkobjc_bindButton3ToSpawn, tkobjc_bindButton3ToArgSpawn,
+	tkobjc_bindButton3ToBeUnhelpful, tkobjc_bindReturnToSetValue,
+	tkobjc_bindKeyReleaseReturnToResetColorAndUpdate,
+	tkobjc_bindFocusInToSetSelection,
+	tkobjc_bindFocusOutToClearSelection, and tkobjc_gimme_ddobj.
+	Renamed tkobjc_bindButton3ForCompleteProbeDisplay from
+	configureButton3ForCompleteProbeDisplay, tkobjc_bindWindowEntry
+	from configureWindowEntry, tkobjc_bindWindowExit from
+	configureWindowExit.
+	
+1997-12-09  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* control.m (dynamicEval): Add.
+
+	* control.h: Add dynamicEval.
+
+	* InputWidget.m ([InputWidget -setValue:]): Constify argument.
+	Reformatting throughout.
+	([InputWidget -linkVariable:Type:]): Cast variableName to char*
+	for Tcl_UnlinkVar and TclLinkVar.
+	([InputWidget -createEnd]): Add char * buf variable to
+	write the value for variableName.
+
+	* InputWidget.h (InputWidget): Constify variableName.
+	Constify argument to setValue.
+	Reformatting throughout.
+
+	* Entry.m ([Entry -setValue:]): Constify argument.
+	Reformatting throughout.
+
+	* Entry.h (InputWidget): Reformatting throughout.
+
+	* CheckButton.m (stringIsFalse): Constify argument.
+	([CheckButton -setValue:]): Constify argument.
+	Reformatting throughout.
+
+	* CheckButton.h: Reformatting throughout.
+
+	* analysis.tcl: New file.
+
+	* simtools.tcl: New file.
+
+	* tkobjc.m: Include tkobjc/control.h.  include simtools_tcl.x and
+	analysis_tcl.x.
+	(initTkObjc): Add check for batchmode.  In this case, set
+	globalTkInterp to Tcl and return.  Remove text of analysis EZBin Tcl
+	support routine active_item_info.  Remove disabled BLT-related
+	code.  Evaluate simtools_tcl and analysis_tcl.
+
+	* Makefile (tkobjc.o): Add dependencies on generated analysis_tcl.x
+	and simtools_tcl.x.  Add rule for conversion of tcl to tcl.x (C strings
+	of the files).
+
+	* DragDrop.m: Minor reformatting.
+
+	* Raster.m ([Raster -createEnd]): Cast second argument to
+	Tk_NameToWindow to char * to avoid GCC warning.
+	Reformatting throughout.
+
+Mon Dec  8 22:47:34 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* tkobjc: replaced all instances of swarmobject.h with
+	objectbase.h and swarmobject/ with objectbase/
+
+1997-12-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* control.m: Include <string.h>.
+	Move Tcl/Tk from MessageProbeWidget and VarProbeWidget:
+	(setAnchorEast): Add.
+	(setWidth): Add.
+	(setText): Add.
+	(ringBell): Add.
+	(normalState): Add.
+	(disabledState): Add.
+	(update): Add.
+	(focus): Add.
+
+	* control.h: Declare new functions setAnchorEast, setWidth,
+	setText, ringBell, normalState, disabledState, update, and focus.
+
+	* control.m (configureButton3ForCompleteProbeDisplay): Add
+	argument, probeDisplayManager, to avoid need for knowledge of
+	simtools in tkobjc.  Allocate probeDisplayManager name dynamically.
+
+	* control.h: Add declarations for packForget, deiconify,
+	releaseAndUpdate, and updateIdleTasksAndHold.
+	(configureButton3ForCompleteProbeDisplay): Add probeDisplayManager
+	argument to avoid need for declaration for a simtools object.
+
+1997-12-07  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* control.m (releaseAndUpdate, updateIdleTasksAndHold): Add.  
+	(These calls to Tcl were made in simtools/ProbeDisplay.m.)
+
+	* Widget.[hm] (Widget): Constify, minor reformatting.
+
+1997-12-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Widget.[hm] ([Widget -setWindowGeometry:s]): Constify.
+
+	* TextItem.[hm] ([TextItem -setText:]): Constify setter and
+	instance variable.
+
+	* Label.[hm] ([Label -setText:]): Constify.
+
+	* ButtonPanel.[hm] ([ButtonPanel -addButtonName:Command:]): Constify.
+
+	* Button.[hm] ([Button -setText:]): Constify.
+	([Button -setCommand:]): Constify.
+
+	* control.m (configureHideButton): Call markForDrop not drop 
+	(for safeprobes).
+
+	* control.[mh]: New files.
+
+	* Makefile (OBJECTS, HEADERS): Add control.[mh], common code from
+	SimpleProbeDisplay and CompleteProbeDisplay.
+	(control.o): Add.
+
+	* Frame.m ([Frame -drop]): Remove diagnostic.
+
+	* ButtonPanel.m: Include collections/String.h.
+	([ButtonPanel -setTargetName:]): Add.
+	([ButtonPanel -addButtonName:actionName:]): Add.
+
+	* ButtonPanel.h: Declare new methods -setTargetName and 
+	-addButtonName: actionName:.
+
+1997-11-29  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Frame.m ([Frame -drop]): Add.  (Only drop if no parent.)
+
+	* Frame.h: Add -(void)drop.
+
+	* Makefile (OBJECTS,HEADER): Add WindowGeometryRecord and
+	ArchivedGeometryWidget
+	(WindowGeometryRecord.o, ArchivedGeometryWidget.o): Add.
+
+	* tkobjc.h: Include WindowGeometryRecord.h and
+	ArchivedGeometryWidget.h.
+
+	* ButtonPanel.m: Remove -createEnd; Frame will take care of it.
+
+	* ButtonPanel.h (Frame): Derive ButtonPanel from Frame, not Widget.
+
+	* Frame.m ([Frame -createEnd]): Call registerAndLoad (since
+	ArchivedGeometryWidget's createEnd isn't being called).
+
+	* Frame.h: Inherit from ArchivedGeometryWidget instead of Widget.
+	* BLTGraph.h: Likewise.
+	* Raster.h: Likewise.
+
+	* WindowGeometryRecord.h: New files.  An object for storing
+	geometry information.
+
+	* ArchivedGeometryWidget.[hm]: New files. An enhanced Widget that
+	can communicate with the Archiver class (in simtools).
+
+Fri Nov 28 16:26:44 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* [Zoom]Raster.[hm] ([-handleButton]): Changed -handleButton
+	X and Y arguments from (long) to (int)because of a problem on
+	HP/UX.
+
+1997-11-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* tkobjc.h: Import DragDrop.h.
+
+1997-11-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* TkExtra.[hm] ([-getBltVersion]): Add routine to return the version
+	of BLT being used.
+
+1997-11-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* DragDrop.[hm]: New files.  Add functions containing the drag&drop
+	logic previously found in various classes in simtools/.  These
+	functions serve to dynamically adjust to the version of BLT being
+	used.
+  
+1997-11-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* BLTGraph.m ([GraphElement -createEnd]): In BLT 2.3, the default
+	symbol type for lines is now a circle; explicitly specify no
+	symbol.
+

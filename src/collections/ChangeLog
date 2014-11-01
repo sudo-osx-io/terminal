@@ -1,0 +1,1926 @@
+2010-04-10  Marcus G. Daniels <marcus@snoutfarm.com>
+
+	* Makefile.am: Remove collections.h from collections_HEADERS, it is
+	redundant with $(MODULE).h.
+
+2009-11-24  Scott Christley  <schristley@mac.com>
+
+	* collections.h: Use collections directory to include generated
+	file on platforms other than OpenStep.
+
+2009-11-07  Scott Christley  <schristley@mac.com>
+
+	* Permutation.m: Add cast to eliminate compiler errors.
+
+2009-09-24  Scott Christley  <schristley@mac.com>
+
+	* List.m: Adjust casts to eliminate compiler warnings.
+
+2009-04-02  Scott Christley  <schristley@mac.com>
+
+	* Stream.m, List.m, OutputStream.m, Map.m, collections.m,
+	InputStream.m, predicates.m: ObjC runtime abstraction.
+
+2008-07-06  Scott Christley  <schristley@mac.com>
+
+	* Array.m, List.m: Include HDF5Object.h to eliminate compile
+	warnings.
+
+	* InputStream.m, List_HDF5out.m, OutputStream.m, Map.m: Cast so
+	compiler finds correct method definition.
+
+	* OutputStream.m: Rename bool to aBool.
+
+	* Stream.[hm]: Rename bool to bool_.
+
+2008-06-25  Scott Christley  <schristley@mac.com>
+
+	* Array.h, Collection.h, InputStream.h, List.h, ListShuffler.h,
+	List_GEN.h, List_linked.h, List_mlinks.h, Map.h, OrderedSet.h,
+	OutputStream.h, Permutation.h, Set.h, Stream.h, StringObject.h,
+	collections.h, List_mlinks.h, Makefile.am: Standardize include
+	directory structure to support libraries and OpenStep frameworks.
+
+2007-03-04  Marcus G. Daniels  <marcus@snoutfarm.com>
+
+	* OutputStrteam.[hm], Stream.h, collections.h: Change class to
+	class_ and bool to bool_ (for Objective C++).
+
+2006-04-02 Paul Johnson
+
+         * Collection.m: 262 change nil to Nil for type correctness
+
+2006-04-01 Paul Johnson <pauljohn@ku.edu>
+         * collections.h: Declaration - (id <MapIndex>)begin: (id <Zone>)aZone;
+          silences compiler warings
+	 *  Collection.m, List.m, Stream.h: Declaration to silence compiler warnings.
+
+2005-04-14  Paul Johnson  <pauljohn@pols111.pols.ku.edu>
+
+	* Array.hm: Consistent casts in declarations like:
+	- (id <Index>)begin: (id <Zone>)aZone; and 
+	- (void)lispOutShallow: (id <OutputStream>)stream;
+	- (void)hdf5OutShallow: (id <HDF5>)hdf5Obj;
+	* Collection.hm: Consistent casts:
+	- (id <PermutedIndex>)beginPermuted: (id <Zone>)aZone;
+	- setCollection: (id <Collection>)aCollection
+	* Map.hm: Consistent Casts
+	- (id <MapIndex>)begin: (id <Zone>)aZone
+	* Set.hm: Consistent Casts
+	- (id <Index>)begin: (id <Zone>)aZone
+	
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Use libobjc definition. Add GNUstep includes.
+
+	* InputStream.m: Include internal.h for long double definition
+	required for GNUstep.  No long double encoding support in the
+	libobjc library.
+
+2004-04-20  Marcus G. Daniels <mgd@santafe.edu>
+
+	* List_HDF5out.m ([.. hdf5OutShallow:]): Call writeRowNames.
+
+2003-06-11  Paul E. Johnson  <pauljohn@pjdell.pols.ukans.edu>
+
+	* Permutation.m ([Permutation_c -setLastPermutation:]): Cast as
+	(Permutation_c *) to stop compiler warning.
+
+	* Collection.m ([PermutedIndex_c -remove]): cast collection as
+	(Collection_any *) to stop compiler warning about wrong type
+	pointer.
+
+2003-05-05    <mgd@arrow.santafe.edu>
+
+	* InputStream.m ([InputStream -getExpr]): Treat #() like #1().
+
+2002-10-19    <pauljohn@dv253s74.lawrence.ks.us>
+
+	* Makefile.am (install-data-local): $(DESTDIR) added
+
+2002-09-13    <pjohnson@localhost.localdomain>
+
+	* Array.m ([Array_c -_lispOut_:deep:]): i must be unsigned
+
+2002-05-14  Marcus G. Daniels  <mgd@condor>
+
+	* collections.h (Array, List, Map): Adopt Serialization.
+
+	* List_GEN.m (TARGET), OrderedSet.m (OrderedSet_c), Stream.m
+	(ArchiverList): Add Setting phase marker for above.
+
+2002-04-23  Marcus G. Daniels  <mgd@condor>
+
+	* Array.m ([Array_c -lispInCreate:,-lispIn:]): Implement.
+
+	* List_HDF5out.m: Don't do anything with nil.
+
+	* List.h, Array.h, Map.h, Collection.h: Explicit includes of
+	defobj.h for Serialization protocol.
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* Array.h, Array.m, Collection.h, Collection.m, InputStream.h,
+	InputStream.m, List.h, List.m, List_GEN.h, List_GEN.m,
+	List_linked.h, List_linked.m, List_mlinks.h, List_mlinks.m,
+	Makefile.in, Map.h, Map.m, OrderedSet.h, OrderedSet.m,
+	OutputStream.h, OutputStream.m, Permutation.h, Permutation.m,
+	Set.h, Set.m, StringObject.h, StringObject.m, collections.h,
+	collections.m, predicates.h, predicates.m: Change copyright
+	statement to canonical version as suggested by GNU GPL.
+
+2002-03-09  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* Map.m ([Map_c -lispIn:]): Fix integer key handling.  
+
+2002-01-16    <mgd@marcus.santafe.edu>
+
+	* collections.h (INDEX{STARTP,ENDP}, REMOVEDP, ARCHIVERDOTP): Cast
+	to void * to avoid warning.
+	(ARCHIVEREOLP): New macro.
+
+	* InputStream.m, Stream.m: Use it.
+
+2001-11-04    <mgd@HELEN>
+
+	* Makefile.am: Don't use multi-line values in variable assignments.
+	(CLEAN_FILES): Set, don't expect included value which
+	confuses new automake.
+	(INCLUDES):Add top_builddir.
+
+2001-10-26  Marcus G. Daniels  <mgd@condor>
+
+	* List_mlinks.[hm] (beginMlinksList, getFirstMlinksLink): Add.
+
+	* List_HDF5out.m, Map.m, StringObject.m: Change getName to getHDF5Name 
+
+	* OrderedSet.m: Change MLINK to MLIST.
+
+	* macros.h: Add more mlinks List equivalents.  Cleanup.
+
+2001-08-17  Marcus G. Daniels  <mgd@condor.santafe.edu>
+
+	* macros.h (LIST_GETFIRST): New macro.
+
+2001-07-29  Marcus G. Daniels  <mgd@dhcp70.santafe.edu>
+
+	* macros.h (COLLECTION_{REMOVE,ATOFFSET,GETLAST,GETFIRST,COUNT},
+	LIST_{{ADD,REMOVE}{LAST,FIRST}}): Add.
+
+2001-07-28  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* Makefile.am (EXTRA_DIST, collections_HEADERS): Install macros.h.
+
+	* Map.m, List_linked.m (beginLinkedList): Moved from Map.m into
+	List_linked.m.
+
+	* List_linked.h (beginLinkedList): Declare.  (Made extern.)
+
+2001-07-06  Marcus G. Daniels  <mgd@dhcp70.santafe.edu>
+
+	* Makefile.am, macros.h: New file.
+
+	* List_GEN.m: Add TINDEXCLASS* that uses "id_" to get class
+	instead of self. 
+
+	* List_GEN.m, Map.m, OrderedSet.m: Utilize macros.h and defobj
+	macros.h. (Many changes.)
+
+	* Map.m (beginLinkedList): New static function.
+
+2001-04-12    <mgd@coyote.santafe.edu>
+
+	* collections.h: Remove Index safety info from Index, Array, and List.
+	Remove EndsOnly info from ListIndex.
+
+2001-03-26  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* Stream.m ([ArchiverValue_c -lispOutDeep:]): Handle nil.
+
+	* predicates.[hm]: Add nil_value_p.
+
+	* OutputStream.[hm], collections.h ([OutputStream_c -catNil]):
+	New method.
+
+	* InputStream.m ([InputStream_c -getExpr]): Add support for nil.
+
+2001-01-24  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* collections.h (OutputStream): Use const void * for catPointer:
+	argument.
+
+2000-11-27  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Map.[hm], collections.h ([MapIndex getKeyValue]): Add.
+
+2000-09-18  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Collection.[hm] ([Collection_any -{count,first,last}]): Remove.
+
+	* Set.[hm] ([Set_c -count]): Remove. 
+	([Set_c -getCount]): Call List's getCount.
+
+2000-07-26    <mgd@DRONE>
+
+	* List_HDF5in.m: Change SD_JAVA_FINDJAVACLASS to
+	SD_JAVA_FIND_CLASS_JAVA.
+	
+2000-07-26  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Collection.m ([PermutedIndex_c -_getLoc_]): Return End when 
+	collection is empty.
+	([PermutedIndex_c -next]): Make while loop condition
+	on _getLoc_ not returning End.
+	([PermutedIndex_c -prev]): Likewise per Start.
+
+	* Permutation.m ([PermutationItem_c -describe:]): Print out
+	lastDirection and position.
+
+2000-07-21  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Collection.m ([PermutedIndex_c -_updatePermutation_]): 
+	If there is a current member, search for it.  Otherwise
+	use setLoc:.
+	([PermutedIndex_c -_getLoc_]): Add.
+	([PermutedIndex_c -getLoc]): Use it.
+
+	* Collection.[hm] ([PermutedIndex_c -find{Next,Prev}:]): Remove.
+	(Inherited versions are fine, now.)
+
+2000-07-19  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Permutation.[hm] ([Permutation_c -createTree]): New method.
+	([Permutation_c -getLastDirectionFor:]): Remove.
+
+	* Permutation.m: Include misc/avl.h
+	(comparePermutationItems): New function.
+	([Permutation_c -createEnd]): Create tree
+	using directed lastPermutation items and use avl_find to find
+	them quickly.  Destroy tree when done.
+
+2000-07-16  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* List_HDF5out.m ([-..hdf5OutShallow]): Don't call writeRowNames.
+	(Common-case of HDF5 usage is logging many points, and this
+	will be a big blob of dumb sequential data.  R should create
+	the row.names on-the-fly for the data frame.)
+
+2000-06-30  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* InputStream.m ([InputStream_c -getExpr]): Handle DSSSL/Kawa
+	style keywords.
+
+2000-06-29  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Makefile.am (EXTRA_DIST): Add List_HDF5{in,out}.m.
+
+	* List.m, List_HDF5in.m, List_HDF5out.m: Split out hdf5 routines
+	into separate files.
+
+	* {List,Map,Stream,StringObject}.[hm], collections.h: Remove
+	return type from {lisp,hdf5}Out{Shallow,Deep}:.
+
+2000-06-26  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* List_GEN.m ([TARGET -addFirst:,-addLast:]): In the case
+	of mlinks, check to see if link is new.  Only then adjust links.
+
+	* Permutation.[hm] ([Permutation_c describe:]): Remove.
+
+2000-06-25  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Permutation.[hm] (Permutation): Add touchedFlag and untouchedFlag
+	and getters.
+	([Permutation_c -getLastDirectionFor:]): New method.
+	([Permutation_c -createEnd]): Don't create
+	PermutationItems if the collection is empty.
+
+	* Collection.m ([PermutedIndex_c +createBegin:]): Clear nextFlag.
+	([PermutedIndex_c -_updatePermutation_]): Don't use count as 
+	condition for regenerating permutation. 
+	([PermutedIndex_c -next]): Set nextFlag on a sucessful advance.
+	([PermutedIndex_c -getLoc]): Use Permutation's getTouchedFlag
+	and getUntouchedFlag and nextFlag to determine status.
+
+	* Collection.h (PermutedIndex_c): Add nextFlag.
+
+2000-06-23  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* collections.h (Permutation): Declare setLastPermutation:.
+
+	* Permutation.[hm] (Permutation_c): Qualify ivars with protocol
+	info.  Likewise for associated methods.
+	([PermutationItem_c setLastDirection:]): New method.
+	([Permutation_c setLastPermutation:]): New method.
+	([Permutation_c -createEnd]): Handle the case of merging
+	a collection with a previous permutation.
+
+	* Collection.m ([PermutedIndex_c -_updatePermutation_]): New method.
+	([PermutedIndex_c
+	-{next,prev,findNext:findPrev,getLoc,setLoc:,
+	getOffset,setOffset:]): Call it first thing.
+	([PermutedIndex_c -next]): Skip over PermutationItem_c's that are
+	tagged with lastDirection = 1.
+	([PermutedIndex_c -_clearDirection_]): New method.
+	([PermutedIndex_c
+	-{findNext:,findPrev:,setLoc:,setOffset:]): Call it.
+
+	* Collection.h (PermutedIndex_c): Add ivar rnd.
+
+2000-05-18  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* collections.h ([Collection copy:]): Protect with #ifndef IDL.
+	([String compare:]): Remove (since there's no documentation, anyway).
+
+2000-04-27    <mgd@nest.swarm.org>
+
+	* collections.h ([Index -compare:]): Protect with #ifndef IDL.
+	([PermutedIndex +createBegin:, -createEnd, -next, -prev,
+	-findNext, -findPrev, -get, -getLoc, -setLoc:, getOffset,
+	-setOffset:]): Remove.
+	([ListShuffler -createEnd]): Remove.
+	([Permutation +createBegin:]): Remove.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Makefile.am (REVISION): Bump.  Swarm 2.1.1 frozen.
+	
+2000-03-25    <mgd@HELEN>
+
+	* Array.m ([Array_c -describe:]): Use PTRHEXFMT instead of PTRFMT.
+
+2000-02-18    <mgd@nest.swarm.org>
+
+	* Makefile.am (CURRENT): Bump.  Version 2.1.
+
+	* Stream.[hm], collections.h ([ArchiverValue_c -getChar, -setChar:]): 
+	Use char, not unsigned char.
+
+2000-02-15    <mgd@nest.swarm.org>
+
+	* collections.h (_Set): Remove bogus documentation about return
+	value of Set's add:.  Thanks to Michael Stillwell.
+
+2000-02-10    <mgd@nest.swarm.org>
+
+	* collections.h (Permutation): Remove -generatePermuation.
+
+2000-01-23    <mgd@nest.swarm.org>
+
+	* Makefile.am (INCLUDES): Add JAVAINCLUDES.
+
+2000-01-22    <mgd@nest.swarm.org>
+
+	* Stream.m ([ArchiverKeyword_c -setKeywordName:]): Copy	argument.
+	([ArchiverKeyword_c -drop]): And drop it.
+
+	* Stream.[hm], collections.h: Add getRank.
+
+2000-01-16    <mgd@nest.swarm.org>
+
+	* Map.m, List.m ([... hdf5OutShallow:]): Use setPrototType:
+	instead of setClass: for making HDF5CompoundType.
+	
+2000-01-11    <mgd@nest.swarm.org>
+
+	* StringObject.m: Inlcude defobj.h.
+	([String hdf5OutShallow:]): Use
+	storeAsDataset:typeName:type:rank:dims:ptr: instead of
+	storeAsDataset:type:ptr:.
+
+	* Stream.m ([ArchiverArray_c -lispOutDeep:]): Update to use new
+	fcall_type_t lisp_process_array interface.
+	([ArchiverValue_c -setDouble:],
+	[ArchiverValue_c -setLongDouble:],
+	[ArchiverValue_c -setBoolean:],
+	[ArchiverValue_c -setFloat:],
+	[ArchiverValue_c -setLongLong:],
+	[ArchiverValue_c -setChar:],
+	[ArchiverValue_c -setNil],
+	[ArchiverValue_c -setClass:],
+	[ArchiverValue_c -lispOutDeep:], [ArchiverValue_c -getValueType]):
+	Likewise.
+
+	* Stream.[hm], collections.h (ArchiverArray_c): Use fcall_type_t
+	for type instead of string.  Update getArrayType and
+	convertToType:dest: as well.
+	(ArchiverValue_c): Likewise.
+
+	* InputStream.m: Don't include internal.h.
+
+2000-01-03  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* StringObject.m ([String_c -lispOutShallow:]): Use catString:
+	and catStartMakeInstance:.
+	([String_c -setLiteralFlag:]): Put it in setting phase.
+
+	* OutputStream.m: Don't include InputStream.h.  Include
+	collections.h, defobj/defalloc.h, and StringObject.h.
+	([OutputStream_c -_addExpr_:]): New method.  Update all cat*
+	routines to handle exprStack.
+	([OutputStream_c -catType:]): Use -catArrayType:.
+	([OutputStream_c -catLiteral:],
+	[OutputStream_c -catSymbol:], [OutputStream_c -catString:]): Set
+	literal flag.
+	([OutputStream_c -catUnsignedPair::]): Quote ArchiverPair.
+
+	* OutputStream.[hm], collections.h ([OutputStream_c
+	-setExprFlag:], [OutputStream_c -catLiteral:],
+	([OutputStream_c -catArrayType:], [OutputStream_c
+	-catStartFunction:], [OutputStream_c -catEndFunction],
+	[OutputStream_c -catEndList],
+	[OutputStream_c -catEndQuotedList],
+	[OutputStream_c -catEndParse],
+	[OutputStream_c -catEndMakeInstance],
+	[OutputStream_c -catEndMakeClass],
+	[OutputStream_c -catEndArray]): New methods.
+	([OutputStream_c -catClass:]): Use Class as argument type.
+
+	* OutputStream.h (OutputStream_c): Add expr and exprStack.
+
+	* Map.m ([Map_c -_lispOut_:deep:]): Use catEndCons instead
+	of catEndExpr.
+
+	* Makefile.am (SRC): Add Stream.m.
+	(collections_HEADERS): Add Stream.h.
+
+	* InputStream.[hm] ([InputStream_c -setExpr:],
+	([InputStream_c +create:setExpr:]): New methods.  Split out
+	Archiver_{Keyword,Array,Value,Pair,List,Quoted} into new files
+	Stream.[hm].  Include Stream.h.
+	([InputStream_c -getExpr]): Handle preset expr / non-filestream
+	case.
+
+1999-12-31  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* OutputStream.m: Include defobj/internal.h for
+	lisp_type_for_objc_type.
+
+	* OutputStream.[hm], collections.h: New methods catBoolean:,
+	catStartExpr, catEndExpr, catSymbol:, catString:, catSeparator,
+	catArrayRank:, catType: catClass:, catStartCons, catStartList,
+	catStartQuotedList, catStartParse, catStartMake{Instance,Class},
+	and catUnsignedPair::.
+
+	* List.m ([List_any -_lispOut_:deep:]): Use new OutputStream
+	features instead of literal strings.
+
+	* Map.m ([Map_c -_lispOut_:deep:]): Likewise.
+
+1999-12-29    <mgd@drone.swarm.org>
+
+	* List.m ([List_any -hdf5Out{Deep,Shallow}:]): Use HDF5
+	setWriteFlag: instead of setCreateFlag:.
+
+	* Map.m ([Map_c -hdf5In:]) Don't use setCreateFlag: NO.
+	([Map_c -hdf5Out{Deep,Shallow}:]): Use setWriteFlag: instead of
+	setCreateFlag:.
+
+1999-12-26    <mgd@DRONE>
+
+	* collections.m (_collections_implement): Turn off _CLS_DEFINEDCLASS
+	in List_linked, List_mlinks after calling setTypeImplemented.
+
+1999-11-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Collection.m ([Collection_any -allSameClass]): Handle leading
+	nil in the right way.
+
+1999-11-16    <mgd@VAIO>
+
+	* predicates.[hm]: Rename listp to archiver_list_p.
+
+	* InputStream.[hm], collections.h ([ArchiverValue_c -setClass:],
+	[ArchiverValue_c -getClass]): New methods.
+
+	* InputStream.m: Change listp to archiver_list_p throughout.
+	(readString): Second argument is now terminator
+	character, not boolean. 
+	([InputStream_c	-getExpr]): Handle <classname> syntax.
+
+1999-10-17  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* InputStream.m ([InputStream_c -getExpr]): Check length before
+	checking for dotted pair.
+
+1999-10-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* collections.m (_collections_implement): Call setTypeImplemented
+	for List_linked, List_mlinks, and MapIndex_c.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-09-12  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* InputStream.m ([ArchiverPair_c -lispOutDeep:]): Don't quote
+	(x . y) cons format here.
+
+	* predicates.[hm] (quotedp): New predicate.
+
+	* InputStream.m ([InputStream_c -getExpr]): Create ArchiverQuoted
+	instance on 'x or (quote x).
+	([ArchiverList_c -lispOutDeep:]): Call lispOutDeep: on argument
+	to make-{class,instance}. 
+	([ArchiverList_c -lispOutDeep:]): Handle all types with lispOutDeep:,
+	adding quotedp check.
+
+	* InputStream.[hm], collections.[hm] (ArchiverQuoted_c,
+	ArchiverQuoted): Implement new protocol.
+
+	* InputStream.m ([ArchiverList_c -lispOutDeep:]): Call lispOutDeep:
+	in default case, don't raise error.
+
+1999-09-11  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* predicates.[hm] (quote_literal_p): New function.
+
+	* InputStream.m ([InputStream_c -getExpr]): Handle (quote x) / 'x
+	equivalence.
+
+1999-09-09  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Set.m ([Set_c -at:], [Set_c -remove:]): Likewise.
+
+	* OrderedSet.m ([OrderedSet_c -contains:]): Rewrite to avoid
+	index leak.
+
+1999-09-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Map.m	([Map_c -hdf5In:]): Use free: instead of XFREE on rowNames.
+
+1999-09-07  Alex Lancaster  <alex@santafe.edu>
+
+	* collections.h (Collection): Make -begin:, -beginPermuted:
+	conform to Index and PermutedIndex protocol, respectively.
+	(Index, PermutedIndex, MapIndex, ListIndex): Make RETURNABLE.
+	Reformatting to avoid forward declarations, throughout.
+
+	* List_GEN.[hm] ([TARGET -begin:]): Return type conforms to
+	ListIndex.
+	(TINDEX): Make TINDEX type conform to ListIndex, rather than
+	Index.
+
+	* collections.h, Map.[hm] ([Map_c -mapBegin:]): New method for
+	generating a MapIndex.
+
+	* collections.h, List_GEN.[hm] ([TARGET -listBegin:]): New method
+	common to all objects conforming to the `List' protocol: generates
+	a list index conforming to the ListIndex protocol.
+
+1999-08-30  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Map.m ([Map_c -at:insert:]): Don't allocate newEntry unless
+	key is new.  Thanks to Ken Cline.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Collection.m ([Collection_any -contains:], [Collection_any
+	-remove:], [Collection_any -removeAll], [Collection_any
+	-deleteAll], [Collection_any -forEach:{,arg1,arg2,arg3}],
+	[Collection_any -allSameClass]): Rewrite to handle nil entries.
+
+	* Set.m ([Set_c -at:], [Set_c -remove:]): Likewise.
+
+	* List.m ([List_any -createEnd], [List_any -lispInCreate:],
+	[List_any -lispIn:], [List_any -_lispOut_:deep:]): Likewise.
+
+	* Map.m ([Map_c -at:insert:], [Map_c -at:replace:],
+	[Map_c -at:memberSlot:],
+	[Map_c -at:keySlot:memberSlot:],
+	[Map_c -containsKey:],
+	[Map_c -lispInCreate:],
+	[Map_c -lispIn:],
+	[Map_c -copy:],
+	[Map_c -at:insert:],
+	[Map_c -at:replace:],
+	[Map_c -at:memberSlot:],
+	[Map_c -at:keySlot:memberSlot:],
+	[Map_c -at:keySlot:memberSlot:],
+	[Map_c -containsKey:],
+	[Map_c -removeKey:],
+	[Map_c -removeKey:],
+	[Map_c -forEachKey:{,arg1,arg2,arg3],
+	[Map_c -createIndex:fromMember:],
+	[Map_c -mapAllocations:],
+	[Map_c -_lispOut_:deep:],
+	[MapIndex_c -setKey:]): Likewise.
+
+	* OrderedSet.m ([OrderedSet_c -contains:]): Likewise.
+
+	* List_GEN.m ([TARGET -copy:]): Likewise.
+
+	* InputStream.m ([ArchiverList_c -lispOutDeep:]): Likewise.
+
+1999-08-25  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* OutputStream.m ([OutputStream_c -catChar:]): Use isPrint instead
+	of isprint.
+
+	* InputStream.m	(readString, [InputStream_c -getExpr]): Use isSpace
+	instead of isspace.
+	([InputStream_c -getExpr]): Use isDigit instead of isdigit.
+
+1999-08-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* collections.h (ArchiverKeyword, ArchiverArray, ArchiverValue,
+	ArchvierPair, ArchiverList, PermutationItem): Change from CREATABLE
+	to RETURNABLE.
+
+	* collections.h: Add objects-conforming-to-Zone argument types.
+
+1999-08-13  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* InputStream.m ([ArchiverArray_c -setArray:]): Use size_for_objc_type
+	instead of switch.
+
+	* InputStream.[hm], collections.h. ([ArchiverArray_c
+	-convertToType:dest:]): New method.
+
+	* InputStream.h (ArchiverArray_c): Switch type to const char *.
+
+1999-08-12  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* InputStream.[hm], collections.h ([ArchiverValue_c -setLong:],
+	[ArchiverValue_c -setInteger:], [-getLong]): Remove.
+	([ArchiverValue_c -setLongDouble:], [ArchiverValue_c
+	-getLongDouble],
+	[ArchiverValue_c -setLongDouble:], [ArchiverValue_c -getLongLong],
+	[ArchiverValue_c -getUnsigned]): Add.
+	([InputStream_c -getExpr], [ArchiverList_c -lispOutDeep:]): Use
+	getZone macro.
+	([InputStream_c -getExpr]): Use long long as default numeric type
+	(not long).  Recognize L0 as long double.  Use strtoll instead of
+	strtol.
+	([ArchiverArray_c -setArray:], [ArchiverValue_c -lispOutDeep:]):
+	([ArchiverArray_c -setArray:], [ArchiverValue_c -lispOutDeep:]):
+	Handle long long and long double.
+	([ArchiverArray_c -setArray:]): Use alloc: instead of xcalloc.
+	Use scratchZone for index and drop it.
+	([ArchiverArray_c -drop]): Drop using free: instead of XFREE.
+	Call superclass drop.
+
+	* InputStream.h (ArchiverValue_c): Add long double and long long.
+	Remove long and int.
+
+1999-08-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* OutputStream.[hm], collections.h ([OutputStream_c
+	-catLongDouble:]): New method.
+
+1999-08-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* OutputStream.m ([OutputStream_c -catLongLong:]): 
+	Raise an error if no long long specifier is available (e.g. HPUX9).
+
+1999-08-06  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* OutputStream.[hm], collections.h ([OutputStream_c
+	-catPointer:]): New method.
+
+1999-08-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* InputStream.m ([InputStream_c -getExpr]): Change strtol failure
+	from error to warning.
+
+	* Map.m ([Map_c -{hdf5,lisp}In:]): Use STRDUP instead of strdup.
+
+1999-08-01  Alex Lancaster  <alex@santafe.edu>
+
+	* collections.h (ForEachKey): New protocol.
+	(KeyedCollection):  Adopt it.
+
+	* Map.[hm] ([Map_c -{forEachKey:, forEachKey::, forEachKey:::,
+	forEachKey::::}]): New methods to implement the `ForEachKey'
+	protocol for Map.  Thanks to Alan Liu <alanl@santafe.edu> for the
+	implementation.
+
+	* Set.[hm]: Identical method functionality implemented for `Set'.
+	
+1999-07-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* OutputStream.m ([OutputStream_c -catLongLong:],
+	[OutputStream_c -catUnsignedLongLong:]): Compose fmt from LLFMT
+	for long long output.  When sizeof long and long long are the
+	same, do a cast and use %l[ud].
+
+1999-07-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* collections.h (_Set): Split out common Set features into
+	subprotocol. (Set, OrderedSet): Adopt it. 
+
+1999-07-03  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* collections.h (InputStream): Declare -setLong: and -getLong.
+
+1999-07-02  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* InputStream.m ([InputStream_c -getExpr]): Default to _C_LNG 
+	for numbers.
+	([ArchiverArray_c -setArray:]): Check for _C_LNG instead of _C_INT.
+	([ArchiverValue_c -lispOutDeep:]): Handle _C_LNG.
+
+	* InputStream.[hm] ([ArchiverValue_c -setLong:], [ArchiverValue_c
+	-getLong]): New methods.
+
+	* InputStream.h (ArchiverValue_c): Add long type to value union.
+
+	* InputStream.m ([InputStream_c -getExpr]): Remove disabled `nil'
+	parsing code.
+
+1999-07-01  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* List_GEN.m ([TARGET -describe:]): Cast getField return to int.
+
+	* InputStream.m ([ArchiverArray_c -lispOutDeep:]): Don't use
+	sprintf just to make string from char.
+
+1999-06-30  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* collections.h (OutputStream), OutputStream.[hm]: Add long long
+	output methods.
+
+	* collections.h, Map.[hm]: Add -setCompareCStrings,
+	-setCompareIntegers, -setCompareUnsignedIntegers, -setCompareIDs.
+
+	* Map.m (COMPAREFUNCEQ): New macro.  Use it throughout
+	for any instance of compareFunc == X.
+
+1999-06-29  Alex Lancaster  <alex@santafe.edu>
+
+	* ListShuffler.m ([ListShuffler_c +create:setUniformRandom:]):
+	Call createBegin on `self' rather than `ListShuffler_c', since
+	this does not exist for a phase-split class.
+
+1999-06-25  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Set.[hm] ([Set_c -getCount]): New method.
+
+1999-06-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Collection.m (indexAtOffset): Adjust loop logic to avoid
+	negative numbers.
+
+	* List_GEN.m ([TINDEX -setOffset:]): Likewise.
+
+	* Permutation.[hm] ([PermutationItem_c -setPosition:],
+	[PermutationItem_c -getPosition]): Make position unsigned.
+
+	* Collection.m (indexAtOffset): Make offset unsigned.
+
+	* Array.[hm], Collection.[hm] ([Array_c -atOffset:], [Array_c
+	-atOffset:put:]): Make offset unsigned.
+	([ArrayIndex_c -setOffset:]): Likewise.
+
+	* List_GEN.m ([TINDEX -setOffset:]): Likewise.
+
+	* Set.m ([SetIndex_c -setOffset:]): Likewise.
+
+	* collections.h: Reflect these changes.
+
+1999-06-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* List.m (setListClass): Don't use string manipulation to
+	get next phase; use nextPhase.
+
+	* Map.m ([Map_c -createIndex:fromMember:]): Use a componentZone for
+	listIndex.
+
+1999-06-17  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* List.m (setListClass): Fix off by one error in computing name
+	for using-phase-lookup-by-string.  Use buffer on stack instead of heap.
+
+1999-06-10  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (BUILT_SOURCES): Use TYPEINFO.
+	(module_headers): Remove.
+
+1999-06-08  Alex Lancaster  <alex@santafe.edu>
+
+	* collections.h (ArchiverPair): Add -{set,get}ConsFormatFlag
+	method to protocol.
+
+	* InputStream.m ([ArchiverList_c -lispOutDeep:]): Handle
+	cons_literal_p, list_literal_p cases.  Also handle the custom
+	PARSE_FUNCTION_NAME case in place of the usual
+	MAKE_{INSTANCE,CLASS}_FUNCTION_NAME.
+	(lisp_output_one_of_pair): Remove function, no longer required.
+	([ArchiverPair_c -lispOutDeep:]): Reorganize to use lispOutDeep
+	directly on {car,cdr} elements, use consFormatFlag to choose
+	between output formats.
+	([InputStream_c -getExpr]): When creating ArchiverPair instance,
+	set consFormatFlag based on the original text file format.
+	
+	* InputStream.[hm] ([ArchiverPair_c
+	-{set,get}ConsFormatFlag:]): New methods and instance variable for
+	saving the kind of output format for a pair: "'(car . cdr)" or
+	"(cons car cdr)" when file is parsed.
+
+	* collections.m (_collections_implement): Add setTypeImplemented
+	for ArchiverList_c to ArchiverList.
+
+	* collections.h (ArchiverList): Add protocol, conform to List,
+	CREATABLE.
+	(OutputStream): Remove -catExpr: method. Add
+	-cat{Short,UnsignedShort,Long,UnsignedLong}: methods.
+
+	* OutputStream.[hm] ([OutputStream_c -catExpr:]): Remove,
+	functionality now in ArchiverList_c.
+	([OutputStream_c -cat{Short,UnsignedShort,Long,UnsignedLong}:]):
+	New methods.
+
+	* InputStream.[hm]: ([ArchiverList_c -lispOut{Shallow,Deep}:]):
+	New class, subclasses from List_linked and allows serialization of
+	itself.
+	([ArchiverList_c -lispOutDeep:]): Moved functionality previously
+	in ([OutputStream_c catExpr:]) into method.
+
+	* predicates.m (stringp): Change predicate to use `conformsTo:
+	@protocol(String)'.
+	(symbolp): Likewise for Symbol.
+	(keywordp): Likwise for ArchiverKeyword.
+	(valuep): Likewise for ArchiverKeyword.
+	(arrayp): Likewise for ArchiverArray.
+	(pairp): Likewise for ArchiverPair.
+	(listp): Set to conform to @protocol(ArchiverList).
+
+	* List.m (setListClass): New function to wrap `setClass'
+	functionality for Lists.  If not one of the standard List
+	implementation (List_any, List_linked, List_mlinks), set the final
+	class name using setClass() to that of the current CREATING phase
+	class name without the `.Creating' suffix, otherwise default to
+	the previous behavior.
+	([List_any -createEnd]): Use new setListClass() function in place
+	of setClass.
+
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (module_headers): Use $(TYPEINFO).
+	(noinst_LTLIBRARIES, lib_LTLIBRARIES): Substitute {inst,noinst}LIBS.
+	(EXTRA_LTLIBRARIES): New variable.
+	(libcollections_la_LDFLAGS): Substitute @inst_LDFLAGS@.
+
+	* Collection.m, List.m: Include misc.h.
+
+1999-06-05  Alex Lancaster  <alex@santafe.edu>
+
+	* InputStream.h: Declare all missing methods.
+
+	* collections.h (OutputStream): [OutputStream_c -cat{Expr, Double,
+	Float, Int, Unsigned}:] Add and document new methods.
+	(Archiver{Keyword,Value,Array,Pair): Add new methods to protocol.
+
+	* StringObject.m ([String_c -lispOutShallow:]): When literalFlag
+	set, don't generate the MAKE_INSTANCE_FUNCTION_NAME.
+
+	* InputStream.[hm] ([InputStream_c -getExpr]): Make uncondtional
+	while loops use Boolean (YES), rather than (1).
+	([ArchiverKeyword_c -lispOut{Shallow,Deep}:]): Implement
+	serialization.
+	([ArchiverArray_c -setArray:]): Save the type information in new
+	`type' slot.
+	([ArchiverArray_c -getArrayType]): New method.
+	([ArchiverArray_c -lispOut{Shallow,Deep}:]): Implement
+	serialization, use saved `type' information to regenerate the
+	array using lisp_process_array function call.
+	([ArchiverValue_c -lispOut{Shallow,Deep}:]): Serialization for the
+	atomic types, using [OutputStream_c -cat{Double, Float, Int,
+	Unsigned}:] functions.
+	(lisp_output_one_of_pair): New function.
+	([ArchiverPair_c -lispOut{Shallow,Deep}:]): Use
+	lisp_output_one_of_pair.  Serialization for pairs.  
+	Import <defobj/internal.h>.
+
+	* OutputStream.[hm] ([OutputStream_c -catChar:]): New method to
+	accept a character and write to a string in the format expected by
+	the Lisp archiver.
+	([OutputStream_c -cat{Double, Float, Int, Unsigned}:]): Likewise
+	for all respective types.
+	([OutputStream_c -catExpr:]): New method to write an expression
+	parsed by an InputStream instance back to a stream.
+
+1999-06-04  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* collections.h ([Set add:]): Remove remark about DupOption (moved to
+	design document).
+	([Map at:replace:]): Remove remark about potential multiple duplicate
+	keys.
+
+1999-05-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I$(top_builddir)/libobjc (for
+	objc/externvar.h).
+
+	* collections.h: Include externvar.h.
+	
+1999-05-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* collections.h: Use `externvar' for external variable declarations.
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES): Switch from lib_LTLIBRARIES.
+
+1999-05-24  Alex Lancaster  <alex@santafe.edu>
+
+	* collections.h (Index): -getLoc, -setLoc: Make these methods
+	accept and return (id <Symbol>).
+	(PermutedIndex):  Likewise.
+
+	* Collection.[hm] ([PermutedIndex_c -getLoc]): Likewise.
+
+	* List_GEN.[hm] ([TINDEX -getLoc]): Likewise.
+
+	* Set.[hm] ([SetIndex_c -getLoc]): Likewise.
+
+	* Map.[hm] ([MapIndex_c -getLoc]): Likewise.
+
+	* Array.[hm] ([ArrayIndex_c -getLoc]): Likewise.
+
+	* Set.[hm] ([Set_c -containsKey:]): Implement.
+	([Set_c -removeKey:]): Implement.
+
+	* collections.h, Map.[hm] ([Map_c -containsKey:]): Implement method.
+ 	Add -containsKey: compliance to KeyedCollection protocol.
+
+	* collections.h (Map): Make protocol comply with CompareFunction.
+	Remove redundant declaration of -removeKey: (already defined in
+	KeyedCollection protocol).
+	(KeyedCollection): Remove compliance with CompareFunction.
+	(Set): Re-enable compliance with KeyedCollection.
+	(InputStream):  Add docs on support for Lisp comments.
+
+1999-05-19  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ListShuffler.m (uniformUnsRand): Externify.
+
+1999-04-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Map.m: Replace pointer-conversion int and unsigned usages
+	to PTRINT and PTRUINT as well as printf format %d and %u
+	to PTRINTFMT and PTRUINTFMT.
+
+	* List_GEN.m: Include misc.h instead of limits.h.
+
+1999-04-26  Alex Lancaster  <alex@santafe.edu>
+
+	* InputStream.m ([InputStream_c -getExpr]): Handle Lisp comments,
+	ignore any remaining part of any line commencing with a semi-colon
+	`;'.
+
+1999-04-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* List.m ([List_any -{hdf5,lispIn}:]): Move to setting phase.
+
+	* Map.m ([Map_c -{lisp,hdf5}In:]): Likewise.
+
+1999-03-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I for libobjc.  Remove -I for
+	objectbase.
+
+	* ListShuffler.m: Don't include random.h.  Instead declare
+	protocol with getUnsignedWithMin:withMax.
+
+1999-03-09  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Set.[hm], collections.h ([Set_c -add:]): Return NO instead of
+	nil.  Make return type boolean.
+
+	* OrderedSet.[hm]: Likewise.
+
+1999-03-04  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Permutation.m ([Permutation_c +createBegin:]): Revert last change.
+
+	* Collection.m ([PermutedIndex_c +createBegin:]): Likewise.
+
+1999-03-04  Vladimir Jojic  <vjojic@chama.santafe.edu>
+	
+	* Permutation.m ([Permutation_c +createBegin:]): Call allocIVars:
+	with [self getClass] as an arguments instead of self and setClass
+	to self.
+
+	* Collection.m ([PermutedIndex_c +createBegin:]): Likewise.
+
+1999-03-03  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* Permutation.m ([Permutation_c -createEnd]): Use macro getCZone
+	instead of getComponentZone: method.
+	([Permutation_c +createBegin:]): Likewise.
+
+	* Collection.m ([PermutedIndex_c -createEnd]): Likewise.
+	([PermutedIndex_c -reshuffle]): Likewise.
+	([PermutedIndex_c -createEnd]): Likewise.
+
+1999-03-02  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* Permutation.m ([Permutation_c +createBegin:]): Use component zone
+	for allocating shuffler.
+	([Permutation_c -mapAllocations:mapalloc]): Call 
+	[super mapAllocations: mapalloc] to deallocate block of memory
+	allocated by array.
+
+1999-02-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* InputStream.m ([InputStream_c -getExpr]): Disable "nil" handling.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (CURRENT, REVISION, AGE): No changes.  Version 1.4.1.
+
+1999-02-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Map.m ([Map_c -lispIn:]): Support string keys (copying them from
+	expression).
+
+	* InputStream.m ([InputStream_c -getExpr]): Use readString
+	instead of getExpr for keyword name.
+
+1999-02-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* List.m, Map.m ([... hdf5OutShallow:]): Call writeLevels
+	in addition to writeRowNames.
+	
+1999-01-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* InputStream.m ([InputStream_c -getExpr]): Raise an event
+	instead of aborting.  Treat :keyword like #:keyword.
+
+	* ListShuffler.m: Use raiseEvent() instead of raiseEvent:.
+
+1999-01-21  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Map.m ([Map_c -_lispOut_:deep:]): Don't print #:compare-function
+	when none set.
+
+1999-01-20  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am (CURRENT): Bump.
+
+	* Map.m (GROUP_KEYS, GROUP_VALUES): New macros for string reuse.
+	([Map_c -allSameKeyClass]): New method.
+	([Map_c -allSameClass]): Use it.
+	([Map_c -allStringKeys]): New method.
+	([Map_c -hdf5OutDeep:]): Use it, handle String keys.
+	([Map_c -hdf5In:]): Handle String case.
+	
+	* StringObject.[hm]: Remove hdf5OutDeep:.
+
+1999-01-19  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Map.m (hdf5_store_compare_function_attribute): New function.
+	([Map_c hdf5OutDeep:], [Map_c hdf5OutShallow:]): Use it.
+	([Map_c hdf5In:]): Implement shallow loading.
+
+	* List.[hm]: Move HDF5 stuff from Collections.
+
+	* List.[hm], Map.[hm], StringObject.[hm]: Switch from
+	{lisp,hdf5}Out:deep: to
+	{lisp,hdf5}OutShallow:.  (Deep is avoided in Archiver.)
+
+	* Map.m ([Map_c hdf5Out:deep]): Don't compute anything for call
+	to -setRowNameLength: and don't call it.
+	([Map_c -hdf5InCreate:]): New method.
+	(setCompareFunctionByName): New function.
+	([Map_c -lispInCreate:], [Map_c -hdf5InCreate:]): Use it.
+	([Map_c -hdf5Out:deep:]): Check compareFunc before checking
+	if key is a string (an object).
+	([Map_c -hdf5In:]): Implement deep loading and shallow/deep keys.
+
+	* List.m ([List_any -hdf5In:]): New method.
+	
+	* Array.[hm], collections.h ([Array_c -setCount:]): Return self.
+
+	* Collection.m, Map.m ([... hdf5Out:deep:]): For dataset,
+	set compoundType and count separately.
+
+1999-01-18  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Collection.m, Map.m ([... hdf5Out:deep:]): Set componentType
+	from member prototype.
+
+1999-01-17  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Collection.m, Map.m, String.m (hdf5Out:deep:): 
+	Use setClass: instead of setSourceClass: and setCompoundType:count:
+	instead of setRecordType:count: (renames).
+	Call writeRowNames:.
+
+	* Map.m ([... hdf5Out:deep:]): Set typeName to Map member
+	type, not Map. 
+
+	* Collection.m, Map.m, String.m ([... hdf5Out:deep:]): Use
+	getTypeName instead of name.  
+
+	* Map.m ([Map_c -lispOut:deep:]): Likewise.
+
+	* List.m ([List_any -lispOut:deep:]): Likewise.
+
+	* StringObject.m ([String_c -lispOut:deep:]): Use getTypeName
+	instead of literal String.
+
+1999-01-16  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Collection.m, Map.m ([... hdf5Out:deep:]): Set createFlag.
+	
+1999-01-15  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* collections.h (String): Remove setLiteralFlag: and getLiteralFlag.
+
+	* StringObject.[hm] ([String_c -getCount], [String_c -count], 
+	[String_c -length]): Return unsigned.
+	([String_c -lispIn:], [String_c -lispOut:deep:],
+	[String_c -hdfIn:], [String_c -hdfOutOut:deep:): New methods.
+
+	* StringObject.m: ([String_c -out:]): Remove.
+
+	* List.[hm]: Make getCountPerBlock return unsigned.
+
+	* InputStream.m: Include StringObject.h.
+
+	* Map.m ([Map_c -hdf5Out:deep:]): Use storeAttributes:value: to
+	save a compare function attribute.  Add support for non-object
+	keys.
+	
+1999-01-14  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Map.m, collection.h (compareCStrings): New function.
+	([Map_c -lispOut:deep:], [Map_c -lispInCreate:]): Add support
+	for c-strings.
+	(COMPARE_{FUNCTION,INT,UNSIGNED,CSTRING,ID}: New macros.
+	([Map_c -lispInCreate:], [Map_c -lispOut:deep:]): Use them.
+	([Map_c -lispOut:deep:]): Abort if unknown compareFunc.
+
+	* Map.h (compareIDs, compareIntegers, compareUnsignedIntegers,
+	compareCStrings): Declare.
+	
+	* Map.m ([Map_c -lispOut:deep:], [Map_c -hdf5Out:deep:]): Use DSIZE.
+	([Map_c -hdf5Out:deep:]): Handle compareFunc of integers differently
+	from IDs.
+
+	* Collections.m ([Collection_any -hdf5Out:deep:]): Use DSIZE.
+
+1999-01-14  Alex Lancaster  <alex@santafe.edu>
+
+	* Map.m ([Map_c -lispOut:deep:]): compareUnsigned ->
+	compareUnsignedIntegers
+
+1999-01-14  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Map.m, collections.h (compareUnsignedIntegers): New function.
+	([Map_c -lispOut:deep:], [Map_c -lispInCreate:]): Handle
+	compareUnsignedIntegers case.
+
+	* Collection.[hm], Map.[hm]: Always declare hdf5Out:deep:. Don't
+	include swarmconfig.h.  Call hdf5_not_available when HAVE_HDF5 not
+	defined.  
+
+	* Collection.m, Map.m: Implement deep serialization for 
+	hdf5Out:deep:.
+
+1999-01-13  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Map.[hm]: Include swarmconfig.h.
+	([Map_c -allSameClass], [Map_c -hdf5Out:deep:]): New methods.
+
+	* Collection.[hm]: Include swarmconfig.h.
+	([Collection_any hdf5Out:deep:]): New method.
+
+	* Collection.m ([Colleciton_any hdf5Out:deep:]): Call
+	numberRecord: on dataset.
+
+1999-01-12  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Collection.[hm], collections.h ([Collection_any -allSameClass]):
+	New method.
+
+1999-01-12  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* collections.h (PermutedIndex):  Declare -reshuffle.
+
+	* Permutation.[hm] ([PermutationItem_c -describe:]): New method
+
+	* Collection.[hm] ([PermutedIndex -reshuffle]): New method.
+
+1999-01-10  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* List.[hm] ([List_any -lispOut:deep:]): Renamed from lispOut:; added
+	deep serialization boolean option.
+
+	* Map.[hm]: Likewise.
+
+1999-01-09  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* InputStream.m ([InputStream_c -getExpr]): Handle nil and Nil
+	as an ArchiverValue.
+	([ArchiverArray_c -setArray:]): Handle arrays of type id.
+
+	* InputStream.[hm], collections.h ([ArchiverValue_c -setNil],
+	([ArchiverValue_c -getObject]): New methods.
+
+	* InputStream.[hm] (ArchiverValue_c): Rename number to value.
+
+1999-01-08  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* List.m ([List_any -lispOut:]): Use MAKE_INSTANCE_FUNCTION_NAME
+	instead of MAKE_OBJC_FUNCTION_NAME.
+
+	* Map.m ([Map_c -lispOut:]): Likewise.
+
+1999-01-06  Alex Lancaster  <alex@santafe.edu>
+
+	* collections.h (PermutationItem): Add phase tags and
+	documentation strings.
+
+1999-01-06  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* List_GEN.m ([TINDEX -setOffset:]): Cast count to int.
+
+	* collections.h (PermutationItem): New protocol.
+	(PermutedIndex): Remove no-update qualification.
+
+	* collections.m (_collections_implement): Setup PermutationItem.
+
+	* Collection.m: Include Permutation.h and collections.h.
+	([PermutedIndex_c -next], [PermutedIndex_c -prev]): Use
+	PermutationItem to get item.  Skip over removed items.
+	([PermutedIndex_c -findNext:], [PermutedIndex_c -findPrev:],
+	[PermutedIndex_c -get]): Get item via PermutedItem.
+	([PermutedIndex_c -put:]): Use atOffset:put: with
+	PermutedItem's offset. 
+	([PermutedIndex_c -remove]): Use indexAtOffset with PermutedItem's
+	offset to remove item.
+	([PermutedIndex_c -getLoc]): Use PermutedItem to get position and
+	return Removed if position is < 0, otherwise use result of 
+	getLoc on internal index.
+
+	* Permutation.m: Include collections.h.
+	([Permutation_c -mapAllocations:mapalloc]): Map over internal
+	PermuteItems.
+
+	* Permutation.h ([Permutation_c -mapAllocations:mapalloc]): Declare.
+
+	* Permutation.[hm] ([Permutation_c -getCollection]): Add.
+	([Permutation_c -generatePermutation]): Remove.
+
+	* Permutation.[hm] (PermutationItem_c): New class.
+
+1998-12-29  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Array.m (initArray): Make copyCount unsigned.
+	([Array_c -atOffset:]): Cast count to int for comparison with
+	offset.
+	([Array_c -atOffset:put:]): Likewise.
+	([ArrayIndex_c -setOffset:]): Likewise.
+
+	* Collection.m (indexAtOffset): Cast count to int for comparison with
+	offset.
+
+1998-12-28  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* List_GEN.m ([TARGET -_createPermutedIndex_:forIndexSubclass:]): 
+	Use -setCollection: instead of +createBegin:forCollection:.
+
+	* collections.h: Change all count arguments to unsigned.
+	(PermutedIndex): Remove generatePermutation.
+	(ArchiverKeyword, ArchiverArray, ArchiverValue,
+	ArchiverPair): Add protocol summary and description strings.
+
+	* Permutation.m ([Permutation_c -createEnd]): Check for a 
+	collection and generatePermutation when finished.
+
+	* Permutation.[hm], collections.h: Remove
+	+createBegin:forCollection:. Add setCollection:.
+
+	* Collection.m ([Collection_any -beginPermuted:aZone]): Use 
+	setCollection: instead of removed +createBegin:forCollection:.
+	([PermutedIndex_c +createBegin:]): Likewise.
+	([PermutedIndex_c generatePermutation]): Remove.
+
+	* Collection.h: Change count arguments from int to unsigned.
+	Declare setCollection: and setUniformRandom:.  Don't
+	declare generatePermutation.
+
+	* Array.[hm]: Change count arguments from int to unsigned.
+
+1998-12-26  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* collections.h (Collection): Declare -beginPermuted:.
+	(PermutedIndex): Declare generatePermutation.
+
+	* Collection.m ([Collection_any -beginPermuted:]): Eliminate
+	temporary variable.
+
+1998-12-22  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* Collection.h (PermutedIndex_c): Remove +createBegin:.
+	(PermutedIndex_c): Add +createBegin:forCollection:.
+
+	* Collection.m ([Collection_any -beginPermuted:aZone]): 
+	Modify to support new PermutedIndex class.
+	([PermutedIndex_c +createBegin:]): Remove.
+	([PermutedIndex_c +createBegin:forCollection:]): Add.
+	([PermutedIndex_c -createEnd]): Modify to support new Permutation 
+	class.
+	([PermutedIndex_c -setUniformRandom:]): Allow setting of 
+	distribution of the shuffler used to generate Permutation.
+	([PermutedIndex_c -generatePermutation]): Modify to support new 
+	Permutation class.
+	([PermutedIndex_c -next]): Delegate the message to the index 
+	operating on Permutation.
+	([PermutedIndex_c -prev]): Likewise.
+	([PermutedIndex_c -findNext:]): Likewise.
+	([PermutedIndex_c -findPrev:]): Likewise.
+	([PermutedIndex_c -get]): Likewise.
+	([PermutedIndex_c -getLoc]): Likewise.
+	([PermutedIndex_c -setLoc:]): Likewise.
+	([PermutedIndex_c -getOffset]): Likewise.
+	([PermutedIndex_c -setOffset:]): Likewise.
+	([PermutedIndex_c -put:]): Disable. Raise an SourceMessage error.
+	([PermutedIndex_c -remove]): Likewise.
+	([PermutedIndex_c -mapAllocations:mapalloc]): Drop permutation along
+	with the PermutedIndex.
+
+	* Permutation.m ([Permutation_c +createBegin:forCollection:]):
+	Rename +createBegin: to +createBegin: forCollection:. 
+	([Permutation_c -createEnd:]): Initialize Permutation with the
+	ids instead of integers.
+	([Permutation_c -setMaxElement:): Remove.
+	([Permutation_c -setMinElement:): Remove.
+
+	* Permutation.h (Permutation_c): Change Permutation_c to hold
+	ids of the objects instead of the integers representing offsets.
+	(Permutation_c): Remove methods setMaxElement: and setMinElement: 
+	and instance variables maxElement and minElement. 
+	(Permutation_c): Remove +createBegin:. 
+	(Permutation_c): Add +createBegin: forCollection:.
+
+	* collections.h: Update descriptions of Permutation and 
+	PermutedIndex.
+
+	* List_GEN.m ([TARGET -_createPermutedIndex_:forIndexSubclass:]): 
+	Modify to support new PermutedIndex_c class.
+
+1998-12-21  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* StringObject.m: Don't include assert.h.
+	([String_c +create:setC:]): Don't use assert on argument.
+
+	* Array.m, OutputStream.m: Include misc.h instead of memory.h.
+
+1998-12-18  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* collections.h, Map.[hm] ([Map -setCompareFunction:]): Return self.
+	(OrderedSet, Set): Don't adopt KeyedCollection.
+
+1998-12-17  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* collections.h (Index): Don't adopt Copy protocol.
+	(KeyedCollection): Remove -createIndex:setMember: and
+	-createIndex:at:.
+	(ListShuffler): Remove +create:withUniformRandom:.
+	Don't adopt CREATABLE or Create.
+
+	* StringObject.h (String_c): Implement String protocol.
+
+	* Set.h (Set_c): Implement Set protocol.
+	(SetIndex_c): Implement KeyedCollectionIndex.
+
+	* OutputStream.h (OutputStream_c): Implement OutputStream protocol.
+
+	* OrderedSet.m (OrderedSetIndex_c): Add Creating and Using
+	tags.
+
+	* OrderedSet.h (OrderedSet_c): Implement OrderedSet protocol.
+	(OrderedSetIndex_c): Implement KeyedCollectionIndex protocol.
+
+	* Map.[hm] ([Map_c -createIndex:fromKey:]): Remove.
+	([Map_c -getCompareFunction]): Add.
+	(MapIndex): Add Using tag.
+
+	* Map.h (Map_c): Implement Map protocol.
+	(MapIndex_c): Implement MapIndex protocol.
+
+	* List_GEN.m (TARGET, TINDEX): Add Creating and Using tags.
+
+	* List_GEN.h (TARGET): Implement List protocol.
+	(TINDEX): Implement Index protocol.
+
+	* ListShuffler.h: Include collections.h.
+	(ListShuffler_c): Implement ListShuffler protocol.
+
+	* InputStream.h (InputStream_c): Implement InputStream protocol.
+
+	* Array.m (ArrayIndex): Add Creating and Using phase tags.
+
+	* Collection.h (Collection_any): Implement Collection protocol.
+	(Index_any): Implement Index protocol. 
+	(PermutedIndex_c): Implement PermutedIndex protocol and inherit
+	from Index_any. Remove collection ivar.
+
+	* Collection.[hm] (Collection_any): Remove getReadOnly. 
+	Add copy: and begin: stubs.
+	(Index_any): Add Creating tag.
+	Add setOffset:, getOffset, setLoc:, put:, remove, prev, and next
+	stubs.
+	(PermutedIndex_c): Add Creating and Using tags.
+
+	* Array.h (Array_c): Implement Array protocol.
+	(ArrayIndex_c): Implement Index protocol.
+
+1998-12-15  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* Permutation.m ([Permutation_c +createBegin:]): Use component zone 
+	for internal objects of Permutation.
+
+	* Collection.m ([PermutedIndex_c -mapAllocations:mapalloc]): 
+	Remove return self.
+	([PermutedIndex_c -createEnd]): Use component zone for internal
+	objects of PermutedIndex.
+
+	* Permutation.m ([Permutation_c -mapAllocations:mapalloc]): 
+	Likewise
+	
+
+	* Collection.m ([PermutedIndex_c -mapAllocations:mapalloc]): 
+	Cast mapAllocations: as void.
+
+	* Permutation.m ([Permutation_c -mapAllocations:mapalloc]): 
+	Likewise.
+
+1998-12-14  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* Collection.m ([PermutedIndex_c -mapAllocations:mapalloc]): 
+	mapAllocations: implemented.
+	([PermutedIndex_c -createEnd]): Add setMappedAlloc.
+
+	* Collection.h: Add mapAllocations: method to PermutedIndex_c.
+
+	* ListShuffler.m: Declare uniformUnsRandom to avoid linking problems.
+	([ListShuffler_c -createEnd]): Add setNextPhase.
+
+	* Permutation.m ([Permutation_c -mapAllocations:mapalloc]): 
+	mapAllocations: implemented.
+
+	* Permutation.h: Add mapAllocations method.
+	
+1998-12-14  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* ListShuffler.[hm], collections.h ([ListShuffler_c
+	-setUniformRandom:]): Return self instead of nothing.
+
+	* ListShuffler.[hm], collections.h ([ListShuffler_c
+	-shufflePartialList:Num:]): Make num argument unsigned. 
+
+	* Permutation.[hm], collections.h ([Permutation_c
+	-setMinElement:]): ([Permutation_c -setMaxElement:]): Take
+	unsigned as argument instead of int and return self instead of
+	nothing.
+
+	* ListShuffler.m ([ListShuffler_c -shufflePartialList:Num:]): Make
+	j, k and m unsigned.
+	([ListShuffler_c -shuffleWholeList:]): Make j and k unsigned.
+	
+	* Permutation.m [Permutation_c -createEnd]): Use unsigned instead
+	of int for i.  Send setCount: and atOffset: to self instead of super.
+	([Permutation_c -describe:]): Make elem unsigned and sprintf
+	format %u instead of %d.
+
+	* collections.m (_collections_implement): Associate ListShuffler_c
+	and ListShuffler.
+
+	* collections.h (ListShuffler): Adopt Create, Drop, and CREATABLE.
+
+	* Makefile.am (INCLUDES): Add random.
+
+	* ListShuffler.m: Include random.h, not random/random.h.  Don't
+	include simtools.h. 
+	([ListShuffler_c +createBegin:]): Remove. 
+
+1998-12-12  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am (module_headers): Add collections.xm.
+
+1998-12-11  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Permutation.[hm]: New files.
+
+1998-12-11  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* Array.h (ArrayIndex_c): setOffset returns id. 
+
+	* Array.m ([ArrayIndex_c -setOffset:]): setOffset modified to
+	return object at offset.
+
+	* Collection.h (Collection_any): Add method beginPermuted: 
+	(PermutedIndex): New class for randomized traversal of a collection.
+
+	* Collection.m ([Collection_any -beginPermuted:aZone]): New method
+	used for creation of a PermutedIndex over any collection.	
+	(PermutedIndex_c): New class that allows randomized traversal of any
+	collection.
+
+	* List_GEN.h:Add method _createPermutedIndex_:forIndexSubclass: 
+
+	* List_GEN.m ([TARGET -_createPermutedIndex_:forIndexSubclass:]): 
+	New method that supports creation of PermutedIndex that operates
+	on top of an arbitrary ListIndex subclass.
+
+	* Map.h (Map_c): Add method _createPermutedIndex_:forIndexSubclass:
+
+	* Map.m ([Map_c -_createPermutedIndex_:forIndexSubclass:]): 
+	New method that suports creation of PermutedIndex that  
+	operates on top of an arbitrary MapIndex subclass.
+
+	* collections.m (_collections_implement): Permutation and 
+	PermutationIndex class objects added.
+
+	* collections.h (ListShuffler): ListShuffler protocol moved from 
+	simtools to collections
+
+1998-12-01  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* collections.h (Index): Change example to avoid processing the
+	End location.
+
+1998-11-19  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* Map.m ([Map_c -createIndex:fromMember:]): implemented as
+	linear search
+
+1998-11-19  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Map.m ([Map_c -lispIn:]): Remove ARCHIVERLITERAL handling; all
+	pairs are the same.
+	([Map_c -lispOut:]): Output (cons key value) instead of '(key . value).
+	
+	* InputStream.m ([InputStream_c -getExpr]): Convert (key . value)
+	to ArchiverPair.  Skip "'"; don't make a (quote x) type datastructure.
+	Treat (cons x y) the same as '(x . y).
+
+	* InputStream.[hm] (ArchiverPair_c), collections.h,
+	collections.m (_collections_implement): New type.
+
+	* predicates.[hm] (cons_literal_p, list_literal_p, symbolp, pairp):
+	New predicates.
+
+1998-11-18  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* List.m ([List_any -getCountPerBlock]): abort instead of exit.
+
+	* collections.h (List): The methods here aren't create-time; mark
+	as USING phase.
+
+1998-11-17  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* InputStream.[hm] (InputStream): New method setBoolean:
+	and getBoolean.  Handle #f and #t from input.
+
+	* Collection.m ([Collection_any -_lispInAttr_:]): New method for
+	shared create-time expression option parsing. 
+	[Collection_any -_lispOutAttr_:]): New using-time expression option
+	output method.  Both are for subclass use.
+	
+	* List_GEN.m: Reformatting throughout.  New macros COUNT,
+	FIRST, and FIRSTPREV to simplify code.
+
+	* List.m ([List_any -lispIn:], [List_any -lispInCreate:], 
+	[List_any -lispOut:]): New methods.  InitialValueSet not yet
+	handled because a copy of that list is not saved from create-time.
+
+	* Map.m ([Map_c -lispIn:], [Map_c -lispOut:], [Map_c
+	-lispInCreate): New methods.  Support compareIntegers
+	and compareIDs.  lispIn: pending for InputStream support of
+	pair syntax (and conversion to expr Map).
+
+	* List.h (List_any): Conform to Serialization protocol.
+	Declare -lispIn: and -lispOut:.
+
+	* Map.h (Map_c): Likewise.
+
+	* collections.h (List, Map): Adopt Serialization protocol.
+	(ArchiverValue): Add setBoolean: and getBoolean.
+
+	* Collection.[hm], Map.[hm]: Reformatting throughout.
+
+1998-11-16  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* predicates.[hm] (keywordp, valuep, arrayp): New predicates.
+
+	* InputStream.m: Include misc.h instead of stdio.h and ctype.h
+	Include predicates.h.
+	([InputStream_c -getExpr]): Don't require leading 0 on octal
+	numbers.  Handle negative values.  
+
+	* InputStream.[hm] (ArchiverKeyword_c,
+	ArchiverArray_c, ArchiverValue_c): New classes.
+
+	* collections.h: Add corresponding protocols.
+
+	* collections.m (_collections_implement): Associate them.
+
+1998-11-15  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* InputStream.m ([InputStream_c -_unexpectedEOF_], 
+	[InputStream_c -_badType_:]): Raise an event instead of aborting.
+	Change return type to void.
+	([InputStream_c -getExpr]): Add support for keyword and array
+	loading.
+
+1998-11-12  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* OutputStream.[hm]: Remove -appendC:.
+
+1998-11-11  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Array.[hm] ([Array_c +create:setMemberAlloc:setCount:],
+	[Array_c -getMemberAlloc]
+	[Array_c -setMemberAlloc:setCount:]): Remove.
+
+	* collections.h: Remove creating -setDefaultMember:; there is
+	already a setting method.
+
+1998-11-02  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* collections.h (Collection): Note that copies are shallow.
+
+1998-10-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (REVISION): Increment.  Swarm 1.3.1 released.
+
+	* OrderedSet.m: Reformatting throughout.
+	([OrderedSet_c -contains:]): Return YES and NO instead of 1 and 0.  
+
+	* collections.h (Sorted): Moved to design document.
+	
+	* StringObject.m ([String_c +create:setC:]): Use getZone instead
+	of argument aZone for allocating string space.
+
+1998-09-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Map.[hm]: ([MapIndex_c -setLoc:]): 
+	Make argument to setLoc: of type id <Symbol>.
+
+	* Set.[hm] ([SetIndex_c -setLoc:]): Likewise.
+
+	* List_GEN.[hm] ([TINDEX -setLoc:]): Likewise.
+
+	* Array.[hm] ([ArrayIndex_c -setLoc:]): Likewise.
+
+	* Map.h, List_GEN.h, Set.h: Reformatting throughout.
+
+	* collections.h (INDEXSTARTP, INDEXENDP, REMOVEDP,
+	ARCHIVERLITERALP): New macros.
+
+	* Collection.m: Reformatting throughout.
+	([Index_any -findNext:]): Use INDEXENDP.
+	([Index_any -findPrev:]): Use INDEXSTARTP.
+
+	* Array.m: Reformatting throughout.
+	Include collections.h.
+	([ArrayIndex_c -next], [ArrayIndex_c -prev], [ArrayIndex_c -get], 
+	[ArrayIndex_c -put:], [ArrayIndex_c -getLoc], [ArrayIndex_c -setLoc:],
+	[ArrayIndex_c -getOffset]):  Use INDEX{START,END}P.
+
+1998-08-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT): Increment.  Swarm 1.3 released.
+	(install-data-local): Do two installs, for install-sh case.
+
+1998-07-30  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Array.m (initArray): Avoid allocating a block of size zero.
+
+1998-07-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* collections.h: Replace @deftype with @protocol throughout.
+
+1998-07-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am: Replace String with StringObject.
+
+	* StringObject.m, predicates.m: Include StringObject.h instead of
+	String.h.
+
+1998-07-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* collections.h: Remove Stack and Queue (now in design document).
+
+1998-07-09  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Map.m ([Map_c -at:insert:]): Actually reject an insert for
+	a pre-existing key.
+
+	* collections.h (Map): Remove mention of DupOption.
+
+	* Makefile.am (INCLUDES): Add misc.
+
+1998-07-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* String.m: Don't include string.h.  Include misc.h.
+
+	* InputStream.m, OutputStream.m: Don't include string.h or assert.h.
+
+1998-07-08  Alex Lancaster  <alex@santafe.edu>
+
+	* collections.h (KeyedCollection): Removed to design document
+	-getCountAtKey:, -containsKey: methods, all are unimplemented.
+	Removed comments for -{get,set}IndexFromMember:
+	(KeyCollectionsIndex): Removed to design document commented-out
+	-setMember method.
+	(Map): Removed to design document -setKeyType:, setKeySize:
+	methods, unimplemented.
+
+1998-06-30  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* List_GEN.m ([... -next]): Return NULL if there is a wrap.
+
+1998-06-25  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* String.m, collections.[hm]: Remove LiteralString.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LIBRARIES, libcollections_a_SOURCES): Remove.
+	(collections_HEADERS): Remove $(module_headers).
+	(EXTRA_DIST): Add List_GEN.m.
+	(install-data-local): New target.
+
+1998-06-23  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LTLIBRARIES, libcollections_la_SOURCES,
+	libcollections_la_LDFLAGS, SRC, CURRENT, REVISION, AGE): New
+	variables.  Set *_SOURCES from SRC.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-06-17  Alex Lancaster  <alex@santafe.edu>
+
+	* collections.m: Removed extern from LiteralString declaration.
+
+1998-06-15  Alex Lancaster  <alex@santafe.edu>
+
+	* Array.m ([Array_c -describe:]): Removed cast of pointer to
+	unsigned long.
+
+1998-06-14  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* collections.h: Remove MemberType; don't adopt it in Collection.
+	Remove IndexSafety.  Remove mention of MemberType in Drop.  Remove
+	EndsOnly; don't adopt it in List.  Remove DupOption,
+	BucketFunction, PartiallyOrdered, PartialOrderContext, and
+	PartialOrderRelations; don't adopt in KeyedCollection.  Remove
+	mention of duplicate key, partial ordering, and index safety from
+	KeyedCollection.  Remove disabled -setIndexFromKey:,
+	-getIndexFromKey, -getKeyAllocSize, -at:insert:setIndex:,
+	-insertGroup, -removeKey:getKey:, -replaceKey:,
+	-createIndex:setKey:, -createIndex:setMember:.
+
+1998-06-05  Alex Lancaster  <alex@santafe.edu>
+
+	* collections.h (LiteralString): Made an extern id <String>,
+	rather than @class variable.  Added doc tag.
+	(DupOption): Put space between global variable tag and @end
+	directive - causing problems for make-h2x script.
+
+	* collections.m: (LiteralString): Likewise, removed dummy
+	#defines.
+	
+1998-06-03  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* collections.h: Updated documentation tags.
+	(BucketFunction): -getBucketFunction now returns bucket_t.
+	(CompareFunction): -getCompareFunction now returns compare_t.
+
+1998-06-01  Alex Lancaster  <alex@santafe.edu>
+
+	* collections.h (Collection): Added method -setIndexFromMemberLoc:
+	to protocol.
+	(Index): Added doc string (//G) to Symbol and Error global
+	variables - made these inside the @end protocol declaration for
+	Index.
+	(KeyedCollection): Added method -createIndex:fromMember: to
+	protocol.
+	
+	* collections.m (LiteralString): Redefine LiteralString as
+	LiteralString_ between the imports of collections.xm and
+	Collection.h to avoid redeclaration error.
+
+1998-06-01  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* collections.m: Put LiteralString global here.
+
+	* collections.h: Make LiteralString a @class.
+
+1998-05-06  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* collections.h (IndexSafety, Offsets, ForEach, DefaultMember,
+	MemberBlock, Array, EndsOnly, DupOption, Sorted, CompareFunction,
+	BucketFunction, PartiallyOrdered, PartialOrderContext, MapIndex,
+	InputStream): Add //S.
+
+	* Set.m ([Set_c -at:memberSlot:]): Return NO, not nil.
+	
+	* collections.h	(Index, ListIndex, Stack, Queue, PartialOrderRelations,
+	Set, MapIndex): Add phase tags.
+
+1998-05-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* collections.h: Remove NextPrev from Index protocol.  Tweak
+	comments for the sake of documentation processing.
+
+1998-04-30  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Set.[hm] ([Set_c -createIndex:fromMember:]): Rename from
+	createIndexIn:fromMember:.  Raise a NotImplemented event.
+
+	* ListGen.m: Adjust error message to be createIndex:fromMember
+	not createIndexIn:fromMember.
+
+	* collections.h: Augment the Index documentation.  Move the
+	existing Index info to the Collections protocol, as it is
+	a bit more general.
+
+1998-04-28  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* collections.h: Add documentation tags.
+
+	* collections.h: New protocols: MemberType, IndexSafety, Offsets, 
+	ForEach.  (Collection): Include them.
+	New protocols: DefaultMember, MemberBlock.
+	(Array): Include them.
+	New protocol: EndsOnly.
+	(List): Include it.
+	New protocols: DupOption, Sorted, CompareFunction, BucketFunction,
+	PartiallyOrdered, PartialOrderContext, PartialOrderRelations.
+	(KeyedCollection): Include them.
+
+	* String.m: Reformatting throughout.
+	
+	* String.[hm]: ([String_c -appendC:]): Remove.
+
+	* InputStream.m (readString): Use catC: instead of appendC:.
+
+1998-04-27  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile: Remove duplicate SWARMHOME assignment.
+
+1998-04-11  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* collections.h: Make archiver symbols extern, not common.
+
+1997-12-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* collections.h (OutputStream, String):  Constify string arguments.
+
+	* OutputStream.[hm]: Constify string arguments.
+
+	* String.[hm]: Constify string arguments.
+
+1997-11-29  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile (OBJECTS): Add InputStream.o and predicates.o.
+	(install-headers): Add InputStream.h and predicates.o.
+	($(INCLIB)/InputStream.h): Add.
+	($(INCLIB)/predicates.h): Add.
+
+	* collections.m (_collections_implement): Add InputStream.
+	(_collections_initialize): Make customized LiteralString type.
+	Define Lispish symbols generated by getExpr.
+
+	* collections.h: Add @deftype for InputStream, and declare symbols
+	that getExpr can return.
+
+	* predicates.[hm]: New files.  Provide some convenience predicate
+	functions for identifying strings and lists.
+
+	* InputStream.[hm]: New files.  This class is introduced to read
+	Lisp-like expressions into lists using the `getExpr' method.
+
+	* collections.h: Declare [gs]etLiteralFlag methods.
+
+	* String.m ([String_c +createBegin:]): Initialize literalFlag to zero.
+	([String_c -setLiteralFlag:]): Add.
+	([String_c -getLiteralFlag]): Add.
+	([String_c -out:]): Add.  This routine that writes string to
+	an archive stream, and quotes its value when literalFlag is set.
+
+	* String.h (String_s): Add literalFlag instance variable, and
+	declare accompanying getter/setter methods.
+
+	* collections.h: Append <Collection> to KeyedCollection deftype.
+
+	

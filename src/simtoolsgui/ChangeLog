@@ -1,0 +1,983 @@
+2009-09-24  Scott Christley  <schristley@mac.com>
+
+	* ProbeDisplayManager.m, MultiVarProbeWidget.m,
+	SimpleProbeDisplay.m, GUISwarm.m, MessageProbeWidget.m: Adjust
+	casts to eliminate compiler warnings.
+
+2009-04-02  Scott Christley  <schristley@mac.com>
+
+	* ClassDisplayWidget.m, MessageProbeWidget.m: ObjC runtime abstraction.
+
+	* MultiVarProbeWidget.h, ControlPanel.h, SimpleProbeDisplay.h,
+	simtoolsgui.h, VarProbeWidge.h, CompleteProbeDisplay.h,
+	ProbeDisplay.h, GUISwarm.h, SingleProbeDisplay.h,
+	ClassDisplayWidget.h, ActionCache.h, CommonProbeDisplay.h,
+	GUIComposite.h, ActionHolder.h, MessageProbeWidget.h,
+	MultiVarProbeDisplay.h, Makefile.am, ProbeDisplayManager.h:
+	Standardize include directory structure to support libraries and
+	OpenStep frameworks.
+
+2007-03-04  Marcus G. Daniels  <marcus@snoutfarm.com>
+
+	* simtoolsgui.h: Use C linkage for probe display creation functions.
+
+2004-12-02  Marcus G. Daniels <mgd@santafe.edu>
+
+	* ControlPanel.m (-setState:):  For Stopped mode, set 
+	immediate drop mode to true.  For Running mode, set immediate drop
+	mode to false.
+	(-setStateStopped): Don't set immediate mode here, have -setState:
+	do it.
+
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Use libobjc definition.  Add GNUstep
+	includes.
+
+2002-09-13    <pjohnson@localhost.localdomain>
+
+	* MessageProbeWidget.m ([MessageProbeWidget -drop]): changed i to int.
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* ActionCache.h, ActionCache.m, ActionHolder.h, ActionHolder.m,
+	ClassDisplayWidget.h, ClassDisplayWidget.m, CommonProbeDisplay.h,
+	CommonProbeDisplay.m, CompleteProbeDisplay.h,
+	CompleteProbeDisplay.m, ControlPanel.h, ControlPanel.m,
+	GUIComposite.h, GUIComposite.m, GUISwarm.h, GUISwarm.m,
+	MessageProbeWidget.h, MessageProbeWidget.m,
+	MultiVarProbeDisplay.h, MultiVarProbeDisplay.m,
+	MultiVarProbeWidget.h, ProbeDisplay.h, ProbeDisplay.m,
+	ProbeDisplayManager.h, ProbeDisplayManager.m,
+	SimpleProbeDisplay.h, SimpleProbeDisplay.m, SingleProbeDisplay.h,
+	SingleProbeDisplay.m, VarProbeWidget.h, VarProbeWidget.m,
+	simtoolsgui.h, simtoolsgui.m: Change copyright statement to
+	canonical version as suggested by GNU GPL.
+
+2001-11-07  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* CompleteProbeDisplay.m (max_class_varname_length): Use 
+	SD_JAVA_FIND_CLASS_JAVA instead of SD_JAVA_FIND_OBJECT_JAVA.
+
+2001-11-04  Marcus G. Daniels <mgd@HELEN>
+
+	* Makefile.am: Avoid multi-line values as they confuse Cygwin
+	automake.
+
+2001-05-13  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* ActionCache.m ([ActionCache -deliverActions]): Only update
+	time on control panel if there is a current activity.
+
+2001-04-14  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* GUIComposite.[hm], simtoolsgui.h ([GUIComposite
+	-enableDestroyNotification:notificationMethod:],
+	[GUIComposite -disableDestroyNotification]): Make return type void.
+
+2001-03-27  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* ProbeDisplayManager.m ([ProbeDisplayManager
+	-_createDefaultProbeDisplayFor_:setWindowGeometryRecordName:]):
+	Raise an event when object is nil.
+
+2001-03-20  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* MultiVarProbe{Display,Widget}.[hm], ProbeDisplayManager.[hm]:
+	Change to void returns as appropriate: -update, -pack, -packFillLeft.
+
+2001-03-12  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* ClassDisplayWidget.[hm], CommonProbeDisplay.[hm],
+	CompleteProbeDisplay.[hm], MessageProbeWidget.[hm],
+	SimpleProbeDisplay.[hm], VarProbeWidget.[hm], simtoolsgui.h:
+	Track changes in gui.h w.r.t. Object->void returns. 
+
+	* ControlPanel.m: Track changes in activity and objectbase
+	w.r.t. stepAction/nextAciton.
+
+2001-02-08  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ProbeDisplay.m: Include defalloc.h.
+
+2001-02-07  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* simtoolsgui.h (GUISwarm): Add GETTERS section.
+
+	* ProbeDisplay.m ([ProbeDisplay -createEnd]): Switch to getZone (self);
+
+	* ProbeDisplayManager.m ([ProbeDisplayManager -createEnd],
+	[ProbeDisplayManager -dropProbeDisplaysFor:],
+	[ProbeDisplayManager -_computeProbeDisplayKeyFor_:],
+	[ProbeDisplayManager 
+	-createArchivedCompleteProbeDisplayFor:variableName:],
+	[ProbeDisplayManager -createCompleteProbeDisplayFor:]): Likewise.
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -createEnd]): 
+	abort if classWidget isn't made.
+
+2001-02-05  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ProbeDisplayManager.m: Use ForObject methods throughout.
+	Include defalloc.h, use use getZone as appropriate.
+
+	* MessageProbeWidget.m: Include probing.h.
+	(printVal): Use string_convert instead of inline code.
+
+2001-01-29  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* MessageProbeWidget.m: Change from _C_* values to fcall_type_*
+	throughout.
+
+2000-09-20  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ActionCache.m ([ActionCache -createProcCtrl]): Pass-thru
+	saveSizeFlag and call updateSize after default geometry.
+
+	* GUIComposite.[hm], GUISwarm.[hm], CommonProbeDisplay.[hm]: Add
+	saveSizeFlag and setter.
+
+	* simtoolsgui.h (WindowGeometryRecordName): Declare -setSaveSizeFlag:.
+
+2000-09-18  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* simtoolsgui.h: Include gui.h.
+	(MessageProbeWidget, MultiVarProbeWidget): Qualify setParent:
+	argument with Frame.
+	(MessageProbeWidget): Qualify argument to setProbe: with Probe.
+	(SimpleProbeDisplay): Qualify argument to setProbeMap:.
+	(ProbeDisplayManager): Qualify addProbeDisplay: and
+	removeProbeDisplay: arguments with CommonProbeDisplay.
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -update]): Make `i'
+	unsigned.
+	([SimpleProbeDisplay -createEnd]): Use local variable for label.
+
+	* SimpleProbeDisplay.h (SimpleProbeDisplay): Add type
+	qualification to probeMap.  Rename numberOfProbes to count and
+	make it unsigned. 
+
+	* SimpleProbeDisplay.[hm]: Add type qualifications to setProbeMap:
+	and getProbemap.
+
+	* ClassDisplayWidget.[hm], MultiVarProbeWidget.[hm],
+	MessageProbeWidget.[hm]: Add Frame qualification to setParent:
+	argument.
+
+	* ClassDisplayWidget.m, CompleteProbeDisplay.m,
+	SimpleProbeDisplay.m: Include defalloc.h.  Use getZone macro
+	throughout.
+
+	* CommonProbeDisplay.m ([CommonProbeDisplay -update]): Add.
+
+	* CommonProbeDisplay.h (CommonProbeDisplay): Implement
+	CommonProbeDisplay.
+
+	* ClassDisplayWidget.[hm]: Rename numberOfProbes to count.
+
+2000-08-31 Alex Lancaster  <alex@santafe.edu>
+
+	* simtoolsgui.h: Add doc string to "doTkEvents" method.
+
+2000-08-28  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* ControlPanel.m ([ControlPanel -setStateStopped]): Remove check
+	for ControlStateQuit (never exit, just return).
+
+2000-07-26    <mgd@DRONE>
+
+	* ClassDisplayWidget.m: Change SD_JAVA_FINDJAVACLASS and
+	SD_JAVA_FIND_CLASS_JAVA.
+
+2000-06-19  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* MessageProbeWidget.m (printVal): Handle NULL objects.
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget -createEnd]): 
+	Handle Java Proxies.
+
+	* CompleteProbeDisplay.m (max_class_varname_length): Rewrite
+	to handle Java objects.
+	(max): Remove.
+	([CompleteProbeDisplay -createEnd]): Accomodate.
+
+2000-06-18    <mgd@DRONE>
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -createEnd]): Use
+	SD_GETCLASS and SD_SUPERCLASS instead of Objective-C-only calls.
+
+2000-05-18  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* simtoolsgui.h (SimpleProbeDisplay, ProbeDisplay): Remove
+	-getProbemap.
+
+2000-04-28    <mgd@nest.swarm.org>
+
+	* simtoolsgui.h (ActionCache, CommonProbeDisplay, MultiVarProbeWidget):
+	Adopt SwarmObject.
+
+2000-04-27    <mgd@nest.swarm.org>
+
+	* simtoolsgui.h
+	([{ControlPanel,ActionCache,SingleProbeDisplay,SimpleProbeDisplay,
+	ProbeDisplay} -createEnd]): Remove.
+	([ControlPanel -drop]): Remove.
+	([{MultiVarProbeDisplay,MessageProbeWidget}
+	+createBegin:,-createEnd,-drop): Remove.
+	
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Swarm 2.1.1 frozen.
+
+2000-02-27    <mgd@nest.swarm.org>
+
+	* Makefile.am (CURRENT, AGE): Bump.  Version 2.1.
+
+	* ControlPanel.m ([ControlPanel -createEnd]): Include swarmconfig.h.
+	([ControlPanel -setStateSave]): Only call sync on hdf5Archiver when
+	HAVE_HDF5 is set.
+
+2000-02-22    <mgd@nest.swarm.org>
+
+	* VarProbeWidget.m ([VarProbeWidget -update]): Increase buffer size.
+
+1999-12-29  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* ControlPanel.m ([ControlPanel -setStateSave]): Use *Archiver
+	sync message, not save.
+
+1999-12-14    <mgd@nest.swarm.org>
+
+	* ProbeDisplayManager.m ([ProbeDisplayManager
+	-_createProbeDisplayFor_:setWindowGeometryRecordName:]): Don't
+	check to see that object responds to getProbeMap.  We're asking
+	the probeLibrary, anyway.
+
+1999-11-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ActionCache.h (ActionCache): Make ctrlPanel conform to ControlPanel.
+
+	* ActionCache.[hm]: Likewise for setter.  Make argument to
+	setScheduleContext: conform to Swarm.
+
+	* ControlPanel.h (ControlPanel): Make state an object that
+	conforms to Symbol.
+
+	* simtoolsgui.h, ControlPanel.[hm]: Add Symbol
+	conformance for getState and setState:.  Make argument to
+	startInActivity: an object conforming to SwarmActivity.
+
+	* simtoolsgui.h, GUISwarm.[hm]: Make argument to setControlPanel
+	conform to ControlPanel protocol.  Make getActionCache and
+	getControlPanel returns conform to ActionCache and ControlPanel
+	protocols.
+
+	* simtoolsgui.h: Make ControlState* symbols conform to Symbol.
+
+1999-09-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ActionCache.m ([ActionCache -deliverActions]): Remove ActionHolder
+	as soon as we've got it.
+	([ActionCache -sendActionOfType:type:]): Call deliverActions on Stop.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-09-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ProbeDisplayManager.m ([ProbeDisplayManager
+	-_createProbeDisplayFor_:setWindowGeometryRecordName:]):
+	swarm_directory_get_swarm_class -> swarm_directory_swarm_class.
+
+1999-09-13    <mgd@HELEN>
+
+	* GUISwarm.m ([GUISwarm -setWindowGeometryRecordName:]): 
+	Only duplicate if non-NULL.
+
+	* GUIComposite.m ([GUIComposite -setWindowGeometryRecordName:]):
+	Likewise.
+
+1999-09-12  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* GUIComposite.m ([GUIComposite -setWindowGeometryRecordName:]): Copy 
+	argument.
+
+	* GUISwarm.m ([GUISwarm -setWindowGeometryRecordName:]): Likewise.
+
+	* GUISwarm.m ([GUISwarm -drop]): Drop it.
+
+	* GUIComposite.[hm] ([GUIComposite -drop]): New method.
+
+	* ActionCache.m ([ActionCache -sendActionOfType:type:]): Handle
+	Quit and Save by sending a deliverActions straight away.
+
+1999-09-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtoolsgui.m (buildWindowGeometryRecordName): Do alloc:
+	in scratchZone instead of xmalloc.
+
+	* MessageProbeWidget.m ([MessageProbeWidget -createEnd]): Use alloc:
+	instead of xmalloc.
+
+1999-09-07  Alex Lancaster  <alex@santafe.edu>
+
+	* MultiVarProbeWidget.m ([MultiVarProbeWidget -createEnd]): Call
+	listBegin: on object that conforms to `List' protocol, to generate
+	an object that conforms to the `ListIndex' protocol.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-25  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbeWidget.m (empty): Avoid using ctype macro.
+
+	* SingleProbeDisplay.m ([SingleProbeDisplay -getId:]): Use
+	getDisplayName instead of getIdName.
+
+	* MultiVarProbeDisplay.m ([MultiVarProbeDisplay -getId:]): Likewise.
+
+	* MessageProbeWidget.m ([MessageProbeWidget -idReceive:arg:]):
+	Likewise.
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget -getId:]): Likewise.
+
+1999-08-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtoolsgui.h (ControlPanel, ActionCache, CommonProbeDisplay,
+	SimpleProbeDisplay, CompleteProbeDisplay): Switch from CREATABLE
+	to RETURNABLE.
+	(SingleProbeDisplay, GUIComposite): Remove CREATABLE.
+	(GUISwarm): Add ActionCache and ControlPanel return typing
+	to getters.
+
+1999-08-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* VarProbeWidget.m ([VarProbeWidget -package:], [VarProbeWidget
+	-Spawn:]): Use probeObject: instead of probeRaw:
+
+1999-08-11  Alex Lancaster  <alex@santafe.edu>
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget -createEnd]): When
+	setting the title of the ClassDisplayLabel instance, if the class
+	of the probed object is the highest in the hierarchy, get the
+	class name of the probed instance, otherwise use the current class
+	name in hierarchy.
+
+	* SingleProbeDisplay.m ([SingleProbeDisplay -getId:]): Call
+	getName, rather than getIdName on the object instance to retrieve
+	the class name.
+
+1999-08-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbeWidget.m ([MessageProbeWidget -dynamic]): Use STRDUP
+	instead of strdup.
+
+	* MultiVarProbeWidget.m ([MultiProbe -update]): Likewise.
+
+1999-07-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ProbeDisplayManager.m: Import directory.h instead of declaring
+	java_get_swarm_class.  Always use (renamed)
+	swarm_directory_get_swarm_class instead of java_get_swarm_class;
+	remove HAVE_JDK conditionals.
+
+	* Makefile.am (INCLUDES): Add JAVAINCLUDES.
+
+1999-07-27  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* ProbeDisplayManager.m: Rename java_get_class_from_objc_object
+	to java_get_swarm_class.
+
+1999-07-21  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* simtoolsgui.h: Make CommonProbeDisplay protocol CREATABLE.
+	Make SingleProbeDisplay protocol CREATABLE.
+	Add SimpleProbeDisplay protocol and make it CREATABLE.
+
+	* ProbeDisplayManager.m: Declare as extern 
+	java_get_class_from_objc_object.
+	([ProbeDisplayManager -_createDefaultProbeDisplayFor_:setWindowGeometryRecordName:]): Use java_get_class_from_objc_object instad of [anObject class].
+	([ProbeDisplayManager -_createProbeDisplayFor_:setWindowGeometryRecordName:]): Use java_get_class_from_objc_object instad of [anObject class].
+
+1999-07-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ActionCache.m ([ActionCache -sendActionOfType:type:]): Directly
+	handle quit if stopped.  This is for the case that a model
+	wants to hold back further -build{Objects,Action} work by
+	waiting for user input within a call to setStateStopped.
+
+1999-06-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbeWidget.m ([MessageProbeWidget -dynamic]): Avoid handling
+	return type if there isn't one.
+
+	* MessageProbeWidget.[hm] ([MessageProbeWidget -dynamic]): Return
+	nothing (since we may be committing suicide, and tclObjc will be
+	looking at the return value).
+
+1999-06-17  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbeWidget.m (printVal): Cast to unsigned, not unsigned char.
+	Remove libffi hacks.
+
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES, lib_LTLIBRARIES): Substitute
+	{inst,noinst}LIBS.
+	(EXTRA_LTLIBRARIES): New variable.
+	(libsimtoolsgui_la_LDFLAGS): Substitute inst_LDFLAGS.
+
+1999-05-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I$(top_builddir)/libobjc.
+
+	* simtoolsgui.h: Include externvar.h.
+
+1999-05-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtoolsgui.m (probeDisplayManager): Add externvardef.
+
+	* ActionCache.m (Control, Probing, Spatial, InvalidActionType,
+	ActionTypeNotImplemented): Add externvardef.
+
+	* ControlPanel.m (ControlStateRunning, ControlStateStopped,
+	ControlStateStepping, ControlStateNextTime, ControlStateQuit): Add
+	externvardef.
+
+	* simtoolsgui.h: Use `externvar' for external variables.
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES): Switch from lib_LTLIBRARIES.
+
+1999-04-26  Alex Lancaster  <alex@santafe.edu>
+
+	* simtoolsgui.h (GUIComposite): Add compliance to SwarmObject
+	protocol.  
+	Revert this change, since protocol is abstract, confirmation
+	added to instantiatable protocols.
+
+1999-04-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ActionCache.h, ActionHolder.h, ClassDisplayWidget.h,
+	ControlPanel.[hm], GUIComposite.h, GUISwarm.h,
+	MessageProbeWidget.[hm], MultiVarProbeDisplay.h,
+	ProbeDisplayManager.[hm], simtoolsgui.h: Add
+	protocol compliance tags to interfaces, adjust phase info
+	as necessary.
+
+1999-04-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MessageProbeWidget.m (printVal): Accomodate renames in
+	types_t (e.g. _char to schar).
+
+1999-04-01  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* simtoolsgui.h: Protocol GUISwarm inherits protocol Swarm. 
+
+1999-03-31  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* simtoolsgui.h: Add methods getActionCache and getControlPanel
+	to GUISwarm.
+
+	* GUISwarm.m ([GUISwarm -getActionCache]): New method.
+	([GUISwarm -getControlPanel]): New method.
+
+1999-03-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Revert last change.
+
+1999-03-16  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add JAVAINCLUDES.
+
+1999-03-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I for libobjc.
+
+1999-02-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtoolsgui.h: Add CREATABLE tags to all non-abstract protocols.
+
+1999-02-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* MultiVarProbeWidget.m ([MultiVarProbeWidget -createEnd]): 
+	Check for conformance with VarProbe, not _VarProbe.
+
+1999-02-12  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ActionCache.m ([ActionCache -createProcCtrl]): 
+	Use SET_COMPONENT_WINDOW_GEOMETRY_RECORD_NAME instead of
+	SET_WINDOW_GEOMETRY_RECORD_NAME.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (CURRENT, AGE): Bump.  Version 1.4.1.
+
+1999-01-31  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (simtoolsgui_HEADERS): Remove global.h.
+
+	* global.h: Removed.
+	
+	* SimpleProbeDisplay.m: Include simtoolgui.h.  Don't include 
+	simtoolsgui/MessageProbeWidget.h or simtoolsgui/global.h.
+
+	* simtoolsgui.h (ProbeDisplayManager): Declare -getDropImmediateFlag.
+
+	* ControlPanel.m, CompleteProbeDisplay.m: Include simtoolgui.h
+	instead of simtoolsgui/global.h.
+
+1999-01-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ActionCache.m, ClassDisplayWidget.m, ProbeDisplay.m: Use
+	raiseEvent() instead of raiseEvent:.
+
+	* ControlPanel.m ([ControlPanel -setStateSave]): Save
+	lispArchiver and hdf5Archiver instead of archiver.
+
+1999-01-20  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am (CURRENT, AGE): Bump.  Clear revision.
+
+	* ControlPanel.m ([ControlPanel -setStateSave]): Use [archiver save]
+	instead of archiverSave().
+
+1999-01-14  Alex Lancaster  <alex@santafe.edu>
+
+	* MessageProbeWidget.m (printVal): When return from message probe
+	is an unsigned char (_C_UCHR), print the octal value.  If the
+	unsigned char is the special case of Boolean YES or NO value,
+	print the octal character followed by the YES or NO in
+	parentheses.
+
+1998-12-31  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* simtoolsgui.h (ActionCache, GUISwarm): Declare -drop.
+
+	* GUISwarm.[hm] ([GUISwarm -drop]): New method.
+
+	* ActionCache.[hm] ([ActionCache -drop]): New method.
+
+1998-12-21  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* MessageProbeWidget.m: Don't include ctype.h.
+
+1998-12-18  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* MultiVarProbeWidget.m ([MultiProbe -setCompareFunction:]): 
+	Return self.
+
+1998-11-12  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* simtoolsgui.m: Include defobj.h instead of objectbase/Arguments.h.
+
+	* ControlPanel.m: Include defobj.h instead of simtools/Archiver.h.
+
+	* ActionCache.m: Include defobj.h instead of objectbase/Arguments.h
+	and simtools/Archiver.h (the latter wasn't needed, anyway).
+
+1998-10-27  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* MessageProbeWidget.m (printVal): Handle void return case.
+
+1998-10-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT, AGE): Increment.  Swarm 1.3.1 released.
+
+	* ActionCache.m ([ActionCache -deliverActions]): Use %lu instead of %u.
+
+	* ActionCache.m ([ActionCache -createProcCtl]): Set geometry of
+	ButtonPanel here.
+
+1998-09-28  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* CommonProbeDisplay.m ([CommonProbeDisplay -install]): Use 
+	Canvas checkGeometry: instead of Frame assertGeometry.
+	
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -do_resize]): Likewise.
+
+1998-09-25  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* CommonProbeDisplay.m ([CommonProbeDisplay -createEnd]): 
+	Use addWidget:X:Y:centerFlag on canvas instead of assertPosition
+	on frame.
+
+1998-09-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]): Use
+	setTargetWidget: instead of setProbeDisplay:
+
+	* MultiVarProbeDisplay.m ([MultiVarProbeDisplay -createEnd]): Likewise.
+
+	* MultiVarProbeDisplay.m ([MultiVarProbeDisplay -createEnd]): Remove 
+	call to setProbeDisplayManager.
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]): Likewise.
+
+1998-09-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ControlPanel.m ([ControlPanel -startInActivity:]): Use RUNNINGP.
+
+1998-09-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbeWidget.m (printVal): Add support for unsigned int,
+	long, and unsigned long.  Don't return in each case, return buf at
+	the end.  Abort in default case.
+	(printVal): Add char, unsigned char, short, and unsigned short.
+
+1998-09-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtoolsgui.h (CommonProbeDisplay): Declare -getTopLevel.
+
+	* CommonProbeDisplay.[hm]: Add -getTopLevel.
+
+1998-08-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT): Increment.  Swarm 1.3 released.
+
+1998-08-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ActionCache.m: Include objectbase/Arguments.h.
+	([ActionCache -insertAction:]): Set selector to setStateNextTime
+	for Next.
+	([ActionCache -deliverActions]): If showCurrentTimeFlag is set,
+	print the current time in the title of the control panel widget.
+	Handle Next like Step (i.e. immediately).
+	([ActionCache -sendNextAction]): Send Next on sendNextAction, not Step.
+	([ActionCache -createProcCtrl]): Don't create a button for Step.
+
+	* simtoolsgui.h (SingleProbeDisplay): Add //S and //D.
+
+1998-07-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ControlPanel.[hm]: Declare.
+	ControlState{Running,Stopped,Stepping,NextTime,Quit} symbols.
+
+	* simtoolsgui.m: Include ControlPanel.h.  Define symbols above.
+
+1998-07-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbeWidget.m: Don't include stdlib.h.
+	([MessageProbeWidget -createEnd]): Use xmalloc instead of malloc.
+
+	* MultiVarProbeDisplay.h (CommonProbeDisplay): Make hideB
+	conform to SimpleProbeDisplayHideButton.
+
+1998-07-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget -getTopLevel]): 
+	New method.
+
+1998-07-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]): 
+	Remove local variables that are now instance variables (below).
+	([SimpleProbeDisplay -drop]): Drop hideB and title here.
+	Don't drop topLevel. Drop raisedFrame and top_top_Frame.
+	Rename myTitle to title throughout.
+
+	* SimpleProbeDisplay.h (SimpleProbeDisplay): Add top_top_Frame,
+	raisedFrame, title, and hideB as instance variables.
+
+	* MultiVarProbeDisplay.m ([MultiVarProbeDisplay -createEnd]): 
+	Call setWindowTitle:.
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -drop]): Don't
+	drop topFrame or topLevel here.
+
+	* CommonProbeDisplay.m ([CommonProbeDisplay -drop]): New method.
+
+	* MultiVarProbeDisplay.m ([MultiVarProbeDisplay -createEnd]): 
+	Create extra frames to contain widget, hide button and title.
+	([MultiVarProbeDisplay -update]): New method.
+	([MultiVarProbeDisplay -drop]): Drop the new widgets.
+
+	* MultiVarProbeDisplay.h (MultiVarProbeDisplay): New ivars
+	top_top_Fram,e middleFrame, raisedFrame, title, and hideB.
+
+	* MultiVarProbeDisplay.[hm]: New methods package: getId:, and update.
+
+	* simtoolsgui.h (CommonProbeDisplay): Remove setProbedObject: and
+	getProbedObject from protocol (moved to SingleProbeDisplay).
+	(SingleProbeDisplay): New protocol.
+	(CompleteProbeDisplay, SimpleProbeDisplay): Adopt SingleProbeDisplay
+	instead of CommonProbeDisplay.
+	(MultiVarProbeDisplay): New protocol. 
+	(MultiVarProbeWidget): Replace setProbeList: with setProbeMap:.
+	Rename setLabelingFlag: to setFieldLabelingFlag:.
+	Rename setAgentNameSelector: to setObjectNameSelector:.
+	Add +createBegin:.
+	Add MultiVarProbeDisplay class object.
+
+	* VarProbeWidget.m ([VarProbeWidget -createEnd]): Use setVarProbe:
+	instead of setProbeType:.
+
+	* VarProbeWidget.[hm]: Remove static typing from setProbe:.
+	Add windowName argument to idReceive:.
+
+	* SimpleProbeDisplay.h: Include SingleProbeDisplay.h instead 
+	of CommonProbeDisplay.h.
+	(SimpleProbeDisplay): Inherit from SingleProbeDisplay.
+
+	* ProbeDisplay.h: Include objectbase.h instead of ProbeMap.h.
+	Make probeMap conform to ProbeMap protocol instead of being statically
+	typed.  Remove static typing from accessors.
+
+	* MultiVarProbeWidget.m: Include objectbase.h.
+	([MultiProbe -setLabelingFlag:]): New method.
+	([MultiProbe -createEnd]): Don't create label unless labelingFlag
+	is set.
+	([MultiProbe -addEntryFor:]): Use setVarProbe: instead of
+	setProbeType:.  Don't set default value for entry.
+	([MultiProbe -idReceive:]): New method.
+	([MultiProbe -package:]): Read value using probe.
+	([MultiVarProbeWidget +createBegin:]): New method.
+	([MultiVarProbeWidget -setFieldLabelingFlag:]): Renamed
+	from setLabelingFlag:.
+	([MultiVarProbeWidget -setObjectNameSelector:]): Renamed
+	from setAgentNameSelector:.
+	(compareProbes): Compare by name.
+	([MultiVarProbeWidget -createEnd]): Don't create objectsTitlelabel
+	unless there is a objectsNameSelector.
+	([MultiVarProbeWidget -createEnd]): Create MultiProbe for each
+	object conforming to a _VarProbe.
+
+	* MultiVarProbeWidget.h (MultiVarProbeWidget): Rename labelingFlag
+	to fieldLabelingFlag. 
+
+	* MultiVarProbeWidget.[hm]: Rename accessor for same.
+	Change setProbeMap: to setProbeList: and setAgentNameSelector
+	to setObjectNameSelector.  Add createBegin:.
+
+	* MessageProbeWidget.m ([MessageProbeWidget -package:],
+	[MessageProbeWidget -package:arg:]): Add windowName argument.
+
+	* MessageProbeWidget.[hm]: Rename idReceive to idReceive:.
+
+	* Makefile.am (SRC, simtoolsgui_HEADERS): Add SingleProbeDisplay
+	and MultiVarProbeDisplay.
+
+	* CommonProbeDisplay.m ([CommonProbeDisplay -createEnd]): Don't
+	call setWindowTitle:.
+
+	* CommonProbeDisplay.h (CommonProbeDisplay): Remove probedObject,
+	objectRef, and removeRef (moved to SingleProbeDisplay).
+
+	* CommonProbeDisplay.[hm]: Remove accessors for same.
+	Remove package: and getId:.
+
+1998-07-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MultiVarProbeWidget.[hm]: New files.
+	
+	* simtoolsgui.h: Add MultiVarProbeWidget protocol and class object.
+
+	* ClassDisplayWidget.[hm], CommonProbeDisplay.[hm],
+	MessageProbeWidget.[hm], VarProbeWidget.[hm]: getId is now getId:.
+	package is now package:. 
+
+	* MessageProbeWidget.[hm]: getId: is now getId:arg:.
+	package: is now package:arg:.
+	argSpawn: is now argSpawn:arg:.
+
+	* MessageProbeWidget.[hm],
+	
+	* VarProbeWidget.h (VarProbeWidget): Rename interactive to
+	interactiveFlag, make it boolean.
+
+	* VarProbeWidget.[hm], MessageProbeWidget.[hm]: Spawn is now Spawn:.
+	
+	* VarProbeWidget.[hm]: setValue is now setVariableName:.
+
+1998-07-10  Alex Lancaster  <alex@santafe.edu>
+
+	* simtoolsgui.h (MessageProbeWidget):  Add phase tags.
+
+1998-07-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* CompleteProbeDisplay.m, MessageProbeWidget.m: Include misc.h
+	instead of string.h.
+
+	* Makefile.am (SRC, simtoolsgui_HEADERS): Remove mention of
+	ActiveGraph.
+
+	* simtoolsgui.h (ActiveGraph): Remove protocl and class object.
+
+	* ActiveGraph.[hm]: Remove.
+
+1998-07-07  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtoolsgui.h (MessageProbeWidget): New protocol and class object.
+
+	* MessageProbeWidget.[hm] (-setProbe:) Make argument an object
+	conforming to the Probe protocol instead of being statically
+	typed.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LIBRARIES, libsimtoolsgui_a_SOURCES): Remove.
+
+1998-06-23  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LTLIBRARIES, libsimtoolsgui_la_SOURCES,
+	libsimtoolsgui_la_LDFLAGS, SRC, CURRENT, REVISION, AGE): New
+	variables.  Set *_SOURCES from SRC.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+	
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-06-03  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* simtoolsgui.h: Update documentation tags.
+	Prefix global references with extern.
+
+	* global.h: Move buildWindowGeometryRecordName declaration here
+	(was in simtoolsgui.h).
+
+	* GUIComposite.m, GUISwarm.m: Include global.h.
+
+1998-05-28  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* simtoolsgui.h: Include activity.h.
+
+1998-05-22  Alex Lancaster  <alex@santafe.edu>
+
+	* simtoolsgui.h (ActionCache, probeDisplayManager,
+	initSimtoolsGUI): Added doc tags (//G) to global variables and
+	symbols.
+	(SET_WINDOW_GEOMETRY_RECORD_NAME,CREATE_PROBE_DISPLAY,
+	CREATE_COMPLETE_PROBE_DISPLAY, CREATE_ARCHIVED_PROBE_DISPLAY,
+	CREATE_ARCHIVED_COMPLETE_PROBE_DISPLAY): Added doc tags (//#) for
+	macros.
+
+1998-05-07  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ProbeDisplayManager.m: Include simtoolsgui.h.
+	([ProbeDisplayManager
+	-_createDefaultProbeDisplayFor_:setWindowGeometryRecordName:],
+	[ProbeDisplayManager
+	-_createProbeDisplayFor_:setWindowGeometryRecordName:],
+	[ProbeDisplayManager
+	-createArchivedProbeDisplayFor:variableName:],
+	[ProbeDisplayManager -createProbeDisplayFor:],
+	[ProbeDisplayManager -createDefaultProbeDisplayFor:],
+	[ProbeDisplayManager
+	-createArchivedDefaultProbeDisplayFor:variableName:]): Return an
+	object conforming to the ProbeDisplay protocol.
+	([ProbeDisplayManager
+	-createArchivedCompleteProbeDisplayFor:variableName:],
+	[ProbeDisplayManager -createCompleteProbeDisplayFor:]): Return an
+	object conforming to the CompleteProbeDisplay protocol.
+
+	* simtoolsgui.h (_createProbeDisplay,
+	createArchivedProbeDisplayNamed): Return id conforming to
+	ProbeDisplay protocol.
+	(_createCompleteProbeDisplay,
+	createArchivedCompleteProbeDisplayNamed): Return an object
+	conforming to CompleteProbeDisplay protocol.
+	(-createProbeDisplayFor:,
+	-createArchivedProbeDisplayFor:variableName:): Return an object
+	conforming to ProbeDisplay protocol.
+	(-createCompleteProbeDisplayFor:,
+	-createArchivedCompleteProbeDisplayFor:variableName:): Return an
+	object conforming to the CompleteProbeDisplay protocol.
+	(-createDefaultProbeDisplayFor:,
+	-createArchivedDefaultProbeDisplayFor:variableName:):
+	Declare.  Return an object conforming to the CompleteProbeDisplay
+	protocol.
+	(-getMarkedForDrop): Return BOOL.
+	
+1998-05-06  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* simtoolsgui.h (WindowGeometryRecordName,
+	CompositeWindowGeometryRecordName, GUIComposite): Add phase tags.
+	(WindowGeometryRecordName, CompositeWindowGeometryRecordName,
+	ControlPanel, ActionCache, CommonProbeDisplay, ProbeDisplay,
+	CompleteProbeDisplay, ProbeDisplayManager, GUIComposite, GUISwarm,
+	ActiveGraph): Move //S and //D tags inside protocol.
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget +createBegin:]): Modify
+	instance variable directly instead of using methods.
+
+	* ActionHolder.m: Remove -createEnd. 
+
+	* ActiveGraph.m, ActionCache.m, ActionHolder.m,
+	ClassDisplayWidget.m, CommonProbeDisplay.m,
+	CompleteProbeDisplay.m, ControlPanel.m, GUIComposite.m,
+	GUISwarm.m, MessageProbeWidget.m, ProbeDisplay.m: Add phase tags
+	and reorder method defintions in sync.
+
+	* ActionCache.h, ActionHolder.h: Reorder per phase info.
+
+	* ProbeDisplay.h: Minor reformatting.
+
+1998-04-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbeWidget.m: Use renamed setIdFlag and isIdFlag.
+
+	* CommonProbeDisplay.h: Include objectbase/SwarmObject.h, not
+	objectbase.h.
+
+1998-04-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]): Make
+	hideB conform to SimpleProbeDisplayHideButton protocol and
+	top_top_Frame and raiseFrame to the Frame protocol.  Don't call
+	setFrame for hideB, instead send packBeforeAndFillLeft to
+	raisedFrame with hideB as an argument.
+
+	* ActionCache.m ([ActionCache -createProcCtrl]): Use
+	addButtonName:method: instead of addButtonName:actionName:.
+
+1998-04-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtoolsgui.h: Add comment tags with documentation.
+
+1998-04-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* GUISwarm.m: Don't include simtoolsgui/ControlPanel.h
+	or simtools.h.
+
+1998-04-06  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ProbeDisplay.m (notifyObjectDropped): Call markForDrop instead
+	of drop.
+
+1998-03-20  Alex Lancaster  <alex@santafe.edu>
+
+	* ControlPanel.m: ([ControlPanel -startInActivity:]): If
+	controlState is ControlStateStopped and this ControlPanel has been
+	started within an activity - just return the state to exit from
+	the while loop.  This allows nested observerSwarms.
+
+1998-03-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtoolsgui.m: Include objectbase/Arguments.h instead of
+	simtools/global.h.
+
+1998-02-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -drop]): Don't
+	call disableDestroyNotification for topLevel.  Note that markDrop
+	in superclass (CommonProbeDisplay) should take care of it.
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -drop]): Likewise.
+
+	* Makefile:  New file.
+
+	* ActionCache.[hm], ActionHolder.[hm], ActiveGraph.[hm],
+	ClassDisplayWidget.[hm], CommonProbeDisplay.[hm],
+	CompleteProbeDisplay.[hm], ControlPanel.[hm], GUIComposite.[hm],
+	GUISwarm.[hm], MessageProbeWidget.[hm], ProbeDisplay.[hm],
+	ProbeDisplayManager.[hm], SimpleProbeDisplay.[hm],
+	VarProbeWidget.[hm], simtools.[hm], global.h: Moved from simtools.
+

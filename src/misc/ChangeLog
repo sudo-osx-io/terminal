@@ -1,0 +1,513 @@
+2010-04-11  Marcus G. Daniels <marcus@snoutfarm.com>
+
+	* misc.h: For MingW32, define sleep as Sleep * 1000. 
+	* misc.h, gettimeofday.c: Remove definition, MingW32 now has it.
+
+	* getopt.c: Remove DATADIR undef in favor of avoiding use of the
+	symbol.
+
+2008-07-10  Scott Christley  <schristley@mac.com>
+
+	* misc.h: Cannot distinquish ObjC runtime when compiling C files so
+	just include standard ObjC header to get BOOL definition.
+
+2008-07-06  Scott Christley  <schristley@mac.com>
+
+	* misc.h, argp-fmtstream.h, argp.h, Makefile.am: Standardize
+	include directory structure to support libraries and OpenStep
+	frameworks.
+
+2008-04-29  Scott Christley  <schristley@mac.com>
+
+	* misc.h (LLONG_MIN, LLONG_MAX): Use old gcc defines if available.
+
+2004-11-14  Marcus G. Daniels <mgd@santafe.edu>
+
+	* argp-eexst.c: Don't include sysexits.h for either Cygwin or
+	__MINGW32__.
+
+	* argp.h: Avoid use of argument names __argc or __argv, which are
+	macros in MingW.
+
+	* getopt.c: Avoid DATADIR and BOOL when including windows.h.
+
+	* misc.h (gettimeofday): Declare for __MINGW32__.
+
+	* realpath.c: Don't define HAVE_READLINK for __MINGW32__.
+
+	* gettimeofday.c: New file.
+
+2004-01-21  Bill Northcott <W.Northcott@unsw.edu.au>
+
+	* argp.h: MacOS X 10.3.x has getopt.h but no argp.
+
+2004-01-21  Bill Northcott <W.Northcott@unsw.edu.au>
+
+	* makefile.am: use @LTLIBOBJS@ for consistency with
+	   AM_DEPENDENCIES.
+	* getopt.h: renamed getopt functions to prevent clashes
+	  with BSD getopt functions.
+
+2003-09-15  Bill Northcott <W.Northcott@unsw.edu.au>
+
+	* xmalloc.c: conditionalised use of weak attribute not supported
+	on Mach-O objects.
+
+2003-03-25    <pauljohn@234.81.cm.sunflower.com>
+
+	* argp.h: Cygwin defines errno_t and sets __ERRNO_H__, so check
+	for that before declaring again.
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* misc.h: Change copyright statement to canonical version as
+	suggested by GNU GPL.
+
+2001-11-04  Marcus G. Daniels  <mgd@HELEN>
+
+	* Makefile.am: Avoid multi-line values as they confused Cygwin
+	automake.
+
+2001-09-07  Marcus G. Daniels  <mgd@condor>
+
+	* Makefile.am (EXTRA_DIST): Add argp.h.
+
+2001-06-26  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* xmalloc.c: Disable GC code.
+
+2001-06-20  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* xmalloc.c (GC_malloc_{atomic_}uncollectable, GC_realloc, GC_free):
+	Declare weak symbols to malloc, malloc, realloc, and free.
+	(xmalloc, xmalloc_atomic, xcalloc, xrealloc, xfree): Always
+	call functions above.
+	(xcalloc): Call memset 0 on results.
+
+2001-06-17  Marcus G. Daniels  <mgd@drone.swarm.org>
+
+	* xmalloc.c (xmalloc, xmalloc_atomic, xcalloc): Use
+	GC_MALLOC_UNCOLLECTABLE in USE_GC case.
+	(xcalloc): Memset to zero in USE_GC case.
+
+	* avltr.c (xfree): Declare.
+	(xltr_destroy, avltr_free, avltr_delete): Use it instead of free.
+
+	* avl.c (xfree): Declare.
+	(avl_destroy, avl_free, avl_delete): Use it instead of free.
+
+2000-09-10  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Makefile.am (SRC): Add avltr.c.
+	(noinst_HEADERS): Add avltr.h.
+
+	* avl.c, avl.h: Updated from avl-1.4.0.
+
+	* avltr.c, avltr.h: Add. 
+	
+	* avl{tr}.[ch]: Disable HAVE_CONFIG_H and PSPP checks,
+	define HAVE_XMALLOC.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Swarm 2.1.1 frozen.
+
+2000-02-13    <mgd@HELEN>
+
+	* Makefile.am (REVISION): Bump.  Version 2.1.
+
+	* find_executable.c (find_executable): Disable realpath for Cygwin.
+	It screws up the search for SWARMHOME.
+
+1999-11-30  Marcus G. Daniels <mgd@swarm.org>
+
+	* find_executable.c (MAXPATHLEN): Provide a default value
+	(e.g. Hurd).
+
+1999-11-04    <mgd@VAIO>
+
+	* Makefile.am (INCLUDES): Add libobjc.
+
+1999-10-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* misc.h: Add quicksort_compar_fn_t and quicksort declarations.
+
+	* Makefile.am (SRC): Add quicksort.c.
+
+	* quicksort.c: New file.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* misc.h: Include objc/objc.h.
+	Use static inlines for ctype-like macros.
+
+1999-08-25    <mgd@HELEN>
+
+	* argp-help.c (hol_entry_cmp): Adjust first1 and first2 to lower
+	case without using tolower.
+
+	* strtoll.c (strtoll): Use misc.h ctype macros.
+
+	* argp.h, argp-help.c (fill_in_uparams, canon_doc_option, SKIPWS):
+	Update ctype-like macros not to use ctype.
+
+1999-08-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* find_executable.c (find_executable): Rename ptr to dupbuf and drop
+	const.  Cast result to const.
+
+1999-08-12  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* misc.h: Declare strtoll if HAVE_STRTOLL is not defined.
+	Ensure that LLONG_{MIN,MAX} exists.
+
+	* strtoll.c: New file.
+
+	* Makefile.am (EXTRA_DIST): Add strtoll.c.
+
+1999-08-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* misc.h: Declare xstrdup, remove conditional strdup declaration.
+
+	* Makefile.am (SRC): Move strdup from EXTRA_DIST to SRC.
+
+1999-08-06  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* avl.c (avl_destroy, avl_free, avl_delete): Use xfree instead of
+	free.
+
+1999-08-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* xmalloc.c: Add GC_* defs for Kaffe. (disabled)
+
+	* find_executable.c (find_executable): Avoid use of strdup.
+
+1999-07-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* misc.h (MAX_ALIGNMENT): New macro.
+
+1999-07-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* argp-fmtstream.h, argp.h: Force __const to be const.
+	HPUX 11 defines __const causing mismatches.
+
+1999-07-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* dropdir.c (SLASHP): New macro. 
+	(dropdir): Use it.
+
+1999-06-17  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* find_executable.c (find_executable): Have realpath write
+	into a zeroed-out stack array, then strdup the result -- eliminate
+	a Checker warning.
+
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES, lib_LTLIBRARIES): Substitute
+	{inst,noinst}LIBS.
+	(EXTRA_LTLIBRARIES): New variable.
+	(libmisc_la_LDFLAGS): Substitute inst_LDFLAGS.
+
+	* find_executable.c (maybe_executable): Disable Linux check
+	for inode match.  It screws up with Java wrapper script.
+
+	* misc.h (abort): #define to debugabort with file, line, and
+	function name arguments.  Declare debugabort as nonreturning.
+
+	* debugabort.c: New file.
+
+1999-06-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (EXTRA_HEADERS): Set to argp.h.
+	(misc_HEADERS): Use @ARGP_H@ instead of argp.h.
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES): Switch from lib_LTLIBRARIES.
+
+1999-05-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* misc.h: Move include of swarmconfig.h to the top.
+	Only include sys/sigevent.h if both __hpux__ and 
+	HAVE_SYS_SIGEVENT_H.
+
+1999-04-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* argp-parse.c: Declare alloca.  Don't include limits.h.
+
+	* misc.h: For HPUX, include sys/sigevent.h before others.  This
+	avoids warning implicit structure declaration.  Include limits.h.
+
+1999-04-24  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* Makefile.am (ARGP_SRC): New variable.
+	(EXTRA_DIST): Use it.
+	(SRC): Move argp stuff to ARGP_SRC.
+
+1999-04-19  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* avl.c: Include misc.h and remove xmalloc #ifdef logic.
+
+	* find_executable.c (find_executable): Use xmalloc and XFREE
+	instead of malloc and free.
+
+1999-04-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* misc.h: Catch the case that jmalloc.h (from Kaffe) was included
+	before misc.h.
+
+1999-03-04  Vladimir Jojic  <vjojic@chama.santafe.edu>
+
+	* avl.c: Include swarmconfig.h instead of config.h
+
+	* avl.h: Add new file.
+
+	* avl.c: Add new file.
+	
+	* Makefile.am (SRC): Add avl.c from libavl to SRC variable.
+	(misc_HEADERS): Add avl.h from libavl to misc_HEADERS variable.
+
+1999-03-04  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* misc.h: If HAVE_REALPATH is not defined, avoid declaring
+	it in stdlib.h, since it will be redeclared later.  This is
+	necessary with Checker.
+
+	* find_executable.c: Don't include unistd.h, errno.h, sys/types.h,
+	sys/stat.h, stdlib.h, or stdio.h.
+
+	* argp-parse.c: Don't include stdlib.h, string.h, or unistd.h.
+
+	* argp-help.c: Don't include stddef.h, stdlib.h, string.h, stdarg.h,
+	or ctype.h.
+
+	* argp-fmtstream.c: Don't include stdlib.h, string.h, errno.h, 
+	stdarg.h, or ctype.h.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (REVISION): Bump.  Version 1.4.1.
+
+1999-01-25  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* getopt.c, realpath.c: Use __CYGWIN__ instead of __CYGWIN32__.
+
+1999-01-20  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am (REVISION): Bump.
+
+1998-12-21  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* misc.h: Include stdio.h, stdarg.h, and math.h.
+
+1998-11-16  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* misc.h: Include ctype.h.
+
+1998-11-13  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* misc.h: Include errno.h.
+
+1998-11-10  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* misc.h: Only define gettimeofday if Cygwin is before B20.
+
+1998-10-21  Marcus G. Daniels  <mgd@sangre.santafe.edu>
+
+	* dropdir.c (dropdir): Return NULL if passed as an argument.
+
+1998-10-10  Marcus G. Daniels  <mgd@sangre.santafe.edu>
+
+	* Makefile.am (CURRENT,AGE): Increment. Swarm 1.3.1 released.
+
+	* Makefile.am (SRC): Add dropdir.c.
+
+	* misc.h (dropdir): Declare.
+
+	* dropdir.c: New file.
+
+1998-10-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* find_executable.c (find_executable): Cast program name to char *
+	to avoid warning on systems that have realpath program argument
+	non-const.
+
+1998-10-01  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* misc.h: Include <swarmconfig.h> instead of "swarmconfig.h".
+
+1998-08-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT): Increment.  Swarm 1.3 released.
+
+1998-08-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* misc.h (XFREE): Add.
+
+	* realpath.c (realpath): MAXPATHLEN includes the null.
+	Thanks to Kim Shrier.
+
+1998-08-19  Marcus G. Daniels  <mgd@helen.santafe.edu>
+	
+	* misc.h: Include sys/types.h and sys/stat.h.
+
+1998-08-11  Marcus G. Daniels  <mgd@helen.santafe.edu>
+
+	* misc.h, getopt.c, getopt1.c, argp-fmtstream.c, argp-help.c,
+	argp-parse.c, argp-pvh.c, argp-xinl.c, argp-fs-xinl.c, argp-fmtstream.h:
+	Include swarmconfig.h instead of config.h.
+
+1998-07-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* argp.h: Only define program_invocation_name and
+	program_invocation_short_name in the absence of glibc.
+
+	* argp-parse.c (argp_default_parser): Cast arg as (char *) for
+	assignment to program_invocation_name and
+	program_invocation_short_name.
+
+1998-07-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* misc.h: Note expectation of atoi, getenv, and qsort getting
+	declared by stdlib.h.  Include unistd.h and time.h and note
+	purpose.  Declare gettimeofday for cygwin32. 
+
+	* Makefile.am (libmisc_la_LIBADD): Use LIBOBJS instead of MISCOBJS
+	(accompanying automake changes).
+
+1998-07-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* realpath.c (realpath): Renamed from myrealpath.
+
+	* misc.h: Include string.h stdlib.h, and config.h.
+
+	* find_executable.c (find_executable): Use realpath instead of 
+	myrealpath.
+
+	* Makefile.am (libmisc_la_LIBADD): Set to substituted value
+	of MISCOBJS.  Move memchr, memcpy, memset, realpath,
+	stpcpy, strchr, strcmp, strdup, strlen, strncmp, strndup, strnlen,
+	strpbrk, and strsep from SRC to EXTRA_DIST.
+
+	* misc.h: Declare removed functions above if corresponding HAVE_*
+	macro is not defined.  
+
+1998-07-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* find_executable.c, realpath.c: Include misc.h last.
+
+1998-07-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (SRC): Add memcpy.c, memchr.c, strncmp.c, strchr.c,
+	and strpbrk.c.
+	(noinst_HEADERS): Add mem.h.
+
+	* strndup.c: Don't include stdio.h or sys/types.h.
+
+	* misc.h: Add declaration of memcpy, memchr, strpbrk, strncmp, and
+	strlen.
+	(__ptr_t): Make it a macro instead of a typedef.
+
+	* memset.c: Include mem.h instead of having local defines.
+
+	* memcpy.c, memchr.c, strlen.c: New files.
+
+	* mem.h: New file (defines common to memset.c and memcpy.c).
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* argp-fmtstream.c, argp-help.c, argp-parse.c, getopt.c: Include
+	misc.h after standard includes.
+
+	* argp-help.c, argp-parse.c: Constify vt and short_index (return
+	of strchr).
+
+	* misc.h: Declare strchr, strcmp, and memset.
+
+	* Makefile.am (lib_LIBRARIES, libmisc_a_SOURCES): Remove.
+	(noinst_HEADERS): Include argp-fmtstream.h and argp-namefrob.h.
+	(SRC): Add strcmp.c, strchr.c, and memset.c.
+
+1998-06-23  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LTLIBRARIES, libmisc_la_SOURCES,
+	libmisc_la_LDFLAGS, SRC, CURRENT, REVISION, AGE): New variables.
+	Set *_SOURCES from SRC.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+	
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-04-27  Alex Lancaster  <alex@santafe.edu>
+
+	* getopt.c: Don't elide getopt code.
+
+1998-04-11  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* getopt1.c: Don't redefine getopt and optarg around stdio.h.
+
+	* getopt.h (opterr, optind, optarg, optopt): Prefix with "misc_"
+	to avoid linker warnings vs. libc versions.
+
+1998-03-30  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* find_executable.c (maybe_executable): Add fd argument
+	for executable read from /proc/PID/exe.  Check it against
+	the path's inode.
+	(find_executable): Don't return the /proc path after open.
+
+1998-03-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* realpath.c (MAXSYMLINKS): Define it as 10 if it isn't defined.
+        
+        * find_executable.c (find_executable): Duplicate local string
+	in __linux__ return case.
+
+1998-03-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* realpath.c (MAXSYMLINKS): Provide value for cygwin.
+	Provide prototype for readlink.
+	Use readlink directly instead of using old cygwin workaround.
+	
+	* Makefile (other_routines): Add realpath and find_executable.
+	realpath.c, find_executable.c: New files.
+
+1998-02-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* strdup.c, strndup.c, strsep.c, and stpcpy.c:  New files.
+
+	* argp-pv.c: Don't initialize argp_program_version.
+
+	* argp-ba.c: Don't initialize argp_program_bug_address.
+
+	* Makefile (string_routines): Add strdup, strndup, strsep and stpcpy.
+
+	* argp-parse.c (parser_finalize, parser_parse_arg,
+	parser_parse_next): Add extra braces to avoid if/else compiler
+	warnings.
+
+	* getopt.c (_getopt_internal): Likewise.
+
+	* argp-help.c (IsAlpha, IsAlnum, IsDigit, IsSpace): And and use
+	new macros to avoid char index to array compiler warnings.
+	(hol_entry_cmp, hol_append, arg, hol_entry_help, usage_long_opt,
+	argp_args_usage): Add extra braces to avoid if/else compiler
+	warnings.
+
+	* argp-fmtstream.c (__argp_fmtstream_update): Add extra braces
+	to avoid if/else compiler warning.
+	
+

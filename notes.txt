@@ -1,0 +1,844 @@
+4/30/04 - mzellner
+- getting into rural lots... Should use a method similar to Bill's
+divideIntoLots, but with the following changes:
+- the method is performed by Farm, called from Model at a p probability
+- It will first look for road adjacency
+- Then will add cells going down first, upto a maximum of 20 acres 
+  if soil is below quality threshold.
+- As cells are added, they are still owned by the farm, but are not
+  part of it. Or, what we can do is not allow a farm to be sold
+  until it sells its rural lots. We can basically lower the probability
+  of a farm coming up for sale to zero if it has cells listed in a rural lot.
+- Cells in rural lot need to change color.
+- Need to add preference for rural lots to residents' preferences.
+- Once a resident wants to buy it, then ownership is transferred.
+- Don't forget new soil (pH values?) and road maps (road values being 0,1,2).
+
+Model.java:
+- New variable and parameter pRuralLotSale
+- New list ruralLotList;
+
+
+4/29/04 - mzellner
+- Adding an output measure to have the number of subs of each type in
+each time step. This needs to be calculated by Township.java. In
+order to do that, townships must have a list of subs, which is already
+there in Model.java. So we need to let Township.java read it.
+- Now create a method in Township.java that will determine the number
+of subs of any type.
+- This method must be called for each type that needs to be calculated.
+- Then have the count be printed for each type, together with 
+  other output measures.
+- Don't forget the headers!
+- I forgot to specify that they need to count those subs ONLY in their
+  territory...
+- YES! Now it's working.
+
+4/27/04 - mzellner
+- Derek made new maps "to more closely resemble the actual
+distribution of values for forest and water." Transforming into
+304x152 worlds. For some reason, all are either horts or rems, but
+no country. Need to create flat worlds with those dimensions. Done.
+Now country subs appear. Adding one amenity at a time. With only water
+or forest, all three types appear. With only heterogeneous elevation,
+there is only rems or horts, so we have the same problem. Need to adjust
+the isRolling threshold? Changing from 20m to 50m, see what happens.
+Still the same thing. Change to 100m? Ridiculous, it's still the same.
+Change it to 1000m. OK, now it's only country and horts.
+This was a problem with the getMinLevel that was set to get Min elevation
+when the space was between 0 and 1. Derek helped me find this out.
+Going back to 20m. Doesn't work. Trying with 50m. Now we have the three
+kinds. That's great! Changing back to 40m; 3 types, though less country.
+Back to 30; three types, but only a few country and after a while, no more
+seem to pop up. Will leave default at 40m for now.
+
+4/15/04 - mzellner
+
+- Change method in Lot.java and Cell.java so that cells are assigned
+panoramic view according to their elevation of cells with respect to their
+neighbors.
+
+3/15/04 - mzellner
+
+-Changed the threshold of isRolling to 0.3, rather than 0.2. With
+the map we had, it presented everything as isRolling=true.
+-Turned the moveOut probability to zero (last week.)
+
+3/10/04 - mzellner
+
+-fixed a bug in Subdivision.java, where it should have said
+getAvgLevel(waterSpace) it asked for the total area.
+
+3/09/04 - wrand
+-modified model.java so that it no longer uses the total number of
+lotsforsale as a limit on residents moving in since sometimes
+residents can't afford to move in
+-also modified the definition of isfull in subdivision.java so that if
+there are no lots then the subdivision is full
+
+3/04/04 - mzellner
+
+- Need to create a parameter that specifies the directory in which the
+  maps are located. If not, Drone creates default maps. That means
+  changing the control files to add this new parameter. OK, it's not 
+  showing up as a parameter. Let's see why. I had forgotten the accessor
+  methods. Now it seems to be working fine.
+
+3/3/04 - wrand
+- changing water condition, basically the contribution of a cell to
+the lot size is whatever the normal contribution is minus the amount
+of it taken up by water
+- first removing Moira's old condition, check to make sure it works,
+seems too
+- making changes to the code so instead of using the length of the
+cellsInLot list it uses a separate integer, I'll change this and make
+sure it works even if a whole cell is added (no water subtraction) and
+test it, okay got the changes in
+- now I'm going to subtract off the part of the cell covered by water,
+got the change in, I'm going to test it with one world where its half
+water and another where there's no water (lot size should be one half)
+-seems to work fine as expected, should add getLotId, get ResId
+etc. so that the probes show them
+
+3/03/04 - mzellner
+
+- Changing the defaults to start experiments. Check that file
+
+3/02/04 - mzellner
+
+- Changed the conditions for developers' decision back to original,
+  and changed water absence/presence to 1%.
+- Created new roads maps, which won't change through experiments.
+- Created new flat maps to start experiments with.
+- Created control files for experiments.
+
+2/25/04 - mzellner
+- Included water threshold in sub (presence/absence) and in cell 
+  (included/excluded from lot) as variables defined at the top
+  of Subdivision class. It works.
+- I don't know why there's a null pointer exception, given that no
+  error messages are printed out when I run it with the command ant run.
+- I incorporated Rick's comments to correct this, by modifying divideIntoLots()
+  in Subdivision.java. Now, if adjacent lot is null, the cells are removed
+  from the cellsInLot list and are left undeveloped. Ran it with ant run
+  and seems to be working fine. The output seems a little different.
+  I'll try running experiments again... (see experiments.txt for details).
+- Changed Model.java so that maps names are easier to change (variables
+  at the top of the class). Now I can create a bunch of maps with different
+  names and change them for different experiments.
+- Trying out some extreme cases, I've noticed that country subs basically
+  cannot be developed with the conditions we specified. So we'll need to
+  change some of the thresholds. I'm not sure where to start... 
+  OK, first of all, let's reduce the threshold for presence/absence of water
+  to 0.1 acres. Let's run it and see if it makes a difference. That did
+  not make much of a difference, using the initial maps that Bill created.
+  It may be the restriction on construction due to water. Set the threshold
+  to 0.9 (90% of the cell would have to be water to not be in lot).
+  It's still not creating country subs! I'm starting to despair... 
+  Wait a minute... I think I made a mistake here. Presence/absence threshold
+  should be much bigger. Let's try with 2.5 acres. OK, now we're where we
+  started! Now let's reduce it to 1 acre, and see what happens. OK, after
+  playing with some of the values, the limit seems to be somewhere between
+  0.60 and 0.65 acres, so I'll set the threshold to 0.65 acres.
+- Now let's see how this looks with the peak maps (go to experiments.txt).
+  Increased threshold of water preventing development to 0.9. It's better,
+  but still no country subs. Maybe it's just the map of water.
+  OK, so it's in the combination of lack of forest and lack of water 
+  that country subs are created, but not for the peak maps, but because of
+  their values.
+- What really skews the dynamics is the threshold of presence/absence of water. 
+  I can define a threshold for presence/absence of water for a specific map. So tweaking
+  the threshold doesn't really work. We need to first establish some sort of
+  value for this threshold, and then have maps with different amounts of
+  water.  Then we should be able to see differences.  I wonder whether we
+  should eliminate it from the conditions. After all, we have others
+  that look at water and forest together, and only forest, which are much
+  clearer.
+                                                                                       
+
+2/24/04 - mzellner
+- I remembered there's something I need to change about the new conditions 
+  for development. If forest is more than 0.5 while water
+  is less than 0.3 (rather than equal to 0.0). It's working.
+- Now I'm thinking that 30% water in a subdivision seems an awful lot.
+  Should we have lower water requirements for remnant/hort?
+- Started to design some of the ctrl files to run experiments.
+  I basically have one, test1.ctrl, which sweeps zoning from 1 to 3
+  for each township. I will create another one to sweep demographics.
+  I need to create new parameters to be able to do that, rather than changing
+  the code (which I will already need to do with the landscape maps).
+- Now will work in second control file. The file test2.ctrl combines the
+  effects of zoning with demographics. The combination is restricted to
+  having one township zoning for minLotSize=1 while the other varies over
+  the whole range, then have both townships agree on minLotSize=2, and
+  then one changes to minLotSize=3. This is combined with populations varying
+  from very even in their distribution of HH with kids, income and env group,
+  to being an older population (less kids) but equal income and env group
+  distribution, to younger population with more unequal distribution of
+  income and env group, to older population with unequal distribution.
+- These two control files will be run with different landscape maps.
+- Created road maps and homogeneous landscape maps.
+- Changing code so that getAreaForest in Subdivision.java changes to 
+  getArea(QualitySpace). Then use this method for water, too, and apply 
+  it when checking conditions in determineSubType. Use 0.5 acres to start with.
+  Done.
+
+
+2/23/04 - mzellner
+Continuing with tests and checking code:
+- In Resident.java, checking how preferences are set. Works fine.
+- In Model.java, checking that roadSpace, forestSpace, waterSpace,
+  elevationSpace, soilSpace is initialized correctly. Seems to
+  work fine.
+- Make sure township zoning is respected. Added redundant check in Model.java.
+  Runs OK.
+- Eliminated soil productivity from conditions to develop. Makes a lot of 
+  difference in development patterns (much more dispersed now).
+- Trying to constrain construction to lots that have less than 50% water.
+  I modified Subdivision.java in divideIntoLots. I have an error of 
+  null point exception. What's happening is that all the cells have more than
+  50% water, so when it looks in all four directions, it can't go anywhere else
+  and no lot can be created. Fixed the bug, and now development is 
+  very constrained. Added in todo.txt to check this restriction.
+- Adding a new method in Sub that determines the cumulative area of water or
+  forest.
+- Adding a new method in Sub that determines total area of forest.
+- Add new condition to remnant and hort to consider acreage of forest
+  or percentage coverage of forest and water.
+- Seems to be working fine. But now I'm wondering if the previous conditions
+  (forest>0.5 and water>0.3) make sense. Looking at Table 2 from Joan, there
+  is confusion and contradiction with what was discussed in our last meeting.
+  Will make a decision here. Will use what was discussed for remnant/hort choice.
+  Added some new conditions from Table 2: consider that water>0.3 is presence of
+  water. Added condition for smaller sub (80 acres or less) that when not adjacent
+  to road, they won't be developed only if there's less than 80% forest, 
+  no water and is flat. Otherwise, it's rem or hort.
+- Yes, but why are some lots not sold, even if the subdivision is there?
+  Because it's all full of water! Therefore it can't be built.
+- Need more realistic landscapes to try this out. Development is very 
+  restricted. And it's mostly country sub in the township that allows it.
+
+2/20/04 - mzellner
+Continuing with tests:
+- Continue with the rest of the lot evaluation. Checked in Resident.java and.
+  Model.java. Seems to be working fine.
+- Test that average forest calculation in township is fine. Included
+  messages to print out calculation. Works fine.
+
+
+2/19/04 - wrand
+-going to add minLotSizes to Subdivisions which are determined by subType
+-So that works and divideintolots uses this now
+-Now I need to add a check when developing the sub that makes sure
+that the subtype has a minlotsize great enough for the town
+-did that also added a getTownship to sub that gets it from their
+first cell
+-results are as expected, since the new mins are Rem = 3, hort = 2,
+country = 1, the old township mins don't work
+-the new mins will be 1 for t0 and 2 for t2
+-hmmm...still no development, don't know why zoning is set correctly
+-I think I had the comparison reversed, no its right, sub min lot size
+has to be greater than township
+-Ah I know what the problem is the minLotSize isn't set till we set
+the subdivision type, so we'll set it before we do the check\
+-tada works fine now
+
+2/19/04 - mzellner
+Continuing with tests:
+-Test that report file is generated appropriately.
+-Test that program works with drone.
+-Test all the process of resident's evaluation, starting with
+ how lot calculates landscape characteristics. Started with Lots.java.
+ Works well, but need to continue with the rest of the evaluation.
+
+2/19/04 - wrand
+-fixed the bug I found yesterday, one of Moira's checks was doing a
+get(0) on copyOfFarmList but didn't check to make sure there was
+anything on the list first, so as soon as it ran out it crashed
+-fixed it by only running the test if there is a farm on the list
+-we should probably change this code so developFarms isn't even called
+if there are no farms on the list
+-going to have it read QualitySpace info from files
+-using the RasterSpace(String) constructor, if it throws an exception
+I'll assume the file isn't there print out an error message and
+initialize the field normally
+-hmm seems to crash right away maybe the code breaks on integers
+(8191) is 1 in the old ESRI format.  I'll see if scaling solves the
+problem
+-it did so it seems to work, I've add similiar load from files for
+forest, water, road, soil, elevation
+-adding .txt files for each of these to the cvs tree
+
+2/18/04 - wrand
+-Going to continue down the priority list
+-First thing to add is to clear the forests, going to make a method
+called clearForest in Subdivision.java, which will be called on each of the
+cells in a lot when the lot is created in Subdivision.java
+-done, maybe clearForest should be in Cell though, but to do so would
+require cells knowing about qualityspaces which we don't have yet, it
+might make sense to actually move all of the qualityspace info down to
+the cell level
+-okay next step is to report average forest level for each township in
+the report file
+-first step add this measure to the header in the report file
+-that seems to work, now I'm going to add a method to the township to
+calculate avg forest, this will be a stub at first
+-okay, put the stub in now I'm going to add the call to the step of
+the report file
+-that works, now I'm going to make sure Cell has access to all the
+qualityspaces, we should go back and rewrite clearForest and the
+subdivision measure calculations to take this into account
+-that compiles so cell's now know what the quality spaces are
+-next thing to do is add a stub to Cell.java that returns its forest
+value, and then modify Township.java/calculateAvgForestLevel to use
+this, actually skipped the stub part since its one line of code to
+return the actual value
+-seems to be working well, since the forest output measure is
+monotonically decreasing, I'll leave testing for Moira
+-Okay I'm going to include environmental features in resident
+evaluations
+-we're modifying Resident.java to have an evaluateEnvironment which
+evaluates the environmental features of a lot, initially this will
+weigh all the features the same
+-This means we will need a lot of getters at the lot level which will
+accumulate data from the cell level
+-The first one simply returns the forest coverage, which is an average
+of the forest coverage at the cell level
+-turns out its now failing one of our old tests that checked to make
+sure there was never a value of 0, but since we can now return a value
+of 0 we need to take this test out
+-okay now that I took that out it seems to work
+-next thing I'm going to add is panoramic view, this will be based on
+whether the high point of elevation in the lot is over .8, if it is
+the lot is considered to have a panoramic view, calculatePanoramicView
+will be at the lot level
+-seems to work, again I'll leave testing for Moira
+-okay next thing to calculate is high relief, this is the difference
+between the highest and lowest points in the lot
+-seems to be working again I'll leave testing for Moira
+-just added water calculations based on average presence of water,
+this also seems to work, testing for Moira
+-now the final piece which is development, we have proxied this with
+the amount of road in the subdivision
+-so the utility function works and seems to include the appropriate
+parts, now I need to set preferences depending on demographics, this
+will be in the constructor for Resident
+-first thing is to simply set up the data members and establish
+default values (1.0) for the alphas
+
+2/17/04 - wrand
+-priority list before Friday:  1)  Fix report bug, 2) Clear forests,
+3) Measure and output forest density, 4)  Residents utility function
+include envt'l features
+-added header to report file
+-fixed bug with report file having two entries at every time step, now
+ its in GUI and Batch as part of the buildschedule
+
+2/17/04 - mzellner
+
+More tests:
+-check isRolling(): Adding code to this method in Subdivision.java to 
+ make sure it's estimating the correct values. It's working well, but
+ because of the distribution of elevation values, isRolling returns always
+ false (i.e. the variance is not big enough).
+-check getMin/getMax/getAvg: Adding code to corresponding methods in 
+ Subdivision.java to make sure it's performing them correctly. It'w working
+ well.
+-test to make sure developments are not looked at in a biased fashion: added
+ code in Model.java to get first and last farm in the list before and after 
+ shuffling, and print out warning if they were. Runs fine.
+
+
+
+2/16/04 - mzellner
+
+Running latest tests:
+- Make sure that subdivision development happens due to demand. 
+  This served as test for canDevelop as well. Added code in Developer.java 
+  to ask value of canDevelop, and re-activate Bill's tests in this class, 
+  and in Subdivision.java.Seems to be working OK.
+- Check developer creation, and adding subs to developer. Added code in 
+  Developer.java to getType. Then add code in Model.java to ask for type, 
+  and compare to type assigned. Should be the same. In Model.java, 
+  added code to make sure that sub is in developer's list after it was added.
+  Seems to be working fine.
+- Check determineSubType. Added code in Subdivision.java to put checks 
+  on conditions that determine sub type.Seems to be working fine.
+
+
+2/13/04 - wrand
+-going to make ARMS-R ant compatible
+-first copy over the .antrc file:
+	   
+	   cp ~mcharter/.antrc ~/.antrc
+
+-adding a build.xml file to the archive
+-created the new directory file structure for ant with src etc.
+-made some changes so to Model.java so it creates the model correctly
+ now and inits it without calling the repast code to start it up
+-need to get it working with parameter files
+-copied over GUI and Batch into src directory I'm going to make sure
+ it at least compiles
+-okay it took a lot of grunt work but its finally compiling and
+ running, still a lot to do in terms of dronifying the code
+-working on dronification
+-going back to Rick's notes:
+
+/users/rlr/Courses/530-04W/Src/Repast/heatBugs2/notes-make-drone-ready.txt
+
+-going pretty smoothly, I'm removing all references to agents, if we
+ ever want to change the "agents" we'll have to add this back in, but
+ right now it seems useless
+-starting to use the GUIModel class moved some of the stuff over there
+-okay it works with GUIModel now
+-going to start on BatchModel
+-seems to work
+-going to commit, but right now processing of command line parameter
+ is not working, I'm looking into this
+-It appears that the process command is not being called
+-fixed command line paramers was being written over again by the
+ default parameters
+-rasterspace switches x and y so anytime you put something to x and y
+ you have to reverse them
+-right now I switched x and y in the get but we'll have to look at
+ this more seriously
+
+2/11/04 - wrand
+-going to work on the developer model some more
+-the >80, and >160 decision processes are identical now and similiar
+ to the <80 (except that checks for a road), due to the fact that we
+ don't have adjacency in place, I wonder what would happen if we just
+ reduced to the simple decision between REM / HORT if
+ hill/water/forest, and COUNTRY/HORT otherwise
+-started dronifying ARMS-R but didn't get very far
+
+2/10/04 - wrand
+-modifying determineSubType to take into account environmental attributes
+-added SPLIT to subdivision types, need to deal with this
+-actually decided to ignore the split subdivisions
+-added links to the quality spaces to the Subdivision class using
+ class variables
+-some developer decisions are implemented for aubdivisions less than
+ 80 acres
+
+2/9/04 - wrand
+-fixing the bug Moira found in QualitySpace, I want it to inherit from
+ RasterSpace anyway, so I'm going to change that but Moira's bug could
+ have been fixed by doing an update call on the Diffuse2D
+-Done, remember RasterSpace numbers from top left not bottom right
+
+2/6/04 - mzellner
+
+-Testing whether environmental features are assigned correctly. I modified
+QualitySpace.java to get the value from x,y after it's put it, but the test
+fails. Maybe I haven't written the test correctly.
+-I tried another way, but it may not be assigning environmental features.
+
+2/5/04 - wrand
+-I'm going to change things so that the farms that become developed
+ are shuffled first
+-that's done
+
+2/5/04 - mzellner
+-Just added some test for township creation and zoning, it worked fine.
+
+2/3/04 - mzellner
+
+-Need to add zoning parameters for each township that determines minimum lot size. Done
+-To use these parameters, township need to get this info from Model, and then
+ subdivisions need to know what township they're in to determine their 
+ min lot size to perform the division into lots.
+-I'm stuck in Model.java. I'm not sure how to set up the parameters for zoned
+ min lot size so that the townships are assigned a separate value. Answer:
+ add a condition that asks if township is zero, then assign value x, else,
+ assign the other value.
+-Right now this is hardcoded for two townships, needs to be more generic.
+-Need to test whether the model is assigning the appropriate minimum lot sizes
+
+2/2/04 - wrand
+-fixed the bugs preventing Moira's fixes of my bugs from working
+ correctly
+-54, 77 should now work fine
+
+01/30/04 - mzellner
+
+-Added slope as a quality space.
+-The model crashes when world size is 54,77 because I think there's 
+ something in the way farms are created. We should allow for some farms
+ to be larger if some cells are left out from other farms. I'm working
+ on this, but finding  compilation errors that I'm not sure how to correct.
+
+01/29/04 - wrand
+
+-So I'm moving the development type decision to the subdivision class
+-apparently it was already there in the subdivision creation, I split
+ it off into two separate functions, determineSubType and setType
+-Now I'm going to add an isFull method to the subdivision that returns
+ true if the subdivision is more than 75% full (lots)
+-Now I'm going to create a developer class and then create a developer
+ for each of the types, these developers will be in charge of
+ aggreagating the subdivisions of their respective types
+-Created Developer classes, now I'm going to add the subs to them
+-now I'm creating a method for devlopers, called canDevelop, if it
+ returns true the developers properties are all currently full, if
+ false then the developer needs to wait
+-seems to work but its hard to know until development depends on it,
+ so I'm going to change the devlopFarms method to take this into
+ account
+-Now I'm running into that sell a lot that doesn't exist bug
+ immediately, so I'll have to fix that to test to see if this works
+-Okay what was happening was that sometimes there were no lots the
+ resident could afford, this is not wrong, but has been fixed so that
+ the model tests for this before trying to sell teh resident a lot
+-another bug showed up while doing this, since farms are considered in
+ left to right, top to bottom order and not randomly they get
+ developed in the same way, this is probably also true of residents
+ should check that
+
+01/27/04 - wrand
+
+-the goal here is to slow down development so a new development isn't
+ built till the old subdivision is close to full
+-I'll start by modifying the old routine.  Instead of automatically
+ selling all farms, if a farm goes up for sale it simply sets an
+ attribute bit in its class definition, then there is a separate
+ process that develops the farms
+-one small issue, since we leave farms on the farm list until they are
+ developed then it means that we can set them to be sold twice, not
+ that this should matter, but it seems weird
+-that seems to be working okay, though that tried to sell a lot that
+ doesn't exist bug is still there, that should be my next goal to fix
+-next step is to have development be driven by demand, first thing
+ first I'm going to move the subdivision type decision into the
+ subdivision class
+
+01/19/04 - wrand
+
+-fixed a bug in the township set up it used to crash if the size of
+ the world isn't easily divided this is because size was 1 ordered,
+ and x value was 0-ordered, I changed this by subtracting 1 from the
+ world size to make it 0-ordered
+-so I want to add environmental features, my plan for this is to
+ create a generic class similiar to the QualitySpace in the old Sluce
+ model to handle these kinds of things, so I'll create a generic one
+ at first
+-I'll call it QualitySpace.java
+-right now I'm having it extend Diffuse2D even though I don't plan to
+ use diffusion but there is not other base class that implements the
+ interface Discrete2D and I don't really want to write my own from the
+ ground up
+-Right now I'll just use the base implementation but I'll leave the
+ QualitySpace in between so when we want to load from a file or do
+ other things we can
+-I'll create 4 qspaces to begin with one for each environmental type
+ that we talked abotu road, soil, water, forest
+-road is binary, all the rest are doubles representing the quality for
+ soil and amount for forest and water
+-okay that's now in, and I tested it by having it print out values,
+ seems to be working fine
+
+01/12/04 - wrand
+
+-two major plans for today, get townships implemented and record some
+ statistic that is based on townships, specifically income which will
+ be 2 for high income 1 for low income, farms as 1/2
+-First create the Township class which is based on the subdivision
+ class
+-The township class is an aggregate class and should contain a pointer
+ to all of the cells and residents of the township, and then be able
+ to calculate statistics based on those lots, the problem is how do we
+ count farms, and empty subdivisions lots?  Maybe that's a question to
+ ask the group, for now I think we should not count them and instead,
+ calculate the income based only on residents, therefore what teh
+ township really needs is a residentlist not a lot list
+-here's my current vision when the world is created the township are
+ told what cells belong to them, then whenever a resident enters the
+ world they ask whether there cell belongs to the township, if it does
+ then they add themselves to the resident list, vice versa when they
+ move out they remove themselves, therefore residents will have to
+ know what township they are in
+-I'll begin by adding "townshipOwnsCell", "addResident" and
+ "removeResident" to township.java
+-now I'm going to create the townships in Model.java, this first take
+ will simply involve the creation of a township list, then the
+ dividing of the world in half and putting half in one township and
+ half in another
+-right now townships don't have any knowledge about borders, maybe in
+ the future they should, the problem is that information seems
+ redundant with them knowing what cells they have, maybe they don't
+ need to know what cells they have
+-hmmm...forgot one thing farms need to end at the end of townships in
+ order to make sure that subdivisions are completely within one
+ township, I'll have to think of that but I'll make a first pass where
+ I don't care and just determine what township a resident is in by
+ looking at the first cell in its lot
+-okay tested the township control and it appears to have the right
+ cells assigned to it
+-now I'm going to add a set/getTownship method to the cell class and an
+ appropriate data member and update it on creation
+-and I'm going to add the same methods to residents, this seems a
+ little duplicitous maybe in the future I can figure out a way to
+ streamline this
+-I'm also going to modify lots to contain this same info
+-Updated createLots in Subdivision to set this field, though it sets
+ it every time it adds a cell to the lot which seems inefficient
+-now I'm going to modify the Subdivision.sellLot and Resident.moveOut
+ routines to take this into account, tested by printing out size of
+ resident list and every time a resident moves in and out
+-that all appears to work, now I'm adding a method to calculate the
+ income in a township, this will loop through all the residents and
+ add 2 for every resident with high income and 1 for every resident
+ with low income, tested by printing out income every time step, that
+ seems to work though it should reach a steady state, however there
+ might be a slight creep up, hard to tell if this is within
+ statistical bounds by eyeball
+-need to add a report method, added that
+-going to create a recorder object to capture the data, so added a
+ createRecord to the buildModel method, also added a record method at
+ every time step and a method to write out the data
+-for some reason the recorder requires doubles so the output is in
+ doubles, seems to work though, that's it for today
+
+12/18/03 - wrand
+
+-two plans for today, 1) have different subdivisions colored different
+ colors, 2) implement the minimum divide lots routine, so that
+ subdivisions can have multiple cells per lot
+-okay coloring is done, remnant subs are green, horts are blue and
+ country subs are red=
+-I started by writing a routine which determines the upper right and
+ lower left coordinates for the subdivision, this is called once
+ during the creation of the subdivision and then I call it again
+ before I use them to make sure nothing has changed, maybe I should
+ change this
+-now I'm attempting to write the routine that loops through the world
+ and gets each lot
+-to do that I need to know where the world is, and right now sub
+ doesn't have access to that so I'll have to make sure it does, I
+ modified the creation routine so you have to give the subdivison a
+ world when you create it
+-changed createLots to divideIntoLots, I'm going to make a createLot
+ routine that handles all of the actual creation of the lot
+-okay the routine divideIntoLots is working with one exception, if it
+ can't find four cells right now it will just not assign them to a
+ lot, what we need it to do is see if there are any cells adjacent to
+ the cells already in the lot and assign them to that lot
+-I don't like the way this routine is right now its clunky and not
+ very elegant
+-having to add a Lot to Cell, so I can find out quickly what Lot owns
+ a cell
+-also added a method to Lot to addnewcells to the lot list
+-I think this is now done
+
+12/09/03 - wrand
+-added a bunch of stuff to the to do list oer our meeting on the 5th
+-today I'm going to add attributes to the residents (income [high,
+low], kids [yes, no], envGroup [yes, no])
+-defined some public static final ints to control these classes, these
+are currently part of the class Resident but we may need to move them
+somewhere else
+-going to have the attributes just set in the constructor right now,
+eventually will want to be able to control these
+-so we now have different attributes for different residents and they
+appear to be initialized randomly as we discussed
+-Now I'm going to start on having different types of subdivisions,
+this will actually just be an attribute of the subdivision which will
+be either country, remnant, or horticultural
+-also added a private static to the class to keep track of the number
+of each type of subdivision
+-so that appears to be working, I checked by clicking on cells and
+also had it simply print out the totals of each type everytime it
+added a new sub and it seems to be working correctly
+-next step is to have residents use the subdivision type in their
+valuation of the lot
+-I'm going to add an evaluate lot method to resident
+-now I need to modify Model.java to use this method
+-That seems to exhibit behavior simliar to what it did before, now I'm
+going to have it assign a value of 0, 0.5 or 1, depending on whether
+or not it likes the sub or not
+-seems to work I had it print out the values and thy are all 0, 0.5,
+or 1, with few 0s
+-finally I'm going to change the routine for looking at cells so it
+only looks at cells that they can afford to move into which means that
+the subdivisioin preference is greater than 0
+-created evaluateSub in resident different from evaluateLot but
+evaluateLot calls it to include that within its value
+-seems to work in the same way as before
+-modifying sellLots so that it checks to make sure resident can afford
+to move in to a subdivision before adding it to their testlots list,
+however right now it just checks to see if its positive and generates
+a new one, we should modify this so somehow it knows if there are any
+lots the resident can afford out there
+-seems to work, I put a test and if it ever gets a value of 0 it will fail
+
+12/05/03 - wrand
+-was going to add destructor methods, but then I realized Java doesn't
+support destructor methods, so we have two choices 1)  add a destroy
+method and call it manually whenever we destroy and object, or 2)
+simply rely on the fact that we won't make many references to objects
+in lists and when we remove the objects we will remove them from the
+list
+-For now I'm going to try and pursue (2) but we may need to change
+this philosophy in the future
+-started working on moveout procedure, need to add code to Resident to
+make this work correctly
+-fixed that, so residents now move out as well
+-also changed getOwnedBy in Lots so it points to owner not subdivision
+
+12/04/03 - mzellner, wrand
+
+- developing sellLots in Model.java. First I need to include
+  parameter to determine the number of residents per turn. Done.
+-working on sellLots, first we create a globalLotsForSale list by
+  aggregating all the subdivision for sale lots into one list per turn
+-then we generate a list of candidate lots for the resident to look at
+-we assign them all a random value, then we simply pick the one with
+  the highest value and sell it to the resident
+-we also noticed that the subdivisions weren't being added to the
+  global subdivision list and fixed that
+-we're adding a check to see if there are fewer lots than residents;
+if that's the case, change resPerTurn to that number. Done, but it
+continues running even when world is full.
+
+12/04/03 - wrand
+-all cells should know who owns them just in case we want to be able
+ to examine an individal cell and find what its part of.  However it
+ might be more important for ownedBy to point to the Lot as opposed to
+ the resident thus preserving the hierarchy
+-Subdivisions are who sells the lot to the resident, since subdivision
+ is the highest level which cares about individual lots thats who
+ should do the selling
+
+12/02/03 - mzellner
+
+- why do we need all the cells in a lot to have an ownedBy attribute?
+- in Lots class, it's not clear to me whether lots are different from
+  subdivisions.
+- i'm confused about Subdivision's sellLot. There's a command for lots there
+  to set owner by a resident. Shouldn't this be in Lots class?
+- changed farmX and farmY to currFarmWidth and currFarmHeight in assignCells
+  (Model.java)
+- changed listOfFarms into listOfFarmCells in assignCells (Model.java)
+
+12/02/03 - wrand
+-going to figure out why subdivisions can be resold today
+-forgot to remove farms from the farm list after we had sold them
+-also forgot to delete it
+-creating first attempt at resident class
+-created it now going to add a sellLots class to Model.java
+-this necessitated modifying the lot class because we want to be able
+to know which resident owns the lot, so we added a setOwnedBy method
+-we also added lotsForSale parameter to Subdivision, with an accessor
+and a sellLot method
+-removed agentList didn't seem to be using it
+-added residentList to keep track of all residents
+-next time I will start working on the code in the sellLots method
+
+11/21/03 - wrand
+-going to create the lot class, and have the subdivision create lots,
+ after that I'm going to pause and go back through and clean up the
+ todo list
+-so lot class is similiar to farm and subdivision, but it has an
+ ownedBy and it also inherits its color from who owns it and doesn't
+ have its own color
+-adding createLots to Subdivision which takes the cell list and splits
+ it up into lots
+-turns out its going to be hard to switch these owners until I fix the
+ fact that all cells should be cells and not subCells and farmCells,
+ so I'm going to have the cells owned by the subdivision until I make
+ this change
+-so I collapsed them and took the first steps to collapsing farm and
+ subdivision into owner, now modifying the code to take advantage of
+ the more economical format now
+-seems to work for sellfarms, modified createLots so cells are now
+ owned by lots instead of subsdivisions seem to work
+
+11/18/03 - wrand
+
+-today I'm going to figure out what's going wrong with those lists
+-okay the new strategy is find out the old x, y coordinates create the
+ new cells, remove the old ones from the world, create the new sub put
+ the new cells in the world
+-okay that now appears to be working, I'm going to write a test for it
+ which I just did tests 3a and 3b
+-next step is to create a lot class and have the subdivision divide up
+ the land into lots
+
+11/11/03 - wrand
+
+-Removed farmer class and all references to it from Model.java, also
+ changed references to numFarmers to numFarms, this still isn't used
+ yet, but maybe we can use it in the future, for now I'll leave it in
+-I'm going to change the colors of the cells back to represent their
+ class, now that I've checked to make sure they are different
+-actually I've decided to leave that for future work
+-tried to change default of farm sizes to 4x4, but change didn't take,
+ maybe its set multiple places, no it worked I just forgot to make it
+ again
+-Creating a Subdivision class now, using the Farm class as the base
+-This necessitates a SubCell class as well and I'll use
+ FarmCell as the base
+-Actually now that I have this I'm going to change the coloring so
+ that it works, I'll make farms different colors of yellow, I'm
+ wondering what the best way to do this is, I think what I want to
+ happen is for the farms to keep track of a Color, this color would be
+ generated at creation of the instance, and would be unique, this
+ seems to imply that I will need some sort of ID number for the farm,
+ that will be passed in from the model, then when a FarmCell is asked
+ to draw itself it will ask what the color of the object that owns it
+ is and draw that color
+-So colors are now stored as a Color in the Aggregate class, and
+ set on creation of the instance
+-I'm now trying to add the FarmID, I think private static is the way
+ to do this, we'll see
+-to set up a static variable for the whole class you use private
+ static, but then you have to keep track of it for that particular
+ instance so you assign it to another member that is only private
+-Okay they are now all different shades of yellow, but they aren't
+ very distinct oh well
+-carrying these changes over to Subdivision.java and SubCell.java,
+ except they will be red instead of yellow
+-I'm eliminating numFarms from the model, if we need its no problem to
+ put it back in
+-going to add new parameter pFarmSale, which is the probability on any
+ time step that a farm goes up for sale
+-okay the new parameter is in
+-it may be possible to have cells simply be one class instead of
+ subdivision, farm, etc, and have all of the type of information be
+ aggregated at the top level, something to think about, actually just
+ added it to the todo list
+-added a method called sellFarms which is the first method in the step
+ function, this will simply sell the farms, by calculating using the
+ probability if a farm is for sale and then transferring it to a
+ subdivision
+-I'm manipulating lists as I am modifying them in sellFarms, I need to
+ find a way to not do this.  One solution is not use get(index) which
+ requires the index to remain static.
+
+23/09/03 - wrand
+
+-This will be an attempt to recode our current model in Repast with
+ appropriate modifications to allow for new features that have come to
+ light especially:
+
+	   1)  Developers
+	   2)  Emigration
+
+-so now that I've got the basic version set up and loaded into CVS, my
+ plans are to begin modifying it, the simplest model that would show
+ anything at all would be to have Farmers initially in the model
+ randomly distributed and then to have Developers buy from farms, then
+ to have Residents move on to developments, this simple model requires
+ three classes of Owners: Farmers, Developers, and Residents.  It also
+ requires two types of Cells:  Farms, and Developments with a third
+ type of helper class which is the Subdivision
+
+-I'll begin by creating the Cell class and the Farm class from it,
+ added Farm.java and Cell.java to the repository
+
+-Okay Now I've got the world filled with Farms, and I've created the
+ farmers, now its simply a matter of assigning different farsm to
+ different farmers
+
+-created a Farm different from FarmCell which is an aggregate class of
+ all the FarmCells that together form a farm

@@ -1,0 +1,4 @@
+#!/bin/sh
+CUDA_BIN=$( cd "$( dirname "$0" )" && pwd )
+PATH=$PATH:$CUDA_BIN DYLD_LIBRARY_PATH=$DYLD_LIBRARY_PATH:$CUDA_BIN/../lib $CUDA_BIN/../libnsight/nsight.app/Contents/MacOS/nsight $@
+

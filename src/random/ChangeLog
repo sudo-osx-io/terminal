@@ -1,0 +1,452 @@
+2009-09-24  Scott Christley  <schristley@mac.com>
+
+	* include.gens.creating.m: Adjust casts to eliminate compiler
+	warnings.
+
+2008-07-06  Scott Christley  <schristley@mac.com>
+
+	* include.gens.creating.m ([-createEnd]): ObjC runtime
+	abstraction.
+
+2008-06-25  Scott Christley  <schristley@mac.com>
+
+	* ACGgen.h, BernoulliDist.h, BinomialDist.h, C2LCGXgen.h,
+	C2MRG3gen.h, C2TAUSgen.h, C3MWCgen.h, C4LCGXgen.h,
+	ExponentialDist.h, GammaDist.h, LCGgen.h, LogNormalDist.h,
+	MRGgen.h, MT19937gen.h, MWCAgen.h, MWCBgen.h, NormalDist.h,
+	PMMLCGgen.h, PSWBgen.h, PoissonDist.h, RWC2gen.h, RWC8gen.h,
+	RandomBitDist.h, SCGgen.h, SWBgen.h, TGFSRgen.h, random.h,
+	randomdefs.h, UniformDoubleDist.h, UniformIntegerDist.h,
+	UniformUnsignedDist.h, random.h, randomvars.h, Makefile.am:
+	Standardize include directory structure to support libraries and
+	OpenStep frameworks.
+
+2006-04-01 Paul Johnson <pauljohn@ku.edu>
+
+        * h files for all generators need declaration: 
+	-(id <BasicRandomGenerator>)getGenerator
+	
+
+2004-07-26  Marcus G. Daniels <mgd@santafe.edu>
+
+	* distributions.h: Add BinomialDist and @class.
+
+	* BinomialDist.[hm]: New files.
+
+	* Makefile.am (random_HEADERS, SRC): Add above files.
+
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Use libobjc definition.  Add GNUstep
+	includes.
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* ACGgen.h, ACGgen.m, BernoulliDist.h, BernoulliDist.m,
+	C2LCGXgen.h, C2LCGXgen.m, C2MRG3gen.h, C2MRG3gen.m, C2TAUSgen.h,
+	C2TAUSgen.m, C3MWCgen.h, C3MWCgen.m, C4LCGXgen.h, C4LCGXgen.m,
+	ExponentialDist.h, ExponentialDist.m, GammaDist.h, GammaDist.m,
+	LCGgen.h, LCGgen.m, LogNormalDist.h, LogNormalDist.m, MRGgen.h,
+	MRGgen.m, MT19937gen.h, MT19937gen.m, MWCAgen.h, MWCAgen.m,
+	MWCBgen.h, MWCBgen.m, NormalDist.h, NormalDist.m, PMMLCGgen.h,
+	PMMLCGgen.m, PSWBgen.h, PSWBgen.m, PoissonDist.h, PoissonDist.m,
+	RWC2gen.h, RWC2gen.m, RWC8gen.h, RWC8gen.m, RandomBitDist.h,
+	RandomBitDist.m, SCGgen.h, SCGgen.m, SWBgen.h, SWBgen.m,
+	TGFSRgen.h, TGFSRgen.m, UniformDoubleDist.h, UniformDoubleDist.m,
+	UniformIntegerDist.h, UniformIntegerDist.m, UniformUnsignedDist.h,
+	UniformUnsignedDist.m, random.h, random.m, randomdefs.h,
+	randomvars.h: Change copyright statement to canonical version as
+	suggested by GNU GPL.
+
+2002-01-14  Marcus G. Daniels  <mgd@condor>
+
+	* include.dists.using.m, include.gens.using.m, include.xgens.using.m
+	(getName): Always return a new value in scratchZone.
+
+2001-12-18  Marcus G. Daniels  <mgd@condor>
+
+	* distributions.h (PoissonDist): Remove +create:setGenerator:
+	and +create:setGenerator:setVirtualGenerator:.
+
+2001-12-17  Marcus G. Daniels  <mgd@condor>
+
+	* distributions.h (PoissonDist): Remove getUnsignedSample, which
+	is redundant.
+
+2001-11-04    <mgd@HELEN>
+
+	* Makefile.am: Avoid multi-line values as they confuse Cygwin automake.
+
+2001-07-17  Sven Thommesen <sthomme@swarm.org>
+
+	* Makefile.in, Makefile.am, randomdefs.h, distributions.h,
+	  PoissonDist.h, PoissonDist.m: added the Poisson distribution
+	  object provided by Steve Railsback & Steve Jackson
+
+2001-06-21    <mgd@maya.santafe.edu>
+
+	* C2LCGXgen.m: Eliminate a multi-line string literal.
+
+2001-06-18    <mgd@DRONE>
+
+	* random.m (initRandom): Check for and use fixed seed from Arguments.
+
+2000-07-16  Paul Johnson  <pauljohn@ukans.edu>
+
+	* ACGgen.h, C2MRG3gen.h, C2TAUSgen.h, C3MWCgen.h,  LCGgen.h, MRGgen.h
+	MWCAgen.h, MWCBgen.h, PMMLCGen.h, PSWBgen.h, RWC2gen.h, RWC8gen.h,
+	SCGgen.h, SWBgen.h, TGFSRgen.h: Inserted the IVAR unsigned
+	(*getUnsignedSample) (id, SEL); for use with IMP caching
+
+	* include.gens.creating.m: createEnd now caches method lookup of
+	getUnsignedSample()
+
+	* include.gens.using.m (getDoubleSample): use getUnsignedSample()
+	cached method to speedup all generators
+
+2000-07-16  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* randomvars.h (randomGenerator): Conform to MT19937gen not
+	SimpleRandomGenerator.
+
+2000-05-18  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* random.h ([InternalState -describe:, -getName]): Remove.
+
+2000-05-06  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* distributions.h: Rename setGenerator: arguments to indicate
+	whether they are simple or split.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Swarm 2.1.1 frozen.
+
+2000-02-18    <mgd@nest.swarm.org>
+
+	* Swarm 2.1 frozen.
+
+2000-02-21  Sven N. Thommesen <sthomme@humsci.auburn.edu>
+
+	* Deleted old compatibility definitions from randomdefs.h.
+
+	* Re-arranged protocol definitions in generators.h.
+
+	* Added (id <GeneratorType>) to method definitions in distributions.h
+	and in distribution objects.
+
+	* Added (id <Zone>) to create messages in generators and distributions.
+
+2000-02-19  Sven N. Thommesen <sthomme@humsci.auburn.edu>
+
+	* Added methods to NormalDist and LogNormalDist 
+	to allow the setting of standard deviation rather than variation.
+
+2000-02-18    <mgd@nest.swarm.org>
+
+	* distributions.h: Add generator protocol conformance to arguments
+	in +create:set* methods.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* distributions.h, generators.h: Add Zone typing to +create* methods.
+
+1999-06-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* C2LCGXgen.[hm]: Change setA:setv:setw: to setA:setV:setW:.
+
+	* C4LCGXgen.[hm]: Likewise.
+
+	* generators.h: Reflect these changes.
+
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES, lib_LTLIBRARIES): Substitute
+	{inst,noinst}LIBS.
+	(EXTRA_LTLIBRARIES): New variable.
+	(librandom_la_LDFLAGS): Substitute inst_LDFLAGS.
+
+	* include.dists.creating.m: Reformatting throughout.
+	Use of raiseEvent macro instead of raiseEvent: method.
+
+1999-05-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I$(top_builddir)/libobjc.
+
+	* randomvars.h: Include externvar.h.
+
+1999-05-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* random.m: Use `externvardef' for definitions of external variables.
+
+	* randomvars.h: Use `externvar' for external variables.
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES): Switch from lib_LTLIBRARIES.
+
+1999-04-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* C4LCGXgen.m, C2LCGXgen.m: Include misc.h instead of limits.h.
+
+1999-03-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Include -I for libobjc.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (CURRENT, REVISION, AGE): No changes.  Version 1.4.1.
+
+1999-01-20  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am (CURRENT): Bump.
+
+1998-12-21  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* GammaDist.m: Include misc.h instead of math.h.
+
+1998-11-18  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am: Remove addition of -Wno-protocol to CPPFLAGS.
+
+1998-10-29  Alex Lancaster  <alex@santafe.edu>
+
+	* generators.h (SimpleRandomGenerator, SplitRandomGenerator: Put
+	protocol conformance on same line as protocol line for correct
+	parsing by DSSSL.
+
+1998-10-28  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* ACGgen.m, C2LCGXgen.m, C2MRG3gen.m, C2TAUSgen.m, C3MRG3gen.m,
+	C4LCGXgen.m, LCGgen.m, MRGgen.m, MT19937gen.m, MWCAgen.m,
+	MWCBgen.m, PMMLCGgen.m, PSWBgen.m, RWC2gen.m, RWC8gen.m, SCGgen.m,
+	SWBgen.m, TGFSRgen.m: Make i, j, and g unsigned in -setState,
+	-putStateInto, initState:, -describe:, and setStateFrom: (some of
+	these cases don't exist).  Use %u instead of %d as appropriate.
+	New method -reset.  Reformatting throughout.
+
+	* BernoulliDist.m, ExponentialDist.m, GammaDist.m,
+	LogNormalDist.m, NormalDist.m, RandomBitDist.m,
+	UniformDoubleDist.m, UniformIntegerDist.m, UniformUnsignedDist.m:
+	Reformatting throughout.
+	
+	* C2MRG3gen.h (C2MRG3gen): Make k unsigned.
+
+	* C2LCGXgen.h, C2MRG3gen.h, C2TAUSgen.h, C4LCGXgen.h (COMPONENTS,
+	SEEDS): Make unsigned.
+
+	* ACgen.h, BernoulliDist.h, C2LCGXgen.h, C2MRG3gen.h, C2TAUSgen.h,
+	C3MWCgen.h, C4LCGXgen.h, ExponentialDist.h, GammaDist.h, LCGgen.h,
+	LogNormalDist.h, MRGgen.h, MT19937gen.h, MWCAgen.h, MWCBgen.h,
+	NormalDist.h, PMMLCGgen.h, PSWBgen.h, RWC2gen.h, RWC8gen.h,
+	RandomBitDist.h, SCGgen.h, SWBgen.h, TGFSRgen.h,
+	UniformDoubleDist.h, UniformIntegerDist.h, UniformUnsignedDist.h:
+	Add creating, setting, and using phases.
+
+	* ACGgen.h, C2MRG3gen.h, C2TAUSgen.h, C3MWCgen.h, LCGgen.h,
+	MRGgen.h, MT19937gen.h, MWCAgen.h, MWCBgen.h, PSWBgen.h, SCGgen.h,
+	SWBgen.h, TGFSRgen.h (ACGgen, C2MRG3gen, C2TAUS[123]gen, C3MWCgen,
+	LCGgen[123], MRG[567]gen, MT19937gen, MWCAgen, MWCBgen,
+	PMMLCG[123456789], PSWBgen, RWC2gen, RWC8gen, SCGgen, SWB[123]gen,
+	TT403gen, TT775gen, TT800gen): Conform to SimpleRandomGenerator
+	and CREATABLE.
+
+	* C2TAUSgen.h, LCGgen.h, MRGgen.h, PMMLCGgen.h, SWBgen.h, TGFSRgen.h
+	(C2TAUSgen, LCGgen, MRGgen, PMMLCGgen, SWBgen, TGFSRgen): Conform to
+	SimpleRandomGenerator.
+
+	* C2LCGXgen.h, C4LCGXgen.h (C2LCGXgen, C4LCGXgen): Conform to
+	SplitRandomGenerator and CREATABLE.
+
+	* BernoulliDist.h, ExponentialDist.h, GammDist.h, LogNormalDist.h,
+	NormalDist.h, RandomBitDist.h, UniformDoubleDist.h,
+	UniformIntegerDist.h, UniformUnsignedDist.h: Conform to respective
+	protocol.
+
+	* ACGgen.m, C2LCGXgen.m, C2MRG3gen.m, C2TAUSgen.m, C3MWCgen.m,
+	LCGgen.m, MRGgen.m, MT19937gen.m, MWCAgen.m, MWCBgen.m,
+	PMMLCGgen.m, PSWBgen.m, RWC2gen.m, RWC8gen.m, SCGgen.m, SWBgen.m:
+	Don't include Common.gens.create.m, Common.gens.genSeeds.m,
+	Common.gens.setparams.m, Common.gens.floats.m.  Add creating,
+	setting, and using phases, including include.gens.PHASE.m as
+	appropriate.
+
+	* BernoulliDist.m, ExponentialDist.m, GammaDist.m,
+	LogNormalDist.m, NormalDist.m, RandomBitDist.m,
+	UniformDoubleDist.m, UniformIntegerDist.m, UniformUnsignedDist.m:
+	Don't include Common.dists.m.  Add creating, setting, and using
+	phases, including include.dists.PHASE.m as appropriate.
+
+	* distributions.h (ProbabilityDistribution): Conform to
+	SwarmObject instead of Create and Drop.  Add setting phase.  Add
+	documentation.
+	(BernoulliDist, UniformIntegerDist, UniformUnsignedDist,
+	UniformDoubleDist, Normal, ExponentialDist, GammaDist): Add
+	documentation and setting phase
+	(NormalDist, LogNormalDist): Clarify descriptions.
+
+	* generators.h (SingleSeed, MultiSeed): Add setting phase.
+	(Simple, SplitSingleSeed, SplitMultiSeed, Split): Add setting
+	phase and augment documentation.
+	(Simple): Add reset method and documentation.
+	(SimpleOut): Improved descriptions.
+	(SimpleRandomGenerator, SplitRandomGenerator): New protocols.
+	(LCGgen, PMMLCGgen): Conform to SimpleRandomGenerator instead of
+	SingleShortGenerator.
+	(ACGgen, SCGgen, SWBgen, PSWBgen, MWCAgen, MWCBgen, RWC2gen,
+	TGFSRgen, MT19937gen, MRGgen): Conform to SimpleRandomGenerator
+	instead of SingleLongGenerator.
+	(RWC8gen): Conform to SimpleRandomGenerator instead of
+	CombinedLongGenerator.
+	(C2TAUSgen): Conform to SimpleRandomGenerator instead of
+	CombinedShortGenerator.
+	(C2MRG3gen, C3MWCgen): Conform to SimpleRandomGenerator instead of
+	CombinedLongGenerator.
+	(C2LCGXgen, C4LCGxgen): Conform to SplitRandomGenerator instead of
+	CombinedShortSplitGenerator.
+	(SingleShortGenerator, SingleLongGenerator,
+	CombinedShortGenerator, CombinedLongGenerator,
+	SingleShortSplitGenerator, SingleLongSplitGenerator,
+	CombinedShortSplitGenerator, CombinedLongSplitGenerator): Remove.
+
+	* random.h: Include objectbase.h instead of defobj.h.
+	Include random{vars,defs}.h instead of Random{Vars,Defs}.h.
+
+	* random.m: Make randomGenerator conform to SimpleRandomGenerator
+	instead of MT19937gen.
+
+1998-10-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT,REVISION,AGE): No changes. Swarm 1.3.1 released.
+
+1998-08-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT,REVISION,AGE): No changes.  Swarm 1.3 released.
+
+1998-07-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* distributions.h, generators.h, random.h: Change @deftype to @protocol
+	throughout.
+
+1998-07-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add misc, objectbase, and activity (activity
+	on behalf of objectbase).
+
+	* random.m: Include objectbase.h instead of objectbase/Arguments.h.
+	Include misc.h instead of sys/time.h.  Move cygwin32 gettimeofday 
+	declaration to misc.h.
+
+	* RandomDefs.h: Include misc.h instead of unistd.h and time.h.  
+
+1998-07-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ACGgen.h, BernoulliDist.m, C2LCGXgen.h, C2MRG3gen.h,
+	C2TAUSgen.h, C3MWCgen.h, C4LCGXgen.h, ExponentialDist.m,
+	GammaDist.m, LCGgen.h, LogNormalDist.m, MRGgen.h, MT19937gen.h,
+	MWCAgen.h, MWCBgen.h, NormalDist.m, PMMLCGgen.h, PSWBgen.h,
+	RWC2gen.h, RWC8gen.h, RandomBitDist.m, SCGgen.h, SWBgen.h,
+	TGFSRgen.h, UniformDoubleDist.m, UniformIntegerDist.m,
+	UniformUnsignedDist.m: Don't include string.h.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LLIBRARIES, librandom_a_SOURCES): Remove.
+	(noinst_HEADERS): Distribute Common*.m files.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+	
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-06-03  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* random.h: Add summary and description tags for module.
+
+1998-05-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* random.h, distributions.h, generators.h:  Add documentation tags.
+
+1998-03-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* random.m: Declare gettimeofday for cygwin.
+
+1998-02-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* C2LCGXgen.m ([C -setA:setv:setw:]): Make maxGen an unsigned long.
+	Cast LONG_MAX to unsigned long in assignment to maxGen.  Change
+	to %lu for maxGen printf field.
+
+	* C4LCGXgen.m ([C -setA:setv:setw:]): Likewise.
+
+1998-02-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* RandomVars.h:  initRandom now takes an argument object
+	instead of argc, argv.
+
+	* random.m (initRandom): Likewise.
+
+1998-01-27  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* RandomVars.h (initRandom):  Constify argv.
+	* random.m (initRandom): Likewise.
+
+1998-01-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MT19937gen.m: Add @end.
+
+1997-12-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ACGgen.h: Constify return of getName.
+	* C2LCGXgen.h: Likewise.
+	* C2MRG3gen.h: Likewise.
+	* C2TAUSgen.h: Likewise.
+	* C3MWCgen.h: Likewise.
+	* C4LCGXgen.h: Likewise.
+	* Common.gens.setparams.m: Likewise.
+	* Common.xgens.setparams.m: Likewise.
+	* LCGgen.h: Likewise.
+	* MRGgen.h: Likewise.
+	* MT19937gen.h: Likewise.
+	* MWCAgen.h: Likewise.
+	* MWCBgen.h: Likewise.
+	* PMMLCGgen.h: Likewise.
+	* PSWBgen.h: Likewise.
+	* RWC2gen.h: Likewise.
+	* RWC8gen.h: Likewise.
+	* SCGgen.h: Likewise.
+	* SWBgen.h: Likewise.
+	* TGFSRgen.h: Likewise.
+
+Mon Dec  8 22:36:07 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* random: replaced all instances of swarmobject.h with
+	objectbase.h and swarmobject/ with objectbase/.
+
+1997-12-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Common.dists.m: ([-getName]): Constify return of getName.
+
+	* BernoulliDist.h: Constify return of getName.
+	* ExponentialDist.h: Likewise.
+	* GammaDist.h: Likewise.
+	* LogNormalDist.h: Likewise.
+	* NormalDist.h: Likewise.
+	* RandomBitDist.h: Likewise.
+	* UniformDoubleDist.h: Likewise.
+	* UniformIntegerDist.h: Likewise.
+	* UniformUnsignedDist.h: Likewise.
+	* random.h: (InternalState): Likewise.
+	
+	

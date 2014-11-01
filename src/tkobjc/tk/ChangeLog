@@ -1,0 +1,54 @@
+2004-12-11  Marcus G. Daniels <mgd@santafe.edu>
+
+	* Makefile.am (noinst_HEADERS): Move below failed to include
+	X11/keysymdef.h.
+
+2004-11-24  Bill Northcott <W.Northcott@unsw.edu.au>
+
+	* Makefile.am :removed SUBDIRS, added files in X11
+			to noinst_HEADERS.
+	* X11/Makefile.am : removed as unnecessary.
+	
+2002-01-14    <mgd@SFI-984289>
+
+	* tkWinPort.h (OPEN_MAX): Comment out.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Swarm 2.1.1 frozen.
+
+2000-03-25    <mgd@HELEN>
+
+	* tkWinPort.h: Comment out panic.
+
+	* tkInt.h: Comment out Tk_PostScriptInfo.
+
+1999-04-29  Marcus G. Daniels  <mgd@chimayo.santafe.edu>
+
+	* tkWinPort.h: Comment out timezone struct definition.
+
+1998-07-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* tkWinPort.h: Go ahead and include string.h, now that String has
+	been renamed.
+
+1998-07-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* tkWinPort.h (gettimeofday): Don't declare.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (noinst_HEADERS): New file.
+	
+	* tkInt.h: Include "tk/tkPort.h" instead of <tkPort.h>.
+
+	* tkWinPort.h: Don't include string.h.
+
+1998-04-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* tkInt.h (TkpClipMask, TkpCreateNativePixmap,
+	TkpGetNativeAppBitmap, TkSetPixmapColormap): Use X11Pixmap instead
+	of Pixmap.
+
+
+

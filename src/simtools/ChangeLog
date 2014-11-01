@@ -1,0 +1,1742 @@
+2008-07-06  Scott Christley  <schristley@mac.com>
+
+	* UName.m: Cast so compiler finds correct method definition.
+
+2008-06-25  Scott Christley  <schristley@mac.com>
+
+	* AppendFile.h, InFile.h, NSelect.h, ObjectLoader.h,
+	ObjectSaver.h, OutFile.h, QSort.h, UName.h, simtools.h,
+	Makefile.am: Standardize include directory structure to support
+	libraries and OpenStep frameworks.
+
+2004-07-21  Scott Christley  <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Parameterize simtoolsgui and gui.
+
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* Makefile.am (INCLUDES): Use libobjc definition.  Add GNUstep
+	includes.
+
+	* initSwarm.h (STRINGIFY): Do not define macro if it is already
+	defined.
+
+2003-06-21  Marcus G. Daniels  <mgd@santafe.edu>
+
+	* simtools.h (__objc_exec_class_for_all_init_modules): Declare.
+	(initSwarmArguments, initSwarmAppArguments): 
+	Call __objc_exec_class_for_all_init_modules before _initSwarm_.
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* AppendFile.h, AppendFile.m, InFile.h, InFile.m, NSelect.h,
+	NSelect.m, ObjectLoader.h, ObjectLoader.m, ObjectSaver.h,
+	ObjectSaver.m, OutFile.h, OutFile.m, QSort.h, QSort.m, UName.h,
+	UName.m, simtools.h: Change copyright statement to canonical
+	version as suggested by GNU GPL.
+
+2001-11-04    <mgd@HELEN>
+
+	* Makefile.am: Avoid multi-line values as they confuse Cygwin
+	automake.
+
+2000-09-18  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Makefile.am (INCLUDES): Add -I$(srcdir)/../gui.
+
+2000-07-16  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* initSwarm.h: Don't declare _initSwarm_.
+
+	* Makefile.am (SRC): Remove simtools.m.
+
+	* simtools.m: Removed.
+
+2000-07-11    <mgd@HELEN>
+
+	* simtools.h: Remove inclusion of externvar.h and declaration
+	of swarmGUIMode (moved to swarm.h).
+	Include swarm.h.
+
+	* Makefile.am (INCLUDES): Move parent directories to front
+	(to prefer swarm.h over objectbase/Swarm.h).
+
+2000-07-11  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* simtools.m: Remove includes.  Use just defobj/Arguments.h
+	and SwarmEnvironment.h.
+	(_initSwarm_): Use SwarmEnvironment.
+	(run_constructors, swarmGUIMode): Moved to SwarmEnvironment.m.
+
+2000-03-28    <mgd@nest.swarm.org>
+
+	* Swarm 2.1.1 frozen.
+
+2000-02-18    <mgd@nest.swarm.org>
+
+	* Makefile.am (CURRENT): Bump.  Version 2.1.
+
+	* simtools.h: Add Zone argument conformance to +create:* methods
+	throughout.
+
+1999-10-20  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* QSort.m ([QSort +sortObjectsIn:],
+	[QSort +sortNumbersIn:],
+	[QSort +sortObjectsIn:using:],
+	[QSort +sortNumbersIn:using:]): Use quicksort instead of
+	qsort, casting comparsion function to quicksort_compar_fn_t.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-09-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.h: Add inhibitExecutableSearchFlag argument.
+
+	* initSwarm.h (_initSwarm_): Likewise.
+
+1999-09-15  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ObjectLoader.m (loadAborted, ABORT, [ObjectLoader
+	+load:fromFileNamed:], [ObjectLoader -loadObject:]): Add
+	stream-context argument to error message.
+
+	* InFile.m ([InFile -getWord:]): Treat carriage return (\r) as 
+	whitespace.
+
+1999-09-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* QSort.m ([QSort +_flatten_:], [QSort +reverseOrderOf:]): Do a
+	alloc: in scratchZone instead of xmalloc.
+	([QSort +_unFlatten_:], [QSort +reverseOrderOf:]): Do a free: in
+	scratchZone instead of XFREE.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-21  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.h, {Append,Out,In}File.[hm]: Add deprecated wrappers
+	for create:withName: (with warnings).
+
+1999-08-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* UName.m ([UName -getNewName]): Use STRDUP instead of strdup.
+
+1999-07-05  Alex Lancaster  <alex@santafe.edu>
+
+	* simtools.h (initSwarmAppArguments): Fixed macro,
+	STRINGIFY(APPNAME) -> APPNAME_STRING.
+
+1999-07-01  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ObjectLoader.m: Remove [-+]_crash_: methods.  
+	(loadAborted): Add.
+	(ABORT): New macro (add filename and lineno info).
+	([ObjectLoader +load:fromFileNamed:], [ObjectLoader -loadObject:]): 
+	Use it instead of _crash_.
+
+	* InFile.m ([InFile -getWord:]): Don't use fscanf for string.
+
+	* QSort.m: Use size_t for size, not int.  Use size_t for `i' in
+	all methods.
+	([QSort +_flatten_:]): xmalloc `flat' using sizeof id, not int.
+	(cmpInts): Use PTRINT as argument type.
+	([QSort +sortNumbersIn:]): Use PTRINT as element size, not int.
+	([QSort +sortNumbersIn:using:]): Use PTRINT as element size, not
+	int.
+	([QSort +reverseOrderOf:]): xmalloc `flat' using size of id
+	not int.
+
+1999-06-23  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* AppendFile.[hm] ([AppendFile +create:setName:]): Renamed from
+	+create:withName:. 
+
+	* OutFile.[hm] ([OutFile +create:setName:]): Likewise.
+
+	* InFile.[hm] ([InFile +create:setName:]): Likewise.
+
+	* simtools.h: Reflect these changes.
+
+	* ObjectSaver.m ([ObjectSaver +save:toFileNamed:],
+	[ObjectSaver +save:toFileNamed:withTemplate:]): Likewise.
+
+1999-06-21  Alex Lancaster  <alex@santafe.edu>
+
+	* simtools.h (InFile, OutFile, AppendFile, ObjectSaver,
+	ObjectLoader): Markup with `//x:' doc-string as deprecated
+	protocols.  Move explanatory text originally in `//D:' markup to
+	new tag, where appropriate.
+
+	* Makefile.am (simtools_HEADERS): Add initSwarm.h.
+
+	* initSwarm.h: New file
+
+	* simtools.h (_initSwarm_, STRINGIFY, STRINGIFYSYM,
+	APPNAME_STRING, APPVERSION_STRING, BUGADDRESS_STRING): Remove,
+	hide from user in new include'd initSwarm.h.
+
+1999-06-19  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.m (run_constructors): New static function.
+	(_initSwarm_): Call it for hpux.
+
+1999-06-10  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.h: Stringify application name, version, and bug address.
+	(Don't require quoting from make.)
+
+1999-06-09  Alex Lancaster  <alex@santafe.edu>
+
+	* simtools.m (_initSwarm_): New function, made from the old init()
+	function with a new argument `appName'.  Make non-static.  Pass
+	appName to initDefobj() call.
+	(init): Remove old internal static function.
+	(initSwarm{Batch, App, AppBatch, AppOptions, AppOptionsBatch}):
+	Remove functions, now macros in simtools.h.
+
+	* simtools.h (initSwarm): Redefine as a macro. Call new internal
+	function _initSwarm_().  If not explicitly set by the macro, pass
+	APPNAME, BUGADDRESS, APPVERSION which will be passed from the
+	application Makefile to the internal _initSwarm_().
+	(initSwarmBatch): Likewise.
+	(initSwarmApp): Likewise.
+	(initSwarmAppBatch): Likewise.
+	(initSwarmAppOptions): Likewise.
+	(initSwarmAppOptionsBatch): Likewise
+	(_initSwarm_):  Define internal function.
+
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES, lib_LTLIBRARIES): Substitute
+	{inst,noinst}LIBS.
+	(EXTRA_LTLIBRARIES): New variable.
+	(libsimtools_la_LDFLAGS): Substitute inst_LDFLAGS.
+
+1999-05-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.h: Include externvar.h.
+
+	* Makefile.am (INCLUDES): Add -I$(top_builddir)/libobjc.
+
+1999-05-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.m: Add externvardef for swarmGUIMode.
+
+	* simtools.h: Use `externvar' for swarmGUIMode.
+
+1999-05-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.m (init): Use YES and NO explicitly for swarmGUIMode.
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (noinst_LTLIBRARIES): Switch from lib_LTLIBRARIES.
+
+1999-04-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* QSort.m: Include swarmconfig.h.
+	(cmpObjs): Cast through PTRINT.
+
+1999-04-22  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	AppendFile.[hm], InFile.[hm], NSelect.[hm],
+	ObjectLoader.[hm], ObjectSaver.[hm], OutFile.[hm],
+	QSort.[hm], UName.[hm], simtools.h: Add protocol compliance
+	tagging in interfaces (adjusting phase structure as necessary).
+
+1999-03-14  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (INCLUDES): Add -I for libobjc.
+
+1999-03-09  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* ObjectSaver.[hm], simtools.h ([ObjectSaver
+	+save:to:withTemplate:]): Make template probemap conform to
+	ProbeMap protocol.
+	([ObjectSaver +save:toFileNamed:withTemplate:]): Likewise.
+	([ObjectSaver -setTemplateProbeMap:]): Likewise.
+
+	* ObjectLoader.m ([ObjectLoader -setTemplateProbeMap:]),
+	simtools.h: Likewise.
+
+	* ObjectSaver.h (ObjectSaver): Declare templateProbeMap as conforming
+	to ProbeMap protocol.
+
+	* ObjectLoader.h (ObjectLoader): Declare probeMapCache as conforming
+	to ProbeMap protocol.
+
+1999-02-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.h: Add CREATABLE tags to all non-abstract protocols.
+
+1999-02-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (CURRENT, REVISION, AGE): No changes.  Version 1.4.1.
+
+1999-02-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* simtools.h (InFile): Add a warning about error return behavior.
+
+1999-01-20  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.am (CURRENT): Bump.
+
+1999-01-14  Alex Lancaster  <alex@santafe.edu>
+
+	* simtools.[hm] (initSwarmApp, initSwarmAppOptions): Remove
+	batchMode arguments.
+	(initSwarmAppBatch, initSwarmAppOptionsBatch): Add new functions,
+	have the effect of setting the batchMode internally.
+
+1999-01-13  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* simtools.[hm] (initSwarmBatch): New function.
+	(initSwarmApp, initSwarmAppOptions): Add batchMode argument.
+
+1999-01-10  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* simtools.m (init): Don't setup any error or warning types.
+
+	* UName.m ([UName -createEnd]): Use InvalidArgument instead of
+	UNameError.
+	
+	* UName.[hm]: Remove UNameError.
+
+	* NSelect.m ([NSelect +select:from:into:]): Use InvalidArgument
+	instead of creating NSelectTooMany.
+
+	* NSelect.[hm]: Remove NSelectTooMany.
+
+	* AppendFile.m ([AppendFile +create:withName:]): Don't
+	raise an event if file fails to open, just return nil.
+
+	* OutFile.m, InFile.m: Likewise.
+
+	* InFile.[hm]: Remove CannotOpenInFile.
+
+	* OutFile.[hm]: Remove CouldOpenOut
+
+	* ObjectLoader.[hm]: Remove CouldNotInitializeObjectLoader.
+
+	* ObjectLoader.m ([ObjectLoader +_crash_:]): Use LoadError
+	from defobj.  
+
+1998-12-21  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* ObjectLoader.m, ObjectSaver.m: Don't include stdio.h.
+
+	* AppendFile.m, InFile.m, OutFile.m: Include misc.h instead of stdio.h.
+
+1998-12-12  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* simtools.m (init): New internal function.
+	(initSwarm, initSwarmApp, initSwarmAppFunc, initSwarmArguments,
+	initSwarmAppArguments): Use it.
+
+	* simtools.[hm] (initSwarmAppFunc): New function.
+	(swarmGUIMode): Make boolean.
+
+1998-12-11  Vladimir Jojic  <vjojic@wijiji.santafe.edu>
+
+	* Makefile.am: Remove ListShuffler
+
+	* simtools.h: Remove ListShuffler protocol and ListShuffler class
+	definition
+
+1998-11-12  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* simtools.m: Include defobj.h.  Don't include simtools/Archiver.h
+	or objectbase/Arguments.m.  
+	(initSwarmAppArguments): Don't initialize arguments or archiver here.
+	Call initDefObj after initModule.
+
+	* Makefile.am (SRC, simtools_HEADERS): Remove
+	Arguments.[hm].
+
+	* Archiver.[hm]: Remove (moved to defobj).
+
+1998-10-03  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT, AGE): Increment.  Swarm 1.3.1 released.
+
+1998-09-13  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.[hm] (initSwarmAppArguments): Call Argument's
+	createArgc:Argv:version:bugAddress:, and body of former
+	initSwarmArguments.
+	(initSwarmApp): New function.
+	(initSwarm, initSwarmArguments): Call initSwarmAppArguments.
+	
+1998-09-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Archiver.m ([Archiver -processQuotedExpr:]): Use ARCHIVERLITERALP.
+
+1998-08-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (CURRENT): Increment.  Swarm 1.3 released.
+
+1998-08-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (SRC, simtools_HEADERS): Add ListShuffler and
+	logically reorder.
+
+	From Sven Thommesen <sthomme@humsci.auburn.edu>:
+	* simtools.h (ListShuffler): New protocol.
+
+	* ListShuffler.[hm]: New files.
+
+1998-08-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* QSort.m ([QSort +_unFlatten_:], [QSort +reverseOrderOf:]): Likewise.
+
+	* Archiver.m (defaultPath): Renamed from defaultFileName.
+	Return const char * instead of id.
+
+	* Archiver.h (Archiver): Replace archiveFileNameString with path,
+	a const char * instead of id.
+
+	* Archiver.[hm]: Replace load:fromFileNamed: with load:path:.
+	Replace ensure:archiveFileName: with ensure:path:.
+	Replace setArchiveFileName: with setPath:.
+
+1998-08-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ObjectLoader.[hm] ([ObjectLoader +load:fromAppConfigFileNamed:]): 
+	New method.
+
+	* simtools.h (ObjectLoader): Add it.
+
+1998-08-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ObjectLoader.[hm] ([ObjectLoader +load:fromAppConfigFileNamed:]),
+	simtools.h (ObjectLoader): Add it.
+
+	* UName.[hm], simtools.m: Rename NoBaseNameForUName to UNameError.
+
+	* Archiver.m: Include objectbase.h instead of objectbase/Arguments.h.
+
+1998-07-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Archiver.m: Include misc.h instead of unistd.h.
+
+1998-07-22  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.m: Include InFile.h, ObjectLoader.h, ObjectSaver.h,
+	OutFile.h, and UName.h to get warning and error symbols.
+	(initSwarmArguments): Remove simtoolsgui symbols (ControlState*).
+	Define error and warning symbols.
+
+	* UName.[hm]: Declare NoBaseNameForUName.
+
+	* UName.m ([UName -createEnd]): Use it with raiseEvent (instead of
+	stderr).
+
+	* OutFile.h: Declare CannotOpenOutFile.
+
+	* OutFile.m ([OutFile +create:withName:]): Use it with raiseEvent
+	(instead of stderr).
+
+	* ObjectSaver.[hm]: Declare CouldNotSave error symbol.
+
+	* ObjectSaver.m ([ObjectSaver +_crash_:], [ObjectSaver -_crash_:]): 
+	Use it with raiseEvent (instead of stderr).
+
+	* ObjectLoader.[hm]: Declare CouldNotInitializeObjectLoader error
+	symbol.
+
+	* ObjectLoader.m ([ObjectLoader +_crash_:],
+	[ObjectLoader -_crash_:]): Use it with raiseEvent (instead of stderr).
+
+	* InFile.[hm]: Declare CannotOpenInFile warning symbol.
+
+	* InFile.m ([InFile +create:withName:]): Use it.  Create from self,
+	not InFile.  Don't use object variable.
+
+	* AppendFile.m ([AppendFile +create:withName:]): Create from self,
+	not from AppendFile.
+	([AppendFile +create:withName:]): Use raiseEvent instead of stderr.
+
+1998-07-21  Alex Lancaster  <alex@santafe.edu>
+
+	* OutFile.[hm] ([OutFile -_getFile_]): Add internal method to
+	retrieve the file pointer.
+
+1998-07-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* QSort.m: Don't include stdlib.h.
+
+	* Archiver.m: Don't include collections/Map.h, strings.h, stdio.h,
+	or stdlib.h.
+
+1998-07-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ObjectSaver.m ([ObjectSaver -saveObject:]): Use getInteractiveFlag
+	instead of isInteractive.
+
+1998-07-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (SRC, simtools_HEADERS): Remove mention ActiveOutFile.
+
+	* simtools.h (ActiveOutFile): Remove protocol and class object.
+
+	* ActiveOutFile.[hm]: Remove.
+
+1998-07-01  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Archiver.m ([Archiver -_collectRemaining_:]): New method.
+	([Archiver -processMakeExpr:]): Call it.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LIBRARIES, libsimtools_a_SOURCES): Remove.
+
+1998-06-23  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am (lib_LTLIBRARIES, libsimtools_la_SOURCES,
+	libsimtools_la_LDFLAGS, SRC, CURRENT, REVISION, AGE): New
+	variables.  Set *_SOURCES from SRC.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile: Remove.
+	
+1998-06-21  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-06-03  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* simtools.h: Update documentation tags.
+
+1998-05-28  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* NSelect.m: Include collections.h.
+
+1998-04-28  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Archiver.m (defaultFileName): Use catC: instead of appendC:
+
+	* UName.m ([UName -getNewNameObject]), ([UName -getNewName]): Likewise.
+
+1998-04-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* QSort.m: Include misc.h.
+	
+	* InFile.m: Include collections.h, not collections/String.h.
+
+	* UName.m: Don't include collections/String.h.  stdlib.h, or
+	string.h.  Include collections.h and misc.h.
+
+	* NSelect.h, ObjectLoader.m, ObjectSaver.[hm], QSort.[hm]:
+	Reformatting throughout.
+	
+	* AppendFile.[hm]: Minor reformatting.
+
+	* simtools.h:  Move tagged documentation to the respective protocols
+	definition.
+	
+	* ActiveOutFile.m, AppendFile.m, InFile.m, NSelect.m,
+	ObjectLoader.m, ObjectSaver.m, OutFile.m, UName.m: Remove tagged
+	documentation.  (Move it to simtools.h.)
+
+1998-04-15  Irene Lee  <lee@wijiji.santafe.edu>
+
+	* ActiveOutFile.m, AppendFile.m, InFile.m, NSelect.m, ObjectLoader.m,
+	ObjectSaver.m, OutFile.m, QSort.m, UName.m, simtools.m:
+	Add comment tags with documentation.
+
+1998-04-06  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.h: Declare new function initSwarmArguments.
+
+	* simtools.m (initSwarmArguments): New function. 
+	(initSwarm): Call initSwarmArguments with NULL.
+
+1998-03-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.m: Don't define arguments here (now in objectbase).
+
+	* Makefile (HEADERS): Remove global.h.
+	(simtools.o): Remove global.h as a dependency.
+
+	* Archiver.m: Don't include simtools/global.h.
+	(global.h): Removed.
+
+1998-02-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* NSelect.m:  Include random.h.
+
+	* simtools.m: Don't include time.h or string.h.  Don't define
+	probeDisplayManager.  Include simtoolsgui.h.
+	(initSwarm): Don't call GUI_INIT, instead call initSimtoolsGUI if
+	swarmGUIMode.
+	(buildWindowGeometryRecordName, _createProbeDisplay,
+	_createCompleteProbeDisplay, getKeyForName,
+	createArchivedProbeDisplayNamed,
+	createArchivedCompleteProbeDisplayNamed): Remove (moved to
+	simtoolsgui.m).
+
+	* simtools.h: Remove ControlPanel, WindowGeometryRecordName,
+	CompositeWindowGeometryRecordName, ActioonCache, ProbeDisplay,
+	CompleteProbeDisplay, ProbeDisplayManager, GUIComposite, GUISwarm,
+	ActiveGraph protocols (moved to simtoolsgui).  Remove declaration
+	of probeDisplayManager.  Remove mention of @classes ActionCache,
+	ProbeDisplay, CompleteProbeDisplay, ProbeDisplayManager, GUISwarm,
+	and ActiveGraph.  Don't include GUISwarm.h.
+
+	* global.h: Remove includes of ProbeDisplayManager.h,
+	SwarmObject.h. and random.h.  Remove declaration of
+	probeDisplayManager and initSwarm.
+	
+	* NSelect.m: Include random.h. 
+
+	* Makefile: Removed classes below.
+
+	* ActionCache.[hm], ActionHolder.[hm], ActiveGraph.[hm],
+	ClassDisplayWidget.[hm], CommonProbeDisplay.[hm],
+	CompleteProbeDisplay.[hm], ControlPanel.[hm], GUIComposite.[hm],
+	GUISwarm.[hm], MessageProbeWidget.[hm], ProbeDisplay.[hm],
+	ProbeDisplayManager.[hm], SimpleProbeDisplay.[hm],
+	VarProbeWidget.[hm], simtools.[hm], global.h: Removed (moved to
+	simtoolsgui).
+
+1998-02-23  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbeWidget.m: Include objectbase.h (for val_t) and
+	objc-api.h.  Change for renames below.
+	(printVal): New function for converting val_t to strings.
+	([MessageProbeWidget -dynamic]): Use printVal whether it is an
+	object or not.  Use renamed setArg:ToString:.
+	([MessageProbeWidget -argSpawn:]): getArg: now returns a val_t;
+	don't use strings.
+	([MessageProbeWidget -package]): Likewise.
+	([MessageProbeWidget -package:]): Likewise.
+	([MessageProbeWidget -idReceive:]): Use setArg:ToString: [resObj
+	getObjectName] instead of (removed) setArg:ToObjectName.
+
+	* MessageProbeWidget.h (MessageProbeWidget):  Rename argNum
+	to argCount.  Rename result to resultMessageProbeEntry.
+	Make objWindows boolean.
+
+	* ActiveGraph.m ([ActiveGraph -createEnd]): Don't call
+	updateMethodCache.
+
+	* ActiveOutFile.m ([ActiveOutFile -createEnd]): Likewise.
+	Reformatting throughout.
+
+1998-02-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* GUIComposite.m ([GUIComposite +createBegin:]): Setup 
+	componentList in createBegin, not createEnd.
+
+	* ControlPanel.m ([ControlPanel -createEnd]): Include
+	awtobjc/JavaControlPanel in USE_JAVA case.  (temporary)
+	([ControlPanel -getState], [ControlPanel -setState]): 
+	USE_JAVA versions that work with ctlObj. (temporary)
+	([ControlPanel -setStateStopped]): Use ctlObj waitRun 
+	in USE_JAVA case. (temporary)
+
+	* ControlPanel.h (ControlPanel): For USE_JAVA case include ctlObj
+	and setter (temporary).
+
+	* ActionCache.m: Include ControlPanel.h, JavaControlPanel.h, and
+	JavaInput.h for AWT (temporary).
+	([ActionCache -createEnd]): Build actionCache widgets from
+	JavaControlPanel instead of our own createProcCtrl.  Create inputQueue
+	in USE_JAVA case (temporary).
+
+1998-02-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Archiver.m: Include Arguments.h.  Minor reformatting.
+	([Archiver -createEnd]): Get application name and mode string
+	from arguments object.
+
+	* Archiver.h: Minor reformatting.
+
+	* simtools.m: Add arguments variable.  Remove applicationName
+	and applicationMode variables.
+	(initSwarm): Change to accept arguments object as argument,
+	Call GUI_INIT with arguments object.
+	(printHelp): Remove.
+	(setApplicationValue):  Move to Arguments.
+
+	* global.h (initSwarm): Declare arguments as a global object, 
+	and remove applicationName and applicationMode.
+
+1998-02-02  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.m (initSwarm): Minor reformatting.
+
+	* NSelect.m ([NSelect +select:from:into:]): Use addLast instead of
+	put for target list.  Use raiseEvent to Error instead of fprintf.
+
+1998-02-01  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* NSelect.m ([NSelect +select:from:into:]): Set a [0,1) 
+	interval for random number generator.  Reformatting throughout.
+
+1998-01-27  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ActionCache.m ([ActionCache -deliverActions]): For Stop
+	call actionHolder if there isn't an activity.  Don't attempt
+	reschedule if no _activity_current.
+
+1998-01-27  Marcus G. Daniels  <mgd@grasshopper.santafe.edu>
+
+	* global.h (initSwarm): Constify argv.
+	* simtools.h: Likewise.
+	* simtools.m (initSwarm): Likewise.
+
+1998-01-27  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbeWidget.m: Include defobj.h.  Don't include stdio.h,
+	simtools/global.h, or objc/objc-api.h.
+	(_nameToObject): Remove; use nameToObject from defobj instead.
+
+1998-01-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget -createEnd]): Use
+	setReliefFlag:.
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]): Likewise.
+
+1998-01-25  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* VarProbeWidget.m ([VarProbeWidget -createEnd]): Create
+	myLabel from a VarProbeLabel instead of a Label; remove
+	call to anchorEast.
+	([VarProbeWidget -setParent:]): Don't define focus method
+	in non-USE_WIDGET case.
+	([VarProbeWidget -idReceive]): Call GUI_FOCUS instead of using
+	now-nonexistent focus widget method.
+
+	* VarProbeWidget.h (VarProbeWidget): Make myLabel conform
+	to the VarProbeLabel instead of Label protocol.
+	Remove declaration of focus method in non-USE_WIDGET case.
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget -createEnd]): Define
+	widgetName and create a frame unless USE_FRAME.
+	([ClassDisplayWidget -createEnd]): Disable relief.  Create myTitle
+	from a ClassDisplayLabel instead of a Label; remove calls to
+	anchorWest and colorBlue.
+	([ClassDisplayWidget -setParent:], [ClassDisplayWidget
+	-getWidgetName], [ClassDisplayWidget -pack]): Define versions unless
+	USE_FRAME.
+
+	* ClassDisplayWidget.h (ClassDisplayWidget): Don't include
+	tkobjc/Frame.h, and inherit from SwarmObject unless USE_FRAME.
+	Make myTitle conform to the ClassDisplayLabel protocol instead of
+	the Label protocol.  Make hideB conform to the
+	ClassDisplayHideButotn protocol.  Make SuperButton conform to the
+	SuperButton protocol.  Include widgetName and parent instance
+	variables and setters unless USE_FRAME.
+
+1998-01-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.m: Include gui.h instead of tkobjc.h.  Use GUI_INIT
+	instead of initTkObjc.
+
+	* simtools.h: Don't include tkobjc.h.
+
+	* VarProbeWidget.m: Include gui.h instead of tkobjc/control.h.
+	Don't include objc/objc-api.h.
+	([VarProbeWidget -createEnd]): Use anchorEast and setWidth, and 
+	instead of tkobjc_setAnchorEast and tkobjc_setWidth.
+	Make myEntry be a VarProbeEntry instead of tkobjc_* frobbed Entry.
+	([VarProbeWidget -Spawn]): Use GUI_BEEP and GUI_UPDATE instead
+	of tkobjc_ringBell and tkobjc_update.  
+	([VarProbeWidget -update]): Use setActiveFlag: instead of
+	tkobjc_normalState and tkobjc_disabledState.  Use GUI_UPDATE
+	instead of tkobjc_update.
+	([VarProbeWidget -focus], [VarProbeWidget -setParent:]): New methods
+	unless USE_WIDGET.
+	([VarProbeWidget -idReceive]): Use GUI_DRAG_AND_DROP_OBJECT instead
+	of tkobjc_gimme_drag_and_drop_object.  Use focus method instead
+	of tkobjc_focus.
+	([VarProbeWidget -package]): Use GUI_BEEP and GUI_UPDATE instead
+	of tkobjc_ringBell and tkobjc_update.
+
+	* VarProbeWidget.h: Include gui.h instead of tkobjc.h.
+	(VarProbeWidget): Inherit from SwarmObject (unless USE_WIDGET).
+	Make myLeft and myRight conform to the Frame protocol (instead of
+	being statically typed).  Likewise for myLabel, and myEntry, but
+	per the Label and VarProbeEntry protocols. 
+	Declare focus and setParent (unless USE_WIDGET).
+
+	* SimpleProbeDisplay.m: Don't include string.h.  Include gui.h
+	instead of tkobjc/control.h.
+	([SimpleProbeDisplay -createEnd]): Use enableRelief instead of
+	tkobjc_setRelief.  Make myTitle be a CompleteProbeDisplayLabel
+	instead of frobbing a Label.  Set the text using the getId method
+	instead of using tkobjc_getId.  Make hideB be a
+	SimpleProbeDisplayHideButton instead of frobbing an ordinary
+	Button.  Use widget methods packFill and packFillLeft instead of 
+	tkobjc_packFill and tkobjc_packFillLeft.
+	([SimpleProbeDisplay -package], [SimpleProbeDisplay -getId]):
+	Drop (inherited).
+
+	* SimpleProbeDisplay.h: Include gui.h.  Make leftFrame, rightFrame,
+	middleFrame, and bottomFrame comply with the Frame protocol.
+	Make myTitle comply with the CompleteProbeDisplayLabe protocol.
+	Make widgets[] comply with the Widget protocol.
+
+	* ProbeDisplay.m: Include gui.h instead of tkobjc/control.h.
+	([ProbeDisplay -createEnd]): Use GUI_UPDATE_IDLE_TASKS_AND_HOLD
+	isntead of tkobjc_updateIdleTasksAndHold.  Use GUI_RELEASE_AND_UPDATE
+	instead of tkobjc_releaseAndUpdate.
+
+	* MessageProbeWidget.m: Include gui.h instead of tkobjc/control.h.
+	Include objc/objc-api.h.
+	(_nameToObject): New static function.
+	([MessageProbeWidget -createEnd]): Define widgetName and create a
+	frame unless USE_FRAME.
+	([MessageProbeWidget -createEnd]): Use MessageProbeEntry instead
+	of a tkobjc_*-frobbed Entry.  Use setActiveFlag: instead of old
+	tkobjc_disabledState.  Make all Widget* casts to myWidgets be id
+	<Widget>, and Label* be <Label>.  Use setButtonTarget: method:
+	instead of computing a Tclish command-string for the button.  Use
+	new widget method packFillLeft instead of tkobjc_packFillLeft.
+	([MessageProbeWidget -dynamic]): Make entryWidget of type id
+	<MessageProbeEntry> instead of Entry*.
+	([MessageProbeWidget -dynamic]): Use GUI_BEEP instead of
+	tkobjc_ringBell.  Go ahead and use dynamicCallOn instead of
+	_trueDynamicCallOn_ because MessageProbes now support ids and
+	classes.  Use setActiveFlag: instead of tkobjc_normalState /
+	tkobjc_disabledState.  Use _nameToObject instead of
+	tclObjc_nameToObject, and getIdName instead of trying
+	getInstanceName.
+	([MessageProbeWidget -Spawn], [MessageProbeWidget
+	-argSpawn:which], [MessageProbeWidget -package],
+	[MessageProbeWidget -package:): Use GUI_BEEP instead of
+	tkobjc_ringBell.
+	([MessageProbeWidget -argSpawn:which]): Likewise.  Use
+	_nameToObject instead of tclObjc_nameToObject.
+	([MessageProbeWidget -package]): Use getObjectName instead of
+	tclObjc_objectToName.
+	([MessageProbeWidget -getId:]): Cast to id <MessageProbeEntry>
+	instead of Entry*.
+	([MessageProbeWidget -idReceive:]): Use GUI_DRAG_AND_DROP_OBJECT
+	isntead of tkobjc_gimme_drag_and_drop_object.  Use getIdName
+	instead of trying getInstanceName.  Use setActiveFlag: instead of
+	tkobjc_normalState / tkobjc_disabledState.  Use GUI_UPDATE instead
+	of tkobjc_update.
+	([MessageProbeWidget -setParent:], [MessageProbeWidget -getWidgetName], 	[MessageProbeWidget -pack]): New methods (unless USE_FRAME).
+
+	* MessageProbeWidget.h: Include gui.h instead of tkobjc.h.
+  	(MessageProbeWidget):  Inherit from SwarmObject (old code
+	conditionally there with USE_FRAME).  Make myWidgets comply
+	with Widget protocol instead of being statically typed.  Make
+	result comply with MessageProbeEntry instead of being statically
+	typed to Entry.  Declare setParent:, pack, and getWidgetName,
+	unless USE_FRAME.
+
+	* ControlPanel.m: Import gui.h instead of tkobjc/control.h.
+	([ControlPanel -_actionCacheWarning_], [ControlPanel -getPanel],
+	 [ControlPanel -waitForControlEvent], [ControlPanel -doTkEvents]):
+	Remove.
+	([ControlPanel -setStateStopped]): Set state to
+	ControlStateStopped and loop on GUI_EVENT_SYNC instead of calling
+	now-nonexistent waitForControlEvent.
+
+	* ControlPanel.h: Remove waitForControlEvent, doTkEvents, and
+	getPanel declarations.
+
+	* CompleteProbeDisplay.m: Don't include tkobjc/control.h.
+	([CompleteProbeDisplay -createEnd]): Activate horizontal scrollbar.
+	Use setMySubclass and setMySuperclass instead of setMySubClass
+	and setMySuperClass throughout.
+	([CompleteProbeDisplay -do_resize]): Use new widget method
+	packForgetAndExpand and new frame method assertGeometry instead
+	of tkobjc_* routines.
+	([CompleteProbeDisplay -update]): Break out as soon as drop
+	is requested.
+
+	* CommonProbeDisplay.m: Include gui.h.
+	([CommonProbeDisplay -createEnd]): Make c_Frame conform to Frame
+	protocol. Use getId to set window title.  Use new Frame method
+	withdraw instead of tkobjc_withdrawWindow.  Use ProbeCanvas instead
+	of frobbing a Canvas.  Use new methods setBorderWidth: and
+	assertPosition instead of tkobjc_* functions.
+	([CommonProbeDisplay -install]): Use new Frame methods deiconify and
+	assertGeometry.
+	([CommonProbeDisplay -package], [CommonProbeDisplay -getId]): 
+	New methods.
+
+	* CommonProbeDisplay.h: Include gui.h.
+	(CommonProbeDisplay): Make topLevel and topFrame conform to Frame
+	protocol.  Add horizontalScrollbarFlag.  Declare package and getId.
+
+	* ClassDisplayWidget.m: Don't include stdlib.h, objc/objc.h,
+	string.h, or tkobjc/control.h.  Include gui.h instead of tkobjc.h.
+	Use mySuperclass and mySubclass instead of mySuperClass and
+	mySubClass throughout (and for setters).
+	([ClassDisplayWidget -createEnd]): Use enableRelief instead of
+	tkobjc_setRelief.
+	([ClassDisplayWidget -createEnd]): Use anchorWest and colorBlue
+	methods instead of tkobjc_setAnchorWest and setColorBlue
+	(UNFINISHED).
+	([ClassDisplayWidget -createEnd]): Use GUI_DRAG_AND_DROP instead
+	of dragAndDrop.  Use new class ClassDisplayHideButton and
+	SuperButton instead of frobbing a plain button with old tkobjc_*
+	routines.  Use new widget methods packToRight:,
+	packBeforeAndFillLeft: and packFillLeft: instead of tkobjc_*
+	versions.
+	([ClassDisplayWidget -armSuperButton]): Use new widget method
+	setActiveFlag: instead of activating with old tkobjc_normalState.
+	([ClassDisplayWidget -package]): Use new CreateDrop method
+	getObjectName to determine value.
+	([ClassDisplayWidget -getId]): Use new CreateDrop method getIdName
+	to determine value.
+
+	* ClassDisplayWidget.h: Include tkobjc.h/Frame.h and gui.h
+	instead of tkobjc.h (UNFINISHED).
+	(ClassDisplayWidget): Use id <Label> for myTitle and
+	id <Frame> for leftFrame, rightFrame, middleFrame, and bottomFrame.
+	Rename mySuperClass and mySubClass to mySuperclass and mySubclass,
+	likewise for setters.
+	Declare new methods getId and package.
+
+	* ActiveOutFile.h: Don't include tkobjc.h.  Reformatting throughout.
+
+	* ActiveGraph.m:  Include gui.h instead of tkobjc.h.
+	([ActiveGraph -setElement:]): Argument
+	is of type id <GraphElement> not GraphElement *.
+	Reformatting throughout.
+
+	* ActiveGraph.h: Include gui.h instead of tkobjc.h.
+	element is now of type id <GraphElement> instead of GraphElement *.
+	Use this type for argument to setElement:.
+	Reformatting throughout.
+
+	* ActionCache.m: Don't include tkobjc/control.h.  Include gui.h.
+	([ActionCache -createProcCtrl]): Returns id <ButtonPanel>, 
+	panelWidget is this type.
+	([ActionCache -createProcCtrl]): Use setButtonTarget instead of
+	setTargetName (use a real object instead of a string).
+	([ActionCache -getPanel]): Returns id <ButtonPanel>.
+	([ActionCache -waitForControlEvent]): Moved from ControlPanel.
+	([ActionCache -waitForControlEvent]): Use GUI_EVENT_SYNC instead
+	of tkobjc_doOneEventAsync.
+
+	* ActionCache.h: Include gui.h instead of tkobjc.h.
+	(ActionCache):  Make panel conform to ButtonPanel protocol instead
+	of being statically typed.
+	createProcCtrl and getPanel now return ids per ButtonPanel protocol.
+	Declare new method waitForControlEvent.
+
+1998-01-20  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* AppendFile.m: Add @end.
+
+	* simtools.h: Add copyright header.
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -update]): Break out
+	of loop if markedForDrop.
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -update]): Likewise.
+
+1998-01-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ControlPanel.m ([ControlPanel -_actionCacheWarning_:]): Clarify
+	warning to indicate that doTkEvents should be sent to an
+	instance of ActionCache, not the class object itself.  Thanks
+	to Paul Johnson.
+
+1998-01-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbeWidget.m: Don't include <malloc.h>.
+
+1998-01-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -update]): Check
+	before doing each update, not before all of them.
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -update]): Likewise.
+
+1998-01-15  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.h (SET_WINDOW_GEOMETRY_RECORD_NAME): Add convenience
+	macro.  ProbeDisplay and CompleteProbeDisplay derive from
+	WindowGeometryRecordName protocol.
+	CompositeWindowGeometryRecordName: New protocol.  ActionCache
+	and GUIComposite protocols derive from it.
+	
+
+	* GUISwarm.m: ([GUISwarm -windowGeometryRecordName:]): Remove.
+
+	* GUIComposite.m ([GUIComposite
+	-setWindowGeometryRecordNameForComponent:widget:]): Insert when
+	key doesn't exist.
+	([GUIComposite -disableDestroyNotification]): New method.
+
+	* GUIComposite.h: Declare -disableDestroyNotification.
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -drop]): Disable
+	destroy notification first thing.
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -drop]): Likewise.
+
+
+1998-01-14  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* GUISwarm.m ([GUISwarm -buildObjects]): Use
+	SET_COMPONENT_WINDOW_GEOMETRY_RECORD_NAME.
+
+	* GUISwarm.[hm]: Remove windowGeometryRecordNameForComponent and
+	windowGeometryRecordName. 
+	Add setWindowGeometryRecordNameForComponent:widget:.
+
+	* GUIComposite.m (compareFunc): New static function for comparing
+	component names.
+	([GUIComposite -createEnd]): Create the componentList.
+	([GUIComposite -setWindowGeometryRecordNameForComponent:widget:]): 
+	New method.
+	([GUIComposite -enableDestroyNotification:notificationMethod:]): Call
+	Apply enableDestroyNotification:notificationMethod: to each
+	component.
+
+	* GUIComposite.h (GUIComposite): Include collections.h.  Drop
+	notificationTarget and notificationMethod;
+	enableDestroyNotification can't be done passthru because some
+	users are createEnd, instead accumulate widgets in a
+	componentList.  Drop windowGeometryRecordNameForComponenet and
+	windowGeometryRecordName methods.  New method
+	setWindowGeometryRecordNameForComponent:widget:.
+
+	* ActionCache.m ([ActionCache -createProcCtrl]): Use new
+	SET_COMPONENT_WINDOW_GEOMETRY_RECORD_NAME to set archiving name
+	for panelWidget.
+
+	* GUIComposite.m ([GUIComposite
+	-enableDestroyNotification:notificationMethod:]): New method.
+
+	* GUIComposite.h (GUIComposite): Add notificationTarget and
+	notificationMethod.  Declare
+	enableDestroyNotification:notificationMethod.
+
+	* simtools.h: Drop windowGeometryRecordNameForComponent and
+	windowGeometryRecordName fro WindowGeometryRecordName protocol.
+	(SET_COMPONENT_WINDOW_GEOMETRY_RECORD_NAME_FOR): New macro.
+	(SET_COMPONENT_WINDOW_GEOMETRY_RECORD_NAME): New macro.
+	(CREATE_PROBE_DISPLAY, CREATE_COMPLETE_PROBE_DISPLAY,
+	CREATE_ARCHIVED_PROBE_DISPLAY,
+	CREATE_ARCHIVED_COMPLETE_PROBE_DISPLAY): Rename to be in caps.
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -update]): Don't update
+	if marked for drop.
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -update]): Likewise.
+
+	* CommonProbeDisplay.m ([CommonProbeDisplay -createEnd]): Use
+	enableDestroyNotification to have markForDrop called when a probe
+	display is killed by the window manager.
+	([CommonProbeDisplay -markForDrop]): Call disableDestroyNotification
+	first thing.
+
+1998-01-13  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbeWidget.m:  Include simtools.h instead of ProbeDisplay.h.
+	([MessageProbeWidget -Spawn]): Use CREATE_PROBE_DISPLAY instead of
+	calling createProbeDisplayFor method.
+	([MessageProbeWidget -argSpawn:which]): Likewise.
+
+	* VarProbeWidget.m: Likewise.
+
+	* simtools.m: Declare probeDisplay as an object complying to the
+	ProbeDisplayManager protocol instead of being statically typed.
+	Import simtools.h.
+	(createProbeDisplay, createCompleteProbeDisplayNamed,
+	getKeyForName, createArchivedProbeDisplayNamed,
+	createArchivedCompleteProbeDisplayNamed): New functions.
+
+	* simtools.h (_createProbeDisplay, _createCompleteProbeDisplay,
+	createArchivedProbeDisplayNamed,
+	createArchivedCompleteProbeDisplayNamed): Declare new functions.
+	(CREATE_ARCHIVED_PROBE_DISPLAY): New macro to pass variable variable
+	name through to archiving functions above.
+	(CREATE_ARCHIVED_COMPLETE_PROBE_DISPLAY): Likewise.
+	(ProbeDisplayManager): Replace setWindowGeometryRecordName
+	versions of createProbeDisplayFor with
+	createArchivedProbeDisplayFor:variableName: and
+	createArchivedCompleteProbeDisplayFor:variableName.
+	(CREATE_PROBE_DISPLAY, CREATE_COMPLETE_PROBE_DISPLAY): Define macros.
+
+	* ProbeDisplayManager.m ([ProbeDisplayManager
+	-_computeProbeDisplayKeyFor_:]): New method.  Returns
+	ProbeDisplay- prepended to argument.
+	([ProbeDisplayManager
+	-_createDefaultProbeDisplayFor_:setWindowGeometryRecordName:]):
+	Make this an internal method.
+	([ProbeDisplayManager
+	-_createProbeDisplayFor_:setWindowGeometryRecordName:]): Make this
+	an internal method.
+	([ProbeDisplayManager
+	-createArchivedProbeDisplayFor:variableName:]): New method.
+	([ProbeDisplayManager -createProbeDisplayFor:]): Use internal
+	method for same functionality.
+	([ProbeDisplayManager -createDefaultProbeDisplayFor:]): Likewise.
+	([ProbeDisplayManager
+	-createArchivedDefaultProbeDisplayFor:variableName:]): New method.
+	([ProbeDisplayManager
+	-createArchivedCompleteProbeDisplayFor:variableName:]): Use new
+	internal method _computeProbeDisplayKeyFor_.
+	([ProbeDisplayManager -createCompleteProbeDisplayFor:]): Preserve
+	functionality, but it here.
+
+	* ProbeDisplayManager.h: Replace setWindowGeometryRecordName:
+	methods with variableName: methods.
+
+	* simtools.h: Add dropProbeDisplaysFor: to the ProbeDisplayManager
+	protocol.
+
+1998-01-12  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* GUISwarm.m:  Import simtools.h for buildWindowGeometryRecordName.
+	([GUISwarm -setWindowGeometryRecordName:]): New method.
+	([GUISwarm -windowGeometryRecordName]): New method.
+	([GUISwarm -windowGeometryRecordNameForComponent:]): New method.
+	([GUISwarm -buildObjects]): setWindowGeometryRecordName for actionCache
+	using derived name using component "ActionCache".
+
+	* GUISwarm.h (GUISwarm): Add baseWindowGeometryRecordName instance
+	variable.  Declare WindowGeometryRecordName-protocol-conforming
+	methods setWindowGeometryRecordName,
+	windowGeometryRecordNameForComponent, and windowGeometryRecordName.
+
+	* ActionCache.m ([ActionCache -createProcCtrl]): Rename
+	component from controlPanel to ButtonPanel.
+
+	* GUIComposite.m: Import simtools.h for buildWindowGeometryRecordName.
+	([GUIComposite-windowGeometryRecordNameForComponent:]): Use
+	buildWindowGeometryRecordName to create the composite name.
+
+	* simtools.m (buildWindowGeometryRecordName): New function.
+
+	* simtools.h: Declare buildWindowGeometryRecordName.  New protocol
+	WindowGeometryRecordName, derive ActionCache, and GUISwarm from it.
+
+1998-01-06  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.h (Action): Rename
+	setControlPanelGeometryRecordName to setWindowGeometryRecordName.
+	(ControlPanel):  Remove setControlPanelGeometryRecordName.
+
+	* Makefile (OBJECTS): Add GUIComposite.o.
+	(HEADERS): Add GUIComposite.h.
+	(GUIComposite.o): Add.
+
+	* ActionCache.m ([ActionCache
+	-setControlPanelGeometryRecordName]): Remove.
+	([ActionCache -createProcCtrl]): Use inherited
+	windowGeometryRecordNameForComponent intead of value previously
+	provided by controlPanelGeometryRecordName.
+
+	* ActionCache.h (ActionCache): Inherit from GUIComposite instead
+	of SwarmObject.  Remove controlPanelGeometryRecordName and setter.
+
+1997-12-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.h (ActionCache): Make setScheduleContext a Using phase
+	method.  Add setControlPanelGeometryRecordName. 
+        (InFile): Add getline to InFile protocol.
+	Reformatting throughout (remove gratuitous space).
+
+	* ProbeDisplay.h: Reformatting throughout.
+
+	* GUISwarm.m ([GUISwarm -buildObjects]): Remove
+	controlPanelGeometryRecordName setter.  Don't use it in buildObjects.
+
+	* GUISwarm.h (GUISwarm): Remove controlPanelGeometryRecordName
+	and setter.
+
+	* ActionCache.h: Make setScheduleContext a Use phase method.
+	Minor reformatting.	
+
+	* ActionCache.m ([ActionCache -setScheduleContext:]): Likewise
+	(just moved).
+
+1997-12-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.h: Add setWindowGeometryRecordName to ProbeDisplay
+	protocol.
+
+	* ProbeDisplay.h: Reformatting method declarations.
+
+1997-12-17  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbeWidget.m ([MessageProbeWidget -dynamic]): Constify
+	test and result_string.
+	([MessageProbeWidget -dynamic]): Cast result_string to void for free
+	in order to avoid warning.
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget -createEnd]): Remove
+	cast on argument of setText.
+
+	* ObjectSaver.m ([ObjectSaver -saveObject:]): Constify
+	fromFileNamed argument.
+	([ObjectSaver +save:toFileNamed:withTemplate:]): Likewise.
+
+	* ObjectLoader.m ([ObjectLoader +load:fromFileNamed:]): Constify
+	fromFileNamed argument.
+
+	* ObjectLoader.h: Constify fromFileNamed argument to load.
+
+	* ObjectSaver.h: Constify toFileNamed argument for save methods.
+	Reformatting throughout.
+	
+1997-12-16  Alex Lancaster  <alex@wijiji.santafe.edu>
+
+	* tests: Added subdirectory with some "unit" module tests.
+
+1997-12-13  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ControlPanel.m ([ControlPanel -setStateSave]): Renamed from
+	setStateStoppedAndSave.  This version doesn't call setStateStopped.
+	Minor reformatting.
+
+	* ControlPanel.h: Rename setStateStoppedAndSave to setStateSave.
+	Reformatting throughout.
+
+	* ActionCache.m ([ActionCache -insertAction:]): Insert renamed
+	setStateSave.
+	([ActionCache -deliverActions]): Only schedule a Stop, do
+	Save and Quit immediately.
+	([ActionCache -sendActionOfType:type:]): Don't set running
+	status if it is a Save; try to be passive.
+	Reformatting throughout.
+
+1997-12-12  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* MessageProbeWidget.m ([MessageProbeWidget -idReceive:which]): 
+	Duplicate output of tclObjc_objectToName; it is needed and will
+	get overwritten.
+
+1997-12-11  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Archiver.m (defaultFileName): Change from ~/.swarm to
+	~/.swarmArchiver for default archiver path.
+
+1997-12-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* InFile.m ([InFile -getChar:]): fgetc to an int (for comparison
+	with EOF).
+	([InFile -skipLine]): Likewise.
+
+	* simtools.h: Consify toExecute argument of ActionCache
+	sendActionOfType.
+	Consify setBaseName argument of UName create.
+	Consify argument to UName setBaseName.
+	Consify return of UName getNewName.
+	Consify withName argument of InFile create.
+	Consify withName argument of OutFile create.
+	Consify argument to OutFile putString.
+	Consify withName argument of AppendFile create.
+	Consify argument to AppendFile putString.
+
+	* UName.m ([UName +create:setBaseName:]): Consify setBaseName
+	argument to create.
+	([UName -setBaseName:]): Consify argument.
+	([UName -getNewName]): Consify return.
+	Reformatting throughout.
+
+	* UName.h: Consify setBaseName argument to create.
+	Consify argument to setBaseName.
+	Consify return of getNewName.
+	Reformatting throughout.
+
+	* AppendFile.m ([AppendFile +create:withName:theName]): Consify 
+	withName argument. 
+	Reformatting throughout.
+
+	* AppendFile.h: Consify withName argument to create.
+	Reformatting throughout.
+
+	* ActionHolder.m ([ActionHolder -setActionName:]): Consify argument.
+	([ActionHolder -getActionName]): Consify return.
+	Reformatting throughout.
+
+	* ActionHolder.h (ActionHolder): Consify name.
+	Consify argument to setActionName.  Consify return of getActionName.
+	Reformatting throughout.
+
+	* ActionCache.m ([ActionCache -sendActionOfType:type:]): Consify
+	toExecute argument.  Reformatting throughout.
+
+	* ActionCache.h: Constify toExecute argument of sendActionOfType.
+	Reformatting throughout.
+
+	* MessageProbeWidget.m ([MessageProbeWidget -idReceive:which]):
+	Use renamed tkobjc_gimme_drag_and_drop_object.
+	* VarProbeWidget.m ([VarProbeWidget -idReceive]): Likewise.
+
+	* MessageProbeWidget.m (isSpace): Add macro to cast char to int
+	before passing to isspace.
+	(empty): Use new macro isSpace.
+
+	* ProbeDisplay.m ([ProbeDisplay -setWindowGeometryRecordName:]):
+	Include tkobjc/control.h.
+
+	* VarProbeWidget.m ([VarProbeWidget -createEnd]): Update to new or
+	renamed tkobjc_setAnchorEast, tkobjc_setWidth,
+	tkobjc_bindReturnToSetValue,
+	tkobjc_bindKeyReleaseReturnToResetColorAndUpdate,
+	tkobjc_bindFocusInToSetSelection,
+	tkobjc_bindFocusOutToClearSelection, tkobjc_disabledState,
+	tkobjc_bindButton3ToSpawn, tkobjc_bindButton3ToBeUnhelpful.
+	([VarProbeWidget -Spawn]): Update to renamed tkobjc_ringBell and
+	tkobjc_update.
+	([VarProbeWidget -update]): Update to renamed
+	tkobjc_normalState, tkobjc_disabledState, and tkobjc_update.
+	([VarProbeWidget -idReceive]): Update to renamed tkobjc_focus.
+	([VarProbeWidget -package]): Update to renamed tkobjc_ringBell
+	and tkobjc_update.
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]): Update
+	to renamed tkobjc_setRelief, tkobjc_getId, tkobjc_setAnchorWest,
+	tkobjc_setColorBlue, tkobjc_bindButton3ForCompleteProbeDisplay,
+	tkobjc_bindWindowEntry, tkobjcWindowExit,
+	tkobjc_configureHideButton, tkobjc_packFill, and
+	tkobjc_packFillLeft.
+	([SimpleProbeDisplay -package]): Update to renamed tkobjc_packageName.
+	([SimpleProbeDisplay -getId]): Update to renamed tkobjc_getId.
+
+	* ProbeDisplay.m ([ProbeDisplay -createEnd]): Update to renamed
+	tkobjc_updateIdleTasksAndHold and tkobjc_releaseAndUpdate.
+
+
+	* MessageProbeWidget.m ([MessageProbeWidget -createEnd]): Update
+	to new or renamed tkobjc_disabledState, tkobjc_setWidth,
+	tkobjc_bindButton3ToSpawn, tkobjc_bindButton3ToBeUnhelpful,
+	tkobjc_packFillLeft, tkobjc_setText, and
+	tkobjc_bindButton3ToArgSpawn.  Reformatting throughout.
+	([MessageProbeWidget -dynamic]): Update to renamed
+	tkobjc_ringBell, tkobjc_normalState, tkobjc_disabledState.
+	([MessageProbeWidget -Spawn]): Update to renamed tkobjc_ringBell.
+	([MessageProbeWidget -argSpawn:which]): Likewise.
+	([MessageProbeWidget -package]): Likewise.
+	([MessageProbeWidget -package:which]): Likewise.
+	([MessageProbeWidget -idReceive:which]): Use new tkobjc wrapper
+	function tkobjc_gimme_ddobj.  Use renamed tkobjc_normalState,
+	tkobjc_disabledState, and tkobjc_update.
+	Reformatting throughout.
+
+	* ControlPanel.m ([ControlPanel -waitForControlEvent]): Update
+	to renamed tkobjc_doOneEventSync.
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -do_resize]): Update
+	to renamed tkobjc_packForgetAndExpand, tkobjc_assertGeometry.
+
+	* CommonProbeDisplay.m ([CommonProbeDisplay -createEnd]): Update
+	to renamed tkobjc_getId, tkobjc_withdrawWindow,
+	tkobjc_configureProbeCanvas, tkobjc_setBorderWidth,
+	tkobjc_createWindow,
+	([CommonProbeDisplay -install]): Update to renamed tkobjc_deiconify,
+	tkobjc_assertGeometry.
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget -createEnd]): Update
+	to new or renamed tkobjc_setRelief, tkobjc_setAnchorWest,
+	tkobjc_setColorBlue, tkobjc_packForgetArmSuperAndResize,
+	tkobjc_configureHideBitmap, tkobjc_configureWidgetToDrop,
+	tkobjc_configureSpecialBitmap, tkobjc_configureSuperBitmap,
+	tkobjc_configureWidgetToPackBeforeAndFillLeftThenDisableAndResize,
+	tkobjc_configureWidgetToBeep, tkobjc_disabledState,
+	tkobjc_packToRight,
+	tkobjc_packBeforeAndFillLeft,tkobjc_packFillLeft.
+	([ClassDisplayWidget -armSuperButton]): Update to
+	renamedtkobjc_normalState.
+	Reformatting throughout.
+
+	* ClassDisplayWidget.h: Reformat throughout.
+
+	* ActionCache.m ([ActionCache -createProcCtrl]): Update to
+	renamed tkobjc_registerCommand.
+	([ActionCache -doTkEvents]): Update to renamed tkobjc_doOneEventAsync.
+
+1997-12-09  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* InFile.m ([InFile +create:withName:]): Constify withName argument.
+	Reformatting and variable elimination throughout.
+
+	* InFile.h: Constify withName argument to create.
+
+	* OutFile.m ([OutFile +create:withName:]): Constify withName argument.
+	([OutFile -putString:]): Constify argument.  Reformatting throughout.
+
+	* OutFile.h: Constify withName argument to create.
+	Constify argument to putString.  Reformatting throughout.
+
+	* MessageProbeWidget.m ([MessageProbeWidget -dynamic]): Remove
+	cast to char* for setValue.
+	([MessageProbeWidget -idReceive:which]): Likewise.
+
+	* VarProbeWidget.m: Reformatting throughout.
+
+	* simtools.m (initSwarm): Remove TkInterp evals for bitmaps
+	hide, super, and special.  Remove Tcl routines send_id, gimmie,
+	sitecmd, and do_package.  (These are now in tkobjc's simtools.tcl.)
+	Reformatting throughout.
+	
+Mon Dec  8 22:37:39 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* simtools: replaced all instances of swarmobject.h with
+	objectbase.h and swarmobject/ with objectbase/
+
+1997-12-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* VarProbeWidget.h: Constify return of -package. Reformatting
+	throughout.
+
+	* VarProbeWidget.m ([VarProbeWidget -createEnd]): Replace calls to
+	Tcl with new tkobjc functions setAnchorEast, setWidth,
+	disabledState,
+	([VarProbeWidget -Spawn]): Use new tkobjc functions ringBell, and
+	update.
+	([VarProbeWidget -update]): Use new tkobjc functions normalState,
+	disabledState, and update.
+	([VarProbeWidget -package]): Constify return value.  Use new 
+	tkobjc functions ringBell and update.
+
+	([VarProbeWidget -idReceive]): Use new tkobjc function focus.
+
+	* MessageProbeWidget.m ([MessageProbeWidget -createEnd]): Replace
+	calls to Tcl with new tkobjc functions disabledState, setWidth,
+	and setText, and existing tkobjc function packFillLeft.
+	([MessageProbeWidget -dynamic]): Use new tkobjc functions
+	ringBell, normalState, and disabledState.
+	([MessageProbeWidget -Spawn]): Use new tkobjc function ringBell.
+	([MessageProbeWidget -argSpawn:which]): Likewise.
+	([MessageProbeWidget -package]): Likewise.
+	([MessageProbeWidget -package:which]): Likewise.
+	([MessageProbeWidget -idReceive:which]): Use new tkobjc function
+	normalState, disabledState, and update. 
+	Reformatting throughout.
+
+	* MessageProbeWidget.h: Consify -package and -package:.
+	Reformatting throughout.
+
+	* MessageProbeWidget.m: Include <tkobjc/control.h>.
+	
+	* MessageProbeWidget.m ([MessageProbeWidget -dynamic]): Add
+	extra conditional braces to pacify GCC.
+
+1997-12-08  Alex Lancaster  <alex@wijiji.santafe.edu>
+
+	* ObjectSaver.m ([ObjectSaver -saveObject:]):
+	Changed call to probeAsString to probeAsString withFullPrecision
+	to write floats and doubles with the precision as set in the global
+	probeLibrary instance (or the %g default).
+
+1997-12-08  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ControlPanel.m ([ControlPanel -_actionCacheWarning_:]): 
+	Add warning for obsolete methods that should now be destined
+	to ActionCache.
+	([ControlPanel -getPanel]): Use _actionCacheWarning_.
+	([ControlPanel -doTkEvents]): Likewise.
+
+Mon Dec  8 15:08:41 1997  glen e. p. ropella  <gepr@seamus.trail.com>
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]):  
+	Added third argument to configureButton3ForCompleteProbeDisplay()
+	call.
+
+	* ProbeDisplayManager.m ([ProbeDisplayManager 
+	-createDefaultProbeDisplayFor:setWindowGeometryRecordName:]): 
+	Added probemap creation call.
+	
+	* ControlPanel.m ([ControlPanel -doTkEvents]): Changed the
+	fatal error back to a warning.
+	([ControlPanel -getPanel]): Changed the fatal error back to
+	a warning.
+
+1997-12-07  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ControlPanel.m ([ControlPanel -getPanel]): Switch from the
+	ObsoleteMessage warning to a fatal error, APIChange.
+	([ControlPanel -doTkEvents]): Likewise.
+	Reformatting throughout.
+
+	* GUISwarm.m: Include ControlPanel.h.  Reformatting throughout.
+
+	* GUISwarm.h (GUISwarm): Change from ControlPanel type to an id.
+	Reformatting throughout.
+
+1997-12-07  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.h (CompleteProbeDisplay): Add getMarkedForDropFlag
+	to protocol.
+
+	* ProbeDisplay.m (resetObjectError): Add routine for error message
+	formerly invoked using redundant code.
+	([ProbeDisplay -setProbedObject:anObject]): Use above.
+	([ProbeDisplay -setProbeMap:]): Likewise.
+	([ProbeDisplay -createEnd]): Use new routines updateIdleTasksAndHold
+	and releaseAndUpdate (in place of direct calls to the Tcl interpreter).
+	([ProbeDisplay -createEnd]): Move common creation code for
+	CompleteProbeDisplay and SimpleProbeDisplay out of conditional.
+	Reformatting throughout.
+
+	* ProbeDisplayManager.m ([ProbeDisplayManager -createEnd]):
+	Include CommonProbeDisplay instead of SimpleProbeDisplay (for 
+	getMarkedForDropFlag).
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -createEnd]):
+	Modified to call CommonProbeDisplay's createEnd and install.
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]):
+	Likewise.
+
+	* CompleteProbeDisplay.[hm] (CompleteProbeDisplay): Removed things
+	now found in CommonProbeDisplay.
+
+	* SimpleProbeDisplay.[hm] (SimpleProbeDisplay): Likewise.
+
+	* CommonProbeDisplay.h: New abstract class for things common
+	to SimpleProbeDisplay and CompleteProbeDisplay.h.
+
+	* ControlPanel.m: Include simtools/global.h instead of locally
+	declaring probeDisplayManager.
+
+1997-12-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.h (ProbeDisplayManager): Add setDropImmediatelyFlag.
+
+1997-12-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	From Dwight Wilson <wilson@blaze.cs.jhu.edu> (slightly adapted)
+	
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]): set
+	markedForDropFlag = NO;
+	([SimpleProbeDisplay -markForDrop]): Add.
+	([SimpleProbeDisplay -getMarkedForDropFlag]): Add.
+
+	* SimpleProbeDisplay.h (SimpleProbeDisplay): Add markedForDropFlag
+	instance variable and getter.
+
+	* ProbeDisplayManager.m: Reformatting throughout.  Move include of
+	DefaultProbeMap.h to top.  Include SimpleProbeDisplay.h, for
+	getMarkedForDropFlag).
+	([ProbeDisplayManager -createEnd]): set dropImmediatelyFlag = YES.
+	([ProbeDisplayManager -update]): Drop the items on the probeList
+	so marked.
+	([ProbeDisplayManager -setDropImmediatelyFlag:]): Add.
+	([ProbeDisplayManager -getDropImmediatelyFlag]): Add.
+
+	* ProbeDisplayManager.h: Add dropImmediatelyFlag and accessor methods.
+	Reformatting throughout.
+
+	* ControlPanel.m: Declare probeDisplayManager.
+	([ControlPanel -setStateStopped]): Call [probeDisplayManager
+	setDropImmediatelyFlag : YES] on the probeDisplayManager.
+	([ControlPanel -setStateStepping]): Likewise.
+	([ControlPanel -setStateRunning]): Call [probeDisplayManager
+	setDropImmediatelyFlag: NO] on the probeDisplayManager.
+
+1997-12-04  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+	
+	* SimpleProbeDisplay.m: Reformatting throughout.  Include
+	tkobjc/control.h instead of tkobjc.h.
+	([SimpleProbeDisplay -createEnd]): Use new tkobjc functions
+	withdrawWindow, configureProbeCanvas, setBorderWidth,
+	createWindow, setRelief, getId, setAnchorWest, setColorBlue,
+	configureButton3ForCompleteProbeDisplay, configureWindowEntry,
+	configureWindowExt, configureHideButton, packFill, packFillLeft,
+	deiconify, assertGeometry to consolidate code with
+	CompleteProbeDisplay.
+	([SimpleProbeDisplay -package]): Now returns const char *.
+	([SimpleProbeDisplay -getId]): Use tkobjc function getId.
+
+	* SimpleProbeDisplay.h: Reformatting throughout.
+	Add `const' to return string of -package.
+
+	* ControlPanel.m: Include tkobjc/control.h, omit tkobjc/global.h
+	later in the code.
+	([ControlPanel -waitForControlEvent]): Use new tkobjc wrapper
+	doOneEventSync instead of calling Tk_DoOneEvent directly.
+
+	* CompleteProbeDisplay.m: Reformatting throughout.
+	 ([CompleteProbeDisplay -setWindowGeometryRecordName:]): Include
+	tkobjc.h instead of tkobjc.h.
+	([CompleteProbeDisplay -createEnd]): Use new tkobjc functions
+	withdrawWindow, configureProbeCanvas, setBorderWidth,
+	createWindow, deiconify, assertGeometry (to consolidate common code
+	with SimpleProbleDisplay).
+	([CompleteProbeDisplay -do_resize]): Use new tkobjc packForget and
+	assertGeometry.
+
+	* ActionCache.m: Include tkobjc/control.h instead of
+	tkobjc/global.h; avoid using TclTk features directly.
+	([ActionCache -createProcCtrl]): Use new tkobjc function
+	registerCommand instead of calling registerObject: directly.
+	([ActionCache -createProcCtrl]): Use new ButtonPanel methods
+	setTargetName and addButtonName: actionName: instead of sending
+	combined command+action string.
+	([ActionCache -doTkEvents]): Use new tkobjc wrapper function
+	doOneEventAsync instead of Tk_DoOneEvent.
+
+1997-12-02  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* simtools.m: Included string.h (for strncmp).
+
+1997-12-01  Alex Lancaster  <alex@wijiji.santafe.edu>
+
+	* Makefile: (OBJECTS, HEADERS): Added AppendFile
+
+	* simtools.h: Added AppendFile and added reverseOrder method to
+	QSort protocol.
+
+	* QSort.m and QSort.h: added factory method +(void) reverseOrderOf:
+	aCollection to reverse the current order of a collection.
+
+	* AppendFile.[hm]: Added.  Allow users
+	to append to a file - rather than just overwriting.
+	
+1997-11-29  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -drop]): Disable
+	explicit calls to destroy.
+
+	* SimpleProbeDisplay.m [SimpleProbeDisplay -drop]): Disable
+	explicit call to destroy.
+
+	* CompleteProbeDisplay.m ([CompleteProbeDisplay -createEnd]):
+	Eliminated bizarre nested indentation.
+
+	* Makefile (OBJECTS, HEADERS): Add Archiver.
+	(Archiver.o): Add.
+
+	* simtools.m: Import Archiver.h.  Define applicationName and
+	applicationMode variables.
+	(setApplicationValue): Add.  Routine strips slashes from a program
+	name.
+	(initSwarm): Create and assign applicationName and applicationMode
+	from argv[0] and `-a' option respectively.
+	(initSwarm): Create archiver.
+	(printHelp): Add info about `-appMode' option.
+
+	* simtools.h: Make Object{Loader,Saver} fromFileNamed: arguments const.
+
+	* global.h: Add applicationName and applicationMode extern objects.
+
+	* ProbeDisplayManager.h: Add
+	create{Default,Complete}*ProbeDisplayFor:setWindowGeometryRecordName: 
+	prototypes.
+
+	* simtools.h: Add methods below to ProbeDisplayManager protocol.
+
+	* ProbeDisplayManager.m ([ProbeDisplayManager
+	-createProbeDisplayFor:setWindowGeometryRecordName:]): Add.
+	([ProbeDisplayManager
+	-createDefaultProbeDisplayFor:setWindowGeometryRecordName:]): Add.
+	([ProbeDisplayManager
+	-createCompleteProbeDisplayFor:setWindowGeometryRecordName:]): Add.
+
+	* ProbeDisplay.m ([ProbeDisplay -setWindowGeometryRecordName:]): Add.
+	([ProbeDisplay -createEnd]): Add calls to setWindowGeometryRecordName.
+
+	* ProbeDisplay.h (SwarmObject): Add instance variable
+	windowGeometryRecordName and setter.
+
+	* GUISwarm.m ([GUISwarm -setControlPanelGeometryRecordName:]): Add.
+	([GUISwarm -buildObjects]): Add create-time call
+	to setControlPanelGeometryRecordName.
+	
+	* GUISwarm.h (GUISwarm): Add controlPanelGeometryRecordName
+	instance variable and setter.
+
+	* ControlPanel.m: Import Archiver.h.
+	([ControlPanel -setStateStoppedAndSave]): Add (stop and call
+	archiverSave).
+
+	* ControlPanel.h: Add declaration of -setStateStoppedAndSave.
+
+	* {Simple,Complete}ProbeDisplay.m: Import Archiver.h.
+	([{Simple,Complete}ProbeDisplay -setWindowGeometryRecordName:]): Add.
+	([{Simple,Complete}ProbeDisplay -createEnd]): For topLevel, add
+	create-time call to setWindowGeometryRecordName.
+
+	* {Simple,Complete}ProbeDisplay.h: Add windowGeometryRecordName
+	instance variable and setter.
+
+	* ActionCache.m: Import Archiver.h.
+	([ActionCache -setControlPanelGeometryRecordName:]): Add.
+	([ActionCache -insertAction:actionHolder]): Recognize "Save" by
+	settting actionHolder to setStateStoppedAndSave. Change syntax of
+	`unrecognized action name' message to better discriminate the
+	action name.
+	([ActionCache -deliverActions]): Recognize "Save" in the same vein
+	of "Stop".  Change syntax of `unrecognized action name' message to
+	better discriminate the action name.
+	([ActionCache -sendSaveAction]): Add.
+	([ActionCache -createProcCtrl]): Add call to
+	setWindowGeometryRecordName for the control panel. Add "Save" button.
+	Don't pack the widget (Frame).
+
+	* ActionCache.h (ActionCache): Add controlPanelGeometryRecordName
+	instance variable and setter method.
+
+	* Archiver.[hm]:  New files. 
+
+Fri Nov 28 16:49:14 1997  glen e. p. ropella  <gepr@swarm.com>
+
+	* GUISwarm.h (@interface GUISwarm): Changed typing of 
+	controlPanel from static to protocol adherence to avoid
+	compiler warning.
+
+1997-11-20 Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+	
+	From glen e. p. ropella  <gepr@grasshopper.santafe.edu>
+	
+	* Action[Cache|Holder].[hm]: Changed header.
+
+	* simtools.h (library-wide): Brought simtools library
+	into conformance with protocol interface standard.
+	
+	* ControlPanel.[hm]
+	  src/simtools/simtools.[hm]
+	  src/simtools/NSelect.m
+	  src/simtools/QSort.m
+	  src/simtools/ActionCache.[hm]
+	  src/space/Discrete2d.m
+	  (headers):  Moved symbols around and changed imports and includes
+	such that simtools.h new protocol interface is followed.
+
+1997-11-16  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget -createEnd]): Use
+	isKindOf instead of isMemberOf so that use of subclasses of
+	VarProbe and MessageProbe are possible.
+
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]): Same.
+	
+	* ObjectSaver.m ([ObjectSaver -saveObject:]): Same (only VarProbe).
+
+	* ObjectLoader.m ([ObjectLoader -loadObject:]): Use new getline
+	method (so that objects with spaces can be read).
+
+	* ObjectLoader.[hm] ([ObjectLoader -setTemplateProbeMap:]): Add
+	setTemplateProbeMap method to ObjectLoader.
+
+	* ClassDisplayWidget.m ([ClassDisplayWidget -createEnd]): Replace
+	call to Tcl for drag&drop with new tkobjc dragAndDrop function.
+
+	* MessageProbeWidget.m ([MessageProbeWidget -createEnd]): Same.
+	
+	* SimpleProbeDisplay.m ([SimpleProbeDisplay -createEnd]): Same.
+
+	* VarProbeWidget.m ([VarProbeWidget -createEnd]): Same.
+
+	* ObjectSaver.m ([ObjectSaver -saveObject:]): Make the save buffer
+	bigger.
+
+	* InFile.[hm] ([InFile -getLine:]): Add method.
+
+	* ActionCache.[hm]: Fix identifying header comment.
+
+	* ActionCache.m: Include <simtools/ActionCache.h> instead of
+	"ActionCache.h" to prevent possibility of multiple inclusion.
+

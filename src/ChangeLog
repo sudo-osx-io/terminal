@@ -1,0 +1,549 @@
+2009-11-24  Scott Christley  <schristley@mac.com>
+
+	* Makefile.am, Makefile.rules: Create links to support building in
+	separate directory from source.
+
+2009-11-09  Scott Christley  <schristley@mac.com>
+
+	* Makefile.am (ENABLE_OPENSTEP): Change from ENABLE_GNUSTEP.
+
+2009-09-24  Scott Christley  <schristley@mac.com>
+
+	* Makefile.am: Define version for library.
+
+	* SwarmEnvironment.m: Adjust casts to eliminate compiler warnings.
+
+2009-04-02  Scott Christley  <schristley@mac.com>
+
+	* SwarmEnvironment.m, Makefile.rules: ObjC runtime abstraction.
+	
+	* swarm.h: Rename to SwarmTop.h
+
+	* SwarmEnvironment.h, Makefile.am, SwarmTop.h: Standardize include
+	directory structure to support libraries and OpenStep frameworks.
+
+2008-08-25  Marcus G. Daniels <marcus@snoutfarm.com>
+
+	* Makefile.am (DIST_SUBDIRS):  Add.
+
+2008-07-06  Scott Christley  <schristley@mac.com>
+
+	* SwarmEnvironment.m: Disable tcl/tk/blt gui for OSX.
+
+2008-04-29  Scott Christley  <schristley@mac.com>
+
+        * Makefile.am (classList.m): Remove class for GNUstep.
+
+        * SwarmEnvironment.h: #ifndef GNUSTEP methods not applicable
+        when GNUstep is enabled.
+
+        * SwarmEnvironment.m: Likewise.
+
+        * swarm.h: Likewise.
+
+2007-03-04  Marcus G. Daniels  <marcus@snoutfarm.com>
+
+	* swarm.h (_initSwarm_).  Use C linkage.
+
+2004-11-25  Marcus G. Daniels <mgd@santafe.edu>
+
+	* Makefile.am: Use ENABLE_GNUSTEP to select SUBDIRS.
+
+2004-11-24  Bill Northcott <W.Northcott@unsw.edu.au>
+
+	* SwarmEnvironment.m :remove lvalue casts.
+	
+2004-07-30  Marcus G. Daniels <mgd@santafe.edu>
+
+	* Makefile.am ($(srcdir)/SwarmEnvironment_getters.m): Add GUIOPT.
+	(classList.m): Exclude some analysis stuff for the --disable-gui case.
+
+2004-07-21  Scott Christley  <schristley@mac.com>
+
+	* Makefile.am (SUBDIRS): Parameterize simtoolsgui and gui.
+	(SWARMMODULES): Likewise.
+	(INCLUDES): Likewise.
+
+	* SwarmEnvironment.h: #ifndef DISABLE_GUI methods not
+	applicable for a non-gui Swarm build.
+
+	* swarm.h: Likewise.
+
+	* SwarmEnvironment.m: Likewise.
+	([SwarmEnvironment createEnd]): Set swarmGUIMode to NO for a
+	non-gui Swarm build.
+
+2004-07-20  Marcus G. Daniels  <mgd@baby>
+
+	* Makefile.am (libswarm_la_LDFLAGS): Add -Wl,--export-all and
+	-shrext .dll for the case of USEDLL.  Current libtool behavior is
+	to make .exe's instead of .dlls if latter is absent.
+
+2004-07-16  Scott Christley <schristley@mac.com>
+
+	* Makefile.am (SUBDIRS): Use tcl/tk gui definition.  Add GNUstep
+	definition.
+	(SWARMMODULES): Use tcl/tk gui module definition.  Add GNUstep
+	module definition.
+	(INCLUDES): Use libobjc definition. Add GNUstep includes.
+	(libswarm_la_LDFLAGS): Use libobjc definition
+
+	* SwarmEnvironment.m ([SwarmEnvironment updateDisplay]): Do not
+	call GUI_EVENT_ASYNC() for GNUstep.
+
+2004-02-25  Bill Northcott <W.Northcott@unsw.edu.au>
+
+	* Makefile.am:add libswarmobjc to libswarm deps.
+	
+2004-02-02  Bill Northcott <W.Northcott@unsw.edu.au>
+
+	* Makefile.am:fix problems with external avcall by
+	adding SWFFILIB.
+	
+2003-09-15  Bill Northcott  <w.northcott@unsw.edu.au>
+
+	* Makefile.rules : Add configured SED to make-h2x invocation.
+
+2003-06-29  mgd  <mgd@drone>
+
+	* Makefile.am (libswarm_la_LDFLAGS): Add -no-undefined.
+	(install-data-local): Disable rule.
+
+2003-05-22  Marcus G. Daniels  <mgd@xserve.santafe.edu>
+
+	* SwarmEnvironment.m (_initSwarm_):
+	Add call to __objc_exec_class_for_all_initial_modules.
+
+	* Makefile.am (classList.m): New rule.
+	(libswarm_la_SOURCES, BUILT_SOURCES): Add classList.m.
+
+2003-05-02    <mgd@mac.swarm.org>
+	
+	* SwarmEnvironment.m (predispatch, createBegin): Remove the
+	constructor attribute and call from createBegin instead.  (The
+	constructor gets called on Mac, but apparently things aren't set
+	up at that point.
+
+2003-05-01    <mgd@arrow.santafe.edu>
+
+	* SwarmEnvironment.m (_swarm_i_Zone_c__allocIVarsComponent_,
+	_swarm_i_Zone_c__freeIVarsComponent_,
+	_swarm_i_Zone_c__allocBlock_,
+	_swarm_i_Zone_c__freeBlock_blockSize_,
+	_swarm_i_ComponentZone_c__allocIVars_,
+	_swarm_i_Object_s__drop): New globals.
+	(predispatch): New constructor function.
+
+2002-10-19    <pauljohn@dv253s74.lawrence.ks.us>
+
+	* Makefile.am (libswarm_la_LDFLAGS): $(DESTDIR) added
+
+2002-04-14  Alex Lancaster  <alex@swarm.org>
+
+	* SwarmEnvironment.h, SwarmEnvironment.m, getters.el, swarm.h: Add
+	copyright and canonical GNU GPL license statement.
+
+2001-11-05  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Makefile.am: Don't use libgcc -L path.
+
+2001-11-04  Marcus G. Daniels  <mgd@HELEN>
+
+	* Makefile.am: Don't use multi-line values as they confuse Cygwin
+	automake.
+	(swarm.dll): Disable this rule for now since automake is being
+	pedantic and unhelpful about EXEEXT.
+
+	* Makefile.rules (CLEANFILES): Remove.
+
+2001-07-23  Marcus G. Daniels  <mgd@HELEN>
+
+	* Makefile.am (swarm.dll): Manually specify avcall.o and
+	avcall-i386-msvc.o. 
+
+2001-07-20  Marcus G. Daniels  <mgd@dhcp70.santafe.edu>
+
+	* SwarmEnvironment.m: Include gui.h. 
+
+	* SwarmEnvironment.[hm], swarm.h ([SwarmEnvironment -updateDisplay]): 
+	Add.
+
+2001-05-08  Marcus G. Daniels  <mgd@coyote.santafe.edu>
+
+	* SwarmEnvironment.m (_initSwarm_): Cast class values to id to
+	quiet new version of GCC.
+
+2001-03-27  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* SwarmEnvironment.m: HAVE_JDK fix.
+
+2001-03-20  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* swarm.h, SwarmEnvironment.[hm]: Add -verboseMessage:.
+
+2001-02-27  Marcus G. Daniels  <mgd@maya.santafe.edu>
+
+	* SwarmEnvironment.m ([SwarmEnvironment
+	+initSwarm:version:bugAddress:argCount:args:]): Don't call createEnd.
+
+2001-02-07  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* swarm.h, SwarmEnvironment.[hm] ([SwarmEnvironment -typeModule:]): New
+	method.
+
+2001-02-05  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* SwarmEnvironment.m ([SwarmEnvironment -createEnd]): Remove 
+	swarmDirectory check.
+
+	* Makefile.am (OBJCFLAGS): Append @CFLAGS_NOWARN_UNKNOWN_PRAGMAS@.
+
+2000-09-18  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Makefile.am (INCLUDES): Add -I$(srcdir)/gui.
+
+2000-09-13  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* swarm.h ([-SwarmEnvironment -getLanguage{COM,Java,ObjC}]):
+	New getters.
+
+2000-08-24  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Makefile.am (EXTRA_DIST, include_HEADERS): Add
+	SwarmEnvironment_getters.[hm].
+
+	* SwarmEnvironment.m ([SwarmEnvironment -createEnd]): Check for
+	swarmDirectory, and a Java-side object before doing Java association.
+
+2000-08-21  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* SwarmEnvironment.m ([SwarmEnvironment
+	-initSwarmUsing:version:bugAddress:args:]): Move to setter
+	phase. 
+	([SwarmEnvironment -createEnd]): Do Java variable association here.
+
+	* swarm.h ([SwarmEnvironment -getArguments]): New getter.
+
+2000-08-17  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* SwarmEnvironment.m ([SwarmEnvironment
+	+initSwarm:version:bugAddress:argCount:args:]):
+	Create swarmDirectory if COM is initialized.
+
+2000-08-15  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* SwarmEnvironment.m ([SwarmEnvironment
+	-initSwarmUsing:version:bugAddress:args:]): Count args and pass 
+	to _init_.
+
+	* SwarmEnvironment.[hm], swarm.h ([SwarmEnvironment
+	+initSwarm:version:bugAddress:argCount:args:,
+	-_init_:version:bugAddress:argCount:args:]): Add argCount
+	argument.
+
+2000-07-27  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* swarm.h, SwarmEnvironment.[hm] ([SwarmEnvironment
+	+initSwarm:version:bugAddress:args:]): Make create-time init
+	method a factory method, so that stubbing can handle constructor.
+
+2000-07-25  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* swarm.h, SwarmEnvironment.[hm] (SwarmEnvironment) Add
+	initSwarmUsing, a synonym to initSwarm.  This, way, COM
+	users won't have the counterintuitive Setting phase initSwarm
+	and Java users can only see using phase.
+
+2000-07-24  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* getters.el (print-arg): New function.
+	(print-method-declaration): Use it.  Rewrite to avoid calls
+	to argument-empty-p in the argument loop.
+
+2000-07-22  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* swarm.h, SwarmEnvironment.m ([SwarmEnvironment
+	initSwarm:version:bugAddress:args:]): Make create-time.
+
+2000-07-21  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* getters.el (generate-getters-implementation): Handle guiFlag->
+	swarmGUIMode conversion here.
+
+2000-07-20  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* Makefile.am ($(abs_top_builddir)/interface.elc): Depends on
+	protocol.elc.
+	(EXTRA_DIST): Add getters.el.
+
+2000-07-19  Marcus G. Daniels  <mgd@forager.swarm.org>
+
+	* SwarmEnvironment.m ([SwarmEnvironment -dumpDirectory]): Disable
+	call if not HAVE_JDK.
+
+2000-07-16  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* SwarmEnvironment.[hm], swarm.h ([SwarmEnvironment
+	-initSwarm:version:bugAddress:args:, -getCurrentTime,
+	-getCurrentSwarmActivity,
+	-createProbeDisplay:,
+	-createCompleteProbeDisplay:,
+	-createArchivedProbeDisplay:name:
+	-createArchivedCompleteProbeDisplay:name:
+	-setWindowGeometryRecordName,
+	-setComponentWindowGeometryRecordFor:widget:name:,
+	-setCompondentWindowGeometryRecordName:name:, -xprint, -xfprint,
+	-dumpDirectory]): New methods
+	(_initSwarm_): Move here from simtools.m.
+
+	* SwarmEnvironment.h (SwarmEnvironment): Inherit from CreateDrop,
+	not Object
+
+	* SwarmEnvironment.m ([SwarmEnvironment createBegin]): Do a
+	switcheroo in createBegin.
+
+	* getters.el: Require 'interface for
+	get-variable-name-for-getter-method (the logic was moved out).
+
+	* Makefile.am (getters.elc): Add interface.elc as a dependency.
+	(INCLUDES): Add JAVAINCLUDES.
+
+2000-07-11  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* swarm.h: Include externvar.h and declare swarmGUIMode.
+
+	* Makefile.am (CPPFLAGS): Append -DBUILDING_SWARM.
+	(headers): Depend on SwarmEnvironment_getters.m.
+	(OBJS): Add SwarmEnvironment.lo.
+
+2000-07-11  Marcus G. Daniels  <mgd@nest.swarm.org>
+
+	* Makefile.am: Include Makefile.protocol.
+	(INCLUDES, SwarmEnvironment.lo, SwarmEnvironment_getters.m,
+	getters.elc,
+	($(srcdir)/SwarmEnvironment_getters.m): Add.
+	(libswarm_la_SOURCES): Change from empty.c to SwarmEnvironment.m.
+	(empty.c): Remove.
+	(include_HEADERS): Add swarm.h and SwarmEnvironment.h.
+
+	* swarm.h, SwarmEnvironment.[hm]: New files.
+
+2000-04-09    <mgd@HELEN>
+
+	* Swarm 2.1.1 frozen.
+
+	* Makefile.am (swarm.dll): Put -L../libobjc before SUPPORTLDFLAGS.
+
+2000-02-12    <mgd@nest.swarm.org>
+
+	* Swarm 2.1 frozen.
+
+1999-09-18  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0.1 released.
+
+1999-08-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Swarm 2.0 released.
+
+1999-08-17    <mgd@HELEN>
+
+	* Makefile.am (swarm.dll): Add (disabled) swarm.dll link command
+	using new linker.
+
+1999-08-02  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (DLLWRAP): Move substitution outside of automake
+	conditional to avoid conditional/non-conditional automake error.
+
+1999-07-09  Alex Lancaster  <alex@santafe.edu>
+
+	* Makefile.rules (CFLAGS, OBJCFLAGS): Override with configure-time
+	options to ignore pragmas in jni headers under Solaris.
+
+1999-06-10  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.rules (xm_file): Set to be the first BUILT_SOURCES.
+	Have the rest of the BUILT_SOURCES depend on the xm_file.
+	(headers): Depend only on xm_file.
+
+1999-06-08  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (swarm.dll): Use -lobjcdll, not *.lo files.  
+	(either need to disable imports in objc headers or use this DLL,
+	since the stubs are only in the generated library).
+
+1999-06-07  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (swarm.dll): Use libobjc *.lo files instead of
+	linking to DLL.
+	(libswarm_la_LDFLAGS): Put module -L options before support -L
+	options.
+	(LIBS): Add -lobjc.
+	(libswarm_la_SOURCES, empty.c): Add to prevent problems with empty
+	archives on IRIX 6.5.
+
+1999-06-06  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.rules ($(TYPEINFO)): Use just the first word of
+	this variable as the target.  This avoids problems with parallel
+	makes.
+
+	* Makefile.am: Put all DLL things in a USEDLL automake conditional.
+	(swarm.dll): Rename libswarm.a to libswarmdll.a.
+	Use swarm.dll.[co].  Add OBJCLIBS.
+	(install-data-local): Accomodate.  Remove shell condition on USEDLL.
+	(swarm_dll_SOURCES): Remove (calling dllinit.c swarm.dll.c instead).
+
+1999-06-05  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am, dllinit.c: Remove constructor stuff.
+	(OBJS): Use .lo files. 
+	(swarm.dll): Add $(OBJS) as a dependency.
+
+	* Makefile.rules (CPPFLAGS): Define BUILDING_SWARM.  The DLL
+	import/export specifics will be set in externvar.h.
+
+1999-06-02  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (libswarm_la_DEPENDENCIES): Use
+	$(module)/lib$(module).la.
+
+1999-05-31    <mgd@HELEN>
+
+	* Makefile.am (swarm.dll): Depend on dllinit.c.  Define
+	constructor_func for dllinit.c.
+
+1999-05-30  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* genctors: Redirect into $1.c.  Use $1 as the function name.
+
+1999-05-29  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (lib_LTLIBRARIES): Set to @LIBSWARM_LA@.
+	(EXTRA_LTLIBRARIES): Set to libswarm.la.
+	(libswarm_la_LDFLAGS): Add -rpath to $(libdir).  This is necessary
+	because the {EXTRA,lib}_LTLIBRARIES switch loses the fact this
+	can be installed.
+
+1999-05-28  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.rules (CPPFLAGS): Append -Dexternvar=$(EXPORT_EXTERN)
+	override.
+	($(TYPEINFO)): Use single quotes on OBJCFLAGS, so that CPPFLAGS
+	may contain double quotes.
+
+        * Makefile.am (CPPFLAGS): Quote $(EXPORT_EXTERN).  It can't
+        be quoted in acdll.m4 because it is extracted into externvar.h.  
+
+1999-05-27  Alex Lancaster  <alex@santafe.edu>
+
+	* Makefile.am (swarm_dll_SOURCES): Set to dllinit.c, so automake
+	doesn't look for a bogus swarm.dll.c.
+
+1999-05-26  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (swarm.dll): Use genctors instead of inline commands.
+
+1999-05-25    <mgd@HELEN>
+
+	* Makefile.am (OBJS, swarm.dll): Don't take apart convenience
+	libraries, just do wildcards on the subdirectories.  Add libobjc
+	objects.
+
+1999-05-25  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (swarm.dll): Handle constructors.
+
+1999-05-25  Alex Lancaster  <alex@santafe.edu>
+
+	* Makefile.am (install-data-local): To avoid returning a non-true
+	value to `make', re-write with explicit `if-then' test.
+
+1999-05-25  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (swarm.dll): New rule.
+	(install-data-local): If SWARM_DLL is set, install libswarm.a and
+	run ranlib on installed version.
+	(EXTRA_PROGRAMS): Add swarm.dll.
+
+1999-05-24  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.am (CURRENT, VERSION, AGE, lib_LTLIBRARIES,
+	libswarm_la_SOURCES, LIBS, libswarm_la_LDFLAGS): New
+	target for libswarm.  Include Makefile.common.
+	(SWARMMODULES): New variable (just the libraries, in order
+	of dependence).
+	(SUBDIRS): Move misc to front.
+
+1999-03-16  Marcus G. Daniels  <mgd@pojoaque.santafe.edu>
+
+	* Makefile.rules ($(TYPEINFO):): Note that $(SOURCES) is a dependency,
+	but comment it out.
+
+1998-12-21  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.rules (MAKEH2X): New variable.
+	($(TYPEINFO)): Depend on $(MAKEH2X) and invoke make-h2x with this
+	variable.
+
+1998-12-11  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.rules ($(TYPEINFO)): Pass OBJC and OBJCFLAGS instead of
+	CC and CFLAGS.
+
+1998-11-19  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.rules (TYPEINFO): Define as $(MODULE).xm types.h classes.h.
+	(CLEANFILES): Define as $(TYPEINFO).
+
+1998-11-12  Marcus G. Daniels  <mgd@chama.santafe.edu>
+
+	* Makefile.rules: Make $(MODULE).xm a target with {types,classes}.h.
+
+1998-08-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (headers): Use $(MAKE), not make.
+
+1998-08-10  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am (SUBDIRS): Add tclobjc.
+
+1998-06-24  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.rules (headers): Use ..la_OBJECTS instead of ..a_OBJECTS.
+	(SUFFIXES): Add .m.
+
+	* Makefile.am (EXTRA_DIST): Distribute Makefile.rules.
+
+1998-06-22  Marcus G. Daniels  <mgd@ute.santafe.edu>
+
+	* Makefile.rules: New file.
+
+	* Makefile: Remove.
+
+1998-06-21  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile.am: New file.
+
+1998-02-26  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile (DIRS): Add simtoolsgui.
+
+1998-02-18  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile (DIRS): Add misc.
+
+1998-01-24  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile (DIRS): Add gui.
+
+1997-12-19  Marcus G. Daniels  <mgd@wijiji.santafe.edu>
+
+	* Makefile (binary): Don't use ld directly, instead invoke
+	through LINKER (gcc) using -nostdlib and -Wl,-r (this was motivated
+	by the desire to have EXTRALDFLAGS that can contain -Wl,-rpath).
+
+Mon Dec  8 22:23:22 1997  glen e. p. ropella  <gepr@swarm.com>
+
+        * Makefile (DIRS): changed swarmobject to objectbase  

@@ -1,0 +1,38 @@
+2008-07-06  Scott Christley  <schristley@mac.com>
+
+	* Value2dDisplay.[hm], Object2dDisplay.[hm]: Draw to image buffer.
+
+	* Raster.[hm]: Let display objects manage their own image buffers.
+
+	* GNUstepSwarm.m: Use producer/consumer condition locks for switching
+	between simulation states, eliminate timer.  Add autorelease pools.
+
+	* GNUstepSwarm.h, ZoomRaster.h, swarmgstep.h: Standardize include
+	directory structure to support libraries and OpenStep frameworks.
+
+2008-04-29  Scott Christley  <schristley@mac.com>
+
+	* Additions.h: New file.
+	* Additions.m: New file.
+	* Object2dDisplay.h: New file.
+	* Object2dDisplay.m: New file.
+	* Value2dDisplay.h: New file.
+	* Value2dDisplay.m: New file.
+	* Makefile.am: Remove unused definitions.  Add new files.
+	* swarmgstep.h: Add Object2dDisplay and Value2dDisplay protocols.
+
+2004-11-25  Marcus G. Daniels <mgd@santafe.edu>
+	
+	* swarmgstep.h:  New file.
+
+2004-03-13  Scott Christley  <schristl@nd.edu>
+
+	* ChangeLog: New file.
+	* Makefile.am: New file.
+	* GNUstepSwarm.m: New file.
+	* GNUstepSwarm.h: New file.
+	* swarmgstep.m: New file.
+	* Raster.h: New file.
+	* Raster.m: New file.
+	* ZoomRaster.h: New file.
+	* ZoomRaster.m: New file.

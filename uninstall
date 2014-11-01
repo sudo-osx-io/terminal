@@ -1,0 +1,28 @@
+#!/usr/bin/perl
+
+use strict;
+
+my $whoami = qx{whoami};
+$whoami =~ /^root$/ or die "sudo required";
+
+system("kextunload /System/Library/Extensions/CUDA.kext");
+
+my @cuda_dirs = (
+  "/usr/local/cuda",
+  "/Developer/NVIDIA/CUDA-$(VERSION_MAJOR).$(VERSION_MINOR)",
+  "/System/Library/StartupItems/CUDA",
+  "/System/Library/Extensions/CUDA.kext",
+  "/Library/Preferences/com.nvidia.CUDAPref.plist.lockfile",
+  "/Library/Preferences/com.nvidia.CUDAPref.plist",
+  "/Library/PreferencePanes/CUDA Preferences.prefPane",
+  "/Library/LaunchAgents/com.nvidia.CUDASoftwareUpdate.plist",
+  "/Library/Frameworks/CUDA.framework",
+  "/private/var/db/receipts/com.nvidia.cuda.launchagent.pkg.plist",
+);
+chomp @cuda_dirs;
+
+foreach my $dir (@cuda_dirs) {
+  print "removing [$dir]\n";
+  system(qq{rm -rf "$dir"}) and die "could not remove [$dir]";
+  -e "$dir" and die "$dir still exists";
+}

@@ -1,0 +1,53 @@
+// Swarm library. Copyright © 1996-2000 Swarm Development Group.
+// This program is free software; you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation; either version 2 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful, but
+// WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+// General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software
+// Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307
+// USA
+// 
+// The Swarm Development Group can be reached via our website at:
+// http://www.swarm.org/
+
+#import <tkobjc/global.h>
+#import <tkobjc/Widget.h>
+#import <tkobjc/Line.h>
+#import <defobj.h> // STRDUP
+
+@implementation Line
+
+PHASE(Creating)
+
+- setTX: (int)the_tx TY: (int)the_ty LX: (int)the_lx LY: (int)the_ly
+{
+  tx = the_tx;
+  ty = the_ty;
+  lx = the_lx;
+  ly = the_ly;
+
+  return self;
+}
+ 
+- createItem
+{
+  [globalTkInterp eval: 
+    "%s create line %d %d %d %d", 
+    [canvas getWidgetName], tx, ty, lx, ly];
+  
+  item = STRDUP ([globalTkInterp result]);
+
+  return self;
+}
+
+PHASE(Using)
+
+@end
+
